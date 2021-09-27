@@ -45,3 +45,13 @@ services:
     #    depends_on:
     #        - django
     #        - postgres
+
+
+    #react_cardal:
+    #    build: ./views_data/cardal_alto_bajo
+    #    image: cardal_dash
+    #    ports:
+    #        - "4301:80"
+    #    depends_on:
+    #        - django
+    #

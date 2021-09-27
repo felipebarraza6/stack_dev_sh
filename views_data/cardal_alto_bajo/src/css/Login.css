@@ -1,0 +1,162 @@
+.general-login {
+  display: flex;
+  margin-top: 10%;
+  
+  justify-content: center;
+  
+  position: relative;
+  min-height: 100%;
+  background: #001529;
+}
+
+
+/* Login Form */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 340px;
+  height: auto;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.login-container img {
+  width: 200px;
+  margin: 0 0 20px 0;
+}
+
+.login-container p {
+  align-self: flex-start;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.login-container p a {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.login {
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  margin: 0 0 10px 0;
+  box-sizing: border-box;
+  border-radius: 3px;
+  background: white;
+  overflow: hidden;
+  animation: input_opacity 0.2s cubic-bezier(.55, 0, .1, 1);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+              0 1px 5px 0 rgba(0, 0, 0, 0.12),
+              0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.head-login {
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  
+  border: 1px solid #001529;
+  background:#001529;
+  
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.3rem;
+  color: #FAFAFA;  
+  border-radius:2px;
+  
+}
+
+
+
+
+
+
+/* Form */
+.login-form {
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+
+/* Inputs */
+.login-input {
+  position: relative;
+  width: 100%;
+  padding: 10px 5px;
+  margin: 0 0 25px 0;
+  border: none;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  background: transparent;
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  opacity: 1;
+  animation: input_opacity 0.8s cubic-bezier(.55, 0, .1, 1);
+  transition: border-bottom 0.2s cubic-bezier(.55, 0, .1, 1);
+}
+
+.login-input:focus {
+  outline: none;
+  border-bottom: 2px solid #001529;
+}
+
+
+/* Submit Button */
+.submit-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  position: relative;
+  padding: 10px;
+  margin: 35px -25px -25px -25px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.login-button {
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #001529;
+  cursor: pointer;
+  opacity: 1;
+  animation: input_opacity 0.8s cubic-bezier(.55, 0, .1, 1);
+  transition: background 0.2s ease-in-out;
+}
+
+.login-button.raised {
+  padding: 5px 10px;
+  color: #FAFAFA;
+  background: #E37F00;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.137255),
+              0px 1px 5px 0px rgba(0, 0, 0, 0.117647),
+              0px 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.login-button:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.login-button.raised:hover {
+  background: #FDAB43;
+}
+
+
+#components-form-demo-normal-login .login-form {
+  max-width: 300px;
+}
+#components-form-demo-normal-login .login-form-forgot {
+  float: right;
+}
+#components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
+  float: left;
+}
+#components-form-demo-normal-login .login-form-button {
+  width: 100%;
+}
