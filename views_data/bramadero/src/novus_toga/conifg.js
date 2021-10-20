@@ -6,7 +6,7 @@ const BASE_URL = "https://api.tago.io"
 export const INSTANCE_POLYKARPO = axios.create({
   'baseURL': BASE_URL,
   headers: {
-      Authorization: 'e74a4e2b-f588-45ec-945e-4870832b665d'
+      Authorization: '1333aa6c-6a3f-46d0-ab94-6359c6b0cdf3'
   }
 
 })
@@ -14,7 +14,7 @@ export const INSTANCE_POLYKARPO = axios.create({
 export const INSTANCE_DITECO = axios.create({
   'baseURL': BASE_URL,
   headers: {
-    Authorization: 'e74a4e2b-f588-45ec-945e-4870832b665d'
+    Authorization: '1333aa6c-6a3f-46d0-ab94-6359c6b0cdf3'
   }
 })
 
@@ -25,9 +25,4 @@ export const GET_POLYKARPO = (endpoint) => {
 
 }
 
-export const GET_DITECO = (endpoint) => {
 
-  const request = INSTANCE_DITECO.get(endpoint)
-  return request
-
-}

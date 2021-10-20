@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import { Steps, Row, Typography } from 'antd'
 import Polykarpo from './Polykarpo'
-import Diteco from './Diteco'
 
 
 let { Step  } = Steps

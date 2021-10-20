@@ -8,15 +8,12 @@ const Polykarpo = () => {
   const [loading, setLoading] = useState(false)
 
     var optionsLines = {
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: false,
-              },
-            },
-          ],
-        },
+      scales: {
+        myScale: {
+          type: 'logarithmic',
+          position: 'left', // `axis` is determined by the position as `'y'`
+        }
+      }
       }
 
     var date_7_days = new Date() 
@@ -199,21 +196,31 @@ const Polykarpo = () => {
       },[])
 
       var columsFlow = []
+    var columnsLTRS = []
     if(flow.dataCharts){
-    columsFlow = [
+    columsFlow = [      
       {
-        title:'Variable',
-        dataIndex: 'variable',
-        key: 'variable'
-      },
-      {
-        title:'Mes',
+        title:'Fecha',
         dataIndex:'date_table',
         key:'date_format',
 
       },
       {
-        title:'Valor',
+        title:'MTRS',
+        dataIndex:'value',
+        key:'value'
+      }
+
+    ]
+    columnsLTRS = [      
+      {
+        title:'Fecha',
+        dataIndex:'date_table',
+        key:'date_format',
+
+      },
+      {
+        title:'LTRS',
         dataIndex:'value',
         key:'value'
       }
@@ -228,7 +235,7 @@ const Polykarpo = () => {
                   <Skeleton /> :
                   <>
                   <Row style={{marginTop:'40px'}}> 
-                  <Col span={8} style={{marginRight:'20px'}}>
+                  <Col span={8} style={{marginRight:'20px', marginLeft: '20px'}}>
                     <Table size='middle' dataSource={freatic.values} columns={columsFlow}  />
                   </Col>
                   <Col span={15} style={{marginRight:'20px'}}>
@@ -249,7 +256,7 @@ const Polykarpo = () => {
                       <Table
                           size='middle'
                           dataSource = {flow.values} 
-                          columns={columsFlow} />
+                          columns={columnsLTRS} />
                     </Col>
                     </Row>
                     </>
