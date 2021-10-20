@@ -252,7 +252,7 @@ const Polykarpo = () => {
                             <Line data= {flow.dataCharts}  options = {optionsLines} />
                         }
                     </Col>
-                    <Col span={8} style={{marginTop:'100px'}}>
+                    <Col span={8} style={{marginTop:'100px', marginBottom: '120px'}}>
                       <Table
                           size='middle'
                           dataSource = {flow.values} 

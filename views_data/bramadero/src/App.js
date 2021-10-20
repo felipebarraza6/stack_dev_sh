@@ -8,6 +8,8 @@ import { login_reducer } from './reducers/auth.js'
 import Home from './containers/Home'
 import Login from './containers/Login'
 
+import { Row } from 'antd'
+
 // Create Contexts
 export const AuthContext = React.createContext()
 
@@ -49,10 +51,12 @@ function App(){
         dispatch
       }}
     > 
+    <Row style={{marginBottom:'120px'}}>
     {state.isAuthenticated ?
       <Home />:
       <Login />
     }
+    </Row>
 
       
     
