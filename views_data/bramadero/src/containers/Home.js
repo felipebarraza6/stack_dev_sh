@@ -39,8 +39,6 @@ const Home = () =>{
 
           </Layout>
           </BrowserRouter>
-
-                            
         )
     }
 

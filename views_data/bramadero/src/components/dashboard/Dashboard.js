@@ -14,7 +14,6 @@ const Dashboard = () =>{
              <Row>              
             </Row>       
             <Row align='center'>
-              
                 <Polykarpo />                  
               
             </Row>

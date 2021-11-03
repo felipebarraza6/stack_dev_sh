@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Line } from 'react-chartjs-2'
 import {getting_list_polykarco} from '../../novus_toga/endpoints'
-import { Row, Col, Table, Typography, Skeleton } from 'antd'
+import { Row, Col, Card, Typography, Skeleton, Statistic } from 'antd'
 const { Title } = Typography 
 const Polykarpo = () => {
 
@@ -235,30 +235,36 @@ const Polykarpo = () => {
                   <Skeleton /> :
                   <>
                   <Row style={{marginTop:'40px'}}> 
-                  <Col span={8} style={{marginRight:'20px', marginLeft: '20px'}}>
-                    <Table size='middle' dataSource={freatic.values} columns={columsFlow}  />
+                  <Col span={12} style={{paddingRight:'20px', paddingLeft: '20px'}}>
+                    <Title level={4} style={{textAlign:'center'}}>Nivel de estanque / Litros</Title>
+                          {flow.values &&
+      
+                              <Line data= {flow.dataCharts}  options = {optionsLines} />
+                          }  
                   </Col>
-                  <Col span={15} style={{marginRight:'20px'}}>
-                    <Title level={4} style={{textAlign:'center'}}>Nivel Freático / Metros</Title>
-                      {freatic.values &&
-                        <Line data={freatic.dataCharts} options={optionsLines} />
+                  <Col span={12} style={{paddingRight:'20px'}}>
+                    <Title level={4} style={{textAlign:'center'}}>Nivel de pozo / Metros</Title>
+                      {freatic.values && <>
+                          <Line data={freatic.dataCharts} options={optionsLines} />                                                    
+                        </>
+                      }                      
+                  </Col>
+                    
+                  <Col span={12} style={{marginTop:'20px', paddingRight:'20px'}}>
+                      {freatic.values && 
+                      <Card>
+                        <Statistic title="Nivel de estanque" value={freatic.values[0].value} />
+                        </Card>
+                      }    
+                  </Col>
+                  <Col span={12} style={{marginTop:'20px', paddingLeft:'20px'}}>                      
+                      {flow.values && 
+                        <Card>
+                        <Statistic title="Nivel de pozo" value={flow.values[0].value} />                      
+                        </Card>
                       }
                   </Col>
-                  
-                  <Col span={15} style={{marginRight:'20px', marginTop:'100px'}} >
-                        <Title level={4} style={{textAlign:'center'}}>Flujo / Litros</Title>
-                        {flow.values &&
-    
-                            <Line data= {flow.dataCharts}  options = {optionsLines} />
-                        }
-                    </Col>
-                    <Col span={8} style={{marginTop:'100px', marginBottom: '120px'}}>
-                      <Table
-                          size='middle'
-                          dataSource = {flow.values} 
-                          columns={columnsLTRS} />
-                    </Col>
-                    </Row>
+                  </Row>
                     </>
                     }                
           </>

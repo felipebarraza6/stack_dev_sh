@@ -51,12 +51,12 @@ function App(){
         dispatch
       }}
     > 
-    <Row style={{marginBottom:'120px'}}>
+    
     {state.isAuthenticated ?
       <Home />:
       <Login />
     }
-    </Row>
+    
 
       
     
