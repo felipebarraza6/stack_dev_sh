@@ -40,9 +40,13 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    'api.crm.apps.CrmAppConfig'
+    'api.crm.apps.CrmAppConfig',
+    'django_crontab'
 ]
 
+CRONJOBS = [
+    ('0 1 * * *', 'api.crm.core')
+]
 
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

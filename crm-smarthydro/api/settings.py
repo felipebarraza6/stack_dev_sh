@@ -15,6 +15,7 @@ SECRET_KEY = 'h#v#*68y)bfb2ylvy^f-tksars9-k1#8lejxo==_3hsnu2ek!h'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
 # Security
 SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_HTTPONLY = True

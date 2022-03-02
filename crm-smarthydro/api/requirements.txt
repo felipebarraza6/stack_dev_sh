@@ -12,3 +12,4 @@ openpyxl
 uwsgi
 django-cors-headers
 django-filter
+django-contrab
