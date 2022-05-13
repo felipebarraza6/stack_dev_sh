@@ -23,7 +23,7 @@ from api.crm.permissions import IsAccountOwner
 from api.crm.models import User, Action
 
 # Serializers
-from api.crm.serializers.users import UserLoginSerializer, UserModelSerializer, UserSignUpSerializer
+from api.crm.serializers.users import UserProfile, UserLoginSerializer, UserModelSerializer, UserSignUpSerializer
 from api.crm.serializers.actions import ActionModelSerializer
 
 
@@ -32,11 +32,6 @@ class UserViewSet(mixins.RetrieveModelMixin,
                   mixins.ListModelMixin,
                   mixins.DestroyModelMixin,
                   viewsets.GenericViewSet,):
-    """User view set.
-
-    Handle sign up, login and account verification.
-    """
-
 
     def get_permissions(self):
         """Assign permissions based on action."""
@@ -52,16 +47,6 @@ class UserViewSet(mixins.RetrieveModelMixin,
     queryset = User.objects.filter(is_verified=True)
     serializer_class = UserModelSerializer
     lookup_field = 'username'
-
-    class Meta:
-        mode = User
-        fields= (
-            'username',
-            'first_name',
-            'last_name',
-            'email'            
-        )
-
     
 
     @action(detail=False, methods=['post'])
@@ -71,7 +56,7 @@ class UserViewSet(mixins.RetrieveModelMixin,
         serializer.is_valid(raise_exception=True)
         user, token = serializer.save()
         data = {
-            'user': UserModelSerializer(user).data,
+            'user': UserProfile(user).data,
             'access_token': token
         }
         return Response(data, status=status.HTTP_201_CREATED)

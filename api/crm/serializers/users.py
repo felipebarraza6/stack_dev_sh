@@ -8,20 +8,47 @@ from django.contrib.auth import password_validation, authenticate
 from django.core.validators import RegexValidator
 
 # Models
-from api.crm.models import User
+from api.crm.models import User, ProfileClient, RegisterPersons
 
-# Login and Authentication Serializers Model User in customers.Users
-# The serializer by used only maganed users in the clients
-class UserModelSerializer(serializers.ModelSerializer):
+
+class RegisterPersonSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = RegisterPersons
+        fields = '__all__'
+
+
+class Profile(serializers.ModelSerializer):
+    persons = serializers.SerializerMethodField('get_persons')
     
+    def get_persons(self, profile):
+        qs = RegisterPersons.objects.filter(profile=profile.id)
+        serializer = RegisterPersonSerializers(instance=qs, many=True)
+        data = serializer.data
+        return data
+
+    class Meta:
+        model = ProfileClient
+        fields = '__all__'
+        
+
+class UserProfile(serializers.ModelSerializer):
+    profile_data = serializers.SerializerMethodField('get_profile')
+
+    def get_profile(self, user):
+        qs = ProfileClient.objects.filter(user=user.id).first()
+        serializer = Profile(instance=qs, many=False)
+        data = serializer.data
+        return data
+
     class Meta:
         model = User
-        fields = (            
-            'username',
-            'email',            
-            'first_name',
-            'last_name',              
-        )
+        fields = '__all__'
+
+class UserModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+
 
 class UserLoginSerializer(serializers.Serializer):
 
@@ -41,6 +68,7 @@ class UserLoginSerializer(serializers.Serializer):
     def create(self, data):
         token, created = Token.objects.get_or_create(user=self.context['user'])
         return self.context['user'], token.key
+
 
 class UserSignUpSerializer(serializers.Serializer):
 
