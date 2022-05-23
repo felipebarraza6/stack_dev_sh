@@ -1,3 +1,5 @@
 ui_crm/node_modules/
 views_data/bramadero/node_modules/
 views_data/cardal_alto_bajo/node_modules/
+__pycache__/
+*.py[cod]
