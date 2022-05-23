@@ -1,5 +1,6 @@
 from django.db import models
-from .utils import  ModelApi
+from .utils import ModelApi
+
 
 class InteractionDetail(ModelApi):
     project_code = models.CharField(max_length=400, blank=True, null=True)
