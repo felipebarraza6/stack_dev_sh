@@ -13,3 +13,10 @@ uwsgi
 django-cors-headers
 django-filter
 django-crontab
+# Celery
+tornado
+redis
+django-redis
+celery
+flower
+pyjwt
