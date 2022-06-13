@@ -8,7 +8,7 @@ from django.contrib.auth import password_validation, authenticate
 from django.core.validators import RegexValidator
 
 # Models
-from api.crm.models import User, ProfileClient, RegisterPersons
+from api.crm.models import User, ProfileClient, AdminView,RegisterPersons
 
 
 class RegisterPersonSerializers(serializers.ModelSerializer):
@@ -33,10 +33,10 @@ class Profile(serializers.ModelSerializer):
 
 class UserProfile(serializers.ModelSerializer):
     profile_data = serializers.SerializerMethodField('get_profile')
-
+    
     def get_profile(self, user):
-        qs = ProfileClient.objects.filter(user=user.id).first()
-        serializer = Profile(instance=qs, many=False)
+        qs = ProfileClient.objects.filter(user=user.id)
+        serializer = Profile(instance=qs, many=True)
         data = serializer.data
         return data
 

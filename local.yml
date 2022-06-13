@@ -18,8 +18,7 @@ services:
             POSTGRES_DB: api
 
     django: &django
-        build: 
-            context: ./api
+        build: ./api 
         image: shydro_django
         depends_on:
             - postgres
@@ -28,30 +27,47 @@ services:
         ports:
             - "8000:8000"
 
-    #react:
+
+    cron:
+      build: ./api     # same as main application
+      restart: unless-stopped
+      image: cron_smarthydro
+      volumes:
+        - .:/code
+      depends_on:
+        - postgres
+        - django
+      command: cron -f  # as a long-running foreground process
+
+    #react_crm:
     #    build: ./ui_crm
-    #    image: shydro_react
+    #    image: crm
     #    ports:
     #        - "4200:80"
     #    depends_on:
     #        - django
     #        - postgres
 
-    #react_bramadero:
-    #    build: ./views_data/bramadero
-    #    image: bramadero_dash
+    #react_prototype:
+    #    build: ./ui_sh_prototype
+    #    image: ui_prorotype
     #    ports:
-    #        - "4300:80"
+    #        - "4201:80"
+    #    depends_on:
+    #        - django
+    #        - postgres
+    
+    #react_web:
+    #    build: ./landing_sh
+    #    image: web
+    #    ports:
+    #        - "80:80"
     #    depends_on:
     #        - django
     #        - postgres
 
 
-    #react_cardal:
-    #    build: ./views_data/cardal_alto_bajo
-    #    image: cardal_dash
-    #    ports:
-    #        - "4301:80"
-    #    depends_on:
-    #        - django
-    #
+
+
+
+    
