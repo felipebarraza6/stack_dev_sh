@@ -49,4 +49,3 @@ class InteractionDetailSerializer(serializers.ModelSerializer):
         if not data:
             raise serializers.ValidationError("interaccion invalida")
         return data
-
