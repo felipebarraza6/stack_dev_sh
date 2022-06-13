@@ -1,12 +1,7 @@
 django
 djangorestframework
-coreapi
 psycopg2-binary
-psycopg2
-dj-database-url
 gunicorn
-whitenoise
-PyYAML
 Pillow
 openpyxl
 uwsgi

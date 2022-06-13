@@ -7,8 +7,6 @@ from api.crm.models import (ProfileClient, RegisterPersons,
                             DataHistoryFact, AdminView)
 
 
-
-
 class RegisterPersons(serializers.ModelSerializer):
     class Meta:
         model = RegisterPersons

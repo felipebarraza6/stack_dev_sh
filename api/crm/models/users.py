@@ -26,6 +26,8 @@ class User(ModelApi, AbstractUser):
         help_text = 'Se establece en verdadero cuando el usuario ha verificado su dirección de correo electrónico'
     )
 
+    is_admin_view = models.BooleanField(default = False)
+
     def __str__(self):
         return self.email
 
