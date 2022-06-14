@@ -29,7 +29,7 @@ export const reducer = (state, action) => {
             localStorage.setItem("access_token", JSON.stringify(action.payload.access_token))
             localStorage.setItem("user", JSON.stringify(action.payload.user))            
             localStorage.setItem("token_novus", action.payload.user.profile_data[0].token_service)
-            localStorage.setItem("selected_sensor", JSON.stringify(action.payload.profile_data[0]))
+            localStorage.setItem("selected_sensor", JSON.stringify(action.payload.user.profile_data[0]))
             localStorage.setItem("data_p", JSON.stringify({
               "d1": action.payload.user.profile_data[0].d1,
               "d2": action.payload.user.profile_data[0].d2,

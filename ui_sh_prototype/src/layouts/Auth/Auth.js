@@ -31,6 +31,7 @@ const Pages = () => {
         type: 'LOGIN',
         payload: request
       })
+      window.location.reload()
       
       return request
     } catch(error) {
