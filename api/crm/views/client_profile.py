@@ -2,7 +2,6 @@ from math import perm
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.decorators import action
-import requests
 
 from rest_framework import generics
 from rest_framework import mixins, viewsets, status
@@ -28,6 +27,7 @@ from api.crm.serializers.client_profile import (
     AdminView,
     InteractionDetailSerializer,
 )
+import requests
 
 list_variables = {
     "nivel": "3grecuc2v",
