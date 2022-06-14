@@ -27,6 +27,9 @@ const Charts = () => {
   const [data3, setData3] = useState([])
 
   const user = JSON.parse(localStorage.getItem('user'))
+  const selected_sensor = JSON.parse(localStorage.getItem('selected_sensor') || null)
+
+  
 
 
   const getDataFl = async()=> {
@@ -66,7 +69,7 @@ const Charts = () => {
           for(var i =0; i < list_d.length; i++){
               var proc = list_d[i]-list_d[i+1]
               if(!isNaN(proc)){
-                rest.push(parseFloat(proc/user.profile_data.scale).toFixed(1)) 
+                rest.push(parseFloat(proc/selected_sensor.scale).toFixed(1)) 
               }              
           }  
           setData1(rest)
@@ -117,7 +120,7 @@ const getDataNl = async()=> {
               } else if(results[0].value == 3276.7){
                 list_d.push(32.2) 
               }else {
-                list_d.push(parseFloat(results[0].value/user.profile_data.scale).toFixed(1))                         
+                list_d.push(parseFloat(results[0].value/selected_sensor.scale).toFixed(1))                         
               } 
              
             }               
@@ -169,7 +172,7 @@ const getDataNl = async()=> {
           for(var i =0; i < list_d.length; i++){
               var proc = list_d[i]-list_d[i+1]
               if(!isNaN(proc)){
-                rest.push(proc/user.profile_data.scale).toFixed(1) 
+                rest.push(proc/selected_sensor.scale).toFixed(1) 
               }              
           }  
           setData2(rest)

@@ -6,7 +6,8 @@ import SortingTable from "../../components/SortingTable/SortingTable.js"
 const RegularTables = () => {
   
   const user = JSON.parse(localStorage.getItem('user') || null)
-  const persons = user.profile_data.persons
+  const selected_sensor = JSON.parse(localStorage.getItem('selected_sensor') || null)
+  const persons = selected_sensor.persons
   console.log(persons)
 
   return (

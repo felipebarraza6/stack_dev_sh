@@ -22,7 +22,8 @@ const Charts2 = () => {
     
     const data_p =  JSON.parse(localStorage.getItem('data_p'))
     const user = JSON.parse(localStorage.getItem('user'))
-    console.log(user)
+    
+    const selected_sensor = JSON.parse(localStorage.getItem('selected_sensor') || null)
     
     const stat1 = user.profile_data.in1
     const stat2 = user.profile_data.in2
@@ -35,7 +36,7 @@ const Charts2 = () => {
     const getData = async()=> {
       var data_v = []
       var start_datenowi = new Date()
-        var rquest2 = await api_crm.billing_data(user.profile_data.id).then((r)=> setStatElement(r.results[0]))
+        var rquest2 = await api_crm.billing_data(selected_sensor.id).then((r)=> setStatElement(r.results[0]))
         try {            
           let list_d = []
           let rest = []
@@ -121,7 +122,7 @@ const Charts2 = () => {
                   {valueMax ? <> 
                     <Col>
                     <div>
-                      <h4>{parseFloat(valueMax.value/user.profile_data.scale).toFixed(1)} (m3)</h4>
+                      <h4>{parseFloat(valueMax.value/selected_sensor.scale).toFixed(1)} (m3)</h4>
                     </div>
                     </Col>
                     <Col>

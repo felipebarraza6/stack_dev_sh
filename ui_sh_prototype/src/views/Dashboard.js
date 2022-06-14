@@ -25,22 +25,21 @@ const Dashboard = () => {
   const [well, setWell] = useState(0)
   const [pond, setPond] = useState(0)
   const user = JSON.parse(localStorage.getItem('user') || null)
+  const selected_sensor = JSON.parse(localStorage.getItem('selected_sensor') || null)
   const [billing, setBilling] = useState(0)
   const [listHistorial, setListHistorial] = useState([])
   const [listHistorialAdmin, setListHistorialAdmin] = useState([])
-  const [listProfiles, setListProfiles] = useState([])
+  const [selectProfileData, setSelectProfileData] = useState(selected_sensor.id)
 
 
   const today = new Date()
 
-  console.log(listProfiles)
 
 
   useEffect(() => {
       const get = async() => {
-          const rqHistory = await api_crm.billing_data(user.profile_data.id).then((r)=>setListHistorial(r.results))
+          const rqHistory = await api_crm.billing_data(selectProfileData).then((r)=>setListHistorial(r.results))
           const rqHistoryAdmin = await api_crm.billing_data_admin().then((r)=>setListHistorialAdmin(r.results))
-          const rqProfiles = await api_crm.list_profiles().then((x)=>setListProfiles(x.results))
           const rqWell = await api_novus.lastData('3grecuc1v')
           const rqPond = await api_novus.lastData('3grecuc2v')
           if(rqPond.data.result[0].value === 3276.7){
@@ -63,33 +62,12 @@ const Dashboard = () => {
     <>
       <div className="content">
     {<Row style={{marginBottom:'20px'}}>
-          {user.username === "pozos.iansa" ? 
               <>
-                <Button>
-                  Pozo 4
-                </Button>
-                <Button>
-                  Pozo 1
-                </Button>
-                <Button>
-                  Pozo 2
-                </Button>
-                <Button>
-                  Pozo 3
-                </Button>
-                <Button>
-                  Pozo 5
-                </Button>
-                <Button>
-                  Pozo 6
-                </Button>
-                
-              </>
-              :
-              <>
-            {listProfiles.map((x)=> {
-              return(<Col xs={2}>
+            {user.profile_data.map((x)=> {
+              return(<Col xs={2} key={x.id}>
                 <Button onClick={()=> {
+                  setSelectProfileData(x.id)
+                  localStorage.setItem("selected_sensor", JSON.stringify({...x}))
                   localStorage.setItem("token_novus", x.token_service)
                   localStorage.setItem("data_p", JSON.stringify({
                     "d1": x.d1,
@@ -100,7 +78,7 @@ const Dashboard = () => {
                     "d6": x.d6
                   }))}}>{x.title}</Button></Col>)
                 })}
-              </>}
+              </>
         </Row>}
         <Row>
               
