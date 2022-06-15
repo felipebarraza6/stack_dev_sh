@@ -60,15 +60,20 @@ def get_values(token):
     return response
 
 
-def get_interactions():
+def run_interactions():
     #  obtiene listado de predios
-    response = {"data": []}
+    response = []
     for item in list_productos.keys():
         if list_productos[item]:
             data = get_values(list_productos[item])
             data["project_code"] = item
-            response["data"].append(data)
-    return response
+            response.append(data)
+    for item in response:
+        serializer = InteractionDetailSerializer(data=item)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        print("guardado")
+    return {"data":response}
 
 
 class ClientProfileViewSet(
@@ -89,11 +94,7 @@ class ClientProfileViewSet(
 
     @action(detail=False, methods=["get"])
     def create_interaction(self, request):
-        data = get_interactions()
-        for item in data.get("data"):
-            serializer = InteractionDetailSerializer(data=item)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
+        data = run_interactions()            
         # serializer.is_valid(raise_exception=True)
         # user, token = serializer.save()
         # data = {"user": "Hola", "access_token": "qwerty"}

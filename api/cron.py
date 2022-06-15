@@ -1,5 +1,5 @@
-from .crm.views.client_profile import get_interactions
+from .crm.views.client_profile import run_interactions
 def main():
-    interaction=get_interactions()
+    interaction=run_interactions()
     print(interaction)
     pass
