@@ -32,28 +32,17 @@ const Collaborators = () => {
                   width="250" alt='logo_cowork' />
               </Col>
               <Col>
-                <img src={logo_mentorinn} 
-                  width="400" alt='logo_cowork' />
-              </Col>
-              <Col>
                 <img src={logo_cidere} 
                   width="120" alt='logo_cowork' />
               </Col>
-          </Row>
-        </div>
-        <div>
-          <Row justify='space-around'>
-            <Col>
-              <img src={polykarpo} 
-                width="300" alt='logo_cowork' />
-            </Col>
-            <Col>
+              <Col>
               <img src={'https://veset.cl/wp-content/uploads/2022/01/LOGO-VESET-CON-%C2%AE.png'} 
                 width="200" alt='logo_cowork' />
             </Col>
+
           </Row>
         </div>
-      </Carousel>
+        </Carousel>
       <Row style={{marginTop:'50px'}} justify='center'>
         <Title level={1} style={styles.title}>Clientes</Title>
       </Row>

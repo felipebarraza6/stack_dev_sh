@@ -181,7 +181,7 @@ const Admin = (props) => {
         logo={{
           outterLink: "",
           text: "Smart Hydro",
-          imgSrc: 'https://smarthydro.cl/wp/wp-content/uploads/2020/01/Logo-SH-1.png',
+          imgSrc: 'https://smarthydro.cl/static/media/logo.f08a9fb1.png',
         }}
         closeSidebar={closeSidebar}
       />

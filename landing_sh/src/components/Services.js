@@ -2,6 +2,8 @@ import React from 'react'
 import { Row, Col, Typography,
         Card } from 'antd'
 import { CalendarOutlined, DesktopOutlined,
+        CloudOutlined, CloudUploadOutlined, FileDoneOutlined, ShopOutlined,
+        ToolOutlined,
         DeploymentUnitOutlined, BuildOutlined, TeamOutlined,
         InfoCircleFilled, WifiOutlined, ExperimentOutlined } from '@ant-design/icons'
 
@@ -16,7 +18,7 @@ const Services = () => {
             </Col>
             <Col style={styles.col} >
                 <Card style={styles.card1} hoverable>
-                    <BuildOutlined style={styles.icon} />
+                    <CloudOutlined style={styles.icon} />
                     <p>
                         Monitoreo de Extracción  Efectiva de agua 
                         subterránea (MEE /DGA N°1.238).
@@ -25,7 +27,7 @@ const Services = () => {
             </Col>
             <Col style={styles.col} >
                 <Card style={styles.card} hoverable>
-                    <BuildOutlined style={styles.icon} />
+                    <CloudUploadOutlined style={styles.icon} />
                     <p>
                       Servicio de transmisión de la información 
                       para el cumplimiento Res. MEE 1.238 DGA.
@@ -55,7 +57,7 @@ const Services = () => {
             </Col>
             <Col style={styles.col} >
                 <Card style={styles.card1} hoverable>
-                    <BuildOutlined style={styles.icon} />
+                    <ShopOutlined style={styles.icon} />
                     <p>
                       Venta de insumos para plantas APR.
                     </p>
@@ -63,7 +65,7 @@ const Services = () => {
             </Col>
             <Col style={styles.col} >
                 <Card style={styles.card1} hoverable>
-                    <BuildOutlined style={styles.icon} />
+                    <ToolOutlined style={styles.icon} />
                     <p>
                       Diseño y ejecución de sistemas de agua potable.
                     </p>
@@ -71,7 +73,7 @@ const Services = () => {
             </Col>
             <Col style={styles.col} >
                 <Card style={styles.card1} hoverable>
-                    <BuildOutlined style={styles.icon} />
+                    <FileDoneOutlined style={styles.icon} />
                     <p>
                       Prueba de bombeo y desarrollo de informe técnico.
                     </p>

@@ -15,13 +15,20 @@ export const reducer = (state, action) => {
               "d5": data_ad.d5,
               "d6": data_ad.d6
             }))
+            let user = action.payload.user
+            console.log(action.payload.update_data)
+            user = {
+              ...user,
+              'profile_data': action.payload.update_data.sensors[0].profile_data
+            }
 
+            localStorage.setItem("user", JSON.stringify({...user, "profile_data": action.payload.update_data.sensors[0].profile_data}))
 
             return {
                 ...state,
                 isAuthenticated: true,                
                 access_token: action.payload.access_token,
-                user: action.payload.user
+                user: user
             }
  
 

@@ -9,7 +9,7 @@ const FooterInfo = () => {
     return(<Row justify='center' style={{marginTop:'70px', marginBottom:'70px'}}>
         <Col xs={24} sm={12} md={6} lg={6} xl={6} style={{paddingLeft:'20px', paddingRight:'20px', paddingBottom:'20px'}}>
             <Title level={2} style={{textAlign: 'center'}}>
-                Innovamos para cambiar vidas.
+                "Innovamos para cambiar vidas."
             </Title>
         </Col>
         <Col xs={24} sm={12} md={6} lg={6} xl={6} style={{paddingLeft:'20px',paddingRight:'20px', paddingBottom:'20px'}}>

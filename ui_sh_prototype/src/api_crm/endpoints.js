@@ -25,11 +25,17 @@ const get_profiles = async() => {
   return rq.data
 }
 
+const get_retrieve = async(user) => {
+  const rq = await GET(`users/${user}/`)
+  return rq.data
+}
+
 const api_crm = {
     authenticated: login,
     billing_data: get_history_data,
     billing_data_admin: get_history_data_admin,
     list_profiles: get_profiles,
+    retrieve_user: get_retrieve
 }
 
 

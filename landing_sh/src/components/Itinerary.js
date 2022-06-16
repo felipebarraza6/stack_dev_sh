@@ -13,6 +13,7 @@ const Itinerary = () => {
 
 
     return (<Row>
+        <Typography.Title level={1} style={styles.title}>Presencia en Nuestra Región</Typography.Title>
         <img src={mapa} width={'100%'} />
     </Row>)
 }
@@ -23,7 +24,10 @@ const styles = {
         color: 'white'
     },
     title: {
-        color: 'white'
+        color: 'white',
+        marginLeft:'55px',
+        marginTop:'55px',
+      marginBottom: '-70px'
     },
     title1: {
         color: 'white',

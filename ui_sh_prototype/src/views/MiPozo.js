@@ -8,10 +8,10 @@ import {
     Col,
     Button,
     CardHeader,
-    Input 
   } from "reactstrap";
 
 import { Bar, Line } from "react-chartjs-2"
+import { Input, Badge } from 'antd'
 
 import SortingTable from "../components/SortingTable/SortingTable.js"
 import Pozo from '../assets/pozo/dem1.png'
@@ -25,6 +25,8 @@ import {
     chartExample10 } from "../variables/charts.js"
 
 import api_novus from '../api_novus/endpoints'
+import imgwatter from '../assets/pozo/pozo y tanque-21.png'
+import bomb from  '../assets/pozo/pozo y tanque-19.png'
 
 const MiPozo = () => {
 
@@ -34,8 +36,7 @@ const MiPozo = () => {
 
   const data_estatic = JSON.parse(localStorage.getItem('data_p'))
 
-  useEffect(() => {
-    const get = async() => {
+const get = async() => {
         const rqWell = await api_novus.lastData('3grecuc1v')
         const rqPond = await api_novus.lastData('3grecuc2v')
         const rqAcc = await api_novus.lastData('3grecdi1va')
@@ -48,8 +49,18 @@ const MiPozo = () => {
           rqAcc
         }
     }
-  get()
+
+  useEffect(() => {
+      get()
   }, [])
+    
+
+let watter2 = {
+      marginTop:`${-160-pond}px`,
+    marginLeft: '-39px',
+    position: 'absolute',
+  }
+
 
     return( <>
         <div className="content">
@@ -62,6 +73,8 @@ const MiPozo = () => {
                     <Col className="text-left" md="5" >
                       <h5 className="card-category">Mi Pozo</h5>
                       <CardTitle tag="h2">Esquema de representacion</CardTitle>
+                        
+                      <Button size="sm" style={{zIndex:'3'}} onClick={()=>{get()}}>ACTUALIZAR DATOS</Button>
                     </Col>
                   </Row>
                 </CardHeader>
@@ -75,10 +88,12 @@ const MiPozo = () => {
                                      backgroundRepeat: 'no-repeat',
                                      width: '100%', marginTop:'100px' }}>
                           <div>
-                          <input size='5' style={{marginTop:'135px', marginLeft:'440px'}} />
-                          </div>
-                          <div>
-                          <input size='5'  style={{marginTop:'145px', marginLeft:'408px', zIndex: 1}} />
+                            <Badge status="processing" text={<>{acc} <b>M3</b></>} style={styles.badge_acc} />
+                            <Badge status="processing" text={<>{pond} <b>Mtrs</b></>} style={styles.badge_level} />
+                            <Badge status="processing" text={<>{well} <b>Ltrs</b></>} style={styles.badge_well} />
+                            <img src={bomb} style={styles.bomb} />
+                            <img src={imgwatter} style={styles.watter} />
+                            <img src={imgwatter} style={watter2} />
                           </div>
                         </div>
 
@@ -128,8 +143,51 @@ const MiPozo = () => {
 }
 
 const styles = {
+badge_well: {
+    position: 'absolute',
+    marginLeft:'240px',
+    zIndex: '3',
+    marginTop: '107px',
+    backgroundColor: 'white',
+    padding:'5px',
+    border:'2px solid #1890ff',
+    borderRadius: '5px'
+  },
 
-  line: {
+  badge_acc: {
+    position: 'absolute',
+    marginLeft:'500px',
+    zIndex: '3',
+    marginTop: '100px',
+    backgroundColor: 'white',
+    padding:'5px',
+    border:'2px solid #1890ff',
+    borderRadius: '5px'
+  },
+  badge_level: {
+    position: 'absolute',
+    marginLeft:'420px',
+    zIndex: '3',
+    marginTop: '340px',
+    backgroundColor: 'white',
+    padding:'5px',
+    border:'2px solid #1890ff',
+    borderRadius: '5px'
+  },
+
+  bomb: {
+    marginTop:'-100px',
+    marginLeft:'16px',
+    position: 'absolute',
+    zIndex:'2'
+
+  },
+  watter: {
+      marginTop:'-138px',
+      marginLeft: '-39px',
+      position: 'absolute',
+  },
+    line: {
     color: 'white',
     backgroundColor: '#5e72e4',
     border:'10px solid #5e72e4',

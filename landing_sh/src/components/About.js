@@ -7,10 +7,8 @@ const About = () => {
 
     return(
         <Row style={styles.container} >
-            <Col span={24}>
-            <Title style={styles.title}>Misión y Visión</Title>
-            </Col>
             <Col xs={24} sm={12} md={12} lg={12} xl={12} style={styles.colPara}>
+              <Title style={styles.title}>Misión</Title>
                 <Paragraph style={styles.paragraph} align='justify'>
                 
                 <Text style={{color: 'white'}}>
@@ -20,6 +18,7 @@ const About = () => {
                 </Paragraph>
             </Col>
             <Col xs={24} sm={12} md={12} lg={12} xl={12} style={styles.colPara}>
+<Title style={styles.title}>Visión</Title>
                 <Paragraph style={styles.paragraph} >
                     <Text style={{color: 'white'}}>                        
       Ser el referente en la sustentabilidad y eficiencia hídrica en Sudamérica en los próximos 3 años a través de procesos de innovación en los servicios entregados, en la gestión empresarial y la creación de valor para nuestros clientes

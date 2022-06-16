@@ -105,7 +105,7 @@ const Charts2 = () => {
       <div className="content" style={{marginTop:'0px'}}>
         <div style={{marginBottom:'0px'}}>        
         </div>
-        {user.username == "pozos.iansa" ? <>
+        {user.username == "pozos_iansa" ? <>
           <Row className="mt-5" >
           <Col className="ml-center" md="5">
             <Card className="card-chart" style={{background:'linear-gradient(180deg, rgba(255,255,255,1) 30%, rgba(228,237,247,1) 61%, rgba(216,229,244,1) 69%, rgba(210,225,242,1) 79%, rgba(197,216,238,1) 87%, rgba(150,183,224,1) 100%, rgba(0,80,179,1) 100%)'}}>

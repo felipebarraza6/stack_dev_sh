@@ -62,16 +62,16 @@ const Home = () => {
                 </Row>
               </Header>
               <Header style={styles.header}>            
-                <Row>                
+                <Row >                
                   {width > 800 ? <>
                     <Col span={4}>
                       <a href='https://smarthydro.cl'>
                       <img src={logo_src} alt='logo' style={styles.logo} />
                       </a>
                     </Col>
-                    <Col span={6}>
+                    <Col span={5}>
                     </Col>                
-                    <Col span={14}> 
+                    <Col span={15}> 
                       <HeaderMenu is_mobile={is_mobile} />
                     </Col>                
                   </>: 
