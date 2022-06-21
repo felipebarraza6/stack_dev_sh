@@ -8,3 +8,4 @@ uwsgi
 django-cors-headers
 django-filter
 django-crontab
+requests

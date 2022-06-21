@@ -8,4 +8,5 @@ if [ "$1" = cron ]; then
 fi
 
 # Launch the main container command passed as arguments.
+echo "$@"
 exec "$@"

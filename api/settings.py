@@ -45,7 +45,7 @@ LOCAL_APPS = [
 ]
 
 CRONJOBS = [
-    ('1 * * * *', 'api.cron.job',  '>> ' + os.path.join(BASE_DIR,'log/debug7.log' + ' 2>&1 '))
+    ('0 * * * *', 'api.cron.main',  '>> ' + os.path.join(BASE_DIR,'log/debug7.log' + ' 2>&1 '))
 ]
 
 

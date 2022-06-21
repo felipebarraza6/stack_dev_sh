@@ -1,0 +1,387 @@
+System check identified some issues:
+
+WARNINGS:
+crm.Action: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.AdminView: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Client: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.DataHistoryFact: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Employee: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.InteractionDetail: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.ProfileClient.scale: (fields.W122) 'max_length' is ignored when used with IntegerField.
+	HINT: Remove 'max_length' from field
+crm.ProfileClient: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.RegisterPersons: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.TypeAction: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.User: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 3, in main
+    interaction=run_interactions()
+  File "/code/api/crm/views/client_profile.py", line 73, in run_interactions
+    serializer.is_valid(raise_exception=True)
+  File "/usr/local/lib/python3.8/site-packages/rest_framework/serializers.py", line 235, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'non_field_errors': [ErrorDetail(string='Invalid data. Expected a dictionary, but got str.', code='invalid')]}
+System check identified some issues:
+
+WARNINGS:
+crm.Action: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.AdminView: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Client: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.DataHistoryFact: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Employee: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.InteractionDetail: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.ProfileClient.scale: (fields.W122) 'max_length' is ignored when used with IntegerField.
+	HINT: Remove 'max_length' from field
+crm.ProfileClient: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.RegisterPersons: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.TypeAction: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.User: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 3, in main
+    interaction=run_interactions()
+  File "/code/api/crm/views/client_profile.py", line 73, in run_interactions
+    serializer.is_valid(raise_exception=True)
+  File "/usr/local/lib/python3.8/site-packages/rest_framework/serializers.py", line 235, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'non_field_errors': [ErrorDetail(string='Invalid data. Expected a dictionary, but got str.', code='invalid')]}
+System check identified some issues:
+
+WARNINGS:
+crm.Action: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.AdminView: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Client: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.DataHistoryFact: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Employee: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.InteractionDetail: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.ProfileClient.scale: (fields.W122) 'max_length' is ignored when used with IntegerField.
+	HINT: Remove 'max_length' from field
+crm.ProfileClient: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.RegisterPersons: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.TypeAction: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.User: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 3, in main
+    interaction=run_interactions()
+  File "/code/api/crm/views/client_profile.py", line 73, in run_interactions
+    serializer.is_valid(raise_exception=True)
+  File "/usr/local/lib/python3.8/site-packages/rest_framework/serializers.py", line 235, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'non_field_errors': [ErrorDetail(string='Invalid data. Expected a dictionary, but got str.', code='invalid')]}
+System check identified some issues:
+
+WARNINGS:
+crm.Action: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.AdminView: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Client: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.DataHistoryFact: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Employee: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.InteractionDetail: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.ProfileClient.scale: (fields.W122) 'max_length' is ignored when used with IntegerField.
+	HINT: Remove 'max_length' from field
+crm.ProfileClient: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.RegisterPersons: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.TypeAction: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.User: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 3, in main
+    interaction=run_interactions()
+  File "/code/api/crm/views/client_profile.py", line 73, in run_interactions
+    serializer.is_valid(raise_exception=True)
+  File "/usr/local/lib/python3.8/site-packages/rest_framework/serializers.py", line 235, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'non_field_errors': [ErrorDetail(string='Invalid data. Expected a dictionary, but got str.', code='invalid')]}
+System check identified some issues:
+
+WARNINGS:
+crm.Action: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.AdminView: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Client: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.DataHistoryFact: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Employee: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.InteractionDetail: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.ProfileClient.scale: (fields.W122) 'max_length' is ignored when used with IntegerField.
+	HINT: Remove 'max_length' from field
+crm.ProfileClient: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.RegisterPersons: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.TypeAction: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.User: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 3, in main
+    interaction=run_interactions()
+  File "/code/api/crm/views/client_profile.py", line 73, in run_interactions
+    serializer.is_valid(raise_exception=True)
+  File "/usr/local/lib/python3.8/site-packages/rest_framework/serializers.py", line 235, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'non_field_errors': [ErrorDetail(string='Invalid data. Expected a dictionary, but got str.', code='invalid')]}
+System check identified some issues:
+
+WARNINGS:
+crm.Action: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.AdminView: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Client: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.DataHistoryFact: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Employee: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.InteractionDetail: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.ProfileClient.scale: (fields.W122) 'max_length' is ignored when used with IntegerField.
+	HINT: Remove 'max_length' from field
+crm.ProfileClient: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.RegisterPersons: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.TypeAction: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.User: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 3, in main
+    interaction=run_interactions()
+  File "/code/api/crm/views/client_profile.py", line 73, in run_interactions
+    serializer.is_valid(raise_exception=True)
+  File "/usr/local/lib/python3.8/site-packages/rest_framework/serializers.py", line 235, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'non_field_errors': [ErrorDetail(string='Invalid data. Expected a dictionary, but got str.', code='invalid')]}
+System check identified some issues:
+
+WARNINGS:
+crm.Action: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.AdminView: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Client: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.DataHistoryFact: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Employee: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.InteractionDetail: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.ProfileClient.scale: (fields.W122) 'max_length' is ignored when used with IntegerField.
+	HINT: Remove 'max_length' from field
+crm.ProfileClient: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.RegisterPersons: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.TypeAction: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.User: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 3, in main
+    interaction=run_interactions()
+  File "/code/api/crm/views/client_profile.py", line 73, in run_interactions
+    serializer.is_valid(raise_exception=True)
+  File "/usr/local/lib/python3.8/site-packages/rest_framework/serializers.py", line 235, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'non_field_errors': [ErrorDetail(string='Invalid data. Expected a dictionary, but got str.', code='invalid')]}
+guardado
+{'data': [{'measurement_time': '01:00', 'date_medition': '2022-06-15', 'nivel': 49, 'total': 337312, 'flow': 0, 'project_code': 'iansa'}]}
+System check identified some issues:
+
+WARNINGS:
+crm.Action: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.AdminView: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Client: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.DataHistoryFact: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Employee: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.InteractionDetail: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.ProfileClient.scale: (fields.W122) 'max_length' is ignored when used with IntegerField.
+	HINT: Remove 'max_length' from field
+crm.ProfileClient: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.RegisterPersons: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.TypeAction: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.User: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+guardado
+{'data': [{'measurement_time': '01:00', 'date_medition': '2022-06-15', 'nivel': 49, 'total': 337312, 'flow': 0, 'project_code': 'iansa'}]}
+System check identified some issues:
+
+WARNINGS:
+crm.Action: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.AdminView: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Client: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.DataHistoryFact: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Employee: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.InteractionDetail: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.ProfileClient.scale: (fields.W122) 'max_length' is ignored when used with IntegerField.
+	HINT: Remove 'max_length' from field
+crm.ProfileClient: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.RegisterPersons: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.TypeAction: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.User: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+guardado
+{'data': [{'measurement_time': '01:00', 'date_medition': '2022-06-15', 'nivel': 49, 'total': 337312, 'flow': 0, 'project_code': 'iansa'}]}
+System check identified some issues:
+
+WARNINGS:
+crm.Action: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.AdminView: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Client: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.DataHistoryFact: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Employee: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.InteractionDetail: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.ProfileClient.scale: (fields.W122) 'max_length' is ignored when used with IntegerField.
+	HINT: Remove 'max_length' from field
+crm.ProfileClient: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.RegisterPersons: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.TypeAction: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.User: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+guardado
+{'data': [{'measurement_time': '01:00', 'date_medition': '2022-06-15', 'nivel': 49, 'total': 337312, 'flow': 0, 'project_code': 'iansa'}]}
+System check identified some issues:
+
+WARNINGS:
+crm.Action: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.AdminView: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Client: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.DataHistoryFact: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Employee: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.InteractionDetail: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.ProfileClient.scale: (fields.W122) 'max_length' is ignored when used with IntegerField.
+	HINT: Remove 'max_length' from field
+crm.ProfileClient: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.RegisterPersons: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.TypeAction: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.User: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+guardado
+{'data': [{'measurement_time': '01:00', 'date_medition': '2022-06-15', 'nivel': 49, 'total': 337312, 'flow': 0, 'project_code': 'iansa'}]}
+System check identified some issues:
+
+WARNINGS:
+crm.Action: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.AdminView: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Client: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.DataHistoryFact: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.Employee: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.InteractionDetail: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.ProfileClient.scale: (fields.W122) 'max_length' is ignored when used with IntegerField.
+	HINT: Remove 'max_length' from field
+crm.ProfileClient: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.RegisterPersons: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.TypeAction: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+crm.User: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the CrmAppConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
