@@ -9,3 +9,4 @@ django-cors-headers
 django-filter
 django-crontab
 requests
+django-import-export

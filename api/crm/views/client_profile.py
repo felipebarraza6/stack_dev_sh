@@ -27,53 +27,6 @@ from api.crm.serializers.client_profile import (
     AdminView,
     InteractionDetailSerializer,
 )
-import requests
-
-list_variables = {
-    "nivel": "3grecuc2v",
-    "acumulado": "3grecdi1va",
-    "caudal": "3grecuc1v",
-}
-list_productos = {"iansa": "a16508e6-8798-461a-8b07-729e03d8b1ef"}
-
-
-def get_values(token):
-    response = {}
-    for item in list_variables.keys():
-        parsed_url = (
-            f"https://api.tago.io/data/?variable={list_variables[item]}&query=last_item"
-        )
-        request = requests.get(parsed_url, headers={"authorization": token})
-        data = request.json()
-        current_time = datetime.strptime(
-            data.get("result")[0].get("time"), "%Y-%m-%dT%H:%M:%S.%fZ"
-        )
-        response["measurement_time"] = datetime.strftime(current_time, "%H:00")
-        response["date_medition"] = datetime.strftime(current_time, "%Y-%m-%d")
-        if item == "nivel":
-            response["nivel"] = data.get("result")[0].get("value")
-        elif item == "caudal":
-            response["flow"] = data.get("result")[0].get("value")
-        else:
-            response["total"] = data.get("result")[0].get("value")
-
-    return response
-
-
-def run_interactions():
-    #  obtiene listado de predios
-    response = []
-    for item in list_productos.keys():
-        if list_productos[item]:
-            data = get_values(list_productos[item])
-            data["project_code"] = item
-            response.append(data)
-    for item in response:
-        serializer = InteractionDetailSerializer(data=item)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        print("guardado")
-    return {"data":response}
 
 
 class ClientProfileViewSet(

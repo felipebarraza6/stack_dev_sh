@@ -45,7 +45,7 @@ LOCAL_APPS = [
 ]
 
 CRONJOBS = [
-    ('0 * * * *', 'api.cron.main',  '>> ' + os.path.join(BASE_DIR,'log/debug7.log' + ' 2>&1 '))
+    ('* * * * *', 'api.cron.main',  '>> ' + os.path.join(BASE_DIR,'log/debug7.log' + ' 2>&1 '))
 ]
 
 
@@ -146,9 +146,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Santiago'
+
 
 USE_I18N = True
 
