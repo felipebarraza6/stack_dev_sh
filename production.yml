@@ -65,6 +65,16 @@ services:
             - letsencrypt
             - postgres 
 
+    cron:
+        build: ./api     # same as main application
+        restart: unless-stopped
+        image: cron_smarthydro
+        volumes:
+          - .:/code
+        depends_on:
+          - postgres
+          - django
+        command: cron -f  # as a long-running foreground process
 
     react_landing:
         build: ./landing_sh
