@@ -24,6 +24,7 @@ def get_values(token):
         date_now = datetime.now(chilean_timezone)
         response["date_time_medition"] = date_now 
         if item == "nivel":
+            print(data.get("result")>0)
             response["nivel"] = data.get("result")[0].get("value")
         elif item == "caudal":
             response["flow"] = data.get("result")[0].get("value")

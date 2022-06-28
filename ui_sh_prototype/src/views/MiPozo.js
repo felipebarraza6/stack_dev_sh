@@ -80,13 +80,15 @@ let watter2 = {
                 </CardHeader>
                 <CardBody>                         
                     <Row >
-                      <Col style={{marginTop:'-200px'}} xs='8' >
-                        <div style={{backgroundImage: `url(${Pozo})`,
+                      <Col style={{marginTop:'-200px',
+                        backgroundImage: `url(${Pozo})`,
                                      backgroundPosition: 'center',
                                      backgroundSize: '100% auto',
                                      height: '500px',
                                      backgroundRepeat: 'no-repeat',
-                                     width: '100%', marginTop:'100px' }}>
+                                     width: '100%', marginTop:'100px' 
+                      }} xs='8' >
+                        <div>
                           <div>
                             <Badge status="processing" text={<>{acc} <b>M3</b></>} style={styles.badge_acc} />
                             <Badge status="processing" text={<>{pond} <b>Mtrs</b></>} style={styles.badge_level} />

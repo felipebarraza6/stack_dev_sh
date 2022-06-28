@@ -13,7 +13,7 @@ SECRET_KEY = 'h#v#*68y)bfb2ylvy^f-tksars9-k1#8lejxo==_3hsnu2ek!h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+# CSRF_TRUSTED_ORIGINS = ['https://*.smarthydro.cl','https://*.127.0.0.1']
 ALLOWED_HOSTS = ['*']
 # Security
 SESSION_COOKIE_HTTPONLY = True
