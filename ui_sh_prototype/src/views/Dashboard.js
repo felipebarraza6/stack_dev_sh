@@ -57,6 +57,8 @@ const Dashboard = () => {
     get()
   }, [])
 
+  console.log(user)
+
   
   return (
     <>

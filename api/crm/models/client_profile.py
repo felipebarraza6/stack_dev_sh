@@ -15,7 +15,7 @@ class ProfileClient(ModelApi):
     d4 = models.CharField(max_length=100, blank=True, null= True)
     d5 = models.CharField(max_length=100, blank=True, null= True)
     d6 = models.CharField(max_length=100, blank=True, null= True)
-    scale = models.IntegerField(max_length=100, blank=True, null= True)
+    scale = models.IntegerField(blank=True, null= True)
     in1 = models.BooleanField(blank=True, default=True)
     in2 = models.BooleanField(blank=True, default=True)
     in3 = models.BooleanField(blank=True, default=True)

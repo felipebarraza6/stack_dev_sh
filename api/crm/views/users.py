@@ -20,7 +20,7 @@ from rest_framework.permissions import (
 from api.crm.permissions import IsAccountOwner
 
 # Models
-from api.crm.models import User, Action
+from api.crm.models import User, Action, ProfileClient
 
 # Serializers
 from api.crm.serializers.users import UserProfile, UserLoginSerializer, UserModelSerializer, UserSignUpSerializer
@@ -81,7 +81,7 @@ class UserViewSet(mixins.RetrieveModelMixin,
 
         data = {
             'user': response.data,
-            'actions': ActionModelSerializer(actions, many=True).data
+            'actions': ActionModelSerializer(actions, many=True).data,
         }
         response.data = data
         return response

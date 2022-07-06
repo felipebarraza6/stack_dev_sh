@@ -1,9 +1,12 @@
 
 import RegularTables from "./views/tables/RegularTables.js";
+
 import Charts from "./views/Charts.js";
 import Charts2 from "./views/Charts2.js";
 import Dashboard from "./views/Dashboard.js";
 import MiPozo from "./views/MiPozo.js";
+
+
 
 
 const routes = [
@@ -37,6 +40,14 @@ const routes = [
     component: Charts2,
     layout: "/admin",
   },
+  {
+    path: "/dga",
+    name: "DGA",
+    rtlName: "الرسوم البيانية",
+    icon: "tim-icons icon-bullet-list-67",
+    layout: "/dga",
+  },
+
   {
     path: "/reports",
     name: "REPORTES",

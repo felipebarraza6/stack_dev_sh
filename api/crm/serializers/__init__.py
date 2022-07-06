@@ -9,3 +9,4 @@ from .employees import EmployeeModelSerializer, EmployeeListSerializer
 from .users import UserProfile ,UserModelSerializer, UserLoginSerializer, UserSignUpSerializer
 from .client_profile import  (ProfileClient, RegisterPersons,
         InteractionDetailSerializer, DataHistoryFact, AdminView)
+from .quotation import QuotationsModelSerializer, WellsModelSerializer

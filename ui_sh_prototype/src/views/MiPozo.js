@@ -56,8 +56,8 @@ const get = async() => {
     
 
 let watter2 = {
-      marginTop:`${-160-pond}px`,
-    marginLeft: '-39px',
+      marginTop:`${-80-pond}px`,
+    marginLeft: '-34px',
     position: 'absolute',
   }
 
@@ -82,11 +82,11 @@ let watter2 = {
                     <Row >
                       <Col style={{marginTop:'-200px',
                         backgroundImage: `url(${Pozo})`,
-                                     backgroundPosition: 'center',
+                                     backgroundPosition: 'absolute',
                                      backgroundSize: '100% auto',
                                      height: '500px',
                                      backgroundRepeat: 'no-repeat',
-                                     width: '100%', marginTop:'100px' 
+                                     width: '100%', marginTop:'-200px' 
                       }} xs='8' >
                         <div>
                           <div>
@@ -147,9 +147,9 @@ let watter2 = {
 const styles = {
 badge_well: {
     position: 'absolute',
-    marginLeft:'240px',
+    marginLeft:'210px',
     zIndex: '3',
-    marginTop: '107px',
+    marginTop: '200px',
     backgroundColor: 'white',
     padding:'5px',
     border:'2px solid #1890ff',
@@ -158,9 +158,9 @@ badge_well: {
 
   badge_acc: {
     position: 'absolute',
-    marginLeft:'500px',
+    marginLeft:'400px',
     zIndex: '3',
-    marginTop: '100px',
+    marginTop: '220px',
     backgroundColor: 'white',
     padding:'5px',
     border:'2px solid #1890ff',
@@ -168,9 +168,9 @@ badge_well: {
   },
   badge_level: {
     position: 'absolute',
-    marginLeft:'420px',
+    marginLeft:'350px',
     zIndex: '3',
-    marginTop: '340px',
+    marginTop: '440px',
     backgroundColor: 'white',
     padding:'5px',
     border:'2px solid #1890ff',
@@ -178,15 +178,15 @@ badge_well: {
   },
 
   bomb: {
-    marginTop:'-100px',
-    marginLeft:'16px',
+    marginTop:'25px',
+    marginLeft:'13px',
     position: 'absolute',
     zIndex:'2'
 
   },
   watter: {
-      marginTop:'-138px',
-      marginLeft: '-39px',
+      marginTop:'-5px',
+      marginLeft: '-34px',
       position: 'absolute',
   },
     line: {

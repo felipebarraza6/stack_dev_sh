@@ -45,6 +45,14 @@ class UserProfile(serializers.ModelSerializer):
         fields = '__all__'
 
 class UserModelSerializer(serializers.ModelSerializer):
+    profile_data = serializers.SerializerMethodField('get_profile')
+    
+    def get_profile(self, user):
+        qs = ProfileClient.objects.filter(user=user.id)
+        serializer = Profile(instance=qs, many=True)
+        data = serializer.data
+        return data
+
     class Meta:
         model = User
         fields = '__all__'

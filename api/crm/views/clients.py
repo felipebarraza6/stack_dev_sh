@@ -17,8 +17,12 @@ from rest_framework.permissions import (
     IsAuthenticated
 )
 
-from api.crm.models import Client, Employee
-from api.crm.serializers.clients import ClientModelSerializer, RetrieveClientModel
+from api.crm.models import Client, TechnicalInfo, Employee
+from api.crm.serializers.clients import (ClientModelSerializer,
+                                        TechnicalInfoSerializer, 
+                                        RetrieveClientModel)
+
+
 
 
 
@@ -70,6 +74,19 @@ class ClientViewSet(mixins.CreateModelMixin,
                 }
 
     filterset_class = ClientFilter
+    
+    
+    @action(detail=False, methods=['post'])
+    def technica_info_add(self, request):
+        """User sign in."""
+        serializer = TechnicalInfoSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.save()
+        data = {
+            'technical_info': TechnicalInfoSerializer(data).data,
+        }
+        return Response(data, status=status.HTTP_201_CREATED)
+
 
     
 

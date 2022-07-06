@@ -105,6 +105,7 @@ const Charts2 = () => {
       <div className="content" style={{marginTop:'0px'}}>
         <div style={{marginBottom:'0px'}}>        
         </div>
+
         {user.username == "pozos_iansa" ? <>
           <Row className="mt-5" >
           <Col className="ml-center" md="5">
@@ -114,7 +115,7 @@ const Charts2 = () => {
                 <Row>
                   <Col><img alt='icono' src={icono6} style={{width:'40%'}} /></Col>
                   <Col>
-                    <h4>Peak de consumo semanal</h4>
+                    <h4>Peak de semana anterior</h4>
                   </Col>
                 </Row>
                 <Row>
@@ -141,6 +142,36 @@ const Charts2 = () => {
               
               </CardHeader>
 
+            </Card>
+          </Col>
+<Col className="ml-center" md="5">
+            <Card className="card-chart" style={{background:'linear-gradient(180deg, rgba(255,255,255,1) 30%, rgba(228,237,247,1) 61%, rgba(216,229,244,1) 69%, rgba(210,225,242,1) 79%, rgba(197,216,238,1) 87%, rgba(150,183,224,1) 100%, rgba(0,80,179,1) 100%)'}}>
+              <CardHeader style={{border:'1px grey solid', borderRadius:'7px'}}>                                
+                <CardBody style={{margin:'10px'}}>                               
+                <Row>
+                  <Col><img alt='icono' src={icono6} style={{width:'40%'}} /></Col>
+                  <Col>
+                    <h4>Menor valor de nivel semana anterior</h4>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col></Col>
+                    <Col>
+                    <div>
+                      <h4>18.3(mtrs)</h4>
+                    </div>
+                    </Col>
+                    <Col>
+                      <h4>2022-06-27</h4>
+                    </Col>
+              </Row>
+                </CardBody>
+              <Row>
+                <Col style={{float:'right'}}>
+                  <div style={{float:'right',backgroundColor:'#3967AA', width:'10px', height:'10px', borderRadius:'50%', margin:'5px'}}></div>
+               </Col>
+              </Row>
+              </CardHeader>
             </Card>
           </Col>
           <Col className="ml-center" md="5">

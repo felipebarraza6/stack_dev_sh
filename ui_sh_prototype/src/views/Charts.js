@@ -40,7 +40,7 @@ const Charts = () => {
           let rest = []
           let proto = []
           let labels= []
-          for(var i=0; i < 8; i++){            
+          for(var i=0; i <= 24; i++){            
             var start_datenow = new Date()                       
             var demo_date = new Date ()
             start_datenow.setDate(start_datenow.getDate()-i)
@@ -58,7 +58,7 @@ const Charts = () => {
                   value: parseFloat(results[0].value ).toFixed(0)
               })
 
-              labels.push(results[0].time.slice(0, 10))
+              labels.push(`${i}:00`)
 
               // eslint-disable-next-line no-loop-func
               
@@ -69,9 +69,17 @@ const Charts = () => {
           for(var i =0; i < list_d.length; i++){
               var proc = list_d[i]-list_d[i+1]
               if(!isNaN(proc)){
-                rest.push(parseFloat(proc/selected_sensor.scale).toFixed(1)) 
+                var number = parseFloat(proc/selected_sensor.scale).toFixed(1)
+                if(i===0){
+
+                rest.push(number.slice('0')) 
+                }else {
+
+                rest.push(number.slice(1,3)) 
+                }
               }              
           }  
+          rest[0]= '0'
           setData1(rest)
           labels.pop()
           setLabels1(labels)
@@ -89,7 +97,7 @@ const getDataNl = async()=> {
           let rest = []
           let proto = []
           let labels= []
-          for(var i=0; i < 7; i++){            
+          for(var i=0; i < start_datenowi.getDate(); i++){            
             var start_datenow = new Date()                       
             var demo_date = new Date ()
             start_datenow.setDate(start_datenow.getDate()-i)
@@ -111,21 +119,19 @@ const getDataNl = async()=> {
               labels.push(results[0].time.slice(0, 10))
 
               // eslint-disable-next-line no-loop-func
-              if(results[0].value == 49.6){
-                list_d.push(27.4)
-              } else if(results[0].value == 50.3){
-                list_d.push(32.3)
-              } else if(results[0].value == 36.6){
-                list_d.push(33.4)
-              } else if(results[0].value == 3276.7){
-                list_d.push(32.2) 
+              //
+              console.log(results)
+              if(results[0].value == -3200){
+                list_d.push(51.00)
               }else {
-                list_d.push(parseFloat(results[0].value/selected_sensor.scale).toFixed(1))                         
+                list_d.push(parseFloat(results[0].value))                         
               } 
              
             }               
           }  
            
+          list_d.reverse()
+          labels.reverse()
           setData3(list_d)
           setLabels3(labels)
           
@@ -175,15 +181,21 @@ const getDataNl = async()=> {
                 rest.push(proc/selected_sensor.scale).toFixed(1) 
               }              
           }  
+          rest.reverse()
           setData2(rest)
           labels.pop()
+          labels.reverse()
           setLabels2(labels)
           
       } catch(err) {
           console.log({err})
       } 
+      
              
   }
+
+  var acc_date = new Date()
+  var month = acc_date.toLocaleString('default', { month: 'long' })
 
   useEffect(() => {
     getDataFl()         
@@ -197,10 +209,10 @@ const getDataNl = async()=> {
        
      
       <Row style={{marginTop:'100px'}}>
-      <Col className="text-left" sm="6">
+      <Col className="text-left" sm="12">
       <Card className="card-chart">  
       <CardHeader>       
-            <CardTitle tag="h2">Acumulado (m3) - Últimos 7 días </CardTitle>
+            <CardTitle tag="h2">Acumulado (m3) - Últimas 24 horas </CardTitle>
       </CardHeader>          
       <CardBody>
         <div className="chart-area">                             
@@ -232,37 +244,56 @@ const getDataNl = async()=> {
       </CardBody>
       </Card> 
         </Col> 
-        <Col className="text-left" sm="6" style={{paddingTop:'6%'}}>
+        <Col className="text-left" sm="12" style={{marginTop:'-10px', paddingBottom:'2%'}}>
+            <h3 style={{paddingLeft:'10px'}}>{month.toUpperCase()}</h3>
         <table style={styles.table}>          
-            <h4>Mayo</h4>
           <tr>
           
-          {labels1.map((x)=>
-              <td style={styles.table.tdtha} >
-              {x.slice(8, 10)}
-              </td>
-            )}</tr>
-            <tr>
-            {data1.map((x)=>
-              <td style={styles.table.tdth}>
+          {labels1.map((x, index)=>{
+              if(index<=12){
+                return(
+                  <td style={styles.table.tdtha} >
               {x}
               </td>
+
+                )
+              }
+            })}</tr>
+            <tr>
+            {data1.map((x, index)=>{ 
+              if(index<=12){
+              return(    
+              <td style={styles.table.tdth}>
+              {x.slice(0,4)}
+              </td>)
+          }
+            }
             )}</tr>
-        <hr />
-        <tr>
-        <td style={styles.table.tdtha} >
-          TOTAL
+
+<tr>
+          
+          {labels1.map((x, index)=>{
+              if(index>12){
+                return(
+                  <td style={styles.table.tdtha} >
+              {x}
               </td>
 
-        <td style={styles.table.tdth}>
-        <b>{data1.reduce((a,b)=> {
-          var sum = parseFloat(a)+parseFloat(b)
-          return(sum.toFixed(1))
+                )
+              }
+            })}</tr>
+            <tr>
+            {data1.map((x, index)=>{ 
+              if(index>12){
+              return(    
+              <td style={styles.table.tdth}>
+              {x.slice(0,2)}
+              </td>)
+          }
+            }
+            )}</tr>
 
-        },0)}</b>
-        </td>
-        </tr>
-
+        
         </table>
         </Col>
       </Row>
@@ -304,6 +335,7 @@ const getDataNl = async()=> {
         </Col>  
         <Col>
           <table style={styles.table}>          
+            <h3 style={{paddingLeft:'10px'}}>{month.toUpperCase()}</h3>
           <tr>
           {labels2.map((x)=>
               <td style={styles.table.tdtha} >
@@ -314,7 +346,7 @@ const getDataNl = async()=> {
             <tr>
             {data2.map((x)=>
               <td style={styles.table.tdth}>
-              {x}
+              {x} (m3)
               </td>
             )}</tr>
     <hr />
@@ -335,14 +367,14 @@ const getDataNl = async()=> {
 
       </Row>
       <Row style={{marginTop:'100px'}}>
-      <Col className="text-left" sm="6">
+      <Col className="text-left" sm="12">
       <Card className="card-chart">  
       <CardHeader>       
-            <CardTitle tag="h2">Columna de agua(metros) - Últimos 7 días</CardTitle>
+            <CardTitle tag="h2">Columna de agua(metros) - Último mes</CardTitle>
       </CardHeader>          
       <CardBody>
         <div className="chart-area">                             
-          <Bar
+          <Line
             data={{      
               labels: labels3,
               datasets: [
@@ -370,11 +402,10 @@ const getDataNl = async()=> {
       </CardBody>
       </Card> 
         </Col> 
-        <Col className="text-left" sm="6" style={{paddingTop:'6%'}}>
+        <Col className="text-left" sm="12" style={{paddingTop:'0%'}}>
+            <h3 style={{paddingLeft:'10px'}}>{month.toUpperCase()}</h3>
         <table style={styles.table}>          
-            <h4>Mayo</h4>
           <tr>
-          
           {labels3.map((x)=>
               <td style={styles.table.tdtha} >
               {x.slice(8, 10)}
@@ -389,9 +420,6 @@ const getDataNl = async()=> {
         </table>
         </Col>
       </Row>
-      
-            
-                       
       </div>
     </>
   );
