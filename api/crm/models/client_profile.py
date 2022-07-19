@@ -53,11 +53,4 @@ class DataHistoryFact(ModelApi):
         return str(self.profile)
 
 
-class AdminView(ModelApi):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    profiles = models.ManyToManyField(ProfileClient,
-            related_name='admin_view_profiles', blank=True)
-
-    def __str__(self):
-        return str(self.user)
 

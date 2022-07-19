@@ -7,7 +7,6 @@ from api.crm.models import (
     ProfileClient,
     RegisterPersons,
     DataHistoryFact,
-    AdminView,
     InteractionDetail,
 )
 
@@ -15,12 +14,6 @@ from api.crm.models import (
 class RegisterPersons(serializers.ModelSerializer):
     class Meta:
         model = RegisterPersons
-        fields = "__all__"
-
-
-class AdminView(serializers.ModelSerializer):
-    class Meta:
-        model = AdminView
         fields = "__all__"
 
 

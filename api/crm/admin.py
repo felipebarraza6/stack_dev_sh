@@ -7,7 +7,7 @@ from django.contrib import admin
 from api.crm.models import (InteractionDetail, User, 
                         Client, Action, ProfileClient,
                         RegisterPersons, DataHistoryFact,
-                        AdminView, TechnicalInfo, Quotation, Well,
+                        TechnicalInfo, Quotation, Well,
                         FormLandingContact)
 from import_export.admin import ExportActionMixin
 
@@ -16,7 +16,6 @@ from import_export.admin import ExportActionMixin
 admin.site.register(ProfileClient)
 admin.site.register(RegisterPersons)
 admin.site.register(DataHistoryFact)
-admin.site.register(AdminView)
 admin.site.register(User)
 admin.site.register(Client)
 admin.site.register(Quotation)

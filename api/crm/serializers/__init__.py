@@ -8,5 +8,5 @@ from .clients import ClientModelSerializer, ClientShortSerializer, RetrieveClien
 from .employees import EmployeeModelSerializer, EmployeeListSerializer
 from .users import UserProfile ,UserModelSerializer, UserLoginSerializer, UserSignUpSerializer
 from .client_profile import  (ProfileClient, RegisterPersons,
-        InteractionDetailSerializer, DataHistoryFact, AdminView)
+        InteractionDetailSerializer, DataHistoryFact)
 from .quotation import QuotationsModelSerializer, WellsModelSerializer

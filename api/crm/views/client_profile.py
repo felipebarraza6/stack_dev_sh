@@ -16,7 +16,6 @@ from api.crm.models import (
     ProfileClient as ProfileClientM,
     RegisterPersons as RegisterPersonsM,
     DataHistoryFact as DataHistoryFactM,
-    AdminView as AdminViewM,
     InteractionDetail as Interaction,
 )
 
@@ -24,7 +23,6 @@ from api.crm.serializers.client_profile import (
     ProfileClient,
     RegisterPersons,
     DataHistoryFact,
-    AdminView,
     InteractionDetailSerializer,
 )
 

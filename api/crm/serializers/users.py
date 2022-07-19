@@ -8,7 +8,8 @@ from django.contrib.auth import password_validation, authenticate
 from django.core.validators import RegexValidator
 
 # Models
-from api.crm.models import User, ProfileClient, AdminView,RegisterPersons
+from api.crm.models import User, ProfileClient, RegisterPersons
+
 
 
 class RegisterPersonSerializers(serializers.ModelSerializer):

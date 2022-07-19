@@ -4,14 +4,12 @@ import {
     Card,  
     CardBody,
     CardTitle,
-    Row,
-    Col,
     Button,
     CardHeader,
   } from "reactstrap";
 
 import { Bar, Line } from "react-chartjs-2"
-import { Input, Badge } from 'antd'
+import { Input, Badge, Col, Row } from 'antd'
 
 import SortingTable from "../components/SortingTable/SortingTable.js"
 import Pozo from '../assets/pozo/dem1.png'
@@ -56,8 +54,8 @@ const get = async() => {
     
 
 let watter2 = {
-      marginTop:`${-80-pond}px`,
-    marginLeft: '-34px',
+      marginTop:`${-40-pond}px`,
+    marginLeft: '-16px',
     position: 'absolute',
   }
 
@@ -65,12 +63,12 @@ let watter2 = {
     return( <>
         <div className="content">
           <Row>         
-            <Col xs="12">
+            <Col span={24}>
               <Card className="card-chart">
                 <CardHeader style={{marginBottom:'90px'}}>
                   
                   <Row>
-                    <Col className="text-left" md="5" >
+                    <Col>
                       <h5 className="card-category">Mi Pozo</h5>
                       <CardTitle tag="h2">Esquema de representacion</CardTitle>
                         
@@ -80,14 +78,14 @@ let watter2 = {
                 </CardHeader>
                 <CardBody>                         
                     <Row >
-                      <Col style={{marginTop:'-200px',
+                      <Col span={12} style={{marginTop:'-200px',
                         backgroundImage: `url(${Pozo})`,
                                      backgroundPosition: 'absolute',
                                      backgroundSize: '100% auto',
                                      height: '500px',
                                      backgroundRepeat: 'no-repeat',
                                      width: '100%', marginTop:'-200px' 
-                      }} xs='8' >
+                      }}>
                         <div>
                           <div>
                             <Badge status="processing" text={<>{acc} <b>M3</b></>} style={styles.badge_acc} />
@@ -102,7 +100,7 @@ let watter2 = {
                       </Col>
                       
 
-                      <Col style={{color:'gray'}}>
+                      <Col style={{color:'gray'}} span={12}>
                       <table style={styles.table}>
                           <tr >
                             <th style={styles.table.tdth}>Profundidad de pozo</th>
@@ -127,8 +125,6 @@ let watter2 = {
                          
                         </table>
                       </Col>
-                      <Col style={{marginTop:'-200px'}} xs='8' >
-                      </Col>
                                             
                     </Row>         
                 </CardBody>
@@ -147,9 +143,9 @@ let watter2 = {
 const styles = {
 badge_well: {
     position: 'absolute',
-    marginLeft:'210px',
+    marginLeft:'170px',
     zIndex: '3',
-    marginTop: '200px',
+    marginTop: '160px',
     backgroundColor: 'white',
     padding:'5px',
     border:'2px solid #1890ff',
@@ -158,9 +154,9 @@ badge_well: {
 
   badge_acc: {
     position: 'absolute',
-    marginLeft:'400px',
+    marginLeft:'340px',
     zIndex: '3',
-    marginTop: '220px',
+    marginTop: '170px',
     backgroundColor: 'white',
     padding:'5px',
     border:'2px solid #1890ff',
@@ -168,9 +164,9 @@ badge_well: {
   },
   badge_level: {
     position: 'absolute',
-    marginLeft:'350px',
+    marginLeft:'330px',
     zIndex: '3',
-    marginTop: '440px',
+    marginTop: '370px',
     backgroundColor: 'white',
     padding:'5px',
     border:'2px solid #1890ff',
@@ -178,23 +174,23 @@ badge_well: {
   },
 
   bomb: {
-    marginTop:'25px',
-    marginLeft:'13px',
+    marginTop:'20px',
+    marginLeft:'25px',
     position: 'absolute',
     zIndex:'2'
 
   },
   watter: {
       marginTop:'-5px',
-      marginLeft: '-34px',
+      marginLeft: '-16px',
       position: 'absolute',
   },
     line: {
     color: 'white',
     backgroundColor: '#5e72e4',
     border:'10px solid #5e72e4',
-    marginTop:'-5px',
-    marginLeft: '-60px',
+    marginTop:'20px',
+    marginLeft: '-16px',
     width:'200px'  
   },
   line2: {
