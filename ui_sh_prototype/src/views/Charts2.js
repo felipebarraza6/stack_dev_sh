@@ -106,7 +106,7 @@ const Charts2 = () => {
         <div style={{marginBottom:'0px'}}>        
         </div>
 
-        {user.username == "pozos_iansa" ? <>
+        {user.username == "pozos_iansa" || "pozos_iansaquepue" ? <>
           <Row className="mt-5" >
           <Col className="ml-center" md="5">
             <Card className="card-chart" style={{background:'linear-gradient(180deg, rgba(255,255,255,1) 30%, rgba(228,237,247,1) 61%, rgba(216,229,244,1) 69%, rgba(210,225,242,1) 79%, rgba(197,216,238,1) 87%, rgba(150,183,224,1) 100%, rgba(0,80,179,1) 100%)'}}>
@@ -158,11 +158,16 @@ const Charts2 = () => {
                   <Col></Col>
                     <Col>
                     <div>
-                      <h4>18.3(mtrs)</h4>
+                    {user.username==='pozos_iansa' ? 
+                      <h4>0.76(mtrs)</h4>:<h4>17.8</h4>
+                    }
                     </div>
                     </Col>
                     <Col>
-                      <h4>2022-06-27</h4>
+                    {user.username==='pozos_iansa' ?
+                      <h4>2022-07-14</h4>:
+                      <h4>2022-07-16</h4>
+                    }
                     </Col>
               </Row>
                 </CardBody>

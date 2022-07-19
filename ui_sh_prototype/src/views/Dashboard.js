@@ -78,7 +78,10 @@ const Dashboard = () => {
                     "d4": x.d4,
                     "d5": x.d5,
                     "d6": x.d6
-                  }))}}>{x.title}</Button></Col>)
+                  }))
+                  window.location.reload()
+
+                }}>{x.title}</Button></Col>)
                 })}
               </>
         </Row>}
