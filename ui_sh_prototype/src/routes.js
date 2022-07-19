@@ -10,6 +10,7 @@ const user = JSON.parse(localStorage.getItem('user'))
 const routes = []
 
 const validateUser = () => {
+  if(user){
   if(user.username==='avicolaelmonte'){
    routes.push({
     path: "/dashboard",
@@ -65,7 +66,7 @@ const validateUser = () => {
       layout: "/admin",
      })
   }  
-
+ }
 }
 
 validateUser()
