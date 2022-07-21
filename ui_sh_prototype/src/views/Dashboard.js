@@ -149,8 +149,8 @@ const Dashboard = () => {
             </Card>
           </Col>        
         </Row>
-        <Row>
-    {user.profile_data.is_apr && <Card className="card-stats">
+        <Row>          
+          {user.profile_data[0].is_apr && <Card className="card-stats">
               <CardBody>
                 <Row>    
                   <Col xs="12">
