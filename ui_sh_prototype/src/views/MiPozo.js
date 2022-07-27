@@ -119,7 +119,7 @@ const MiPozo = () => {
                           status="processing"
                           text={
                             <>
-                              {well} <b>Ltrs</b>
+                              {well < 0 ? 0: well} <b>Ltrs</b>
                             </>
                           }
                           style={styles.badge_well}
