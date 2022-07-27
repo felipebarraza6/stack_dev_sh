@@ -219,15 +219,15 @@ const Charts2 = () => {
                             {user.username === "pozos_iansa" ? (
                               <h4>0.76(mtrs)</h4>
                             ) : (
-                              <h4>17.8</h4>
+                              <h4>14.8</h4>
                             )}
                           </div>
                         </Col>
                         <Col>
                           {user.username === "pozos_iansa" ? (
-                            <h4>2022-07-14</h4>
+                            <h4>2022-07-21</h4>
                           ) : (
-                            <h4>2022-07-16</h4>
+                            <h4>2022-07-21</h4>
                           )}
                         </Col>
                       </Row>

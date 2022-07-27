@@ -100,7 +100,7 @@ const Dashboard = () => {
                   <Col xs="7">
                     <div className="numbers">
                       <p className="card-category">Caudal (lt/s)</p>
-                      <CardTitle tag="h3"> {well} </CardTitle>
+                      <CardTitle tag="h3"> {well===-0.2 ? 0 :well} </CardTitle>
                     </div>
                   </Col>
                 </Row>
