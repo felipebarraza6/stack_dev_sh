@@ -341,22 +341,21 @@ const getDataNl = async()=> {
               <td style={styles.table.tdtha} >
               {x.slice(8,10)}
               </td>
-              
             )}</tr>
             <tr>
             {data2.map((x)=>
               <td style={styles.table.tdth}>
-              {x} (m3)
+              {x}
               </td>
             )}</tr>
-    <hr />
+          <hr />
           <tr>
         <td style={styles.table.tdtha} >
           TOTAL
               </td>
 
         <td style={styles.table.tdth}>
-        <b>{data2.reduce((a,b)=>(parseFloat(a)+parseFloat(b)),0)}</b>
+        <b>{data2.reduce((a,b)=>(parseFloat(a+b).toFixed(2)),0)}</b>
         </td>
         </tr>
 

@@ -21,7 +21,7 @@ RUN apt-get install -y \
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm /etc/nginx/sites-enabled/default
 RUN ln -s /code/conf/nginx-app.conf /etc/nginx/sites-enabled/
-run pip install requests
+RUN pip install requests
 ADD . /code/
 
 # Add source code.

@@ -1,8 +1,9 @@
 import requests
+import pytz
+from datetime import datetime
 from .crm.models import ProfileClient 
 from .crm.serializers import InteractionDetailSerializer
-from datetime import datetime
-import pytz
+
 
 list_variables = {
     "nivel": "3grecuc2v",

@@ -2,3 +2,5 @@ ui_crm/node_modules/
 landing_sh/node_modules/
 ui_sh_prototype/node_modules/
 ui_prototype/
+*.pyc 
+
