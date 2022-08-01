@@ -263,4 +263,4 @@ const styles = {
   },
 };
 
-export default MiPozo;
+export default MiPozo
