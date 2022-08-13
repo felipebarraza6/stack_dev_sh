@@ -1,0 +1,37 @@
+from rest_framework.viewsets import ReadOnlyModelViewSet
+from drf_excel.mixins import XLSXFileMixin
+from drf_excel.renderers import XLSXRenderer
+
+from api.crm.serializers import InteractionDetailModelSerializer 
+from api.crm.models import InteractionDetail
+from django_filters import rest_framework as filters
+
+
+class InteractionXLS(XLSXFileMixin, ReadOnlyModelViewSet):
+    queryset = InteractionDetail.objects.all()
+    serializer_class = InteractionDetailModelSerializer
+    renderer_classes = (XLSXRenderer,)
+    filename = 'reporte.xlsx'
+    filter_backends = (filters.DjangoFilterBackend,)
+    class InteractionFilter(filters.FilterSet):
+
+        class Meta:
+            model = InteractionDetail
+            fields = {
+                'profile_client': ['exact'],            
+                'created': ['contains', 'gte', 'lte', 'year', 'month', 'day', 'year__range', 'month__range', 'day__range', 'date__range'],                
+                }
+
+    filterset_class = InteractionFilter
+
+
+    xlsx_ignore_headers = ['modified', 'id', 'date_time_medition', 'profile_client']
+    column_header = {
+        'titles': [
+            "FECHA",
+            "CAUDAL",
+            "ACUMULADO",
+            "NIVEL"
+        ]
+    }
+

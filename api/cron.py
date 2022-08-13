@@ -1,4 +1,5 @@
 import requests
+import zeep
 import pytz
 from datetime import datetime
 from .crm.models import ProfileClient 
@@ -37,6 +38,10 @@ def get_values(token):
 
 def run_interactions():
     #  obtiene listado de predios
+    wsdl = 'https://snia.mop.gob.cl/controlextraccion/wsdl/datosExtraccion/SendDataExtraccionService?wsdl'
+    client = zeep.Client(wsdl=wsdl)
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+
     response = []
     for item in list_productos:
         data = get_values(item['token_service'])

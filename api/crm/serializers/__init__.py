@@ -10,3 +10,4 @@ from .users import UserProfile ,UserModelSerializer, UserLoginSerializer, UserSi
 from .client_profile import  (ProfileClient, RegisterPersons,
         InteractionDetailSerializer, DataHistoryFact)
 from .quotation import QuotationsModelSerializer, WellsModelSerializer
+from .interaction_detail import InteractionDetailModelSerializer

@@ -1,10 +1,10 @@
 
-import RegularTables from "./views/tables/RegularTables.js";
+import RegularTables from "./views/tables/RegularTables.js"
 
-import Charts from "./views/Charts.js";
-import Charts2 from "./views/Charts2.js";
-import Dashboard from "./views/Dashboard.js";
-import MiPozo from "./views/MiPozo.js";
+import Charts from "./views/Charts.js"
+import Charts2 from "./views/Charts2.js"
+import Dashboard from "./views/Dashboard.js"
+import MiPozo from "./views/MiPozo.js"
 const user = JSON.parse(localStorage.getItem('user'))
 
 const routes = []
@@ -51,13 +51,6 @@ const validateUser = () => {
       layout: "/admin",
     })
     routes.push({
-      path: "/dga",
-      name: "DGA",
-      rtlName: "الرسوم البيانية",
-      icon: "tim-icons icon-bullet-list-67",
-      layout: "/dga",
-    })
-    routes.push({
       path: "/reports",
       name: "REPORTES",
       rtlName: "الرسوم البيانية",
@@ -72,4 +65,4 @@ const validateUser = () => {
 validateUser()
 
 
-export default routes;
+export default routes

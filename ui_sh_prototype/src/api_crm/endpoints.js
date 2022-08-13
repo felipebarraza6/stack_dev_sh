@@ -1,4 +1,4 @@
-import { POST_LOGIN, GET  } from "./config"
+import { POST_LOGIN, GET, DOWNLOAD  } from "./config"
 
 const login = async(data) =>{
     
@@ -30,8 +30,14 @@ const get_retrieve = async(user) => {
   return rq.data
 }
 
+const downloadFile = async(id_profile, month)=> {
+  const rq = await DOWNLOAD(`interaction_detail/?profile_client=${id_profile}&created__month=${month}`, 'reporte.xlsx')
+  return rq.data
+}
+
 const api_crm = {
     authenticated: login,
+    download_detail: downloadFile,
     billing_data: get_history_data,
     billing_data_admin: get_history_data_admin,
     list_profiles: get_profiles,

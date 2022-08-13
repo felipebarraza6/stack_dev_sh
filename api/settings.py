@@ -1,6 +1,5 @@
 
 import os
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -74,6 +73,8 @@ CORS_ORIGIN_WHITELIST = [
 REST_FRAMEWORK = {
     'DEAFULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'drf_excel.renderers.XLSXRenderer'
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 'rest_framework.permissions.AllowAny',
@@ -86,6 +87,9 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated', # !!!!
+    )
 }
 
 ROOT_URLCONF = 'api.urls'

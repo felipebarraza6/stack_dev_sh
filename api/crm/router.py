@@ -13,6 +13,7 @@ from api.crm.views import employess as views_employess
 from api.crm.views import users as views_users
 from api.crm.views import client_profile as views_clientp
 from api.crm.views import quotation as views_quotations 
+from api.crm.views import interaction_detail as views_detail
 
 router = DefaultRouter()
 
@@ -26,6 +27,7 @@ router.register(r'client_profile', views_clientp.ClientProfileViewSet, basename=
 router.register(r'history_data', views_clientp.DataHistoryFactViewSet, basename= 'history_data')
 router.register(r'quotation', views_quotations.QuotationViewSet, basename=
         'quotation')
+router.register(r'interaction_detail', views_detail.InteractionXLS)
 
 
 urlpatterns = [

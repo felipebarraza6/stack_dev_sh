@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import HeaderMenu from '../components/HeaderMenu'
-import { Layout, Col, Row, 
-        Affix, Typography } from 'antd'
+import { Layout, Col, Row } from 'antd'
 import logo_src from '../assets/images/logo.png'
-import logo_movil_src from '../assets/images/logo_movil.png'
 import Sliders from '../components/Sliders'
 import About from '../components/About'
 import Services from '../components/Services'
 import Contact from '../components/Contact'
 import Collaborators from '../components/Collaborators'
 import FooterInfo from '../components/FooterInfo'
-import Inscribed from '../components/Inscribed'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import ContainerFormDga from '../components/dgaform/ContainerFormDga'
 import ContactForm from '../components/forms/ContactForm'
+import Init from '../components/fingerprint/Init'
 import ThankYou from '../components/pages/ThankYou'
-import { InstagramOutlined,TwitterOutlined,FacebookOutlined, WhatsAppOutlined, PhoneOutlined, MailOutlined } from '@ant-design/icons'
+import { InstagramOutlined,TwitterOutlined,FacebookOutlined, 
+          WhatsAppOutlined, PhoneOutlined, MailOutlined } from '@ant-design/icons'
 const { Header, Content, Footer } = Layout
-const { Title } = Typography
 
 const Home = () => {
 
@@ -26,18 +24,15 @@ const Home = () => {
     const [is_mobile, setIsMobile] = useState()    
 
     useEffect(()=> {
-        
         setWidth(window.innerWidth)
           if(window.innerWidth > 800){
             setIsMobile(true)
           }
-
     }, [])
 
 
     return(<Layout>
         <BrowserRouter>
-        
               <Header style={styles.header1}>
                 <Row justify='end'>
                   <Col><a href='https://www.facebook.com/smarthydrorrss/' target='_blank'>
@@ -104,6 +99,9 @@ const Home = () => {
               </Route>
               <Route exact path='/dgaform'>
                 <ContainerFormDga />
+              </Route>
+              <Route exact path='/fingerprint'>
+                <Init />
               </Route>
               <Route exact path='/contacto'>
                 <ContactForm />
