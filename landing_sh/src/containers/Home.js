@@ -13,6 +13,7 @@ import ContainerFormDga from '../components/dgaform/ContainerFormDga'
 import ContactForm from '../components/forms/ContactForm'
 import Init from '../components/fingerprint/Init'
 import ThankYou from '../components/pages/ThankYou'
+import WebinarsDemo from '../components/webinars/webinarsDemo'
 import { InstagramOutlined,TwitterOutlined,FacebookOutlined, 
           WhatsAppOutlined, PhoneOutlined, MailOutlined } from '@ant-design/icons'
 const { Header, Content, Footer } = Layout
@@ -100,14 +101,16 @@ const Home = () => {
               <Route exact path='/dgaform'>
                 <ContainerFormDga />
               </Route>
-              <Route exact path='/fingerprint'>
-                <Init />
+              <Route exact path='/fingerprint/:id' component={Init}>
               </Route>
               <Route exact path='/contacto'>
                 <ContactForm />
               </Route>
               <Route exact path='/gracias'>
                 <ThankYou />
+              </Route>
+              <Route exact path='/webinars/:id'>
+                <WebinarsDemo />
               </Route>
             </Row>
             

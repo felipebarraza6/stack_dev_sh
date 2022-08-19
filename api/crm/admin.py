@@ -8,7 +8,7 @@ from api.crm.models import (InteractionDetail, User,
                         Client, Action, ProfileClient,
                         RegisterPersons, DataHistoryFact,
                         TechnicalInfo, Quotation, Well,
-                        FormLandingContact)
+                        FormLandingContact, ProfileFootprints, Webinars, ElementsProgramation)
 from import_export.admin import ExportActionMixin
 
 
@@ -22,6 +22,9 @@ admin.site.register(Quotation)
 admin.site.register(Well)
 admin.site.register(TechnicalInfo)
 admin.site.register(FormLandingContact)
+admin.site.register(ProfileFootprints)
+admin.site.register(Webinars)
+admin.site.register(ElementsProgramation)
 
 @admin.register(InteractionDetail)
 class UserAdmin(ExportActionMixin,admin.ModelAdmin):

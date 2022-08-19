@@ -7,3 +7,5 @@ from .quotation import Quotation, Well
 from .client_profile import (ProfileClient, RegisterPersons, 
                         DataHistoryFact)
 from .forms_landing import FormLandingContact 
+from .profile_footprints import ProfileFootprints
+from .webinars import Webinars, ElementsProgramation  

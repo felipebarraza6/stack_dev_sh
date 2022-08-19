@@ -1,10 +1,28 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Row,Col, Typography, Input } from 'antd'
 import Navigate from './Navigate'
 import StatusLine from './StatusLine'
+import {callbacks} from '../../api/endpoints'
 
 
-const Init = () => {
+const Init = ({match}) => {
+
+  const initialState = {
+    id_fingerprint: match.params.id,
+    data_fingerprint: null
+  }
+
+  const [state, setState] = useState(initialState)
+
+  const getData = async()=> {
+    const rq = await callbacks.fingerprint.retrieve(state.id_fingerprint).then((x)=> console.log(x))
+  }
+
+  useEffect(()=> {
+    getData()
+
+  }, [])
+
 
     return(<>
       <Col span={6} style={styles.container}>

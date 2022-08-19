@@ -12,7 +12,15 @@ const list_participans = async() => {
     return request
 }
 
-  export const callbacks = {
-      signupEvent: signup_event,
-      list: list_participans
-  }
+const get_fingerprint = async(id) => {
+  const request = await GET(`profile_footprints/${id}`)
+  return request
+}
+
+export const callbacks = {
+     signupEvent: signup_event,
+     list: list_participans,
+     fingerprint: {
+       retrieve: get_fingerprint
+     }
+}

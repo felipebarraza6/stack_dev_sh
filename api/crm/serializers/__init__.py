@@ -11,3 +11,5 @@ from .client_profile import  (ProfileClient, RegisterPersons,
         InteractionDetailSerializer, DataHistoryFact)
 from .quotation import QuotationsModelSerializer, WellsModelSerializer
 from .interaction_detail import InteractionDetailModelSerializer
+from .webinars import WebinarsModelSerializer
+from .profile_footprints import ProfileFootprintsSerializer
