@@ -38,9 +38,9 @@ def get_values(token):
 
 def run_interactions():
     #  obtiene listado de predios
-    wsdl = 'https://snia.mop.gob.cl/controlextraccion/wsdl/datosExtraccion/SendDataExtraccionService?wsdl'
-    client = zeep.Client(wsdl=wsdl)
-    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+    # wsdl = 'https://snia.mop.gob.cl/controlextraccion/wsdl/datosExtraccion/SendDataExtraccionService?wsdl'
+    # client = zeep.Client(wsdl=wsdl)
+    # print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
 
     response = []
     for item in list_productos:

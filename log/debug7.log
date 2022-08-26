@@ -50820,3 +50820,423 @@ Traceback (most recent call last):
   File "/code/api/cron.py", line 43, in run_interactions
     print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
 AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 43, in run_interactions
+    print(dir(client.service.authSendDataExtraccionOp.authDataUsuario()))
+AttributeError: 'OperationProxy' object has no attribute 'authDataUsuario'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 47, in run_interactions
+    data = get_values(item['token_service'])
+  File "/code/api/cron.py", line 29, in get_values
+    print(data.get("result")>0)
+TypeError: '>' not supported between instances of 'list' and 'int'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 47, in run_interactions
+    data = get_values(item['token_service'])
+  File "/code/api/cron.py", line 29, in get_values
+    print(data.get("result")>0)
+TypeError: '>' not supported between instances of 'list' and 'int'
+Failed to complete cronjob at ('* * * * *', 'api.cron.main', '>> /code/log/debug7.log 2>&1 ')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/code/api/cron.py", line 61, in main
+    interaction=run_interactions()
+  File "/code/api/cron.py", line 47, in run_interactions
+    data = get_values(item['token_service'])
+  File "/code/api/cron.py", line 29, in get_values
+    print(data.get("result")>0)
+TypeError: '>' not supported between instances of 'list' and 'int'
