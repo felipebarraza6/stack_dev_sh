@@ -5,17 +5,18 @@ import StatusLine from './StatusLine'
 import {callbacks} from '../../api/endpoints'
 
 
-const Init = ({match}) => {
+  const Init = ({match}) => {
 
-  const initialState = {
-    id_fingerprint: match.params.id,
-    data_fingerprint: null
-  }
+    const initialState = {
+      id_fingerprint: match.params.id,
+      data_fingerprint: null
+    }
 
   const [state, setState] = useState(initialState)
 
   const getData = async()=> {
-    const rq = await callbacks.fingerprint.retrieve(state.id_fingerprint).then((x)=> console.log(x))
+    const rq = await callbacks.fingerprint.retrieve(state.id_fingerprint)
+      .then((x)=> console.log(x))
   }
 
   useEffect(()=> {

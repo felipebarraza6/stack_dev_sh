@@ -1,69 +1,168 @@
 import React, { useState } from 'react'
-import { Col, Row, Card,
-        Tag, Button, Input, List, 
-        Menu, Typography, Badge } from 'antd'
+import { Col, Row, Card, Select,
+        Tag, Button, Input, List, Spin, Modal,
+        Menu, notification, Badge } from 'antd'
+import { SmileTwoTone } from '@ant-design/icons'
 
 import img_pozo from '../../assets/images/dem1.png'
+import { callbacks } from '../../api/endpoints'
 
-const Wells = ({ quantity, setQuantity }) => {
+const Wells = ({ quantity, setQuantity, quotation }) => {
       
     const [addWell, setAddWell] = useState(false)
     const [listWells, addListWells] = useState([])
-    const [inputName, setInputName] = useState('')
-    const [inputType, setInputType] = useState('')
+    const [inputName, setInputName] = useState(null)
+    const [selectCaptation, setSelectCaptation] = useState(null)    
     const [key, setKey] = useState('0')
+    const [selectedWell, setSelectedWell] = useState({})
+    const [loadWell, setLoadWell] = useState(false)
+    const [dataSending, setDataSending] = useState(false)
+
+    async function sendData(){      
+      const rq = await callbacks.quotation.createWell(listWells).then((res)=> {        
+        setDataSending(true)    
+        setTimeout(() => { window.location.assign('/') }, 7000)
+      })
+      return rq
+    }
     
-          return(<Row>
-                <Col style={styles.col_datas}>
+          return(<>
+            <Modal icon={SmileTwoTone} title='DATOS CARGADOS CORRECTAMENTE, GRACIAS POR LA INFORMACIÓN, TE ENVIAREMOS UNA COTIZACION A LA BREVEDAD...' 
+              visible={dataSending}
+                footer={[]}>
+              <center><Spin size='large' /></center>
+            </Modal>
+            <Col style={{padding:'10px'}} sm={5} xl={5} lg={5} xs={24}>
                   <Card title={<>{quantity ? quantity:'0'} POZOS INGRESADOS</>} bordered hoverable>
                     <Row>
                       <Col>
                          <Button type='primary' onClick = {()=> setAddWell(true)}>AGREGAR POZO (+)</Button><br /><br />
                          {addWell && <>
-                           Nombre o sector del pozo: <br/><Input onChange={(e)=>setInputName(e.target.value)} size="small" style={{width:'140px'}} /><br />
-                           Tipo captación: <br />
-                           <Input onChange={(e)=>setInputType(e.target.value)} size="small" style={{width:'140px'}} /><br />
-                          <Button type='primary' style={{marginTop:'10px'}} onClick = {()=> {
-                            addListWells([...listWells, {name:inputName, type: inputType}])
-                            setInputName('')
-                            setInputType('')
-                            setAddWell(false)
-                            setQuantity(quantity+1)
+                      Nombre o sector del pozo: <br /><Input onChange={(e) => {
+                          if(e.target.value == ''){
+                            setInputName(null) 
+                          } else{
+                            setInputName(e.target.value)
+                          }                          
+                          
+                          }} size="small" style={{ width: '140px' }} /><br /><br />
+                           Fuente de captación: <br/><Select onChange={(e)=> setSelectCaptation(e)} placeholder="Selecciona una opción...">
+                              <Select.Option value="pozo">POZO</Select.Option>
+                              <Select.Option value="puntera">PUNTERA</Select.Option>
+                            </Select><br /><br />
+                            <Button type='primary' style={{marginTop:'10px'}} onClick = {()=> {
+                              if(inputName==null || selectCaptation==null){
+                                notification.error({message:'DEBES INGRESAR LOS CAMPOS'})                                
+                              } else{
+                                setSelectedWell({
+                                  name: inputName,
+                                  type_captation: selectCaptation
+                                })
+                                addListWells([
+                                  ...listWells,
+                                  {
+                                    name: inputName,
+                                    quotation: quotation,
+                                    granted_flow: '',
+                                    type_captation: selectCaptation,
+                                    well_depth: '',
+                                    static_level: '',
+                                    dynamic_level: '',
+                                    pump_installation_depth: '',
+                                    inside_diameter_well: '',
+                                    duct_outside_diameter: ''
+                                  }])
+                                setAddWell(false)
+                                setInputName(null)
+                                setSelectCaptation(null)
+                                setQuantity(quantity + 1)
+                              }                                                        
                           }}>CARGAR POZO</Button>
-                         </>}
+                         </>
+}
+
                       </Col>
                     </Row> 
                   </Card>
-                </Col>
-                <Col style={styles.col_datas}>
-                  <Card style={{width:'800px'}}>
+            </Col>             
+            <Col style={{padding:'20px'}} xl={13} sm={13} lg={13} xs={24}>                  
+                  <Card style={{width:'100%'}}>
                     <Row>
                       <Col span={24}>
-                        <Menu mode="horizontal" onClick={(x)=> setKey(x.key)}>
-                          {listWells.map((x, index)=> <Menu.Item key={index}>{x.name}</Menu.Item>)}
+                        <Menu mode="horizontal" onClick={(x)=> {
+                            setKey(x.key) 
+                            setSelectedWell(listWells[x.key]) 
+                            setTimeout(()=> {
+                              if(loadWell){
+                                setLoadWell(false)
+                              } else{
+                                setLoadWell(true)
+                                setLoadWell(false)
+                              }
+                            },500)
+                        }}>
+                          {listWells.map((x, index)=> <>
+                            <Menu.Item key={index}>{x.name}</Menu.Item>
+                            </>)}
                         </Menu>
                         {listWells.length > 0 && <>
                           <Row>
-                            <Col span={12}>
+                            {loadWell ? <Spin />:<>
+                            <Col lg={12} xs={24}>
                               <List bordered style={{marginTop:'20px'}}>
                                   <List.Item>1 - Caudal otorgado: <Tag color='blue'>LTRS/SEG</Tag></List.Item>
-                                  <List.Item>2 - Profundidad: <Tag color='blue'>MTRS</Tag></List.Item>
-                                  <List.Item>3 - Nivel Estatico: <Tag color='blue'>MTRS</Tag></List.Item>
-                                  <List.Item>4 - Nivel Dinamico: <Tag color='blue'>MTRS</Tag></List.Item>
-                                  <List.Item>5 - Profundidad instalacion bomda: <Tag color='blue'>MTRS</Tag></List.Item>
-                                  <List.Item>6 - Diametro interior pozo: <Tag color='blue'>MM/P</Tag></List.Item>
-                                  <List.Item>7 - Diametro exterior ducto: <Tag color='blue'>MM/P</Tag></List.Item>
+                                  <List.Item>2 - Profundidad total del pozo: <Tag color='blue'>MT</Tag></List.Item>
+                                  <List.Item>3 - Nivel Estático: <Tag color='blue'>MT</Tag></List.Item>
+                                  <List.Item>4 - Nivel Dinámico: <Tag color='blue'>MT</Tag></List.Item>
+                                  <List.Item>5 - Profundidad instalacion bomda: <Tag color='blue'>MT</Tag></List.Item>
+                                  <List.Item>6 - Diámetro interior pozo: <Tag color='blue'>MM/PULG</Tag></List.Item>
+                                  <List.Item>7 - Diámetro exterior ducto: <Tag color='blue'>MM/PULG</Tag></List.Item>
                               </List>
-                            </Col>
-                            <Col span={12} style={styles.col_well}>
-                                <Input style={{...styles.input, marginTop:'70px', marginLeft:'30px'}} prefix={<Badge count={1} style={styles.badgeNumber} />} />
-                                <Input style={{...styles.input, marginTop:'230px', marginLeft:'80px'}} prefix={<Badge count={2} style={styles.badgeNumber} />} />
-                                <Input style={{...styles.input, marginTop:'180px', marginLeft:'240px'}} prefix={<Badge count={3} style={styles.badgeNumber} />} />
-                                <Input style={{...styles.input, marginLeft:'248px', marginTop:'240px'}} prefix={<Badge count={4} style={styles.badgeNumber} />} />
-                                <Input style={{...styles.input, marginTop:'290px', marginLeft:'230px'}} prefix={<Badge count={5} style={styles.badgeNumber} />} />
-                                <Input style={{...styles.input, marginTop:'130px', marginLeft:'240px'}} prefix={<Badge count={6} style={styles.badgeNumber} />} />
-                                <Input style={{...styles.input, marginTop:'80px', marginLeft:'180px'}} prefix={<Badge count={7} style={styles.badgeNumber} />} />
-                            </Col>
+                            </Col>                            
+                            <Col lg={12} xs={24} style={styles.col_well}>
+                              <Tag color={'geekblue'} style={{margin:'20px', position:'absolute'}}>{selectedWell.name}({selectedWell.type_captation})</Tag>
+                                <Input style={{...styles.input, marginTop:'70px', marginLeft:'30px'}} prefix={<Badge count={1} style={styles.badgeNumber} />}
+                                  defaultValue={selectedWell.granted_flow}                                  
+                                  onChange = {(e)=> {
+                                    listWells[key].granted_flow= e.target.value
+                                  }}
+                                />
+                                <Input style={{...styles.input, marginTop:'230px', marginLeft:'80px'}} prefix={<Badge count={2} style={styles.badgeNumber} />} 
+                                  defaultValue={selectedWell.well_depth}
+                                  onChange = {(e)=> {
+                                    listWells[key].well_depth= e.target.value
+                                  }}
+                                />
+                                <Input style={{...styles.input, marginTop:'180px', marginLeft:'240px'}} prefix={<Badge count={3} style={styles.badgeNumber} />}
+                                  defaultValue={selectedWell.static_level}                                  
+                                  onChange = {(e)=> {
+                                    listWells[key].static_level= e.target.value
+                                  }}
+/>
+                                <Input style={{...styles.input, marginLeft:'248px', marginTop:'240px'}} prefix={<Badge count={4} style={styles.badgeNumber} />}
+                                  defaultValue={selectedWell.dynamic_level}
+                                  onChange = {(e)=> {
+                                    listWells[key].dynamic_level= e.target.value
+                                  }}
+ />
+                                <Input style={{...styles.input, marginTop:'290px', marginLeft:'230px'}} prefix={<Badge count={5} style={styles.badgeNumber} />}                                   defaultValue={selectedWell.pump_installation_depth}
+                                  onChange = {(e)=> {
+                                    listWells[key].pump_installation_depth= e.target.value
+                                  }}
+/>
+                                <Input style={{...styles.input, marginTop:'130px', marginLeft:'240px'}} prefix={<Badge count={6} style={styles.badgeNumber} />}                                   
+                                defaultValue={selectedWell.inside_diameter_well} 
+                                onChange = {(e)=> {
+                                    listWells[key].inside_diameter_well= e.target.value
+                                  }}
+ />
+                                <Input style={{...styles.input, marginTop:'80px', marginLeft:'180px'}} prefix={<Badge count={7} style={styles.badgeNumber} />} 
+                                   defaultValue={selectedWell.duct_outside_diameter}
+                                   onChange = {(e)=> {
+                                    listWells[key].duct_outside_diameter= e.target.value
+                                  }} />
+                            </Col></>}
+                          <Button type='primary' onClick={sendData}>Envíar datos</Button>
                           </Row>
                         </>}
                       </Col>
@@ -71,7 +170,7 @@ const Wells = ({ quantity, setQuantity }) => {
                   </Card>
                 </Col>
 
-          </Row>)
+          </>)
 }
 
 
@@ -80,13 +179,14 @@ const styles = {
     backgroundImage: `url(${img_pozo})`,
     backgroundPosition: 'center',
     backgroundSize: '180% auto',
-                                          height: '400px',
-                                          backgroundRepeat: 'no-repeat',
-                                          width: '100%'
+    height: '400px',
+    backgroundRepeat: 'no-repeat',
+    width: '100%',
+    marginTop: window.innerWidth > 800 ? '0px': '20px'
   },
   input: {
     position: 'absolute',
-    width: '30%',
+    width: '25%',
   },
   badgeNumber: {
     backgroundColor: '#1890ff',
@@ -101,11 +201,11 @@ const styles = {
     marginTop: '100px',
   },
   col_datas: {
-    padding:'20px',
+    padding:'0px',
   },
   col_datas_b: {
-    paddingleft: '20px',
-    paddingright: '20px',
+    paddingleft: '10px',
+    paddingright: '10px',
     marginbottom: '100px',
   },
   col_tech: {
@@ -113,6 +213,14 @@ const styles = {
   }, 
   tag: {
     margin: '3px'
+  },
+  colform:{
+    paddingLeft:'10px',
+    paddingTop: '10px'
+  },
+  col_wells: {
+    paddingLeft: '10px',
+    paddingTop: '10px'
   }
 }
 

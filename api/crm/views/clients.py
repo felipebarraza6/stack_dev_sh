@@ -17,11 +17,26 @@ from rest_framework.permissions import (
     IsAuthenticated
 )
 
-from api.crm.models import Client, TechnicalInfo, Employee
+from api.crm.models import Client, TechnicalInfo, Employee, Note
 from api.crm.serializers.clients import (ClientModelSerializer,
                                         TechnicalInfoSerializer, 
-                                        RetrieveClientModel)
+                                        RetrieveClientModel,
+                                        ExternalClientModelSerializer)
 
+
+
+class ClientExternalViewSet(mixins.CreateModelMixin,
+                            mixins.RetrieveModelMixin,
+                            mixins.UpdateModelMixin,
+                            mixins.ListModelMixin,
+                            mixins.DestroyModelMixin,
+                            viewsets.GenericViewSet):
+
+    permission_classes = [AllowAny]
+    filter_backends = (filters.DjangoFilterBackend,)
+    ordering = ('created', )
+    queryset = Note.objects.all()
+    serializer_class = ExternalClientModelSerializer
 
 
 

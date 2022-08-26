@@ -13,7 +13,7 @@ import ContainerFormDga from '../components/dgaform/ContainerFormDga'
 import ContactForm from '../components/forms/ContactForm'
 import Init from '../components/fingerprint/Init'
 import ThankYou from '../components/pages/ThankYou'
-import WebinarsDemo from '../components/webinars/webinarsDemo'
+import WebinarRetrieve from '../components/webinars/webinarRetrieve'
 import { InstagramOutlined,TwitterOutlined,FacebookOutlined, 
           WhatsAppOutlined, PhoneOutlined, MailOutlined } from '@ant-design/icons'
 const { Header, Content, Footer } = Layout
@@ -99,7 +99,11 @@ const Home = () => {
                 </> 
               </Route>
               <Route exact path='/dgaform'>
+                
                 <ContainerFormDga />
+              </Route>
+              <Route exact path='/dgaform/public'>
+                <ContainerFormDga is_public={true} />
               </Route>
               <Route exact path='/fingerprint/:id' component={Init}>
               </Route>
@@ -109,9 +113,7 @@ const Home = () => {
               <Route exact path='/gracias'>
                 <ThankYou />
               </Route>
-              <Route exact path='/webinars/:id'>
-                <WebinarsDemo />
-              </Route>
+              <Route exact path='/webinars/:id' component ={WebinarRetrieve} />
             </Row>
             
             </Content>

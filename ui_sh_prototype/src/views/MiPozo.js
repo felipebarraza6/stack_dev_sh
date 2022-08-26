@@ -7,7 +7,7 @@ import { Input, Badge, Col, Row } from "antd";
 
 import SortingTable from "../components/SortingTable/SortingTable.js";
 import Pozo from "../assets/pozo/dem1.png";
-
+import Img_acc from "../assets/pozo/acc.png"
 import {
   chartExample5,
   chartExample6,
@@ -78,60 +78,8 @@ const MiPozo = () => {
                       ACTUALIZAR DATOS
                     </Button>
                   </Col>
-                </Row>
-              </CardHeader>
-              <CardBody>
-                <Row>
-                  <Col
-                    span={12}
-                    style={{
-                      marginTop: "-200px",
-                      backgroundImage: `url(${Pozo})`,
-                      backgroundPosition: "absolute",
-                      backgroundSize: "100% auto",
-                      height: "500px",
-                      backgroundRepeat: "no-repeat",
-                      width: "100%",
-                      marginTop: "-200px",
-                    }}
-                  >
-                    <div>
-                      <div>
-                        <Badge
-                          status="processing"
-                          text={
-                            <>
-                              {acc / selected_sensor.scale} <b>M3</b>
-                            </>
-                          }
-                          style={styles.badge_acc}
-                        />
-                        <Badge
-                          status="processing"
-                          text={
-                            <>
-                              {pond} <b>Mtrs</b>
-                            </>
-                          }
-                          style={styles.badge_level}
-                        />
-                        <Badge
-                          status="processing"
-                          text={
-                            <>
-                              {well < 0 ? 0: well} <b>Ltrs</b>
-                            </>
-                          }
-                          style={styles.badge_well}
-                        />
-                        <img src={bomb} style={styles.bomb} />
-                        <img src={imgwatter} style={styles.watter} />
-                        <img src={imgwatter} style={watter2} />
-                      </div>
-                    </div>
-                  </Col>
+    <Col style={{marginLeft:'400px'}}>
 
-                  <Col style={{ color: "gray" }} span={12}>
                     <table style={styles.table}>
                       <tr>
                         <th style={styles.table.tdth}>Profundidad de pozo</th>
@@ -168,6 +116,84 @@ const MiPozo = () => {
                     </table>
                   </Col>
                 </Row>
+              </CardHeader>
+              <CardBody>
+               
+                <Row>
+                  
+                  <Col span={6}></Col>
+                  <Col span={6} style={{
+                      marginLeft:"-100px",
+                      marginTop: "-200px",
+                      backgroundImage: `url(${Img_acc})`,
+                      backgroundPosition: "absolute",
+                      backgroundSize: "100% auto",
+                      height: "500px",
+                      backgroundRepeat: "no-repeat",
+                      width: "100%",
+                    }}
+>
+<Badge
+                          status="processing"
+                          text={
+                            <>
+                              1.5 <b>Mtrs</b>
+                            </>
+                          }
+                          style={styles.badge_acc2}
+                        />
+
+                  </Col>
+                  <Col
+                    span={12}
+                    style={{
+                      marginLeft:'-210px',
+                      marginTop: "-199px",
+                      backgroundImage: `url(${Pozo})`,
+                      backgroundPosition: "absolute",
+                      backgroundSize: "100% auto",
+                      height: "500px",
+                      backgroundRepeat: "no-repeat",
+                      width: "100%",
+                    }}
+                  >
+                    <div>
+                      <div>
+                        <Badge
+                          status="processing"
+                          text={
+                            <>
+                              55.136 <b>M3</b>
+                            </>
+                          }
+                          style={styles.badge_acc}
+                        />
+                        <Badge
+                          status="processing"
+                          text={
+                            <>
+                              20 <b>Mtrs</b>
+                            </>
+                          }
+                          style={styles.badge_level}
+                        />
+                        <Badge
+                          status="processing"
+                          text={
+                            <>
+                              6 <b>Ltrs</b>
+                            </>
+                          }
+                          style={styles.badge_well}
+                        />
+                        <img src={bomb} style={styles.bomb} />
+                        <img src={imgwatter} style={styles.watter} />
+                        <img src={imgwatter} style={watter2} />
+                      </div>
+                    </div>
+                  </Col>
+
+                                  </Row>
               </CardBody>
             </Card>
           </Col>
@@ -190,6 +216,17 @@ const styles = {
     borderRadius: "5px",
   },
 
+
+badge_acc2: {
+    position: "absolute",
+    marginLeft: "100px",
+    zIndex: "3",
+    marginTop: "70px",
+    backgroundColor: "white",
+    padding: "5px",
+    border: "2px solid #1890ff",
+    borderRadius: "5px",
+  },
   badge_acc: {
     position: "absolute",
     marginLeft: "340px",

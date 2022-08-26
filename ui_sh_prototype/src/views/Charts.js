@@ -355,7 +355,7 @@ const getDataNl = async()=> {
               </td>
 
         <td style={styles.table.tdth}>
-        <b>{data2.reduce((a,b)=>(parseFloat(a+b).toFixed(2)),0)}</b>
+        <b>{data2.reduce((a,b)=>parseInt(a+b),0)}</b>
         </td>
         </tr>
 

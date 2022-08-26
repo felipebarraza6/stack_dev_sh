@@ -1,10 +1,20 @@
 # Django
 from django.db import models
 from django.core.validators import RegexValidator
-from django.core.validators import MinValueValidator, MaxValueValidator
-
 # Utils
 from .utils import ModelApi
+
+
+class ExternalClient(ModelApi):
+	"""A dummy docstring."""
+	name_enterprise = models.CharField(max_length=300, blank=True, null=True)
+	address_enterprise = models.CharField(max_length=600, blank=True, null=True)
+	name_contact = models.CharField(max_length=300, blank=True, null=True)
+	mail_contact = models.CharField(max_length=300, blank=True, null=True)
+	phone_contact = models.CharField(max_length=300, blank=True, null= True)
+    
+	def __str__(self):
+		return str(self.name_enterprise)
 
 
 class Client(ModelApi):

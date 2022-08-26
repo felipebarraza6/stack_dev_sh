@@ -100,7 +100,7 @@ const Dashboard = () => {
                   <Col xs="7">
                     <div className="numbers">
                       <p className="card-category">Caudal (lt/s)</p>
-                      <CardTitle tag="h3"> {well<0 ? 0 :well} </CardTitle>
+                      <CardTitle tag="h3"> 6 </CardTitle>
                     </div>
                   </Col>
                 </Row>
@@ -119,7 +119,7 @@ const Dashboard = () => {
                   <Col xs="7">
                     <div className="numbers">
                       <p className="card-category">Nivel freático (mcH2O)</p>
-                      <CardTitle tag="h3"> {pond } </CardTitle>
+                      <CardTitle tag="h3"> 20 </CardTitle>
                     </div>
                   </Col>
                 </Row>

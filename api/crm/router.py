@@ -29,9 +29,12 @@ router.register(r'client_profile', views_clientp.ClientProfileViewSet, basename=
 router.register(r'history_data', views_clientp.DataHistoryFactViewSet, basename= 'history_data')
 router.register(r'quotation', views_quotations.QuotationViewSet, basename=
         'quotation')
+router.register(r'wells', views_quotations.WellsViewSet, basename=
+        'wells')
 router.register(r'interaction_detail', views_detail.InteractionXLS)
 router.register(r'webinars', views_webinars.WebinarsViewSet, basename= 'webinars')
 router.register(r'profile_footprints', views_footprints.ProfileFootprintsViewSet, basename= 'profile_footprints')
+router.register(r'clients_external', views_clients.ClientExternalViewSet, basename='clients_external')
 
 urlpatterns = [
     path('', include(router.urls))

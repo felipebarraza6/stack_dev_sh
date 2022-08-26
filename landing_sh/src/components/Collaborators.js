@@ -1,10 +1,7 @@
 import React from 'react'
 import { Row, Col, Typography, Carousel } from 'antd'
-import logo_cowork from '../assets/images/parners/essbio.png'
 import logo_corfo from '../assets/images/corfo.png'
-import logo_mentorinn from '../assets/images/parners/biodiversa.png'
 import logo_cidere from '../assets/images/cidere.png'
-import logo_cdn from '../assets/images/parners/asoex.png'
 
 import diteco from '../assets/images/clientes/diteco.png'
 import polykarpo from '../assets/images/clientes/polykarpo.png'

@@ -2,7 +2,7 @@ import React from 'react'
 import {Col, Row } from 'antd'
 import { HashLink as Link } from 'react-router-hash-link'
 
-const HeaderMenu = ({ is_mobile }) => {
+const HeaderMenu = () => {
 
   const pathname = window.location.pathname
 

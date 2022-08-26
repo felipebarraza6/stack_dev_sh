@@ -13,6 +13,30 @@ from api.crm.models import Quotation, Well
 from api.crm.serializers import QuotationsModelSerializer, WellsModelSerializer
 
 
+class WellsViewSet(mixins.CreateModelMixin,
+                        mixins.UpdateModelMixin,
+                        mixins.ListModelMixin,
+                        mixins.RetrieveModelMixin,
+                        mixins.DestroyModelMixin,
+                        viewsets.GenericViewSet):
+
+    permission_classes = [AllowAny, ]
+    filter_backends = (filters.DjangoFilterBackend,)
+    ordering = ('created',)
+    queryset = Well.objects.all()
+    serializer_class = WellsModelSerializer     
+    class QuotationFilter(filters.FilterSet):
+
+        class Meta:
+            model = Well
+            fields = {
+                    'quotation': ['exact']
+            }
+
+    filterset_class = QuotationFilter
+
+
+
 class QuotationViewSet(mixins.CreateModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.ListModelMixin,
@@ -20,7 +44,7 @@ class QuotationViewSet(mixins.CreateModelMixin,
                         mixins.DestroyModelMixin,
                         viewsets.GenericViewSet):
 
-    permissions = [AllowAny, ]
+    permission_classes = [AllowAny, ]
     filter_backends = (filters.DjangoFilterBackend,)
     ordering = ('created',)
     queryset = Quotation.objects.all()

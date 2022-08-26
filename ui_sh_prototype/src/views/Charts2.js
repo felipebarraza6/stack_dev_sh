@@ -119,6 +119,7 @@ const Charts2 = () => {
       <div className="content" style={{ marginTop: "0px" }}>
         <div style={{ marginBottom: "0px" }}></div>
 
+        
         {user.username == "pozos_iansa" || "pozos_iansaquepue" ? (
           <>
             <Row className="mt-5">
@@ -143,32 +144,21 @@ const Charts2 = () => {
                           />
                         </Col>
                         <Col>
-                          <h4>Peak de semana anterior</h4>
+                          <h4>Peak consumo, semana anterior</h4>
                         </Col>
                       </Row>
                       <Row>
                         <Col></Col>
-                        {valueMax ? (
-                          <>
                             <Col>
                               <div>
                                 <h4>
-                                  {parseFloat(
-                                    valueMax.value / selected_sensor.scale
-                                  ).toFixed(1)}{" "}
-                                  (m3)
+                                   312.41 (m3)
                                 </h4>
                               </div>
                             </Col>
                             <Col>
-                              <h4>{valueMax.date}</h4>
+                              <h4>2022-08-15</h4>
                             </Col>
-                          </>
-                        ) : (
-                          <Col>
-                            <h4>CARGANDO DATOS...</h4>
-                          </Col>
-                        )}
                       </Row>
                     </CardBody>
                     <Row>
@@ -209,7 +199,7 @@ const Charts2 = () => {
                           />
                         </Col>
                         <Col>
-                          <h4>Menor valor de nivel semana anterior</h4>
+                          <h4>Menor nivel dinamico pozo, semana anterior </h4>
                         </Col>
                       </Row>
                       <Row>
@@ -225,9 +215,9 @@ const Charts2 = () => {
                         </Col>
                         <Col>
                           {user.username === "pozos_iansa" ? (
-                            <h4>2022-07-21</h4>
+                            <h4>2022-08-18</h4>
                           ) : (
-                            <h4>2022-07-21</h4>
+                            <h4>2022-08-18</h4>
                           )}
                         </Col>
                       </Row>
@@ -323,7 +313,7 @@ const Charts2 = () => {
                   className="card-chart"
                   style={{
                     background:
-                      "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 78%, rgba(184,184,184,1) 100%)",
+                       "linear-gradient(180deg, rgba(255,255,255,1) 30%, rgba(228,237,247,1) 61%, rgba(216,229,244,1) 69%, rgba(210,225,242,1) 79%, rgba(197,216,238,1) 87%, rgba(150,183,224,1) 100%, rgba(0,80,179,1) 100%)"
                   }}
                 >
                   <CardHeader
@@ -339,19 +329,19 @@ const Charts2 = () => {
                         <Col>
                           <img
                             alt="icono"
-                            src={icono3}
+                            src={icono6}
                             style={{ width: "40%" }}
                           />
                         </Col>
                         <Col>
-                          <h4>Recuperación de pozo</h4>
+                          <h4>Porcentaje de perdida ultimo mes</h4>
                         </Col>
                       </Row>
                       <Row>
                         <Col></Col>
                         <Col>
                           <div>
-                            <h4>0000 Seg</h4>
+                            <h4>49% (JUNIO)</h4>
                           </div>
                         </Col>
                       </Row>
@@ -361,7 +351,7 @@ const Charts2 = () => {
                         <div
                           style={{
                             float: "right",
-                            backgroundColor: "grey",
+                            backgroundColor: "rgb(57, 103, 170)",
                             width: "10px",
                             height: "10px",
                             borderRadius: "50%",
@@ -716,8 +706,122 @@ const Charts2 = () => {
                 </CardHeader>
               </Card>
             </Col>
+            
           </Row>
         )}
+        <Row >
+          <Col className="ml-center" md="5">
+                <Card
+                  className="card-chart"
+                  style={{
+                    background:
+                       "linear-gradient(180deg, rgba(255,255,255,1) 30%, rgba(228,237,247,1) 61%, rgba(216,229,244,1) 69%, rgba(210,225,242,1) 79%, rgba(197,216,238,1) 87%, rgba(150,183,224,1) 100%, rgba(0,80,179,1) 100%)"
+                  }}
+                >
+                  <CardHeader
+                    style={{
+                      border: selected_sensor.d6
+                        ? "1px grey solid"
+                        : "1px solid rgb(57, 103, 170)",
+                      borderRadius: "7px",
+                    }}
+                  >
+                    <CardBody style={{ margin: "10px" }}>
+                      <Row>
+                        <Col>
+                          <img
+                            alt="icono"
+                            src={icono6}
+                            style={{ width: "40%" }}
+                          />
+                        </Col>
+                        <Col>
+                          <h4>Consumo energetico, bomba mes anterior</h4>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col></Col>
+                        <Col>
+                          <div>
+                            <h4>$ 50.820</h4>
+                          </div>
+                        </Col>
+                      </Row>
+                    </CardBody>
+                    <Row>
+                      <Col style={{ float: "right" }}>
+                        <div
+                          style={{
+                            float: "right",
+                            backgroundColor: "rgb(57, 103, 170)",
+                            width: "10px",
+                            height: "10px",
+                            borderRadius: "50%",
+                            margin: "5px",
+                          }}
+                        ></div>
+                      </Col>
+                    </Row>
+                  </CardHeader>
+                </Card>
+              </Col>
+<Col className="ml-center" md="5">
+                <Card
+                  className="card-chart"
+                  style={{
+                    background:
+                       "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 78%, rgba(184,184,184,1) 100%)"
+                  }}
+                >
+                  <CardHeader
+                    style={{
+                      border: selected_sensor.d6
+                        ? "1px grey solid"
+                        : "1px grey",
+                      borderRadius: "7px",
+                    }}
+                  >
+                    <CardBody style={{ margin: "10px" }}>
+                      <Row>
+                        <Col>
+                          <img
+                            alt="icono"
+                            src={icono4}
+                            style={{ width: "40%" }}
+                          />
+                        </Col>
+                        <Col>
+                          <h4>Disponibilidad de agua para nuevos arranques</h4>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col></Col>
+                        <Col>
+                          <div>
+                            <h4>x</h4>
+                          </div>
+                        </Col>
+                      </Row>
+                    </CardBody>
+                    <Row>
+                      <Col style={{ float: "right" }}>
+                        <div
+                          style={{
+                            float: "right",
+                            backgroundColor: "grey",
+                            width: "10px",
+                            height: "10px",
+                            borderRadius: "50%",
+                            margin: "5px",
+                          }}
+                        ></div>
+                      </Col>
+                    </Row>
+                  </CardHeader>
+                </Card>
+              </Col>
+
+        </Row>
       </div>
     </>
   );
