@@ -8,7 +8,10 @@ import { Layout, Menu  } from 'antd'
 import { DashboardOutlined,          
          UsergroupAddOutlined, 
          BuildOutlined, 
-         UnorderedListOutlined} from '@ant-design/icons'
+         OrderedListOutlined,
+         UserOutlined,
+         UnorderedListOutlined,
+         FolderOpenOutlined} from '@ant-design/icons'
 
 //Build
 import logo from '../build/images/logo-white.png'
@@ -20,6 +23,7 @@ import Enterprises from '../components/enterprises/Enterprises'
 import Clients from '../components/clients/Clients'
 import Tasks from '../components/tasks/Tasks'
 import NotFound from '../components/errors/NotFound'
+import HomeQuotation  from '../components/quotations/Home'
 
 // React Router
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
@@ -31,12 +35,12 @@ const Home = () =>{
         return(
           <BrowserRouter>
             <Layout style={{ minHeight: '100vh' }}>            
-            <Sider style={{padding:'20px'}}>
-              <div style={{alignItems:'center'}}>
+            <Sider style={{padding:'10px'}} width={'260px'}>
+              <div>
                   <img alt='logo' style={{width:'80%', marginRight:'50px', marginTop:'40px', marginBottom:'40px'}} src={logo} />
               </div>
               
-              <Menu theme="dark" mode="inline">
+              <Menu theme="dark" mode="inline" style={{textAlign:'left',}}>
                 <Menu.Item key="1">
                     <Link to="/">
                     <DashboardOutlined style={{marginRight:'10px'}}/>
@@ -60,7 +64,23 @@ const Home = () =>{
                         <UnorderedListOutlined />
                         Tareas
                       </Link>
-                    </Menu.Item>                
+                  </Menu.Item>                
+                  <Menu.SubMenu title={<><FolderOpenOutlined /> Cotizaciones</>} >
+                    <Menu.SubMenu title="Externas">
+                      <Menu.Item key="5">
+                        <Link to="/quotations">
+                          <OrderedListOutlined />
+                            Cotizaciones
+                        </Link>                        
+                      </Menu.Item>
+                      <Menu.Item key="6">
+                        <Link to="/external-clients">
+                          <UserOutlined />
+                          Prospectos Externos
+                        </Link>
+                      </Menu.Item>
+                      </Menu.SubMenu>                    
+                  </Menu.SubMenu>
               </Menu>
               
             </Sider>
@@ -77,6 +97,7 @@ const Home = () =>{
                     <Route exact path='/enterprises' component={Enterprises} />
                     <Route exact path='/clients' component={Clients} />
                     <Route exact path='/actions' component={Tasks} />
+                    <Route exact path='/quotations' component={HomeQuotation} />
                     <Route path="*" component={NotFound} />
                  </Switch>
                 </div>
