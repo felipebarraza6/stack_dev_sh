@@ -3,109 +3,42 @@ import { Row,Col, Typography, Input } from 'antd'
 import Navigate from './Navigate'
 import StatusLine from './StatusLine'
 import {callbacks} from '../../api/endpoints'
+import FormFields from './FormFields'
 
 
-  const Init = ({match}) => {
+  const Init = ({ match }) => {
 
     const initialState = {
       id_fingerprint: match.params.id,
-      data_fingerprint: null
+      data_fingerprint: null,
+      fields: null,
+      section_selected: null,
     }
 
-  const [state, setState] = useState(initialState)
+    const [state, setState] = useState(initialState)
 
-  const getData = async()=> {
-    const rq = await callbacks.fingerprint.retrieve(state.id_fingerprint)
-      .then((x)=> console.log(x))
-  }
+    const getData = async()=> {
+      const rq = await callbacks.fingerprint.retrieve(state.id_fingerprint)
+        .then((x) => setState({ ...state, data_fingerprint: x.data }))
+    }
 
-  useEffect(()=> {
-    getData()
-
-  }, [])
+    useEffect(()=> {
+      getData()
+    }, [])
 
 
     return(<>
-      <Col span={6} style={styles.container}>
-        <Typography.Title level={4}>HUELLA HÍDRRICA</Typography.Title>
+      <Col span={6} style={styles.container}>        
+        {state.data_fingerprint && <>
+          <Typography.Title level={4}>{state.data_fingerprint.title} (#{state.data_fingerprint.id})</Typography.Title>
+          <Navigate elements={state.data_fingerprint.modules} setState={setState} state={state} />          
+        </>}
         <Navigate />
       </Col>
-
       <Col span={18} style={styles.nav}>
-        <StatusLine />
-        <Row style={{marginTop:'20px'}}>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 1"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 2"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 3"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 4"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 5"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 6"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 7"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 8"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 9"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 10"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 11"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 12"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 13"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 14"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 15"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 16"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 17"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 18"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 19"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 20"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 21"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 22"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 23"/>
-          </Col>
-          <Col style={{padding:'10px'}}>
-            <Input placeholder="CAMPO 24"/>
-          </Col>
+        <StatusLine  section={state.section_selected} />
+        <Row style={styles.rowContainer}>
+          <FormFields fields={state.fields} section={state.section_selected} />          
         </Row>
       </Col>
     </>)
@@ -119,6 +52,10 @@ const styles = {
     backgroundColor: 'white',
     padding: '20px'
   },
+  rowContainer: {
+    marginTop: '20px'
+  }
 }
+
 
 export default Init

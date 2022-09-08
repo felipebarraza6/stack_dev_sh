@@ -13,17 +13,16 @@ class InteractionXLS(XLSXFileMixin, ReadOnlyModelViewSet):
     renderer_classes = (XLSXRenderer,)
     filename = 'reporte.xlsx'
     filter_backends = (filters.DjangoFilterBackend,)
-    class InteractionFilter(filters.FilterSet):
 
+    class InteractionFilter(filters.FilterSet):
         class Meta:
             model = InteractionDetail
             fields = {
                 'profile_client': ['exact'],            
                 'created': ['contains', 'gte', 'lte', 'year', 'month', 'day', 'year__range', 'month__range', 'day__range', 'date__range'],                
-                }
+            }
 
     filterset_class = InteractionFilter
-
 
     xlsx_ignore_headers = ['modified', 'id', 'date_time_medition', 'profile_client']
     column_header = {

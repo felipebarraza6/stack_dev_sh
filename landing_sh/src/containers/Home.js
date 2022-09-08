@@ -11,7 +11,7 @@ import FooterInfo from '../components/FooterInfo'
 import { BrowserRouter, Route } from 'react-router-dom'
 import ContainerFormDga from '../components/dgaform/ContainerFormDga'
 import ContactForm from '../components/forms/ContactForm'
-import Init from '../components/fingerprint/Init'
+import Fingerprint from '../components/fingerprint/Init'
 import ThankYou from '../components/pages/ThankYou'
 import WebinarRetrieve from '../components/webinars/webinarRetrieve'
 import { InstagramOutlined,TwitterOutlined,FacebookOutlined, 
@@ -80,33 +80,32 @@ const Home = () => {
               </Header>
         <Content >
             <Row>
-              <Route exact path='/'> <>
-                <Col span={24} >
-                    <Sliders is_mobile={is_mobile} />
-                </Col>
-                <Col span={24} id='about'>
-                    <About />
-                </Col>
-                <Col span={24} id='features'>
-                    <Services />
-                </Col>
-                <Col span={24} id='colaborators' style={styles.marginCol}>
-                    <Collaborators />
-                </Col>
-                <Col span={24} id="contact">
-                    <Contact />
-                </Col> 
+              <Route exact path='/'> 
+                <>
+                  <Col span={24} >
+                      <Sliders is_mobile={is_mobile} />
+                  </Col>
+                  <Col span={24} id='about'>
+                      <About />
+                  </Col>
+                  <Col span={24} id='features'>
+                      <Services />
+                  </Col>
+                  <Col span={24} id='colaborators' style={styles.marginCol}>
+                      <Collaborators />
+                  </Col>
+                  <Col span={24} id="contact">
+                      <Contact />
+                  </Col> 
                 </> 
               </Route>
-              <Route exact path='/dgaform'>
-                
+              <Route exact path='/dgaform'>                
                 <ContainerFormDga />
               </Route>
               <Route exact path='/dgaform/public'>
                 <ContainerFormDga is_public={true} />
               </Route>
-              <Route exact path='/fingerprint/:id' component={Init}>
-              </Route>
+              <Route exact path='/fingerprint/:id' component={Fingerprint} />
               <Route exact path='/contacto'>
                 <ContactForm />
               </Route>

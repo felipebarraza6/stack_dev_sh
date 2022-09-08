@@ -1,4 +1,3 @@
-import { forwardRef } from 'react'
 import { POST, GET } from './config'
 
 
@@ -26,10 +25,8 @@ const create_quotation = async(data) => {
 const create_wells = async(wells) => {
   for(var i = 0; wells.length > i; i++){
     const rq = await POST('wells/', wells[i])
-    console.log(rq)
+    return rq
   }
-  //const rq = await POST('wells/', data)
-  //return rq
 }
 
 
@@ -47,5 +44,4 @@ export const callbacks = {
     create: create_quotation,
     createWell: create_wells
   }
-     
 }

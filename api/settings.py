@@ -44,7 +44,7 @@ LOCAL_APPS = [
 ]
 
 CRONJOBS = [
-    ('* * * * *', 'api.cron.main',  '>> ' + os.path.join(BASE_DIR,'log/debug7.log' + ' 2>&1 '))
+    ('* * * * *', 'api.cron.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug7.log' + ' 2>&1 '))
 ]
 
 
@@ -58,7 +58,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
@@ -89,7 +88,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated', # !!!!
+        'rest_framework.permissions.IsAuthenticated',
     )
 }
 
@@ -152,14 +151,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 LANGUAGE_CODE = 'es'
-
 TIME_ZONE = 'America/Santiago'
-
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -167,8 +161,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
 AUTH_USER_MODEL = 'crm.User'
-
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 

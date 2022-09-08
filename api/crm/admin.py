@@ -9,10 +9,21 @@ from api.crm.models import (InteractionDetail, User,
                         RegisterPersons, DataHistoryFact,
                         TechnicalInfo, Quotation, Well, Note,
                         FormLandingContact, ProfileFootprints, 
-                        Webinars, ElementsProgramation)
+                        Webinars, ElementsProgramation, ModuleFootprints, 
+                        SectionModuleFootprints, FieldSectionFootprints, QuestionSection, 
+                        OptionsSelectionFieldFootprints, SupportSection,
+                        TicketSupport, AnswerTicket)
+                        
 from import_export.admin import ExportActionMixin
 
-
+admin.site.register(SupportSection)
+admin.site.register(TicketSupport)
+admin.site.register(AnswerTicket)
+admin.site.register(OptionsSelectionFieldFootprints)
+admin.site.register(ModuleFootprints)
+admin.site.register(SectionModuleFootprints)
+admin.site.register(FieldSectionFootprints)
+admin.site.register(QuestionSection)
 admin.site.register(ExternalClient)
 admin.site.register(Note)
 admin.site.register(ProfileClient)

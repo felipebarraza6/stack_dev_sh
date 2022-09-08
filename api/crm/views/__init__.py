@@ -7,3 +7,4 @@ from .quotation import QuotationViewSet, WellsViewSet
 from .interaction_detail import InteractionXLS
 from .webinars import WebinarsViewSet
 from .profile_footprints import ProfileFootprintsViewSet
+from .supports import SupportSectionViewSet, TicketSupportViewSet, AnswerTicketViewSet

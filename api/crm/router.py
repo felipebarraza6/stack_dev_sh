@@ -7,6 +7,7 @@ from django.urls import include,path
 from rest_framework.routers import DefaultRouter
 
 # Views
+from api.crm.views import supports as views_supports
 from api.crm.views import actions as views_actions
 from api.crm.views import clients as views_clients
 from api.crm.views import employess as views_employess
@@ -35,6 +36,11 @@ router.register(r'interaction_detail', views_detail.InteractionXLS)
 router.register(r'webinars', views_webinars.WebinarsViewSet, basename= 'webinars')
 router.register(r'profile_footprints', views_footprints.ProfileFootprintsViewSet, basename= 'profile_footprints')
 router.register(r'clients_external', views_clients.ClientExternalViewSet, basename='clients_external')
+router.register(r'support_sections', views_supports.SupportSectionViewSet, basename='support_sections')
+router.register(r'support_tickets', views_supports.TicketSupportViewSet, basename='support_ticket')
+router.register(r'ticket_answers', views_supports.AnswerTicketViewSet, basename='ticket_answer')
+router.register(r'fields', views_footprints.FieldSectionViewSet, basename='fields')
+
 
 urlpatterns = [
     path('', include(router.urls))

@@ -1,83 +1,53 @@
-import React from 'react'
-import { Menu } from 'antd'
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import React, { useState } from 'react'
+import { Menu, Drawer } from 'antd'
+import { ToolOutlined, PlusCircleOutlined, UnorderedListOutlined, CheckCircleTwoTone, CloseCircleOutlined } from '@ant-design/icons'
+import DrawerSupport from './DrawerSupport'
+import glosary from '../../assets/files/glosario.pdf'
+import accession from '../../assets/files/formulario-de-adhesion.docx'
 
-
-const Navigate = () => {
+const Navigate = ({ elements, state, setState }) => {
   
-  function getItem(label, key, icon, children, type) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  };
-  }
+  const [stateNavigate, setStateNavigate] = useState({
+    drawerSupportOpen: false,
+    drawerIsCreate:false,
+    tickets: null
+  })
 
-  const items = [
-  getItem('Navigation One', 'sub1', <MailOutlined />, [
-    getItem('Item 1', 'g1', null, [getItem('Option 1', '1'), getItem('Option 2', '2')], 'group'),
-    getItem('Item 2', 'g2', null, [getItem('Option 3', '3'), getItem('Option 4', '4')], 'group'),
-  ]),
-  getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
-    getItem('Option 5', '5'),
-    getItem('Option 6', '6'),
-    getItem('Submenu', 'sub3', null, [getItem('Option 7', '7'), getItem('Option 8', '8')]),
-  ]),
-  getItem('Navigation Three', 'sub4', <SettingOutlined />, [
-    getItem('Option 9', '9'),
-    getItem('Option 10', '10'),
-    getItem('Option 11', '11'),
-    getItem('Option 12', '12'),
-  ]),
-]
-
-  return(<><Menu mode='inline'>
-      <Menu.SubMenu title='Etapa 1: Administrativa'>
-        <Menu.Item>
-          Actividad 1.1
+  return(<>
+    <DrawerSupport is_open={stateNavigate.drawerSupportOpen} 
+      is_create={stateNavigate.drawerIsCreate}
+      setStateNavigate={setStateNavigate}
+      tickets={stateNavigate.tickets} />
+    <Menu mode='inline'>{elements && <>
+        <Menu.Item onClick={()=> window.open(glosary)}>
+      GLOSARIO
+    </Menu.Item>
+    <Menu.Item onClick={()=> window.open(accession)}>
+      ANEXO FORMULARIO DE ADHESIÓN
+    </Menu.Item>
+    {elements.map((module) => <Menu.SubMenu title={`Etapa ${module.id} :${module.name}`}>
+      {module.sections.map((section) => <Menu.Item onClick={(e) => setState({ ...state, section_selected: section})}>
+        {section.is_validated ? <CheckCircleTwoTone />:<CloseCircleOutlined />} {module.id}.{section.id}) {section.name}
+      </Menu.Item>)}
+      <Menu.SubMenu title='SOPORTE' icon={<ToolOutlined />}>
+        <Menu.Item icon={<PlusCircleOutlined />} onClick={() => setStateNavigate({...stateNavigate, drawerSupportOpen:true, drawerIsCreate: true}) }>
+          ABRIR TICKET
         </Menu.Item>
-        <Menu.Item>
-          Actividad 1.2
-        </Menu.Item>
-        <Menu.Item>
-          Actividad 1.3
-        </Menu.Item>
-        <Menu.Item>
-          Actividad 1.4
-        </Menu.Item>
-      </Menu.SubMenu>
-    <Menu.SubMenu title='Etapa 2: Legal'>
-        <Menu.Item>
-          Actividad 2.1
-        </Menu.Item>
-        <Menu.Item>
-          Actividad 2.2
-        </Menu.Item>
-        <Menu.Item>
-          Actividad 2.3
-        </Menu.Item>
-        <Menu.Item>
-          Actividad 2.4
+        <Menu.Item icon={<UnorderedListOutlined />} 
+          onClick={()=> 
+            setStateNavigate({
+              ...stateNavigate, 
+              drawerSupportOpen:true, 
+              drawerIsCreate:false,
+              tickets: module.tickets
+            })
+          }>
+          TICKETS 
         </Menu.Item>
       </Menu.SubMenu>
-    <Menu.SubMenu title='Etapa 3: Tecnica'>
-        <Menu.Item>
-          Actividad 3.1
-        </Menu.Item>
-        <Menu.Item>
-          Actividad 3.2
-        </Menu.Item>
-        <Menu.Item>
-          Actividad 3.3
-        </Menu.Item>
-        <Menu.Item>
-          Actividad 3.4
-        </Menu.Item>
-      </Menu.SubMenu>
-    </Menu>
-    </>)
+    </Menu.SubMenu>)}    
+    </>}
+  </Menu></>)
 
 }
 
