@@ -22,11 +22,14 @@ import imgwatter from "../assets/pozo/pozo y tanque-21.png";
 import bomb from "../assets/pozo/pozo y tanque-19.png";
 
 const MiPozo = () => {
-  const [well, setWell] = useState(0);
-  const [pond, setPond] = useState(0);
-  const [acc, setAcc] = useState(0);
+  const [well, setWell] = useState(0)
+  const [pond, setPond] = useState(0)
+  const [acc, setAcc] = useState(0)
+  const [acc2, setAcc2] = useState(0)
 
-  const data_estatic = JSON.parse(localStorage.getItem("data_p"));
+  const data_estatic = JSON.parse(localStorage.getItem("data_p"))
+  const data_user = JSON.parse(localStorage.getItem("user"))
+  console.log(data_user)
 
   const selected_sensor = JSON.parse(
     localStorage.getItem("selected_sensor") || null
@@ -122,6 +125,28 @@ const MiPozo = () => {
                 <Row>
                   
                   <Col span={6}></Col>
+                    {data_user.username=="aprsanjose" && 
+                    <Col span={6} style={{
+                      marginLeft:"-100px",
+                      marginTop: "-200px",
+                      backgroundImage: `url(${Img_acc})`,
+                      backgroundPosition: "absolute",
+                      backgroundSize: "100% auto",
+                      height: "500px",
+                      backgroundRepeat: "no-repeat",
+                      width: "100%",
+                    }}>
+                        <Badge
+                          status="processing"
+                          text={
+                            <>
+                              1.5 <b>Mtrs</b>
+                            </>
+                          }
+                          style={styles.badge_acc2}
+                        />
+
+                  </Col>}
                     <Col
                     span={12}
                     style={{
