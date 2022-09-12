@@ -38,6 +38,7 @@ class SectionModuleFootprints(ModelApi):
     in_validate = models.BooleanField(default=False)
     is_complete = models.BooleanField(default=False)
     feedback = models.TextField(max_length=1200, blank=True, null=True)    
+    is_file_section = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.name)
@@ -63,6 +64,7 @@ class FieldSectionFootprints(ModelApi):
 
     section = models.ForeignKey(SectionModuleFootprints, on_delete=models.CASCADE)
     label = models.CharField(max_length=500)
+    name_field = models.CharField(max_length=500, blank=True, null=True)
     help_text = models.CharField(max_length=500, blank=True, null=True)
     type = models.CharField(max_length=500, choices=TYPES_CHOICES)
     value = models.CharField(max_length=1800, blank=True, null=True)
