@@ -122,29 +122,7 @@ const MiPozo = () => {
                 <Row>
                   
                   <Col span={6}></Col>
-                  <Col span={6} style={{
-                      marginLeft:"-100px",
-                      marginTop: "-200px",
-                      backgroundImage: `url(${Img_acc})`,
-                      backgroundPosition: "absolute",
-                      backgroundSize: "100% auto",
-                      height: "500px",
-                      backgroundRepeat: "no-repeat",
-                      width: "100%",
-                    }}
->
-<Badge
-                          status="processing"
-                          text={
-                            <>
-                              1.5 <b>Mtrs</b>
-                            </>
-                          }
-                          style={styles.badge_acc2}
-                        />
-
-                  </Col>
-                  <Col
+                    <Col
                     span={12}
                     style={{
                       marginLeft:'-210px',
@@ -163,7 +141,7 @@ const MiPozo = () => {
                           status="processing"
                           text={
                             <>
-                              55.136 <b>M3</b>
+                            {acc} <b>M3</b>
                             </>
                           }
                           style={styles.badge_acc}
@@ -172,7 +150,7 @@ const MiPozo = () => {
                           status="processing"
                           text={
                             <>
-                              20 <b>Mtrs</b>
+                             {pond} <b>Mtrs</b>
                             </>
                           }
                           style={styles.badge_level}
@@ -181,7 +159,7 @@ const MiPozo = () => {
                           status="processing"
                           text={
                             <>
-                              6 <b>Ltrs</b>
+                            {well} <b>Ltrs</b>
                             </>
                           }
                           style={styles.badge_well}
