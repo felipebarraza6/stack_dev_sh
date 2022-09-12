@@ -27,16 +27,16 @@ services:
             - "8000:8000"
 
 
-#    cron:
-#      build: ./api     # same as main application
-#      restart: unless-stopped
-#      image: cron_smarthydro
-#      volumes:
-#        - .:/code
-#      depends_on:
-#        - postgres
-#        - django
-#      command: cron -f  # as a long-running foreground process
+    cron:
+      build: ./api     # same as main application
+      restart: unless-stopped
+      image: cron_smarthydro
+      volumes:
+        - .:/code
+      depends_on:
+        - postgres
+        - django
+      command: cron -f  # as a long-running foreground process
 
     #react_crm:
     #    build: ./ui_crm

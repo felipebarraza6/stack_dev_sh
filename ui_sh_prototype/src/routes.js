@@ -19,7 +19,24 @@ const validateUser = () => {
     component: MiPozo,
     layout: "/admin",
   })   
-  } else {
+  } else if(user.username==='ericmontenicos'){
+routes.push({
+      path: "/dashboard",
+      name: "INICIO",
+      icon: "tim-icons icon-components",
+      component: Dashboard,
+      layout: "/admin",
+    })
+
+routes.push({
+    path: "/mipozo",
+    name: "MI POZO",
+    icon: "tim-icons icon-compass-05",
+    component: MiPozo,
+    layout: "/admin",
+  })
+      
+  }else {
     routes.push({
       path: "/dashboard",
       name: "INICIO",

@@ -5,6 +5,12 @@ from drf_excel.renderers import XLSXRenderer
 from api.crm.serializers import InteractionDetailModelSerializer 
 from api.crm.models import InteractionDetail
 from django_filters import rest_framework as filters
+from rest_framework.pagination import PageNumberPagination
+
+
+
+class OverridePagination(PageNumberPagination):       
+               page_size = 10000
 
 
 class InteractionXLS(XLSXFileMixin, ReadOnlyModelViewSet):
@@ -12,7 +18,8 @@ class InteractionXLS(XLSXFileMixin, ReadOnlyModelViewSet):
     serializer_class = InteractionDetailModelSerializer
     renderer_classes = (XLSXRenderer,)
     filename = 'reporte.xlsx'
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = (filters.DjangoFilterBackend,)    
+    pagination_class = OverridePagination
 
     class InteractionFilter(filters.FilterSet):
         class Meta:
