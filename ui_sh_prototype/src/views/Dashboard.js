@@ -41,14 +41,16 @@ const Dashboard = () => {
           const rqHistory = await api_crm.billing_data(selectProfileData).then((r)=>setListHistorial(r.results))
           const rqHistoryAdmin = await api_crm.billing_data_admin().then((r)=>setListHistorialAdmin(r.results))
           const rqWell = await api_novus.lastData('3grecuc1v')
+          console.log(rqWell.data.result[0].value)
           const rqPond = await api_novus.lastData('3grecuc2v')
-          if(rqPond.data.result[0].value === 3276.7){
-            setPond(50) 
-          }else {
-            setPond(rqPond.data.result[0].value)
+          if(rqPond.data.result.length > 0){
+            if(rqPond.data.result[0].value === 3276.7){
+              setPond(50) 
+            }else {
+              setPond(rqPond.data.result[0].value)
+            }
           }
           setWell(rqWell.data.result[0].value)
-          
           return {
             rqWell, 
             rqPond
@@ -100,7 +102,13 @@ const Dashboard = () => {
                   <Col xs="7">
                     <div className="numbers">
                       <p className="card-category">Caudal (lt/s)</p>
-                      <CardTitle tag="h3"> 6 </CardTitle>
+                      {user.username==='gcastro' ?<> 
+
+                        <CardTitle tag="h3">{pond}</CardTitle>
+                        EN DESARROLLO...
+                        </>:
+                      <CardTitle tag="h3"> {well} </CardTitle>
+                      }
                     </div>
                   </Col>
                 </Row>
@@ -119,7 +127,10 @@ const Dashboard = () => {
                   <Col xs="7">
                     <div className="numbers">
                       <p className="card-category">Nivel freático (mcH2O)</p>
-                      <CardTitle tag="h3"> 20 </CardTitle>
+                      {user.username==='gcastro' ? 
+                      <CardTitle tag="h3"> {well} </CardTitle>:
+                      <CardTitle tag="h3"> {pond} </CardTitle>
+                      }
                     </div>
                   </Col>
                 </Row>

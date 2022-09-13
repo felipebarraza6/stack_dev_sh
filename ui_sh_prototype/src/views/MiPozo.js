@@ -36,12 +36,18 @@ const MiPozo = () => {
   )
 
   const get = async () => {
-    const rqWell = await api_novus.lastData("3grecuc1v");
-    const rqPond = await api_novus.lastData("3grecuc2v");
-    const rqAcc = await api_novus.lastData("3grecdi1va");
-    setWell(rqWell.data.result[0].value);
-    setPond(rqPond.data.result[0].value);
-    setAcc(rqAcc.data.result[0].value);
+    const rqWell = await api_novus.lastData("3grecuc1v")
+    const rqPond = await api_novus.lastData("3grecuc2v")
+    const rqAcc = await api_novus.lastData("3grecdi1va")
+    if(rqAcc.data.result.length > 0){
+      setAcc(rqAcc.data.result[0].value);
+    }
+    if(rqPond.data.result.length > 0){
+      setPond(rqPond.data.result[0].value);
+    }
+    if(rqWell.data.result.length > 0){
+      setWell(rqWell.data.result[0].value);
+    }
     return {
       rqWell,
       rqPond,
@@ -173,16 +179,19 @@ const MiPozo = () => {
                         />
                         <Badge
                           status="processing"
-                          text={
+                          text={data_user.username==='gcastro' ?
                             <>
-                             {pond} <b>Mtrs</b>
-                            </>
+                             {well} <b>Mtrs</b>
+                            </>:<>{pond} <b>Mtrs</b></>
                           }
                           style={styles.badge_level}
                         />
                         <Badge
                           status="processing"
-                          text={
+                          text={data_user.username==='gcastro'?
+                            <>
+                            {pond} <b>Ltrs</b>
+                            </>:
                             <>
                             {well} <b>Ltrs</b>
                             </>
