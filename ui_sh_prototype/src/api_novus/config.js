@@ -13,7 +13,17 @@ export const Axios = axios.create({
 })
 
 
+
 export const GET = async (endpoint) =>{
     const request = await Axios.get(endpoint)
     return request
+}
+
+export const GET_NOT_TOKEN = async(token) => {
+  const request = axios.get(BASE_URL, {
+    headers: {
+      Authorization: token
+    }
+  })
+  return request
 }

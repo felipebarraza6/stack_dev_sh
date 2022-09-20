@@ -106,8 +106,12 @@ const Dashboard = () => {
 
                         <CardTitle tag="h3">{pond}</CardTitle>
                         EN DESARROLLO...
-                        </>:
-                      <CardTitle tag="h3"> {well} </CardTitle>
+                        </>:<>
+                          {user.username==='pozos_iansa' ? 
+                            <CardTitle tag="h3">{pond}</CardTitle>:
+                            <CardTitle tag="h3"> {well} </CardTitle>
+                          }
+                        </>
                       }
                     </div>
                   </Col>
@@ -127,9 +131,14 @@ const Dashboard = () => {
                   <Col xs="7">
                     <div className="numbers">
                       <p className="card-category">Nivel freático (mcH2O)</p>
-                      {user.username==='gcastro' ? 
+                      {user.username==='gcastro'  ? 
                       <CardTitle tag="h3"> {well} </CardTitle>:
-                      <CardTitle tag="h3"> {pond} </CardTitle>
+                        <>
+                          {user.username='pozos_iansa' ? 
+                            <CardTitle tag="h3"> {well} </CardTitle>: 
+                            <CardTitle tag="h3"> {pond} </CardTitle>
+                          }
+                        </>
                       }
                     </div>
                   </Col>

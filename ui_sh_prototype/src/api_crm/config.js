@@ -43,7 +43,7 @@ export const DOWNLOAD = async(endpoint, name_file) => {
         link.click()
     })
     
-    await notification.open({
+    notification.open({
         message: 'Notificación de Descarga',
         description: `Archivo ${name_file} descargado...`,
         placement: 'bottomRight'
