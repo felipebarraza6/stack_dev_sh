@@ -1,43 +1,69 @@
-import React, { useState } from 'react'
-import { Menu, Row, Col, Form, Tag,
-          Radio, Input, Select, Cascader,
-          InputNumber, Switch, Button,
-          DatePicker, TreeSelect, Card, Typography,
-          Affix } from 'antd'
+import React, { useState, useEffect } from 'react'
+import { Row, Col, Card, Typography } from 'antd'
+
 import YourData from './YourData'
+
 import Wells from './Wells'
 import slidde from '../../assets/images/slide2.png'
 import FormClientExternal from '../external_clients/FormClientExternal'
+import { callbacks } from '../../api/endpoints'
 
-const ContainerFormDga = () => {
+const ContainerFormDga = ({ match }) => {
 
   const [selectKey, setSelectKey] = useState('1')
   const [wells, setWells] = useState(null)
+  const [isDataNew, setIsNew] = useState(true)
   const [dataClient, setDataClient] = useState(null)
   const [quotation, setQuotation] = useState(null)
+  const [listWells, setListWells] = useState(null)
 
   const date = new Date()
+
+  
+  async function getQuotation(uuid){
+    const rq = await callbacks.quotation.retrieve(uuid).then((response)=> {
+      setDataClient({data:response.data.external_client})
+      setQuotation(response.data.uuid)
+      setWells(response.data.wells.length)
+      setListWells(response.data.wells)
+    })
+  }
+  
+
+  useEffect(() => {
+    if(match){
+      getQuotation(match.params.id)
+      setIsNew(true)
+    }
+  }, [])
 
 
   return(<>
           <Col span={12} style={styles.col_header}>
-            <Typography.Title level={5}>
-              COTIZACIÓN EXTERNA: {dataClient && <>{dataClient.data.name_enterprise}</>}
-            </Typography.Title>
-          </Col>
-          <Col span={12} style={styles.col_header}>
-            <Typography.Title level={5} style={styles.title_date}>
-              FECHA: {date.getDate()} - {<>{date.getMonth() < 10 ? <>0{date.getMonth()}</>:<>{date.getMonth()}</>}</>} - {date.getFullYear()}
-            </Typography.Title>
-          </Col>
-          <Col span={24}>
-          <Row style={styles.row}>              
-                <Col lg={6} xl={6} xs={24} style={{paddingTop:'20px', paddingRight:'10px', paddingLeft:'20px'}}>
-                  <FormClientExternal is_public={true} setSteps={setSelectKey} setQuotation={setQuotation} setDataClient={setDataClient} />
+              <Typography.Title level={5}>
+                 {dataClient ? <>COTIZACIÓN EXTERNA: {dataClient.data.name_enterprise}</>:<>REGISTRA TUS DATOS EN EL FORMULARIO</>}
+              </Typography.Title>
+            </Col>
+            <Col span={12} style={styles.col_header}>
+              <Typography.Title level={5} style={styles.title_date}>
+                FECHA: {date.getDate()} - {<>{date.getMonth() < 10 ? <>0{date.getMonth()}</>:<>{date.getMonth()}</>}</>} - {date.getFullYear()}
+              </Typography.Title>
+            </Col>
+            <Col span={24}>
+            <Row style={styles.row}>              
+                  <Col lg={6} xl={6} xs={24} style={{paddingTop:'20px', paddingRight:'10px', paddingLeft:'20px'}}>
+                    {!isDataNew ? <Card>
+                       <b>NOMBRE COMPLETO:</b><br/>{dataClient.data.name_enterprise}<br />
+                       <b>DIRECCION EMPRESA:</b><br/>{dataClient.data.address_enterprise}<br/>
+                       <b>NOMBRE CONTACTO:</b><br/>{dataClient.data.name_contact}<br/>
+                       <b>EMAIL CONTACTO:</b><br/>{dataClient.data.mail_contact}<br/>
+                       <b>TELEFONO CONTACTO:</b><br/>{dataClient.data.phone_contact}
+                    </Card>: 
+                  <FormClientExternal dataClient={dataClient} setSteps={setSelectKey} setQuotation={setQuotation} setDataClient={setDataClient} />
+                    }
                 </Col>
                   {dataClient ? 
-                      
-                        <Wells quantity={wells} setQuantity={setWells} quotation={quotation} />
+                        <Wells quantity={wells} listWellsArr={listWells} setQuantity={setWells} quotation={quotation} />
                          :
                       <Col xs={24} lg={18} xl={18} style={{padding:'50px'}}>
                         <div style={{marginLeft:'0px', marginTop:'00px'}}>
@@ -45,7 +71,6 @@ const ContainerFormDga = () => {
                           <img src={slidde} style={{width:'100%'}} />
                       </div>
                       </Col>
-                    
                   }      
       </Row></Col>
   </>)

@@ -102,11 +102,10 @@ const Home = () => {
               <Route exact path='/dgaform'>                
                 <ContainerFormDga />
               </Route>
-              <Route exact path='/dgaform/public'>
-                <ContainerFormDga is_public={true} />
+              <Route exact path='/dgaform/new' >
+                <ContainerFormDga />
               </Route>
-              <Route exact path='/dgaform/public/:id'>
-                <ContainerFormDga is_public={true} />
+              <Route exact path='/dgaform/external_client/:id' component={ContainerFormDga} >
               </Route>
               <Route exact path='/fingerprint/:id' component={Fingerprint} />
               <Route exact path='/contacto'>

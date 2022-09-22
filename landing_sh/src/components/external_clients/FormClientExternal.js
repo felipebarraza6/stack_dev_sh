@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Input, Row, Space, 
         Col, Button, Modal } from 'antd'
 import { callbacks } from '../../api/endpoints' 
 const { Item } = Form
 
-const FormClientExternal = ({ setDataClient,isModal, is_public,setStatusSub, setSteps, setQuotation }) => {
+const FormClientExternal = ({ dataClient, setDataClient,isModal,setStatusSub, setQuotation }) => {
   
   const [form] = Form.useForm()
   const [isCreate ,setIsCreate] = useState(false)
-
+  const [initialValues, setInitialValues] = useState(null)
+  console.log(dataClient)
+  
   async function onFinish(data) {
     const rq = await callbacks.external_clients.create(data)
       .then((res)=>{
@@ -18,23 +20,24 @@ const FormClientExternal = ({ setDataClient,isModal, is_public,setStatusSub, set
           setStatusSub(true)
         } else {
           setDataClient(res)
-          const createQuo = async()=> {
+          const createQuo = async() => {
             const rq = await callbacks.quotation.create({ 
               external_client: res.data.id,
               is_external_client: true
             }).then((res)=> setQuotation(res.data.uuid))
-            return rq
-          }
-          createQuo()
+            return rq          
         }
-      
-      })
-      return rq
-    }
-  
+        createQuo()
+      }
+    })
+    return rq
+  }
 
+  
   return(<div >
-      <Form layout={'vertical'} form={form} onFinish={onFinish}>
+      <Form name='form_person' layout={'vertical'} 
+          initialValues={{...initialValues}}
+          form={form} onFinish={onFinish}>
         <Item  label='Nombre Empresa' name='name_enterprise' rules={[{ required: true, message:'campo obligatorio' }]}>
           <Input disabled={isCreate} />
         </Item>

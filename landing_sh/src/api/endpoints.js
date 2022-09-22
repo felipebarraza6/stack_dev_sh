@@ -29,6 +29,11 @@ const create_wells = async(wells) => {
   }
 }
 
+const get_quotation = async(uuid) => {
+  const rq = await GET(`quotation/${uuid}/`)
+  return rq
+}
+
 
 export const callbacks = {
   fingerprint: {
@@ -42,6 +47,7 @@ export const callbacks = {
   },
   quotation: {
     create: create_quotation,
-    createWell: create_wells
+    createWell: create_wells,
+    retrieve: get_quotation
   }
 }

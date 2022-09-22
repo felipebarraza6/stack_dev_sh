@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Col, Row, Card, Select,
         Tag, Button, Input, List, Spin, Modal,
         Menu, notification, Badge } from 'antd'
@@ -7,7 +7,7 @@ import { SmileTwoTone } from '@ant-design/icons'
 import img_pozo from '../../assets/images/dem1.png'
 import { callbacks } from '../../api/endpoints'
 
-const Wells = ({ quantity, setQuantity, quotation }) => {
+const Wells = ({ quantity, setQuantity, quotation, listWellsArr }) => {
       
     const [addWell, setAddWell] = useState(false)
     const [listWells, addListWells] = useState([])
@@ -17,14 +17,76 @@ const Wells = ({ quantity, setQuantity, quotation }) => {
     const [selectedWell, setSelectedWell] = useState({})
     const [loadWell, setLoadWell] = useState(false)
     const [dataSending, setDataSending] = useState(false)
+    const [bloackedButton, setBlockedButton] = useState(true)
 
     async function sendData(){      
+      var dataCompleted = true
+      listWells.map((x)=> {
+        if(x['duct_outside_diameter']==''){
+          notification.error({
+            message: 'DEBES COMPLETAR ESTE CAMPO', 
+            description: `Diámetro exterior ducto, en el pozo ${x.name}`
+          })
+          dataCompleted = false
+        }
+        if(x['dynamic_level']==''){
+          notification.error({
+            message: 'DEBES COMPLETAR ESTE CAMPO', 
+            description: `Nivel Dinámico, en el pozo ${x.name}`
+          })
+          dataCompleted = false
+        }
+        if(x['granted_flow']==''){
+          notification.error({
+            message: 'DEBES COMPLETAR ESTE CAMPO', 
+            description: `Caudal otorgado, en el pozo ${x.name}`
+          })
+          dataCompleted = false
+        }
+        if(x['inside_diameter_well']==''){
+          notification.error({
+            message: 'DEBES COMPLETAR ESTE CAMPO', 
+            description: `Diámetro interior pozo, en el pozo ${x.name}`
+          })
+          dataCompleted = false
+        }
+        if(x['pump_installation_depth']==''){
+          notification.error({
+            message: 'DEBES COMPLETAR ESTE CAMPO', 
+            description: `Profundidad instalacion bomda, en el pozo ${x.name}`
+          })
+          dataCompleted = false
+        }
+        if(x['static_level']==''){
+          notification.error({
+            message: 'DEBES COMPLETAR ESTE CAMPO', 
+            description: `Nivel Estático, en el pozo ${x.name}`
+          })
+          dataCompleted = false
+        }
+        if(x['well_depth']==''){
+          notification.error({
+            message: 'DEBES COMPLETAR ESTE CAMPO', 
+            description: `Profundida total del pozo, en el pozo ${x.name}`
+          })
+          dataCompleted = false
+        }       
+      })
+      if(dataCompleted){ 
       const rq = await callbacks.quotation.createWell(listWells).then((res)=> {        
         setDataSending(true)    
         setTimeout(() => { window.location.assign('/') }, 7000)
       })
       return rq
+      }
     }
+
+    useEffect(() => {
+      if(listWellsArr){
+        console.log(listWellsArr)
+        addListWells(listWellsArr)
+      }
+    }, [])
     
           return(<>
             <Modal icon={SmileTwoTone} title='DATOS CARGADOS CORRECTAMENTE, GRACIAS POR LA INFORMACIÓN, TE ENVIAREMOS UNA COTIZACION A LA BREVEDAD...' 
@@ -110,13 +172,13 @@ const Wells = ({ quantity, setQuantity, quotation }) => {
                             {loadWell ? <Spin />:<>
                             <Col lg={12} xs={24}>
                               <List bordered style={{marginTop:'20px'}}>
-                                  <List.Item>1 - Caudal otorgado: <Tag color='blue'>LTRS/SEG</Tag></List.Item>
-                                  <List.Item>2 - Profundidad total del pozo: <Tag color='blue'>MT</Tag></List.Item>
-                                  <List.Item>3 - Nivel Estático: <Tag color='blue'>MT</Tag></List.Item>
-                                  <List.Item>4 - Nivel Dinámico: <Tag color='blue'>MT</Tag></List.Item>
-                                  <List.Item>5 - Profundidad instalacion bomda: <Tag color='blue'>MT</Tag></List.Item>
+                                  <List.Item>1 - Caudal otorgado: <Tag color='blue'>Lt/SEG</Tag></List.Item>
+                                  <List.Item>2 - Profundidad total del pozo: <Tag color='blue'>Mt</Tag></List.Item>
+                                  <List.Item>3 - Nivel Estático: <Tag color='blue'>Mt</Tag></List.Item>
+                                  <List.Item>4 - Nivel Dinámico: <Tag color='blue'>Mt</Tag></List.Item>
+                                  <List.Item>5 - Profundidad instalacion bomda: <Tag color='blue'>Mt</Tag></List.Item>
                                   <List.Item>6 - Diámetro interior pozo: <Tag color='blue'>MM/PULG</Tag></List.Item>
-                                  <List.Item>7 - Diámetro exterior ducto: <Tag color='blue'>MM/PULG</Tag></List.Item>
+                                  <List.Item>7 - Diámetro exterior ducto salida bomba: <Tag color='blue'>MM/PULG</Tag></List.Item>
                               </List>
                             </Col>                            
                             <Col lg={12} xs={24} style={styles.col_well}>

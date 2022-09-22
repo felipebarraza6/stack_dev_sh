@@ -10,7 +10,7 @@ from rest_framework.permissions import (
 
 
 from api.crm.models import Quotation, Well
-from api.crm.serializers import QuotationsModelSerializer, WellsModelSerializer
+from api.crm.serializers import QuotationRetrieveModelSerializer, QuotationsModelSerializer, WellsModelSerializer
 
 
 class WellsViewSet(mixins.CreateModelMixin,
@@ -49,6 +49,12 @@ class QuotationViewSet(mixins.CreateModelMixin,
     ordering = ('created',)
     queryset = Quotation.objects.all()
     serializer_class = QuotationsModelSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return QuotationRetrieveModelSerializer
+        else:
+            return QuotationsModelSerializer
 
     class QuotationFilter(filters.FilterSet):
         class Meta:
