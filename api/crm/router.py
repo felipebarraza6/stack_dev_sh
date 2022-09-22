@@ -33,6 +33,7 @@ router.register(r'quotation', views_quotations.QuotationViewSet, basename=
 router.register(r'wells', views_quotations.WellsViewSet, basename=
         'wells')
 router.register(r'interaction_detail', views_detail.InteractionXLS)
+router.register(r'interaction_detail_json', views_detail.InteractionDetailViewSet, basename= 'interaction_detail_json')
 router.register(r'webinars', views_webinars.WebinarsViewSet, basename= 'webinars')
 router.register(r'profile_footprints', views_footprints.ProfileFootprintsViewSet, basename= 'profile_footprints')
 router.register(r'clients_external', views_clients.ClientExternalViewSet, basename='clients_external')

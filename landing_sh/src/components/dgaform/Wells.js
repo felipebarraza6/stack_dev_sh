@@ -22,6 +22,58 @@ const Wells = ({ quantity, setQuantity, quotation, listWellsArr }) => {
     async function sendData(){      
       var dataCompleted = true
       listWells.map((x)=> {
+        if(x['duct_outside_diameter'].match(/[a-z]/i)){
+          notification.error({
+            message: 'DEBES INGRESAR UN CAMPO NUMERICO', 
+            description: `Diámetro exterior ducto, en el pozo ${x.name}`
+          })
+        }
+        if(x['dynamic_level'].match(/[a-z]/i)){
+          notification.error({
+            message: 'DEBES INGRESAR UN CAMPO NUMERICO', 
+            description: `Nivel Dinámico, en el pozo ${x.name}`
+          })
+          dataCompleted = false
+        }
+        if(x['granted_flow'].match(/[a-z]/i)){
+          notification.error({
+            message: 'DEBES INGRESAR UN CAMPO NUMERICO', 
+            description: `Caudal otorgado, en el pozo ${x.name}`
+          })
+          dataCompleted = false
+        }
+        if(x['inside_diameter_well'].match(/[a-z]/i)){
+          notification.error({
+            message: 'DEBES INGRESAR UN CAMPO NUMERICO', 
+            description: `Diámetro interior pozo, en el pozo ${x.name}`
+          })
+          dataCompleted = false
+        }
+        if(x['pump_installation_depth'].match(/[a-z]/i)){
+          notification.error({
+            message: 'DEBES INGRESAR UN CAMPO NUMERICO', 
+            description: `Profundidad instalacion bomda, en el pozo ${x.name}`
+          })
+          dataCompleted = false
+        }
+        if(x['static_level'].match(/[a-z]/i)){
+          notification.error({
+            message: 'DEBES INGRESAR UN CAMPO NUMERICO', 
+            description: `Nivel Estático, en el pozo ${x.name}`
+          })
+          dataCompleted = false
+        }
+        if(x['well_depth'].match(/[a-z]/i)){
+          notification.error({
+            message: 'DEBES INGRESAR UN CAMPO NUMERICO', 
+            description: `Profundida total del pozo, en el pozo ${x.name}`
+          })
+          dataCompleted = false
+        } 
+
+
+
+
         if(x['duct_outside_diameter']==''){
           notification.error({
             message: 'DEBES COMPLETAR ESTE CAMPO', 

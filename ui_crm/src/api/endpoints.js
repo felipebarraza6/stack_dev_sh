@@ -58,38 +58,27 @@ const get_tasks = async (
     const request = await GET(
         `actions/?page=${page}&is_active=${filters.is_active}&is_complete=${filters.is_complete}&is_priority=${filters.is_priority}&date__date__range=${string_date_rage}&date__year=${year}&date__month=${month}&date__day=${day}&employee=${person}&client=${enterprises}`
         )
-
     return request
 }
 
 const finish_task = async (id_task) =>{
-
     const request = await POST(`actions/${id_task}/finish/`)
-
     return request
 }
 
 const update_task = async(id_task ,data) =>{
-    
     const request = await UPDATE(`actions/${id_task}/`, data)    
-    
     return request
 }
 
 const delete_task = async (id_task) =>{
-
     const request = await DELETE(`actions/${id_task}/`)
-
     return request
-
 }
 
 const create_task = async (data) =>{
-    
     const task = await POST('actions/', data)    
-
     return task
-
 }
 
 //Enterprises
@@ -240,6 +229,11 @@ const search_type_task = async(name_type_task)=>{
     return search
 }
 
+const get_list_quotation = async()=>{
+  const rq = await GET('quotation/')
+  return rq
+}
+
 const api = {
     user:{
         login,
@@ -276,9 +270,10 @@ const api = {
         delete_type_task,
         update_type_task,
         search_type_task
-    }
-    
-
+    },
+    quotation: {
+      list: get_list_quotation
+    } 
 }
 
 export default  api
