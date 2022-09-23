@@ -1,4 +1,4 @@
-import { POST, GET } from './config'
+import { POST, GET, PATCH } from './config'
 
 
 const get_fingerprint = async(id) => {
@@ -34,10 +34,17 @@ const get_quotation = async(uuid) => {
   return rq
 }
 
+const update_field = async(id, data)=>{
+  const rq = await PATCH(`fields/${id}/`, data)
+  return rq
+}
+
 
 export const callbacks = {
   fingerprint: {
-    retrieve: get_fingerprint
+    retrieve: get_fingerprint,
+    update_field: update_field
+
   },
   webinar: {
     retrieve: get_webinar
