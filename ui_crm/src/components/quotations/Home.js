@@ -26,7 +26,7 @@ const Home = () => {
                     <b>TELEFONO:</b> {client.phone_contact}<br/>
                     <b>CORREO:</b> {client.mail_contact}<br/>
                     <b>NOMBE EMPRESA:</b> {client.name_enterprise}<br/>
-                    <b>DIRECCIÓN EMPRESA:</b> {client.name_enterprise}<br/>
+                    <b>DIRECCIÓN EMPRESA:</b> {client.address_enterprise}<br/>
           </Typography.Paragraph>
       })
     }
@@ -39,13 +39,13 @@ const Home = () => {
           {wells.map((x)=> {
             return(<Col span={12}><Card title={x.name}>
                 <Descriptions bordered>
-                  <Descriptions.Item span={3} label='Caudal otorgado'>{x.granted_flow}</Descriptions.Item>
-                  <Descriptions.Item span={3} label='Profundida total del pozo'>{x.well_depth}</Descriptions.Item>
-                  <Descriptions.Item span={3} label='Nivel estático'>{x.static_level}</Descriptions.Item>
-                  <Descriptions.Item span={3} label='Nivel dinámico'>{x.dynamic_level}</Descriptions.Item>
-                  <Descriptions.Item span={3} label='Profundida instalación bomba'>{x.pump_installation_depth}</Descriptions.Item>
-                  <Descriptions.Item span={3} label='Diámetro interior pozo'>{x.inside_diameter_well}</Descriptions.Item>
-                  <Descriptions.Item span={3} label='Diámetro exterior ducto salida bomba'>{x.duct_outside_diameter}</Descriptions.Item>
+                  <Descriptions.Item span={3} label='Caudal otorgado (Lt/SEG)'>{x.granted_flow}</Descriptions.Item>
+                  <Descriptions.Item span={3} label='Profundida total del pozo (Mt)'>{x.well_depth}</Descriptions.Item>
+                  <Descriptions.Item span={3} label='Nivel estático (Mt)'>{x.static_level}</Descriptions.Item>
+                  <Descriptions.Item span={3} label='Nivel dinámico (Mt)'>{x.dynamic_level}</Descriptions.Item>
+                  <Descriptions.Item span={3} label='Profundida instalación bomba (Mt)'>{x.pump_installation_depth}</Descriptions.Item>
+                  <Descriptions.Item span={3} label='Diámetro interior pozo (MM/PULG)'>{x.inside_diameter_well}</Descriptions.Item>
+                  <Descriptions.Item span={3} label='Diámetro exterior ducto salida bomba (MM/PULG)'>{x.duct_outside_diameter}</Descriptions.Item>
                 </Descriptions>
               </Card></Col>)
           })}
