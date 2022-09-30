@@ -3,9 +3,14 @@ from .models import (InteractionDetail, User,
 from .serializers import InteractionDetailModelSerializer
 import requests
 from datetime import datetime
+from zeep import Client
+import pytz
+
 
 def get_novus_and_save_in_api():
     clients = ProfileClient.objects.all()
+    chile = pytz.timezone("America/Santiago") 
+
 
     for client in clients:
         list_variables = {
@@ -24,13 +29,12 @@ def get_novus_and_save_in_api():
             current_time = ""
 
             if data.get("result"):
-                current_time = datetime.strptime(
-                    data.get("result")[0].get("time"), "%Y-%m-%dT%H:%M:%S.%fZ"
-                )
+                current_time = data.get("result")[0].get("time")                
             else:
-                current_time = datetime.now()
+                current_time = datetime.now(chile).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
 
-            response["date_time_medition"] = datetime.strftime(current_time, "%Y-%m-%dT%H:%M:%S.%fZ")
+
+            response["date_time_medition"] = current_time            
             response["profile_client"] = client.id
 
             if variable == "nivel":
@@ -48,15 +52,18 @@ def get_novus_and_save_in_api():
                     response["total"] = data.get("result")[0].get("value")
                 else:
                     response["total"] = "0"
-
+        
         serializer = InteractionDetailModelSerializer(data=response)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
+        if client.is_dga:
+            pass
+            #client = Client('https://snia.mop.gob.cl/controlextraccion/wsdl/datosExtraccion/SendDataExtraccionService')
+            #print(dir(client.service.authSendDataExtraccionOp()))
 
 
 def main():
-    print(datetime.now())
     get_novus_and_save_in_api()
 
 main()

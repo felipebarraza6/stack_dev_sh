@@ -24,6 +24,9 @@ class ModuleFootprints(ModelApi):
     name = models.CharField(max_length=1200, blank=True, null=True)
     description = models.TextField(max_length=1200, blank=True, null=True)
     number_module = models.CharField(max_length=12, blank=True, null=True)
+    is_complete = models.BooleanField(default=False)
+    is_hidden = models.BooleanField(default=False)
+    is_blocked = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.name)
@@ -39,6 +42,7 @@ class SectionModuleFootprints(ModelApi):
     is_complete = models.BooleanField(default=False)
     feedback = models.TextField(max_length=1200, blank=True, null=True)    
     is_file_section = models.BooleanField(default=False)
+    is_captation_data = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.name)
@@ -68,7 +72,7 @@ class FieldSectionFootprints(ModelApi):
     help_text = models.CharField(max_length=500, blank=True, null=True)
     type = models.CharField(max_length=500, choices=TYPES_CHOICES)
     value = models.CharField(max_length=1800, blank=True, null=True)
-    file = models.FileField(blank=True, null=True)
+    file = models.FileField(upload_to='fingerprint/annex/', blank=True, null=True)
 
     def __str__(self):
         return str(self.label)    

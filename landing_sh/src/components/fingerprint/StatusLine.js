@@ -3,7 +3,7 @@ import { LoadingOutlined,
         ClockCircleOutlined,
         SmileOutlined, 
         SolutionOutlined, 
-        UserOutlined } from '@ant-design/icons'
+        UserOutlined, CheckCircleOutlined } from '@ant-design/icons'
 import { Steps } from 'antd'
 const { Step } = Steps
 
@@ -28,7 +28,7 @@ return(<Steps>
         <Step status={in_validate} title={section.in_validate ? "En validacion" : "Validado"} icon={in_validate == 'complete' ? <>
       {section.in_validate ? <LoadingOutlined /> : <SolutionOutlined />}          
         </>:<ClockCircleOutlined />} />
-        <Step status={is_complete} title="Completado" icon={<SmileOutlined />} />    
+        <Step status={is_complete} title="Completado" icon={<CheckCircleOutlined style={{color:'green'}} />} />    
       </>:<>
         <Step status="wait" title="Ingreso" icon={<UserOutlined />} />      
         <Step status="wait" title="En validacion" icon={<ClockCircleOutlined />} />

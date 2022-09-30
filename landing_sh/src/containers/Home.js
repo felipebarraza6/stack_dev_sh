@@ -8,6 +8,7 @@ import Services from '../components/Services'
 import Contact from '../components/Contact'
 import Collaborators from '../components/Collaborators'
 import FooterInfo from '../components/FooterInfo'
+import FooterFingerprint from '../components/FooterFingerprint'
 import { BrowserRouter, Route } from 'react-router-dom'
 import ContainerFormDga from '../components/dgaform/ContainerFormDga'
 import ContactForm from '../components/forms/ContactForm'
@@ -34,6 +35,8 @@ const Home = () => {
 
     return(<Layout>
         <BrowserRouter>
+              
+              <Route exact path='/'>
               <Header style={styles.header1}>
                 <Row justify='end'>
                   <Col><a href='https://www.facebook.com/smarthydrorrss/' target='_blank'>
@@ -57,6 +60,13 @@ const Home = () => {
 
                 </Row>
               </Header>
+              </Route>
+              <Route exact path='/fingerprint/:id'>
+              <Header style={styles.header1}>
+                              </Header>
+              </Route>
+
+              <Route exact path='/'>
               <Header style={styles.header}>            
                 <Row >                
                   {width > 800 ? <>
@@ -78,6 +88,52 @@ const Home = () => {
                     </Col>}
                 </Row>
               </Header>
+              </Route>
+              <Route exact path='/fingerprint/:id'>
+              <Header style={styles.header}>            
+                <Row >                
+                  {width > 800 ? <>
+                    <Col span={4}>
+                      <a href='https://smarthydro.cl'>
+                      <img src={logo_src} alt='logo' style={styles.logo} />
+                      </a>
+                    </Col>
+                    <Col span={5}>
+                    </Col>                
+                    <Col span={15}> 
+                      <Row justify='end'>
+                  <Col><a href='https://www.facebook.com/smarthydrorrss/' target='_blank'>
+                    <FacebookOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
+                  </a></Col>
+                  <Col><a target='_blank' href='https://twitter.com/smarthydrorrss'>
+                    <TwitterOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
+                  </a></Col>
+                  <Col><a target='_blank' href='https://www.instagram.com/smarthydrorrss/'>
+                    <InstagramOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
+                  </a></Col>
+                  <Col><a target='_blank' href='https://web.whatsapp.com/send?phone=56939581688&text=¡Hola!'>
+                    <WhatsAppOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
+                  </a></Col>
+                  <Col><a target='_blank' href='tel:56939581688'>
+                    <PhoneOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
+                  </a></Col>
+                  <Col><a target='_blank' href='mailto:contacto@smarthydro.cl'>
+                    <MailOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
+                  </a></Col>
+
+                </Row>
+
+                    </Col>                
+                  </>: 
+                    <Col style={styles.colLogoMobil} span={24}>
+                      <a href='https://smarthydro.cl'>
+                      <img src={logo_src} alt='logo' style={styles.logo} />
+                      </a>
+                    </Col>}
+                </Row>
+              </Header>
+              </Route>
+
         <Content >
             <Row>
               <Route exact path='/'> 
@@ -108,6 +164,8 @@ const Home = () => {
               <Route exact path='/dgaform/external_client/:id' component={ContainerFormDga} >
               </Route>
               <Route exact path='/fingerprint/:id' component={Fingerprint} />
+              <Route exact path='/fingerprint/root/:id' component={Fingerprint} />
+
               <Route exact path='/contacto'>
                 <ContactForm />
               </Route>
@@ -118,11 +176,16 @@ const Home = () => {
             </Row>
             
             </Content>
-        </BrowserRouter>
+      <Route exact path='/'>
         <Footer>
             <FooterInfo />
         </Footer>
-    </Layout>)
+      </Route>
+      <Route exact path='/fingerprint/:id'>
+        <FooterFingerprint /> 
+      </Route>
+        </BrowserRouter>
+            </Layout>)
 }
 
 

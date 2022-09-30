@@ -1,4 +1,4 @@
-import { POST, GET, PATCH } from './config'
+import { POST, GET, PATCH, INSTANCE } from './config'
 
 
 const get_fingerprint = async(id) => {
@@ -39,11 +39,29 @@ const update_field = async(id, data)=>{
   return rq
 }
 
+const update_field_file = async(endpoints, file) => {
+    const token = JSON.parse(localStorage.getItem('access_token'))
+    let data = new FormData()
+
+    data.append('file', file)
+
+    const options = {
+      headers: {
+          Authorization: `Token ${token}`,
+          'content-type': 'multipart/form-data'
+      }
+    }
+
+    const request = await INSTANCE.patch(endpoints, data, options)
+    return request
+}
+
 
 export const callbacks = {
   fingerprint: {
     retrieve: get_fingerprint,
-    update_field: update_field
+    update_field: update_field,
+    update_file: update_field_file
 
   },
   webinar: {

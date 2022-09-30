@@ -20,7 +20,7 @@ const Home = () => {
     function modalRetrieveClient(client) {
       Modal.info({ 
         width: 500,
-        title: client.name_contact,
+        title: client.name_enterprise,
         content: <Typography.Paragraph>
                     <b>NOMBRE CONTACTO:</b> {client.name_contact}<br/>
                     <b>TELEFONO:</b> {client.phone_contact}<br/>

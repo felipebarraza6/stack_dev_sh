@@ -81,6 +81,17 @@ const Home = () =>{
                       </Menu.Item>
                       </Menu.SubMenu>                    
                   </Menu.SubMenu>
+                  <Menu.SubMenu title={<><FolderOpenOutlined /> Huella Hidrica</>} >
+                    <Menu.SubMenu title="Procesos activos">
+                      <Menu.Item key="5">
+                          <a href='http://localhost:3000/fingerprint/root/1' target='__blank'>
+                          <OrderedListOutlined />
+                            CLIENTE #1 
+                            </a>
+                      </Menu.Item>
+                      </Menu.SubMenu>                    
+                  </Menu.SubMenu>
+
               </Menu>
               
             </Sider>

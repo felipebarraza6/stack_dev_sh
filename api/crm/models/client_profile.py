@@ -9,6 +9,7 @@ class ProfileClient(ModelApi):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     theme = models.CharField(max_length=200, default='ligth', blank=True, null=True)
     token_service = models.CharField(max_length=400, blank=True, null= True)
+    code_dga_site = models.CharField(max_length=1200, blank=True, null=True)
     d1 = models.CharField(max_length=100, blank=True, null= True)
     d2 = models.CharField(max_length=100, blank=True, null= True)
     d3 = models.CharField(max_length=100, blank=True, null= True)
