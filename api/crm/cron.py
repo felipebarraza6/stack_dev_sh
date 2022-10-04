@@ -11,7 +11,6 @@ def get_novus_and_save_in_api():
     clients = ProfileClient.objects.all()
     chile = pytz.timezone("America/Santiago") 
 
-
     for client in clients:
         list_variables = {
             "nivel": "3grecuc2v",
@@ -29,12 +28,16 @@ def get_novus_and_save_in_api():
             current_time = ""
 
             if data.get("result"):
-                current_time = data.get("result")[0].get("time")                
+                response_date = datetime.strptime(
+                    data.get("result")[0].get("time"), "%Y-%m-%dT%H:%M:%S.%fZ"
+                )
+                format_date_response = datetime.strftime(response_date, "%Y-%m-%dT%H:00:00")
+                current_time = format_date_response
             else:
-                current_time = datetime.now(chile).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+                current_time = datetime.now(chile).strftime("%Y-%m-%dT%H:00:00")            
 
 
-            response["date_time_medition"] = current_time            
+            response["date_time_medition"] = current_time                        
             response["profile_client"] = client.id
 
             if variable == "nivel":
@@ -53,6 +56,7 @@ def get_novus_and_save_in_api():
                 else:
                     response["total"] = "0"
         
+        print(response)
         serializer = InteractionDetailModelSerializer(data=response)
         serializer.is_valid(raise_exception=True)
         serializer.save()
