@@ -5,6 +5,7 @@ import requests
 from datetime import datetime
 from zeep import Client
 import pytz
+from .send_data_dga import send
 
 
 def get_novus_and_save_in_api():
@@ -23,21 +24,12 @@ def get_novus_and_save_in_api():
             parsed_url = (
                 f"https://api.tago.io/data/?variable={list_variables[variable]}&query=last_item"
             )
+            
             request = requests.get(parsed_url, headers={"authorization": client.token_service})
+            
             data = request.json()
-            current_time = ""
 
-            if data.get("result"):
-                response_date = datetime.strptime(
-                    data.get("result")[0].get("time"), "%Y-%m-%dT%H:%M:%S.%fZ"
-                )
-                format_date_response = datetime.strftime(response_date, "%Y-%m-%dT%H:00:00")
-                current_time = format_date_response
-            else:
-                current_time = datetime.now(chile).strftime("%Y-%m-%dT%H:00:00")            
-
-
-            response["date_time_medition"] = current_time                        
+            response["date_time_medition"] = datetime.now(chile).strftime("%Y-%m-%dT%H:00:00")                       
             response["profile_client"] = client.id
 
             if variable == "nivel":
@@ -56,18 +48,15 @@ def get_novus_and_save_in_api():
                 else:
                     response["total"] = "0"
         
-        print(response)
         serializer = InteractionDetailModelSerializer(data=response)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
         if client.is_dga:
-            pass
-            #client = Client('https://snia.mop.gob.cl/controlextraccion/wsdl/datosExtraccion/SendDataExtraccionService')
-            #print(dir(client.service.authSendDataExtraccionOp()))
+            send(client, response)
+
 
 
 def main():
     get_novus_and_save_in_api()
 
-main()
