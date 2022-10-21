@@ -31,6 +31,7 @@ class QuotationRetrieveModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quotation
         fields = (
+            'created',
             'uuid',
             'client',
             'external_client',

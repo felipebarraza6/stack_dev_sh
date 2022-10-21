@@ -68,6 +68,10 @@ const Home = () => {
             </>
           }, 
           {
+            title: 'Fecha creación',
+            render: (x) => <>{console.log(x)}</>
+          },
+          {
             title: 'Cliente',
             render: (x)=> <>
               <Button icon={<UserOutlined />}

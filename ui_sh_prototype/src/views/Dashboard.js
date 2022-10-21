@@ -41,7 +41,6 @@ const Dashboard = () => {
           const rqHistory = await api_crm.billing_data(selectProfileData).then((r)=>setListHistorial(r.results))
           const rqHistoryAdmin = await api_crm.billing_data_admin().then((r)=>setListHistorialAdmin(r.results))
           const rqWell = await api_novus.lastData('3grecuc1v')
-          console.log(rqWell.data.result[0].value)
           const rqPond = await api_novus.lastData('3grecuc2v')
           if(rqPond.data.result.length > 0){
             if(rqPond.data.result[0].value === 3276.7){
@@ -59,7 +58,6 @@ const Dashboard = () => {
     get()
   }, [])
 
-  console.log(user)
 
   
   return (
@@ -134,7 +132,7 @@ const Dashboard = () => {
                       {user.username==='gcastro'  ? 
                       <CardTitle tag="h3"> {well} </CardTitle>:
                         <>
-                          {user.username='pozos_iansa' ? 
+                          {user.username=='pozos_iansa'  ? 
                             <CardTitle tag="h3"> {well} </CardTitle>: 
                             <CardTitle tag="h3"> {pond} </CardTitle>
                           }

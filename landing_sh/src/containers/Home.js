@@ -57,15 +57,60 @@ const Home = () => {
                   <Col><a target='_blank' href='mailto:contacto@smarthydro.cl'>
                     <MailOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
                   </a></Col>
-
                 </Row>
               </Header>
               </Route>
               <Route exact path='/fingerprint/:id'>
               <Header style={styles.header1}>
-                              </Header>
+              </Header>
               </Route>
+              <Route path='/dgaform/'>
+              <Header style={styles.header1}>
+              </Header>
 
+                <Header style={styles.header}>            
+                <Row >                
+                  {width > 800 ? <>
+                    <Col span={4}>
+                      <a href='https://smarthydro.cl'>
+                      <img src={logo_src} alt='logo' style={styles.logo} />
+                      </a>
+                    </Col>
+                    <Col span={5}>
+                    </Col>                
+                    <Col span={15}> 
+                      <Row justify='end'>
+                  <Col><a href='https://www.facebook.com/smarthydrorrss/' target='_blank'>
+                    <FacebookOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
+                  </a></Col>
+                  <Col><a target='_blank' href='https://twitter.com/smarthydrorrss'>
+                    <TwitterOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
+                  </a></Col>
+                  <Col><a target='_blank' href='https://www.instagram.com/smarthydrorrss/'>
+                    <InstagramOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
+                  </a></Col>
+                  <Col><a target='_blank' href='https://web.whatsapp.com/send?phone=56939581688&text=¡Hola!'>
+                    <WhatsAppOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
+                  </a></Col>
+                  <Col><a target='_blank' href='tel:56939581688'>
+                    <PhoneOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
+                  </a></Col>
+                  <Col><a target='_blank' href='mailto:contacto@smarthydro.cl'>
+                    <MailOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
+                  </a></Col>
+                </Row>
+                    </Col>                
+                  </>: 
+                    <Col style={styles.colLogoMobil} span={24}>
+                      <a href='https://smarthydro.cl'>
+                      <img src={logo_src} alt='logo' style={styles.logo} />
+                      </a>
+                    </Col>}
+                </Row>
+              </Header>
+
+
+              </Route>
               <Route exact path='/'>
               <Header style={styles.header}>            
                 <Row >                
@@ -120,9 +165,7 @@ const Home = () => {
                   <Col><a target='_blank' href='mailto:contacto@smarthydro.cl'>
                     <MailOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
                   </a></Col>
-
                 </Row>
-
                     </Col>                
                   </>: 
                     <Col style={styles.colLogoMobil} span={24}>
@@ -133,8 +176,7 @@ const Home = () => {
                 </Row>
               </Header>
               </Route>
-
-        <Content >
+        <Content>
             <Row>
               <Route exact path='/'> 
                 <>
@@ -165,7 +207,6 @@ const Home = () => {
               </Route>
               <Route exact path='/fingerprint/:id' component={Fingerprint} />
               <Route exact path='/fingerprint/root/:id' component={Fingerprint} />
-
               <Route exact path='/contacto'>
                 <ContactForm />
               </Route>
@@ -174,9 +215,18 @@ const Home = () => {
               </Route>
               <Route exact path='/webinars/:id' component ={WebinarRetrieve} />
             </Row>
-            
-            </Content>
+        </Content>
       <Route exact path='/'>
+        <Footer>
+            <FooterInfo />
+        </Footer>
+      </Route>
+      <Route exact path='/dgaform/new'>
+        <Footer>
+            <FooterInfo />
+        </Footer>
+      </Route>
+      <Route exact path='/dgaform/external_client/:id'>
         <Footer>
             <FooterInfo />
         </Footer>

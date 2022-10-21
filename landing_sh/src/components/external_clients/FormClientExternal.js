@@ -4,12 +4,10 @@ import { Form, Input, Row, Space,
 import { callbacks } from '../../api/endpoints' 
 const { Item } = Form
 
-const FormClientExternal = ({ dataClient, setDataClient,isModal,setStatusSub, setQuotation }) => {
+const FormClientExternal = ({ setDataClient,isModal,setStatusSub, setQuotation }) => {
   
   const [form] = Form.useForm()
   const [isCreate ,setIsCreate] = useState(false)
-  const [initialValues, setInitialValues] = useState(null)
-  console.log(dataClient)
   
   async function onFinish(data) {
     const rq = await callbacks.external_clients.create(data)
@@ -36,13 +34,9 @@ const FormClientExternal = ({ dataClient, setDataClient,isModal,setStatusSub, se
   
   return(<div >
       <Form name='form_person' layout={'vertical'} 
-          initialValues={{...initialValues}}
           form={form} onFinish={onFinish}>
         <Item  label='Nombre Empresa' name='name_enterprise' rules={[{ required: true, message:'campo obligatorio' }]}>
           <Input disabled={isCreate} />
-        </Item>
-        <Item label='Dirección Empresa' name='address_enterprise' rules={[{ required: true, message:'campo obligatorio' }]}>
-          <Input disabled={isCreate} placeholder={'REGION, COMUNA Y SECTOR O CALLE ‘METROPOLITANA, ISLA DE MAIPO Y LA ISLITA’'} />
         </Item>
         <Item label='Nombre Contacto' name='name_contact' rules={[{ required: true, message:'campo obliatorio' }]}>
           <Input disabled={isCreate} />
@@ -54,7 +48,7 @@ const FormClientExternal = ({ dataClient, setDataClient,isModal,setStatusSub, se
           <Input disabled={isCreate} />
         </Item>
         <Item style={styles.itemBtn}>
-          <Button style={styles.btn} disabled={isCreate} type='primary' htmlType='submit'>ENVÍAR</Button>
+          <Button style={styles.btn} disabled={isCreate} type='primary' htmlType='submit'>SIGUIENTE</Button>
           {!isCreate && 
             <Button type='primary' danger onClick={()=> form.resetFields()} >LIMPIAR DATOS</Button>
           }

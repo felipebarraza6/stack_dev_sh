@@ -22,10 +22,8 @@ const CubicMetersConsumed = () => {
 
     const [labels, setLabels] = useState([])
     const [data, setData] = useState([])
-    const user = JSON.parse(localStorage.getItem('user'))
     const selected_sensor = JSON.parse(localStorage.getItem('selected_sensor') || null)
  
-   
     const getData = async()=> {
       var data_l = []
       var data_d = []

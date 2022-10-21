@@ -1,4 +1,3 @@
-"""Module providingFunction printing python version."""
 
 from django.db import models
 import uuid
@@ -39,6 +38,9 @@ class Well(ModelApi):
     pump_installation_depth = models.CharField(max_length=1000, blank=True, null=True)
     inside_diameter_well = models.CharField(max_length=1000, blank=True, null=True)
     duct_outside_diameter = models.CharField(max_length=1000, blank=True, null=True)
+    exact_address = models.TextField(max_length=1200, blank=True, null=True)
+    img1 = models.ImageField(blank=True, null=True)
+    img2 = models.ImageField(blank=True, null=True)
 
 
     def __str__(self):
