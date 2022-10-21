@@ -152,12 +152,27 @@ const Charts2 = () => {
                             <Col>
                               <div>
                                 <h4>
-                                   312.41 (m3)
+                                  {selected_sensor.token_service == "867f9225-24f2-487d-bf28-c2ccd0e662bc" && 
+                                    '369.97 (m3)'	
+                                  }
+                                  {selected_sensor.token_service == "32ae0a00-7374-46e8-bc5c-e085714748d7" && 
+                                    '131.32 (m3)'	
+                                  }
+
                                 </h4>
                               </div>
                             </Col>
                             <Col>
-                              <h4>2022-08-15</h4>
+                              <h4>
+                                {selected_sensor.token_service == "867f9225-24f2-487d-bf28-c2ccd0e662bc" && 
+                                    '2022-10-15'	
+                                }
+{selected_sensor.token_service == "32ae0a00-7374-46e8-bc5c-e085714748d7" && 
+                                    '2022-10-10'	
+                                  }
+
+
+                              </h4>
                             </Col>
                       </Row>
                     </CardBody>
@@ -206,18 +221,20 @@ const Charts2 = () => {
                         <Col></Col>
                         <Col>
                           <div>
-                            {user.username === "pozos_iansa" ? (
-                              <h4>0.76(mtrs)</h4>
-                            ) : (
-                              <h4>14.8</h4>
-                            )}
+                            {selected_sensor.token_service === "32ae0a00-7374-46e8-bc5c-e085714748d7" && 
+                              <h4>14.2</h4>
+                            }
+                            {selected_sensor.token_service == "867f9225-24f2-487d-bf28-c2ccd0e662bc" && 
+                               <h4> 0.0 (mtrs)</h4>	
+                            }
+
                           </div>
                         </Col>
                         <Col>
                           {user.username === "pozos_iansa" ? (
-                            <h4>2022-08-18</h4>
+                            <h4>2022-10-15</h4>
                           ) : (
-                            <h4>2022-08-18</h4>
+                            <h4>2022-10-08</h4>
                           )}
                         </Col>
                       </Row>

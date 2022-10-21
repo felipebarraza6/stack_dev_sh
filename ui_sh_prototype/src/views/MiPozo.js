@@ -40,7 +40,11 @@ const MiPozo = () => {
     const rqPond = await api_novus.lastData("3grecuc2v")
     const rqAcc = await api_novus.lastData("3grecdi1va")
     if(rqAcc.data.result.length > 0){
-      setAcc(rqAcc.data.result[0].value);
+      if(selected_sensor=="32ae0a00-7374-46e8-bc5c-e085714748d7"){
+        setAcc(rqAcc.data.result[0]/100);
+      } else{
+        setAcc(rqAcc.data.result[0].value);
+      }
     }
     if(rqPond.data.result.length > 0){
       setPond(rqPond.data.result[0].value);
@@ -172,7 +176,15 @@ const MiPozo = () => {
                           status="processing"
                           text={
                             <>
-                            {acc} <b>M3</b>
+                            {selected_sensor.token_service=="32ae0a00-7374-46e8-bc5c-e085714748d7" ? 
+                              <>
+                                {acc/selected_sensor.scale} <b>M3</b>
+                              </>:
+                              <>
+                                {acc} <b>M3</b>
+                              </>
+
+                            }
                             </>
                           }
                           style={styles.badge_acc}

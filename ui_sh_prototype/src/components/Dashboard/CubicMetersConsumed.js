@@ -30,7 +30,9 @@ const CubicMetersConsumed = () => {
         try {            
             for(var i=0; i < 7; i++){              
               var start_datenow = new Date()                       
-              var demo_date = new Date ()
+              if(selected_sensor.token_service=="32ae0a00-7374-46e8-bc5c-e085714748d7"){
+                start_datenow.setDate(-42)
+              }
               start_datenow.setDate(start_datenow.getDate()-i)
               const rq1 = await api_novus.data('3grecdi1va', 
                 `${start_datenow.getFullYear()}-${start_datenow.getMonth()+1}-${start_datenow.getDate()}`,

@@ -35,6 +35,7 @@ const Charts = () => {
   const getDataFl = async()=> {
     
     var start_datenowi = new Date()
+
       try {            
           let list_d = []
           let rest = []
@@ -42,6 +43,10 @@ const Charts = () => {
           let labels= []
           for(var i=0; i <= 24; i++){            
             var start_datenow = new Date()                       
+            if(selected_sensor.token_service=="32ae0a00-7374-46e8-bc5c-e085714748d7"){
+                start_datenow.setDate(-42)
+              }
+
             var demo_date = new Date ()
             start_datenow.setDate(start_datenow.getDate()-i)
             const rq1 = await api_novus.data('3grecdi1va', 
@@ -99,6 +104,10 @@ const getDataNl = async()=> {
           let labels= []
           for(var i=0; i < start_datenowi.getDate(); i++){            
             var start_datenow = new Date()                       
+if(selected_sensor.token_service=="32ae0a00-7374-46e8-bc5c-e085714748d7"){
+                start_datenow.setDate(-42)
+              }
+
             var demo_date = new Date ()
             start_datenow.setDate(start_datenow.getDate()-i)
             const rq1 = await api_novus.data('3grecuc2v', 
@@ -151,6 +160,10 @@ const getDataNl = async()=> {
           let token_date = new Date()
           for(var i=0; i < token_date.getDate() +1 ; i++){            
             var start_datenow = new Date()                       
+if(selected_sensor.token_service=="32ae0a00-7374-46e8-bc5c-e085714748d7"){
+                start_datenow.setDate(-42)
+              }
+
             var demo_date = new Date ()
             start_datenow.setDate(start_datenow.getDate()-i)
             const rq1 = await api_novus.data('3grecdi1va', 
