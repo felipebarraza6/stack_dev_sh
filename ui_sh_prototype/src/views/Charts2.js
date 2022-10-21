@@ -158,6 +158,10 @@ const Charts2 = () => {
                                   {selected_sensor.token_service == "32ae0a00-7374-46e8-bc5c-e085714748d7" && 
                                     '131.32 (m3)'	
                                   }
+                                  {selected_sensor.token_service == "9d1162a7-7088-4dc8-9b19-d666acc051b1" && 
+                                    '313.9 (m3)'	
+                                  }
+
 
                                 </h4>
                               </div>
@@ -169,6 +173,9 @@ const Charts2 = () => {
                                 }
 {selected_sensor.token_service == "32ae0a00-7374-46e8-bc5c-e085714748d7" && 
                                     '2022-10-10'	
+                                  }
+{selected_sensor.token_service == "9d1162a7-7088-4dc8-9b19-d666acc051b1" && 
+                                    '2022-10-13'	
                                   }
 
 
@@ -227,15 +234,29 @@ const Charts2 = () => {
                             {selected_sensor.token_service == "867f9225-24f2-487d-bf28-c2ccd0e662bc" && 
                                <h4> 0.0 (mtrs)</h4>	
                             }
+  {selected_sensor.token_service == "9d1162a7-7088-4dc8-9b19-d666acc051b1" && 
+                                    <h4>1.3</h4>	
+                                  }
+
 
                           </div>
                         </Col>
                         <Col>
-                          {user.username === "pozos_iansa" ? (
+{selected_sensor.token_service == "867f9225-24f2-487d-bf28-c2ccd0e662bc" && 
+
                             <h4>2022-10-15</h4>
-                          ) : (
+                          }
+{selected_sensor.token_service == "32ae0a00-7374-46e8-bc5c-e085714748d7" && 
+
                             <h4>2022-10-08</h4>
-                          )}
+                          }
+
+
+                          {selected_sensor.token_service == "9d1162a7-7088-4dc8-9b19-d666acc051b1" && 
+
+                            <h4>2022-10-13</h4>
+                          }
+
                         </Col>
                       </Row>
                     </CardBody>
