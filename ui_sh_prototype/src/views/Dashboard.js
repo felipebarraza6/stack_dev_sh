@@ -27,6 +27,8 @@ const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem('user') || null)
   const selected_sensor = JSON.parse(localStorage.getItem('selected_sensor') || null)
   const [billing, setBilling] = useState(0)
+  const [acc, setAcc] = useState(0)    
+  const [acc2, setAcc2] = useState(0)    
   const [listHistorial, setListHistorial] = useState([])
   const [listHistorialAdmin, setListHistorialAdmin] = useState([])
   const [selectProfileData, setSelectProfileData] = useState(selected_sensor.id)
@@ -41,6 +43,13 @@ const Dashboard = () => {
           const rqHistoryAdmin = await api_crm.billing_data_admin().then((r)=>setListHistorialAdmin(r.results))
           const rqWell = await api_novus.lastData('3grecuc1v')
           const rqPond = await api_novus.lastData('3grecuc2v')
+          const rqAcc = await api_novus.lastData("3grecdi1va")          
+          var start_datenow = new Date()
+          start_datenow.setDate(start_datenow.getDate()-1)
+              const rq1 = await api_novus.data('3grecdi1va', 
+                `${start_datenow.getFullYear()}-${start_datenow.getMonth()+1}-${start_datenow.getDate()}`,
+                `${start_datenow.getFullYear()}-${start_datenow.getMonth()+1}-${start_datenow.getDate()}`
+              )            
           if(rqPond.data.result.length > 0){
             if(rqPond.data.result[0].value === 3276.7){
               setPond(50) 
@@ -49,6 +58,8 @@ const Dashboard = () => {
             }
           }
           setWell(rqWell.data.result[0].value)
+          setAcc(rqAcc.data.result[0].value)          
+          setAcc2(rq1.data.result[0].value)
           return {
             rqWell, 
             rqPond
@@ -100,13 +111,11 @@ const Dashboard = () => {
                     <div className="numbers">
                       <p className="card-category">Caudal (lt/s)</p>
                       {user.username==='gcastro' ?<> 
-
-                        <CardTitle tag="h3">{pond}</CardTitle>
-                        EN DESARROLLO...
+                        <CardTitle tag="h3">{Math.round(((((acc-acc2)/1000)/5)*1000)/1440)}.0</CardTitle>                        
                         </>:<>
                           {user.username==='pozos_iansa' ? 
                             <CardTitle tag="h3">{pond}</CardTitle>:
-                            <CardTitle tag="h3"> {well} </CardTitle>
+                            <CardTitle tag="h3">{well} </CardTitle>
                           }
                         </>
                       }

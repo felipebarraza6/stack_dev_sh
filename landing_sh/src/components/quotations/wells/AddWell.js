@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { QuotationContext } from '../../containers/QuotationExternalClients'
+import { QuotationContext } from '../../../containers/QuotationExternalClients'
 import { Form, Typography, Input, 
         Select, Button } from 'antd'
 
@@ -46,7 +46,6 @@ const AddWell = () => {
           <Button style={styles.btnP} htmlType="submit" type='primary'>Siguiente</Button>
           <Button style={styles.btnP} onClick={()=> form.resetFields()}>Limpiar</Button>
     </Form>)
-
 }
 
 const styles = {

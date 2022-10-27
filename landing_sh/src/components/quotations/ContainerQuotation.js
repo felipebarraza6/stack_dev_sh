@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { QuotationContext } from '../../containers/QuotationExternalClients'
 import FormClientExternal from '../external_clients/FormClientExternal'
-import AddWell from '../quotations/AddWell'
+import AddWell from './wells/AddWell'
 import TimeLineProcess from './TimeLineProcess'
 import { Row, Col, Typography } from 'antd'
 
