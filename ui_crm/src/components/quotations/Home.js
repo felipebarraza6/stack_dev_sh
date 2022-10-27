@@ -69,7 +69,7 @@ const Home = () => {
           }, 
           {
             title: 'Fecha creación',
-            render: (x) => <>{console.log(x)}</>
+            render: (x) => <>{x.created.slice(0,10)} - {x.created.slice(11,16)}</>
           },
           {
             title: 'Cliente',

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import HeaderMenu from '../components/HeaderMenu'
-import { Layout, Col, Row } from 'antd'
+import { Layout, Col, Row, Typography } from 'antd'
 import logo_src from '../assets/images/logo.png'
+import logo_src2 from '../assets/images/logo2.png'
 import Sliders from '../components/Sliders'
 import About from '../components/About'
 import Services from '../components/Services'
@@ -17,6 +18,7 @@ import ThankYou from '../components/pages/ThankYou'
 import WebinarRetrieve from '../components/webinars/webinarRetrieve'
 import { InstagramOutlined,TwitterOutlined,FacebookOutlined, 
           WhatsAppOutlined, PhoneOutlined, MailOutlined } from '@ant-design/icons'
+import QuotationExternalClients from './QuotationExternalClients'
 const { Header, Content, Footer } = Layout
 
 const Home = () => {
@@ -32,10 +34,11 @@ const Home = () => {
           }
     }, [])
 
+    var event = new Date()
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
     return(<Layout>
-        <BrowserRouter>
-              
+        <BrowserRouter>              
               <Route exact path='/'>
               <Header style={styles.header1}>
                 <Row justify='end'>
@@ -65,51 +68,14 @@ const Home = () => {
               </Header>
               </Route>
               <Route path='/dgaform/'>
-              <Header style={styles.header1}>
-              </Header>
-
-                <Header style={styles.header}>            
-                <Row >                
-                  {width > 800 ? <>
-                    <Col span={4}>
-                      <a href='https://smarthydro.cl'>
-                      <img src={logo_src} alt='logo' style={styles.logo} />
-                      </a>
-                    </Col>
-                    <Col span={5}>
-                    </Col>                
-                    <Col span={15}> 
-                      <Row justify='end'>
-                  <Col><a href='https://www.facebook.com/smarthydrorrss/' target='_blank'>
-                    <FacebookOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                  <Col><a target='_blank' href='https://twitter.com/smarthydrorrss'>
-                    <TwitterOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                  <Col><a target='_blank' href='https://www.instagram.com/smarthydrorrss/'>
-                    <InstagramOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                  <Col><a target='_blank' href='https://web.whatsapp.com/send?phone=56939581688&text=¡Hola!'>
-                    <WhatsAppOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                  <Col><a target='_blank' href='tel:56939581688'>
-                    <PhoneOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                  <Col><a target='_blank' href='mailto:contacto@smarthydro.cl'>
-                    <MailOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
+                <Row style={{padding:'10px', backgroundColor:'#1890ff'}} justify="start">
+                  <Col span={18}>
+                  <img src={logo_src2} alt='logo' style={styles.logo2} />                 
+                  </Col>
+                  <Col span={6}>
+                    <Typography.Title level={4} style={{color:'white', paddingTop:'8%'}}> {event.toLocaleDateString('es-ES', options)} </Typography.Title>
+                  </Col>
                 </Row>
-                    </Col>                
-                  </>: 
-                    <Col style={styles.colLogoMobil} span={24}>
-                      <a href='https://smarthydro.cl'>
-                      <img src={logo_src} alt='logo' style={styles.logo} />
-                      </a>
-                    </Col>}
-                </Row>
-              </Header>
-
-
               </Route>
               <Route exact path='/'>
               <Header style={styles.header}>            
@@ -177,7 +143,6 @@ const Home = () => {
               </Header>
               </Route>
         <Content>
-            <Row>
               <Route exact path='/'> 
                 <>
                   <Col span={24} >
@@ -201,7 +166,7 @@ const Home = () => {
                 <ContainerFormDga />
               </Route>
               <Route exact path='/dgaform/new' >
-                <ContainerFormDga />
+                <QuotationExternalClients />
               </Route>
               <Route exact path='/dgaform/external_client/:id' component={ContainerFormDga} >
               </Route>
@@ -214,14 +179,8 @@ const Home = () => {
                 <ThankYou />
               </Route>
               <Route exact path='/webinars/:id' component ={WebinarRetrieve} />
-            </Row>
         </Content>
       <Route exact path='/'>
-        <Footer>
-            <FooterInfo />
-        </Footer>
-      </Route>
-      <Route exact path='/dgaform/new'>
         <Footer>
             <FooterInfo />
         </Footer>
@@ -247,6 +206,11 @@ const styles = {
     logo: {
         width: '250px',
         marginTop: '-125px'
+    },
+    logo2: {
+      width: '200px',
+      padding:'10px'
+      
     },
     colLogoMobil: {
         textAlign: 'center',
