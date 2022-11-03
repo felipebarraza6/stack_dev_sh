@@ -73,7 +73,10 @@ export const quotation_reducers = (state, action) => {
               duct_outside_diameter:{ value:0.0, select:false },
               has_flow_sensor: { value:null, select:false }
             },
-            images: null,
+            images: {
+              r1: null,
+              r2: null
+            },
             create_or_edit: true,
             is_load_image: false,
           } 
@@ -113,7 +116,10 @@ export const quotation_reducers = (state, action) => {
               duct_outside_diameter:{ value:0.0, select:false },
               has_flow_sensor: { value:null, select:false }
             },
-            images: null,
+            images: {
+              r1: null,
+              r2: null
+            },
             create_or_edit: true,
             is_load_image: false,
           }
@@ -164,7 +170,10 @@ export const quotation_reducers = (state, action) => {
               duct_outside_diameter:{ value:0.0, select:false },
               has_flow_sensor: { value:null, select:false }
             },
-            images: null,
+            images: {
+              r1: null,
+              r2: null
+            },
             create_or_edit: true,
             is_load_image: false,
           }

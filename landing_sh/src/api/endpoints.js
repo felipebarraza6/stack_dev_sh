@@ -22,9 +22,7 @@ const create_quotation = async(data) => {
   return rq
 }
 
-const create_wells = async(wells) => {  
-  
-  console.log(wells)
+const create_wells = async(wells) => {      
 
   const options = {
     headers: {        

@@ -104,8 +104,8 @@ const ImageLoader = () => {
                         </Upload>
                     </Col>
                 </Col>
-                <Col span={window.innerWidth > 800 ? 12:24}>
-                    <Col span={window.innerHeight>800?12:24}>                    
+                <Col span={window.innerWidth>800?12:24}>
+                    <Col span={window.innerWidth > 800 ? 12:24}>                    
                         <img src={r2}  width={'100%'} style={{borderRadius:'10px'}} />                                         
                     </Col>
                     <Col span={window.innerWidth > 800 ? 12:24} style={{padding:'10px'}}>

@@ -25,6 +25,7 @@ const ButtonFinish = () => {
 
     const senData = async() => {
         setVisible(true)
+        console.log(state.wells.list)
         const rq1_create_client = await callbacks.external_clients.create({...state.client}).then((response)=>{            
             notification.success({message: 'DATOS DE CONTACTO'})           
             const rq2_create_quotation =  callbacks.quotation.create({
@@ -50,17 +51,11 @@ const ButtonFinish = () => {
                 })
             })
         })
-
-
-        
-        
-        
-
     }
 
 
     return (<>
-            <Modal visible={visible} footer={[]} width={'650px'} centered>
+            <Modal visible={visible} onCancel={()=>setVisible(false)} footer={[]} width={'650px'} centered>
                 <Row justify="center">
                     <Col span={24}>
                         <center><Typography.Title level={3}>
