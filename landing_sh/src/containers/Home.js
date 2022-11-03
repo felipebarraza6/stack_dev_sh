@@ -10,7 +10,7 @@ import Contact from '../components/Contact'
 import Collaborators from '../components/Collaborators'
 import FooterInfo from '../components/FooterInfo'
 import FooterFingerprint from '../components/FooterFingerprint'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Redirect, Route } from 'react-router-dom'
 import ContainerFormDga from '../components/dgaform/ContainerFormDga'
 import ContactForm from '../components/forms/ContactForm'
 import Fingerprint from '../components/fingerprint/Init'
@@ -18,7 +18,7 @@ import ThankYou from '../components/pages/ThankYou'
 import WebinarRetrieve from '../components/webinars/webinarRetrieve'
 import { InstagramOutlined,TwitterOutlined,FacebookOutlined, 
           WhatsAppOutlined, PhoneOutlined, MailOutlined } from '@ant-design/icons'
-import QuotationExternalClients from './QuotationExternalClients'
+import QuotationExternalClients from './Quotation'
 const { Header, Content, Footer } = Layout
 
 const Home = () => {
@@ -67,12 +67,12 @@ const Home = () => {
               <Header style={styles.header1}>
               </Header>
               </Route>
-              <Route path='/dgaform/'>
+              <Route path='/quotations/'>
                 <Row style={{padding:'10px', backgroundColor:'#1890ff'}} justify="start">
-                  <Col span={18}>
+                  <Col span={width > 800 ? 18:24}>
                   <img src={logo_src2} alt='logo' style={styles.logo2} />                 
                   </Col>
-                  <Col span={6}>
+                  <Col span={width > 800 ? 6:24}>
                     <Typography.Title level={4} style={{color:'white', paddingTop:'8%'}}> {event.toLocaleDateString('es-ES', options)} </Typography.Title>
                   </Col>
                 </Row>
@@ -162,10 +162,10 @@ const Home = () => {
                   </Col> 
                 </> 
               </Route>
-              <Route exact path='/dgaform'>                
-                <ContainerFormDga />
+              <Route exact path='/dgaform/new'>                
+                <Redirect to='/quotations/new' />
               </Route>
-              <Route exact path='/dgaform/new' >
+              <Route exact path='/quotations/new' >
                 <QuotationExternalClients />
               </Route>
               <Route exact path='/dgaform/external_client/:id' component={ContainerFormDga} >
