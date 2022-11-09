@@ -117,6 +117,20 @@ services:
             - django
             - nginx_proxy
             - letsencrypt
+    
+    react_demo:
+        build: ./zivo_ui
+        image: ui_zivo
+        expose:
+            - "80"
+        environment:
+            - VIRTUAL_HOST=demo.smarthydro.cl, www.demo.smarthydro.cl
+            - LETSENCRYPT_HOST=demo.smarthydro.cl, www.demo.smarthydro.cl
+            - LETSENCRYPT_EMAIL=demo@smarthydro.cl
+        depends_on:
+            - django
+            - nginx_proxy
+            - letsencrypt
 
 
 
