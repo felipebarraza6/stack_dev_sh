@@ -8,67 +8,58 @@ import polykarpo from '../assets/images/clientes/polykarpo.png'
 import placilla from '../assets/images/placilla.jpeg'
 import cannes from '../assets/images/canner.png'
 
+import im1 from '../assets/images/team/1.jpg'
+import im2 from '../assets/images/team/2.jpg'
+
+import c1 from '../assets/images/clientes/1.png'
+import c2 from '../assets/images/clientes/2.png'
+import c3 from '../assets/images/clientes/3.png'
+import c4 from '../assets/images/clientes/4.png'
+import c5 from '../assets/images/clientes/5.png'
+
 
 const { Title } = Typography
 
 const Collaborators = () => {
 
-    return (<>
-        <Row justify='center' style={{marginTop:'50px'}}>          
-          <Title style={{marginBottom:'20px'}}>Patners</Title>
-        </Row>
-        <Carousel autoplay>
-          <div>
-            <Row justify='space-around'>
-              <Col>
-                <img src={'https://www.ubiobio.cl/mcc/images/logosimbologia.png'} 
-                  width="100" alt='logo_cowork' />
-              </Col>
-              <Col>
-                <img src={logo_corfo} 
-                  width="250" alt='logo_cowork' />
-              </Col>
-              <Col>
-                <img src={logo_cidere} 
-                  width="120" alt='logo_cowork' />
-              </Col>
-              <Col>
-              <img src={'https://veset.cl/wp-content/uploads/2022/01/LOGO-VESET-CON-%C2%AE.png'} 
-                width="200" alt='logo_cowork' />
-            </Col>
-
-          </Row>
-        </div>
+    return (<>        
+        <Carousel autoplay dotPosition='right'>
+              <div>
+                <img src={im1} 
+                  style={{
+                    width:'100%',
+                    height: '500px',
+                    objectFit: 'cover'
+                  }} />
+                  
+              </div>
+              <div>
+                <img src={im2} 
+                  style={{
+                    width:'100%',
+                    height: '500px',
+                    objectFit: 'cover'
+                  }} />
+                  
+              </div>
+                
         </Carousel>
-      <Row style={{marginTop:'50px'}} justify='center'>
+      <Row style={{marginTop:'-100px'}} justify='center'>
+        <Col style={{backgroundColor:'white', paddingLeft:'40px', paddingRight:'40px', borderRadius:'300px 300px 0px 0px', paddingTop:'0px'}}>
         <Title level={1} style={styles.title}>Clientes</Title>
+        </Col>
       </Row>
-      <Carousel autoplay style={{marginBottom:'120px'}}>
-        <div>
-            <Row justify='space-around'>
-            <Col>
-              <img src={diteco} style={styles.ditecologo_cowork} alt='logo_cowork' />
-            </Col>
-            <Col>                
-              <img src={polykarpo} style={styles.ditecologo_cowork} alt='logo_corfo' />
-            </Col>
-            <Col>                
-              <img width="200" src={'https://empresasiansa.cl/wp-content/uploads/2021/02/divisi%C3%B3n-industrial-02-e1613423333912.png'} alt='logo_corfo' />
-            </Col>
-             
-          </Row>
-        </div>
-        <div>
-          <Row justify='space-around'>
-            <Col>                
-              <img src={placilla} width={'150px'} alt='logo_corfo' />
-            </Col>  
-            <Col>                
-              <img src={cannes} width={'300px'} alt='logo_corfo' />
-            </Col>
-          </Row>
-        </div>
-      </Carousel>
+      <Row justify='center'>
+            <Col span={24} style={{paddingTop:'30px'}}><center>
+              <img src={c1} style={{marginRight:'50px'}} width='15%' alt='logo_cowork' />
+              <img src={c2} style={{marginRight:'50px'}} width='15%' alt='logo_cowork' />
+              <img src={c3} style={{marginRight:'50px'}} width='15%' alt='logo_cowork' />
+              <img src={c4} style={{marginRight:'50px'}} width='15%' alt='logo_cowork' />
+              <img src={c5} style={{marginRight:'50px'}} width='15%' alt='logo_cowork' />
+              </center>
+            </Col>            
+            
+      </Row>
     </>)
 
 }

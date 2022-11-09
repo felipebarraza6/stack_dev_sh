@@ -53,7 +53,8 @@ const FormSuscription = ({ closeAffix, is_affix, in_affix }) => {
             setResponse({
                 ...response,                                
                 lg: 6, 
-                xl: 6 
+                xl: 12,
+
             })
         }
     }, [])
@@ -64,15 +65,15 @@ const FormSuscription = ({ closeAffix, is_affix, in_affix }) => {
                         <Col xs={response.xs} sm={response.sm} md={response.md} lg={response.lg} xl={response.xl} style={styles.col}>
                             <Form.Item name='name'
                                 rules={[{ required: true, message: 'Ingresa tu nombre completo' }]} 
-                                style={{color:'white'}} label={<Text style={styles.text}>Nombre completo</Text>}>
-                                <Input placeholder='Escribe tu nombre completo' />
+                                style={{color:'white'}} >
+                                <Input placeholder='Nombre completo' />
                             </Form.Item>
                         </Col>
                         <Col xs={response.xs} sm={response.sm} md={response.md} lg={response.lg} xl={response.xl}style={styles.col}>
                             <Form.Item name='phone' 
                                 rules={[{ required: true, message: 'Ingresa tu telefono'  }]} 
-                                style={{color:'white'}} label={<Text style={styles.text}>Teléfono</Text>} >
-                                <Input placeholder='Escribe tu telefono de contacto' />
+                                style={{color:'white'}}  >
+                                <Input placeholder='Teléfono' />
                             </Form.Item>
                         </Col>
                         <Col xs={response.xs} sm={response.sm} md={response.md} lg={response.lg} xl={response.xl} style={styles.col}>
@@ -86,14 +87,14 @@ const FormSuscription = ({ closeAffix, is_affix, in_affix }) => {
                                         type: 'email',
                                         message: 'Recuerda ingresar tu @'
                                     }]} 
-                                style={{color:'white'}} label={<Text style={styles.text}>Correo</Text>}>
-                                <Input placeholder='Escribe tu correo electronico' />
+                                style={{color:'white'}} >
+                                <Input placeholder='Correo' />
                             </Form.Item>
                         </Col>
                         <Col xs={response.xs} sm={response.sm} md={response.md} lg={response.lg} xl={response.xl} style={styles.col}>
                             <Form.Item name='commune'
                                 rules={[{ required: true, message: 'Selecciona una opción' }]} 
-                                style={{color:'white'}} label={<Text style={styles.text}>Servicio</Text>}>                        
+                                style={{color:'white'}} >                        
                                 <Select placeholder='Selecciona una opcion...'>                                
                                     <Option value='resdga'>Resolución DGA 1.238 MEE</Option>
                                     <Option value='bombeo'>Prueba Bombeo</Option>
@@ -102,38 +103,21 @@ const FormSuscription = ({ closeAffix, is_affix, in_affix }) => {
                                 </Select>
                             </Form.Item>
                         </Col>
-                        <Col span={24}>
+                        <Col span={24} style={styles.col}>
                             <Form.Item name='commune'
                                 rules={[{ required: true, message: 'Selecciona una opción' }]} 
-                                style={{color:'white'}} label={<Text style={styles.text}>Requerimiento</Text>}>                        
-                              <Input.TextArea />
+                                style={{color:'white'}}>                        
+                              <Input.TextArea placeholder='Requerimiento...' />
                             </Form.Item>
-                        </Col>
-                        
-                         
-                        {state.is_select_ocupation && <>         
-                        <Col span={24} style={styles.col}>
-                            <Title level={4} style={styles.text}>COMPLETAR</Title>
-                        </Col>                   
-                        <Col xs={response.xs} sm={response.sm} md={response.md} lg={response.lg} xl={response.xl} style={styles.col} > 
-                            <Form.Item name='enterprise' 
-                                rules={[{ required: true, message: 'Ingresa tu organizacion/empresa' }]} 
-                                style={{color:'white'}} label={<Text style={styles.text}>Organización/Empresa</Text>}>                        
-                                <Input placeholder='Escribe tu organización / empresa' />   
-                            </Form.Item>
-                        </Col>
-                        <Col xs={response.xs} sm={response.sm} md={response.md} lg={response.lg} xl={response.xl} style={styles.col} > 
-                            <Form.Item name='turn'
-                                rules={[{ required: true, message: 'Ingresa tu giro/actividad' }]}  
-                                style={{color:'white'}} label={<Text style={styles.text}>Giro/Actividad</Text>}>                        
-                                <Input placeholder='Escribe tu giro / actividad' />   
-                            </Form.Item>
-                        </Col>
-                        </>}
+                        </Col>                                                                         
                     </Row> 
                     <Row>
+                        <Col>
                         <Button htmlType='submit' style={styles.btn} type='primary'>Enviar</Button>
+                        </Col>
+                        <Col>
                         <Button type='primary' style={styles.btn} onClick={resetForm}>Limpiar</Button>
+                        </Col>
                     </Row>
                 </Form>
 
@@ -148,12 +132,16 @@ const styles = {
     },
     btn: {
         marginRight:'10px',
-        borderRadius: '5px'
+        marginBottom:'10px',
+        borderRadius: '5px',
+        backgroundColor:'#FCE921',
+        borderColor:'#FCE921',
+        color:'black'
     },
     form : {
         color:'white', 
-        paddingLeft:'50px', 
-        paddingRight:'50px',
+        paddingLeft:'0px', 
+        paddingRight:'0px',
         paddingTop:'70px'
     },
     container: {

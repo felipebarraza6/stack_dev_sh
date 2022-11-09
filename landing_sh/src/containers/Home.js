@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import HeaderMenu from '../components/HeaderMenu'
-import { Layout, Col, Row, Typography } from 'antd'
+import { Layout, Col, Row, Typography,
+        Affix, Button } from 'antd'
 import logo_src from '../assets/images/logo.png'
 import logo_src2 from '../assets/images/logo2.png'
+import icono_logo from '../assets/images/icono_logo.png'
 import Sliders from '../components/Sliders'
 import About from '../components/About'
 import Services from '../components/Services'
@@ -14,10 +16,9 @@ import { BrowserRouter, Redirect, Route } from 'react-router-dom'
 import ContainerFormDga from '../components/dgaform/ContainerFormDga'
 import ContactForm from '../components/forms/ContactForm'
 import Fingerprint from '../components/fingerprint/Init'
+import { UserOutlined } from '@ant-design/icons'
 import ThankYou from '../components/pages/ThankYou'
 import WebinarRetrieve from '../components/webinars/webinarRetrieve'
-import { InstagramOutlined,TwitterOutlined,FacebookOutlined, 
-          WhatsAppOutlined, PhoneOutlined, MailOutlined } from '@ant-design/icons'
 import QuotationExternalClients from './Quotation'
 const { Header, Content, Footer } = Layout
 
@@ -34,38 +35,17 @@ const Home = () => {
           }
     }, [])
 
+    const goDataIot = () => {
+      window.open('https://dataiot.smarthydro.cl')
+  }
+
     var event = new Date()
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
-    return(<Layout>
-        <BrowserRouter>              
-              <Route exact path='/'>
-              <Header style={styles.header1}>
-                <Row justify='end'>
-                  <Col><a href='https://www.facebook.com/smarthydrorrss/' target='_blank'>
-                    <FacebookOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                  <Col><a target='_blank' href='https://twitter.com/smarthydrorrss'>
-                    <TwitterOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                  <Col><a target='_blank' href='https://www.instagram.com/smarthydrorrss/'>
-                    <InstagramOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                  <Col><a target='_blank' href='https://web.whatsapp.com/send?phone=56939581688&text=¡Hola!'>
-                    <WhatsAppOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                  <Col><a target='_blank' href='tel:56939581688'>
-                    <PhoneOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                  <Col><a target='_blank' href='mailto:contacto@smarthydro.cl'>
-                    <MailOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                </Row>
-              </Header>
-              </Route>
+    return(<Layout style={styles.layout}>
+        <BrowserRouter>                            
               <Route exact path='/fingerprint/:id'>
-              <Header style={styles.header1}>
-              </Header>
+                <Header style={styles.header1} />                
               </Route>
               <Route path='/quotations/'>
                 <Row style={{padding:'10px', backgroundColor:'#1890ff'}} justify="start">
@@ -77,28 +57,33 @@ const Home = () => {
                   </Col>
                 </Row>
               </Route>
-              <Route exact path='/'>
-              <Header style={styles.header}>            
-                <Row >                
-                  {width > 800 ? <>
-                    <Col span={4}>
-                      <a href='https://smarthydro.cl'>
-                      <img src={logo_src} alt='logo' style={styles.logo} />
-                      </a>
-                    </Col>
-                    <Col span={5}>
-                    </Col>                
-                    <Col span={15}> 
-                      <HeaderMenu is_mobile={is_mobile} />
-                    </Col>                
-                  </>: 
-                    <Col style={styles.colLogoMobil} span={24}>
-                      <a href='https://smarthydro.cl'>
-                      <img src={logo_src} alt='logo' style={styles.logo} />
-                      </a>
-                    </Col>}
-                </Row>
-              </Header>
+              <Route exact path='/'>                
+                <Header style={styles.header} >            
+                  <Row>                
+                    {width > 800 ? <>
+                      <Col span={2} >
+                        <a href='https://smarthydro.cl'>
+                        <img src={icono_logo} alt='logo' style={styles.logo} />
+                        </a>
+                      </Col>          
+                      <Col span={22}> 
+                        <HeaderMenu is_mobile={is_mobile} />
+                      </Col>                
+                    </>:<>
+                      <Col style={styles.colLogoMobil} span={12}>
+                        
+                        <a href='https://smarthydro.cl'>
+                        <img src={icono_logo} alt='logo' style={styles.logo} />
+                        </a>
+                      </Col>
+                      <Col span={12}>
+                      <Button style={styles.btnAction} icon={<UserOutlined style={styles.usericon} />} onClick={goDataIot}>
+                    <b>ACCESO DATAIOT</b>
+                </Button>
+                      </Col>
+                      </>}
+                  </Row>
+                </Header>                
               </Route>
               <Route exact path='/fingerprint/:id'>
               <Header style={styles.header}>            
@@ -111,27 +96,7 @@ const Home = () => {
                     </Col>
                     <Col span={5}>
                     </Col>                
-                    <Col span={15}> 
-                      <Row justify='end'>
-                  <Col><a href='https://www.facebook.com/smarthydrorrss/' target='_blank'>
-                    <FacebookOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                  <Col><a target='_blank' href='https://twitter.com/smarthydrorrss'>
-                    <TwitterOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                  <Col><a target='_blank' href='https://www.instagram.com/smarthydrorrss/'>
-                    <InstagramOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                  <Col><a target='_blank' href='https://web.whatsapp.com/send?phone=56939581688&text=¡Hola!'>
-                    <WhatsAppOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                  <Col><a target='_blank' href='tel:56939581688'>
-                    <PhoneOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                  <Col><a target='_blank' href='mailto:contacto@smarthydro.cl'>
-                    <MailOutlined style={{color:'white', fontSize:'20px', marginRight:'25px' }}/>
-                  </a></Col>
-                </Row>
+                    <Col span={15}>                       
                     </Col>                
                   </>: 
                     <Col style={styles.colLogoMobil} span={24}>
@@ -181,7 +146,7 @@ const Home = () => {
               <Route exact path='/webinars/:id' component ={WebinarRetrieve} />
         </Content>
       <Route exact path='/'>
-        <Footer>
+        <Footer style={{backgroundColor:'#1F3461'}}>
             <FooterInfo />
         </Footer>
       </Route>
@@ -199,13 +164,27 @@ const Home = () => {
 
 
 const styles = {
+  btnAction: {
+    backgroundColor:'#222221',
+    borderRadius:'10px',
+    borderColor:'#222221',
+    color:'white',
+    marginTop:'50px'        
+},
+    layout: {
+      backgroundColor: 'white'
+    },
     marginCol: {
         paddingTop:'20px',
         paddingBottom: '40px'
     },
+
+    usericon: {
+      marginRight:'8px',
+      fontSize:'20px'
+  },
     logo: {
-        width: '250px',
-        marginTop: '-125px'
+        width: '50px',                
     },
     logo2: {
       width: '200px',
@@ -213,14 +192,16 @@ const styles = {
       
     },
     colLogoMobil: {
-        textAlign: 'center',
+      
     },
     title: {
         color:'white', 
         margin: '13px'
     },
     header: {
-        backgroundColor: '#1890ff',
+        backgroundColor: 'white',
+        marginBottom:'40px',        
+        paddingTop:'10px'
     },
     header1: {
         backgroundColor: '#1890ff',
