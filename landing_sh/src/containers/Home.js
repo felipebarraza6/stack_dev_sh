@@ -59,7 +59,7 @@ const Home = () => {
               </Route>
               <Route exact path='/'>                
                 <Header style={styles.header} >            
-                  <Row>                
+                  <Row align='middle'>                
                     {width > 800 ? <>
                       <Col span={2} >
                         <a href='https://smarthydro.cl'>
@@ -169,7 +169,7 @@ const styles = {
     borderRadius:'10px',
     borderColor:'#222221',
     color:'white',
-    marginTop:'50px'        
+    marginTop:'25px'        
 },
     layout: {
       backgroundColor: 'white'
@@ -184,7 +184,7 @@ const styles = {
       fontSize:'20px'
   },
     logo: {
-        width: '50px',                
+        width: window.innerWidth<800?'35px':'50px',                
     },
     logo2: {
       width: '200px',

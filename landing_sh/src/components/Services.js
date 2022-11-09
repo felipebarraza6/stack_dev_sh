@@ -27,7 +27,7 @@ const Services = () => {
     return(<>
         <Row style={styles.row}>
             <Col span={24} style={styles.titleCol}>
-                <Title>Qué puede hacer el <br/> Sofware(IOT) de Smart Hydro</Title>                
+                <Title>Qué puede hacer el <br/> Software(IOT) de Smart Hydro</Title>                
             </Col>
             </Row>  
         <Row justify={'center'} style={{
