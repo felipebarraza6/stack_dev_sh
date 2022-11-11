@@ -168,22 +168,22 @@ const Ssr = () => {
             <Col span={24}>
                     <TitleTy level={2}>Análisis de datos</TitleTy>
                 </Col>            
-            <Col span={12} style={{marginBottom:'10px'}}>
+            <Col span={8} style={{marginBottom:'10px'}}>
                         <img src={kpi1_5} width={'280px'}/>
             </Col>
-            <Col span={12} style={{marginBottom:'10px'}}>
+            <Col span={8} style={{marginBottom:'10px'}}>
                         <img src={kpi1_4} width={'280px'}/>
             </Col>
-            <Col span={12} style={{marginBottom:'10px'}}>
+            <Col span={8} style={{marginBottom:'10px'}}>
                         <img src={kpi1_3} width={'280px'} />
             </Col>
-            <Col span={12} style={{marginBottom:'10px'}}>
+            <Col span={8} style={{marginBottom:'10px'}}>
                         <img src={kpi1_2} width={'280px'}/>
             </Col>
-            <Col span={12} style={{marginBottom:'10px'}}>
+            <Col span={8} style={{marginBottom:'10px'}}>
                         <img src={kpi1_1} width={'280px'}/>
             </Col>
-            <Col span={12} style={{marginBottom:'10px'}}>
+            <Col span={8} style={{marginBottom:'10px'}}>
                         <img src={kpi1_6} width={'280px'} />
             </Col>
         </Row>)

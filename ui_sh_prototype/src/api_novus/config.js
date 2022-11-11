@@ -19,8 +19,8 @@ export const GET = async (endpoint) =>{
     return request
 }
 
-export const GET_NOT_TOKEN = async(token) => {
-  const request = axios.get(BASE_URL, {
+export const GET_NOT_TOKEN = async(token, endpoint) => {
+  const request = axios.get(`${BASE_URL}/${endpoint}`, {
     headers: {
       Authorization: token
     }

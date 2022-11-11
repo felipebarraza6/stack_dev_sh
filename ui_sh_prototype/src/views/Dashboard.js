@@ -41,8 +41,21 @@ const Dashboard = () => {
       const get = async() => {
           const rqHistory = await api_crm.billing_data(selectProfileData).then((r)=>setListHistorial(r.results))
           const rqHistoryAdmin = await api_crm.billing_data_admin().then((r)=>setListHistorialAdmin(r.results))
-          const rqWell = await api_novus.lastData('3grecuc1v')
-          const rqPond = await api_novus.lastData('3grecuc2v')
+          var rqWell = null
+
+          if(selected_sensor.title=='POZO 2'){
+            const rqWell = await api_novus.notToken.lastData('3grecuc1v', '6c1b1ad5-4103-43a3-b594-bf1e998d094c') 
+            setWell(rqWell.data.result[0].value)
+            
+          } else {
+            const rqWell = await api_novus.notToken.lastData('3grecuc1v')
+            setPond(rqWell.data.result[0].value)
+            const rqPond = await api_novus.notToken.lastData('3grecuc2v')
+            setWell(rqPond.data.result[0].value)
+          }                    
+
+
+          
           const rqAcc = await api_novus.lastData("3grecdi1va")          
           var start_datenow = new Date()
           start_datenow.setDate(start_datenow.getDate()-1)
@@ -50,23 +63,15 @@ const Dashboard = () => {
                 `${start_datenow.getFullYear()}-${start_datenow.getMonth()+1}-${start_datenow.getDate()}`,
                 `${start_datenow.getFullYear()}-${start_datenow.getMonth()+1}-${start_datenow.getDate()}`
               )            
-          if(rqPond.data.result.length > 0){
-            if(rqPond.data.result[0].value === 3276.7){
-              setPond(50) 
-            }else {
-              setPond(rqPond.data.result[0].value)
-            }
-          }
-          setWell(rqWell.data.result[0].value)
+          
+            
           setAcc(rqAcc.data.result[0].value)          
           setAcc2(rq1.data.result[0].value)
-          return {
-            rqWell, 
-            rqPond
-          }
+         
       }
     get()
   }, [])
+
 
 
   

@@ -8,7 +8,7 @@ const Home = () => {
 
     return(<Row align='middle' justify='center' style={{
         backgroundImage:`url(${wallpaper})`,
-        minHeight: '720px',    
+        minHeight: '800px',    
         /* Create the parallax 
         scrolling effect */
         backgroundAttachment: 'fixed',

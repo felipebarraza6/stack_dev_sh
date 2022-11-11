@@ -36,9 +36,24 @@ const MiPozo = () => {
   )
 
   const get = async () => {
-    const rqWell = await api_novus.lastData("3grecuc1v")
-    const rqPond = await api_novus.lastData("3grecuc2v")
+    
     const rqAcc = await api_novus.lastData("3grecdi1va")
+    if(selected_sensor.title=='POZO 2'){
+      const rqWell = await api_novus.notToken.lastData("3grecuc1v", '6c1b1ad5-4103-43a3-b594-bf1e998d094c')      
+      if(rqWell.data.result.length > 0){
+        setPond(rqWell.data.result[0].value);
+      }      
+    }else{
+      const rqWell = await api_novus.lastData("3grecuc1v")
+      if(rqWell.data.result.length > 0){
+        setWell(rqWell.data.result[0].value);
+      }
+      const rqPond = await api_novus.lastData("3grecuc2v")
+      if(rqPond.data.result.length > 0){
+        setPond(rqPond.data.result[0].value);
+      }
+    }
+
     if(rqAcc.data.result.length > 0){
       if(selected_sensor=="32ae0a00-7374-46e8-bc5c-e085714748d7"){
         setAcc(rqAcc.data.result[0]/100);
@@ -46,17 +61,8 @@ const MiPozo = () => {
         setAcc(rqAcc.data.result[0].value);
       }
     }
-    if(rqPond.data.result.length > 0){
-      setPond(rqPond.data.result[0].value);
-    }
-    if(rqWell.data.result.length > 0){
-      setWell(rqWell.data.result[0].value);
-    }
-    return {
-      rqWell,
-      rqPond,
-      rqAcc,
-    };
+    
+    
   };
 
   useEffect(() => {

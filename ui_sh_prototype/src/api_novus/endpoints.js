@@ -1,4 +1,4 @@
-import { GET } from './config'
+import { GET, GET_NOT_TOKEN} from './config'
 
 const getData = async(variable, start_date, end_date) =>{
 
@@ -22,10 +22,22 @@ const getLastData = async(variable) => {
     }
 }
 
+const getLastDataNotToken = async(variable, token) => {
+    try {
+        const request = await GET_NOT_TOKEN(token, `?variable=${variable}&query=last_item`)        
+        return request
+    } catch(err) {
+        console.log(err)
+    }
+}
+
 
 const api_novus = {
     data: getData,
-    lastData: getLastData
+    lastData: getLastData,
+    notToken:{
+        lastData: getLastDataNotToken
+    }
 }
 
 

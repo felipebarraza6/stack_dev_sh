@@ -119,8 +119,8 @@ const Foot = () => {
                 </Col>
                 <Col style={{marginTop:'30px'}}>
                     <TitleTy level={3}>Consumo Total</TitleTy>
-                    <TitleTy style={{marginLeft:'20px', marginTop:'-10px'}} level={5}>A.D.P: 33.982 M3</TitleTy>
-                    <TitleTy style={{marginLeft:'20px', marginTop:'-10px'}} level={5}>A.P: 14.00 M3</TitleTy>
+                    <TitleTy style={{marginLeft:'20px', marginTop:'-10px'}} level={5}>Agua de pozo: 33.982 M3</TitleTy>
+                    <TitleTy style={{marginLeft:'20px', marginTop:'-10px'}} level={5}>Agua potable: 14.00 M3</TitleTy>
                     
                 </Col>
             </Row>
@@ -140,10 +140,10 @@ const Foot = () => {
 
             </Col>
             <Col span={6}>
-                <img src={line2} width='78px'  />
+                <img src={line1} width='100px' />
             </Col>
             <Col span={6} >
-                <img src={line1} width='100px' />
+                <img src={line2} width='78px'  />                
             </Col>
             <Col span={6} style={{marginLeft:'-60px'}}>
                 <center><TitleTy level={3}>Huella Mundial</TitleTy>

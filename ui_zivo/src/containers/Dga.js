@@ -13,6 +13,7 @@ import acumulado_img  from '../assets/images/acumulado.png'
 import pozo1  from '../assets/images/pozo1.png'
 import { Area, Line } from '@ant-design/plots'
 import g1 from '../assets/images/g1.png'
+import qr from '../assets/images/qr.png'
 
 
 import kpi1_1 from '../assets/images/kpi1/1.png'
@@ -166,27 +167,71 @@ const Dga = () => {
 
     const Analituc = () => {
         return(<Row>
-            <Col span={24}>
-                    <TitleTy level={2}>Análisis de datos</TitleTy>
+            <Col span={24} style={{marginBottom:'40px'}}>
+                    <TitleTy level={2}>Últimos datos enviados a la DGA {new Date().getDate()} - {new Date().getMonth()} - {new Date().getFullYear() } </TitleTy>
                 </Col>
 
-            <Col span={12} style={{marginBottom:'10px'}}>
-                        <img src={kpi1_1} width={'280px'} />
+            <Col span={12}>
+                <Table pagination={false} bordered columns={[
+                            {title:'Hora', dataIndex:'number'},                        
+                            {title:'Caudal', dataIndex:'name'},
+                            {title:'Nivel', dataIndex: 'email'},
+                            {title:'Acumulado', dataIndex: 'phone'},
+                        ]} dataSource = {[
+                            {
+                                key: '1',
+                                number: '00:00',
+                                name: '2.3',
+                                email: '3',
+                                phone: '1220',
+                            },
+                            {
+                                key: '1',
+                                number: '01:00',
+                                name: '2.1',
+                                email: '3.5',
+                                phone: '1420',
+                            },
+                            {
+                                key: '1',
+                                number: '02:00',
+                                name: '2.2',
+                                email: '4',
+                                phone: '2100',
+                            },
+                            {
+                                key: '1',
+                                number: '03:00',
+                                name: '2.7',
+                                email: '5',
+                                phone: '2450',
+                            },
+                            {
+                                key: '1',
+                                number: '04:00',
+                                name: '2.9',
+                                email: '2',
+                                phone: '2800',
+                            },
+                            {
+                                key: '1',
+                                number: '05:00',
+                                name: '2.1',
+                                email: '6',
+                                phone: '3221',
+                            },
+                            {
+                                key: '1',
+                                number: '065:00',
+                                name: '2.9',
+                                email: '8',
+                                phone: '3611',
+                            },
+                        ]} />
             </Col>
-            <Col span={12} style={{marginBottom:'10px'}}>
-                        <img src={kpi1_2} width={'280px'}/>
-            </Col>
-            <Col span={12} style={{marginBottom:'10px'}}>
-                        <img src={kpi1_3} width={'280px'}/>
-            </Col>
-            <Col span={12} style={{marginBottom:'10px'}}>
-                        <img src={kpi1_4} width={'280px'} />
-            </Col>
-            <Col span={12} style={{marginBottom:'10px'}}>
-                        <img src={kpi1_5} width={'280px'}/>
-            </Col>
-            <Col span={12} style={{marginBottom:'10px'}}>
-                        <img src={kpi1_6} width={'280px'}/>
+            <Col span={12}>
+                <center><img style={{marginTop:'50px'}} src={qr} width={'250px'} /></center>
+                <center><Button onClick={()=>window.open('https://snia.mop.gob.cl/cExtracciones2/#/consultaExtraccionesDia')} style={{marginTop:'20px', backgroundColor:'#1F3461', borderColor:'#1F3461'}} type='primary'>Ir a mi DGA</Button></center>
             </Col>
         </Row>)
     }    
@@ -196,7 +241,7 @@ const Dga = () => {
                     <TitleTy level={2}>Listado de usuarios autorizados</TitleTy>
                 </Col>
                 <Col span={24} style={{marginTop:'10px', marginBottom:'280px'}}>
-                    <Table bordered columns={[
+                    <Table pagination={false} bordered columns={[
                         {title:'#', dataIndex:'number'},                        
                         {title:'Nombre', dataIndex:'name'},
                         {title:'Email', dataIndex: 'email'},
@@ -242,12 +287,9 @@ const Dga = () => {
                             <div style={{textAlign:'center', backgroundColor:'white', marginLeft:'-24px', marginRight:'-24px',  marginBottom:'15px'}}>
                                 <Button onClick={()=>setOption(0)} type='link' style={{color:'#1F3461'}}>Mi Pozo</Button>
                             </div>
-                            <div style={{textAlign:'center', backgroundColor:'white', marginLeft:'-24px', marginRight:'-24px',  marginBottom:'15px'}}>
-                                <Button onClick={()=>setOption(1)} type='link' style={{color:'#1F3461'}}>Gráficos</Button>                                
-                            </div>
                             <div style={{textAlign:'center', backgroundColor:'white', marginLeft:'-24px', marginRight:'-24px',  marginBottom:'15px', }}>
-                                <Button onClick={()=>setOption(2)} type='link' style={{color:'#1F3461'}}>Análisis</Button>                                
-                            </div>
+                                <Button onClick={()=>setOption(2)} type='link' style={{color:'#1F3461'}}>DGA</Button>                                
+                            </div>                                                                                     
                             <div style={{textAlign:'center', backgroundColor:'white', marginLeft:'-24px', marginRight:'-24px',  marginBottom:'220px', }}>
                                 <Button onClick={()=>setOption(3)} type='link' style={{color:'#1F3461'}}>Reportes</Button>                                
                             </div>                                                        
