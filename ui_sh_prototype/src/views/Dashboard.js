@@ -47,10 +47,16 @@ const Dashboard = () => {
             const rqWell = await api_novus.notToken.lastData('3grecuc1v', '6c1b1ad5-4103-43a3-b594-bf1e998d094c') 
             setWell(rqWell.data.result[0].value)
             
-          } else {
-            const rqWell = await api_novus.notToken.lastData('3grecuc1v')
+          } 
+          else if(selected_sensor.title=='POZO 3'){
+            const rqWell = await api_novus.notToken.lastData('3grecuc1v', '321bbb98-4579-4c63-b93f-ecad987b2abf') 
+            setWell(rqWell.data.result[0].value)
+            
+          }
+          else {
+            const rqWell = await api_novus.lastData('3grecuc1v')
             setPond(rqWell.data.result[0].value)
-            const rqPond = await api_novus.notToken.lastData('3grecuc2v')
+            const rqPond = await api_novus.lastData('3grecuc2v')
             setWell(rqPond.data.result[0].value)
           }                    
 
