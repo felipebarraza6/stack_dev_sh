@@ -55,20 +55,26 @@ const Dashboard = () => {
           }
           else {
             const rqWell = await api_novus.lastData('3grecuc1v')
-            setPond(rqWell.data.result[0].value)
+            if(rqWell.data.result.length > 0){
+              setPond(rqWell.data.result[0].value)
+            }            
             const rqPond = await api_novus.lastData('3grecuc2v')
-            setWell(rqPond.data.result[0].value)
+            if(rqPond.data.result.length > 0){
+              setWell(rqPond.data.result[0].value)
+            }            
           }                    
 
 
           
-          const rqAcc = await api_novus.lastData("3grecdi1va")          
+          const rqAcc = await api_novus.lastData("3grecdi1va")      
+          
+          console.log(rqAcc)    
           var start_datenow = new Date()
           start_datenow.setDate(start_datenow.getDate()-1)
-              const rq1 = await api_novus.data('3grecdi1va', 
-                `${start_datenow.getFullYear()}-${start_datenow.getMonth()+1}-${start_datenow.getDate()}`,
-                `${start_datenow.getFullYear()}-${start_datenow.getMonth()+1}-${start_datenow.getDate()}`
-              )            
+          const rq1 = await api_novus.lastData('3grecdi1va', 
+            `${start_datenow.getFullYear()}-${start_datenow.getMonth()+1}-${start_datenow.getDate()}`,
+            `${start_datenow.getFullYear()}-${start_datenow.getMonth()+1}-${start_datenow.getDate()}`
+          )            
           
             
           setAcc(rqAcc.data.result[0].value)          
@@ -122,7 +128,7 @@ const Dashboard = () => {
                     <div className="numbers">
                       <p className="card-category">Caudal (lt/s)</p>
                       {user.username==='gcastro' ?<> 
-                        <CardTitle tag="h3">{Math.round(((((acc-acc2)/1000)/5)*1000)/1440)}.0</CardTitle>                        
+                        <CardTitle tag="h3">{Math.round(((((acc)/1000)/5)*1000)/1440)}.0</CardTitle>                        
                         </>:<>
                           {user.username==='pozos_iansa' ? 
                             <CardTitle tag="h3">{pond}</CardTitle>:
@@ -147,9 +153,9 @@ const Dashboard = () => {
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Nivel freático (mcH2O)</p>
+                      <p className="card-category">Nivel freático (mcH2O)</p>                      
                       {user.username==='gcastro'  ? 
-                      <CardTitle tag="h3"> {well} </CardTitle>:
+                      <CardTitle tag="h3"> {pond} </CardTitle>:
                         <>
                           {user.username=='pozos_iansa'  ? 
                             <CardTitle tag="h3"> {well} </CardTitle>: 

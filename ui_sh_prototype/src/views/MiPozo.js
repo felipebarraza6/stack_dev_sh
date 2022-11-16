@@ -208,7 +208,7 @@ const MiPozo = () => {
                           status="processing"
                           text={data_user.username==='gcastro'?
                             <>
-                            {Math.round(((((acc-acc2)/1000)/5)*1000)/1440)}.0 <b>Ltrs</b>
+                            {Math.round(((((acc)/1000)/5)*1000)/1440)}.0 <b>Ltrs</b>
                             </>:
                             <>
                             {well} <b>Ltrs</b>
