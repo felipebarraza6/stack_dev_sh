@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import  api from '../../api/endpoints'
 import { Table, Button, Modal, 
           Tooltip, Card, Descriptions,
-          Row, Col } from 'antd'
+          Row, Col, Tag } from 'antd'
 import { SendOutlined, CloudDownloadOutlined, EyeFilled } from '@ant-design/icons'
 
 const Home = () => {
@@ -46,14 +46,28 @@ const Home = () => {
         content: <Row>
           {wells.map((x)=> {
             return(<Col span={12}><Card title={x.name}>
-                <Descriptions bordered>
-                  <Descriptions.Item span={3} label='Caudal otorgado (Lt/SEG)'>{x.granted_flow}</Descriptions.Item>
-                  <Descriptions.Item span={3} label='Profundida total del pozo (Mt)'>{x.well_depth}</Descriptions.Item>
-                  <Descriptions.Item span={3} label='Nivel estático (Mt)'>{x.static_level}</Descriptions.Item>
-                  <Descriptions.Item span={3} label='Nivel dinámico (Mt)'>{x.dynamic_level}</Descriptions.Item>
-                  <Descriptions.Item span={3} label='Profundida instalación bomba (Mt)'>{x.pump_installation_depth}</Descriptions.Item>
-                  <Descriptions.Item span={3} label='Diámetro interior pozo (MM/PULG)'>{x.inside_diameter_well}</Descriptions.Item>
-                  <Descriptions.Item span={3} label='Diámetro exterior ducto salida bomba (MM/PULG)'>{x.duct_outside_diameter}</Descriptions.Item>
+                <Descriptions bordered title={x.exact_address}>
+                  <Descriptions.Item span={3} label={<>Caudal otorgado <Tag color='geekblue'>(Lt/SEG)</Tag></>}>
+                    {parseFloat(x.granted_flow).toFixed(2)}
+                  </Descriptions.Item>
+                  <Descriptions.Item span={3} label={<>Profundida total del pozo <Tag color='geekblue'>(Mt)</Tag></>}>
+                    {parseFloat(x.well_depth).toFixed(2)}
+                  </Descriptions.Item>
+                  <Descriptions.Item span={3} label={<>Nivel estático <Tag color='geekblue'>(Mt)</Tag></>}>
+                    {parseFloat(x.static_level).toFixed(2)}
+                  </Descriptions.Item>
+                  <Descriptions.Item span={3} label={<>Nivel dinámico <Tag color='geekblue'>(Mt)</Tag></>}>
+                    {parseFloat(x.dynamic_level).toFixed(2)}
+                  </Descriptions.Item>
+                  <Descriptions.Item span={3} label={<>Profundida instalación bomba <Tag color='geekblue'>(Mt)</Tag></>}>
+                    {parseFloat(x.pump_installation_depth).toFixed(2)}
+                  </Descriptions.Item>
+                  <Descriptions.Item span={3} label={<>Diámetro interior pozo <Tag color='geekblue'>(MM/PULG)</Tag></>}>
+                    {parseFloat(x.inside_diameter_well).toFixed(2)}
+                  </Descriptions.Item>
+                  <Descriptions.Item span={3} label={<>Diámetro exterior ducto salida bomba <Tag color='geekblue'>(MM/PULG)</Tag></>}>
+                    {parseFloat(x.duct_outside_diameter).toFixed(2)}
+                  </Descriptions.Item>
                 </Descriptions>
               </Card></Col>)
           })}
