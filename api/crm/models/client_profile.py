@@ -32,6 +32,13 @@ class ProfileClient(ModelApi):
     def __str__(self):
         return str(('{} - {}').format(self.title, self.user))
 
+class VariableClient(ModelApi):
+    profile = models.ForeignKey(ProfileClient, related_name='variable_profile', on_delete=models.CASCADE)
+    str_variable = models.CharField(max_length=400)
+    type_variable = models.CharField(max_length=1200)
+
+    def __str__(self):
+        return str(self.profile)
 
 class RegisterPersons(ModelApi):
     profile = models.ForeignKey(ProfileClient, blank=True, null=True, on_delete=models.CASCADE) 
