@@ -18,7 +18,7 @@ const Indicators = () => {
 
     useEffect(()=> {
         getNovusData1(state, setInd1, setInd2, api_novus, setLoad)
-    }, [])
+    }, [state.selected_profile])
 
 
     return(<Row justify='center' style={{padding:'20px'}}>
@@ -48,7 +48,7 @@ const Indicators = () => {
                     value={ind2[0] ? ind2[0].mt:0}
                     valueStyle={{ color: 'rgb(31, 52, 97)' }}
                     prefix={<img src={nivel_img} width={'70%'} />}
-                    suffix="(mt)"
+                    suffix="(m)"
                 />
  
                   <div style={{float:'right'}}>{ind1[0] ? ind1[0].date:0}</div>

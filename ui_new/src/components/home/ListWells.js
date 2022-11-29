@@ -1,4 +1,3 @@
-
 import React, { useContext } from 'react'
 import { Button } from 'antd'
 import { AppContext } from '../../App'
@@ -10,7 +9,7 @@ const ListWells = () => {
 
     return(<div style={{padding:'10px'}}>
         {state.profile_client && <>
-            {state.profile_client.map((x)=><Link to='/'><Button 
+            {state.profile_client.map((x)=><Button 
                 onClick={()=>{
                     dispatch({
                         type:'CHANGE_SELECTED_PROFILE',
@@ -25,7 +24,7 @@ const ListWells = () => {
                     backgroundColor: x.id == state.selected_profile.id ? 'white':'#1F3461', 
                     fontSize: x.id == state.selected_profile.id ? '15px':'', 
                     borderColor: '#1F3461', 
-                    borderRadius:'5px'}}>{x.title}</Button></Link>)}
+                    borderRadius:'5px'}}>{x.title}</Button>)}
         </>}
     </div>)
 

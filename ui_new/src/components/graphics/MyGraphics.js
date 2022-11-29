@@ -22,15 +22,17 @@ const MyGraphics = () => {
       xField: 'date',
       yField: 'm3/hora'  
     }
+
     const config2 = {
       data: data2,        
       xField: 'date',
       yField: 'm3/dia',
     }
+
     const config3 = {
       data: data3,        
       xField: 'date',
-      yField: 'mt/dia',
+      yField: 'm/dia',
     }
 
     const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -45,7 +47,7 @@ const MyGraphics = () => {
           setData3,
           setLoad, 
         option)
-      }, [option])
+      }, [option, state.selected_profile])
 
 
     return(<Row justify={'end'} align='middle' style={{paddingTop:'20px'}}>
@@ -63,7 +65,7 @@ const MyGraphics = () => {
             </Button>
             <Button onClick={()=>setOption(2)} style={{margin:'5px', backgroundColor: option == 2 ?'white':'#1F3461', borderRadius:'10px', 
                             color:option == 2 ?'#1F3461':'white', borderColor:'#1F3461'}}>
-                Nivel freático(mt) - mensual
+                Nivel freático(m) - mensual
             </Button>
         </Col>
         <Col span={24} style={{paddingTop:'40px'}}>

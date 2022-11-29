@@ -1,4 +1,4 @@
-import { POST_LOGIN, GET  } from "./config"
+import { POST_LOGIN, GET, DOWNLOAD_FILE  } from "./config"
 
 const login = async(data) =>{
     
@@ -26,11 +26,17 @@ const get_profile = async() => {
     return rq.data
 }
 
+const download = async(profile_id) => {
+  const rq = await DOWNLOAD_FILE(`interaction_detail/?profile_client=${profile_id}/`, 'reporte')
+  return rq
+}
+
 const sh = {
     authenticated: login,
     billing_data: get_history_data,
     billing_data_admin: get_history_data_admin,
     get_profile: get_profile,
+    downloadFile: download 
 }
 
 export default sh

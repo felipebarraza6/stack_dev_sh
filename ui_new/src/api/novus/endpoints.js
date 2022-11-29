@@ -90,7 +90,7 @@ const getMonthLevel = async(variable,token) => {
 
         listData.push({
             date: `${i+1}`,
-            'mt/dia': request.data.result[0] ? 
+            'm/dia': request.data.result[0] ? 
                     request.data.result[0].value > 0  && request.data.result[0].value > 50 ? 50.0 :
                 request.data.result[0].value
                 : 0.0
