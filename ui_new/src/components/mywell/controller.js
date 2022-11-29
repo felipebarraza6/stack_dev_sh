@@ -1,5 +1,7 @@
-export async function getNovusData(setCaudal, setNivel, state, api_novus, setAcumulado){
-    const rqCaudal = await api_novus.lastData(state.selected_profile.title=='POZO 2' ?'3grecuc2v':'3grecuc1v', state.selected_profile.token_service).then((x)=>{
+export async function getNovusData(setCaudal, setNivel, state, api_novus, setAcumulado, acumulado, nivel){
+    const rqCaudal = await api_novus.lastData(state.selected_profile.title=='POZO 2' ?'3grecuc2v': 
+      state.selected_profile.title=='Las Pircas' ? '3grecuc2v':
+      '3grecuc1v', state.selected_profile.token_service).then((x)=>{
         if(x.data.result[0].value > 0){
             setCaudal(x.data.result[0].value)
         } else{
@@ -7,11 +9,11 @@ export async function getNovusData(setCaudal, setNivel, state, api_novus, setAcu
         }
         
     }).catch((e)=>{
-        setCaudal(0.0)  
+            setCaudal(0.0)
     })    
     const rqNivel = await api_novus.lastData(
         state.selected_profile.title=='POZO 3' || state.selected_profile.title=='POZO 2'  ? 
-            '3grecuc1v':'3grecuc2v', 
+            '3grecuc1v': state.selected_profile.title=='Las Pircas' ? '3grecuc1v':'3grecuc2v', 
         state.selected_profile.title=='POZO 3'? 
             '321bbb98-4579-4c63-b93f-ecad987b2abf':
             state.selected_profile.title=='POZO 2'? 

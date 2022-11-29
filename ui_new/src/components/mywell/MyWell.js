@@ -24,7 +24,7 @@ const MyWell = () => {
     
 
     useEffect(()=> {
-        getNovusData(setCaudal, setNivel, state, api_novus, setAcumulado)
+        getNovusData(setCaudal, setNivel, state, api_novus, setAcumulado, acumulado, nivel)
 
     }, [state.selected_profile])
 
@@ -37,7 +37,13 @@ const MyWell = () => {
                         <Row align='middle'>
                             <Col span={7}><img src={caudal_img} width='60px'  /></Col>
                             <Col span={12}><Title level={5} style={{color:'#222221'}}>Caudal</Title></Col>
-                            <Col span={12} offset={7} style={{marginTop:'-15px'}}><Typography.Paragraph level={5}><b>{parseFloat(caudal).toFixed(1)} (Litros/seg)</b></Typography.Paragraph></Col>
+                            <Col span={12} offset={7} style={{marginTop:'-15px'}}>
+                              <Typography.Paragraph level={5}>
+                                {state.selected_profile.title == 'Las Pircas' ?  
+                                <b>{parseFloat(((acumulado/60)/nivel)/1000).toFixed(1)} (Litros/seg)</b>:
+                                <b>{parseFloat(caudal).toFixed(1)} (Litros/seg)</b>}
+                              </Typography.Paragraph>
+                            </Col>
                         </Row>                                    
                     </Card>
                     <Card hoverable style={{marginBottom:'10px', marginTop:'20px', border:'solid 1px grey', borderRadius:'15px', width:'350px'}}>
@@ -63,7 +69,11 @@ const MyWell = () => {
                            <center>
                                <img src={pozo1} width={'430px'} style={{position:'absolute', marginLeft:'-240px', marginTop:'-80px'}} />                                        
                            </center>
-                               <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'110px', marginTop:'30px', marginLeft:'140px', position:'absolute', borderRadius:'10px'}} value={`${parseFloat(caudal).toFixed(1)} (lts/s)`} />
+                               <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'150px', marginTop:'30px', marginLeft:'140px', position:'absolute', borderRadius:'10px'}} 
+                                value={state.selected_profile.title == 'Las Pircas' ?  
+                                `${parseFloat(((acumulado/60)/nivel)/1000).toFixed(1)} (Litros/seg)`:
+                                `${parseFloat(caudal).toFixed(1)} (Litros/seg)`} />
+
                                <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'160px', marginTop:'5px', marginLeft:'380px', position:'absolute', borderRadius:'10px'}} value={`${numberForMiles.format(acumulado)} (m³)`}  />
                                <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'110px', marginTop:'260px', marginLeft:'340px', position:'absolute', borderRadius:'10px'}} value={`${parseFloat(nivel).toFixed(1)} (m)`}  />                               
                        </Col>
