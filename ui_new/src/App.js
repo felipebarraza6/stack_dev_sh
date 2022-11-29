@@ -1,18 +1,9 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import './App.css'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-
 import { appReducer } from './reducers/appReducer'
 import sh from './api/sh/endpoints'
-
-
-
 import Login from './containers/Login'
 import Home from './containers/Home'
-import Dga from './containers/Dga'
-import Ssr from './containers/Ssr'
-import Foot from './containers/Foot'
-
 export const AppContext = createContext()
 
 

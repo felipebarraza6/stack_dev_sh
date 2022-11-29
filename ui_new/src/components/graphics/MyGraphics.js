@@ -18,35 +18,34 @@ const MyGraphics = () => {
     const {state} = useContext(AppContext)
 
     const config1 = {
-        data:  data1,        
-        xField: 'date',
-        yField: 'm3'  
-      }
+      data:  data1,        
+      xField: 'date',
+      yField: 'm3/hora'  
+    }
     const config2 = {
-        data: data2,        
-        xField: 'date',
-        yField: 'm3',
-        meta: {
-            range: [60000]
-        },            
-      }
+      data: data2,        
+      xField: 'date',
+      yField: 'm3/dia',
+    }
     const config3 = {
-        data: data3,        
-        xField: 'date',
-        yField: 'mt',
-        meta: {
-            range: [60000]
-        },            
-      }
+      data: data3,        
+      xField: 'date',
+      yField: 'mt/dia',
+    }
 
-      
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
-      useEffect(()=> {
-        getNovusData1(state, api_novus, setData1, setData2, setData3,setLoad, option)
-        
-
+    useEffect(()=> {
+        getNovusData1(
+          state, 
+          api_novus, 
+          setData1, 
+          setData2, 
+          setData3,
+          setLoad, 
+        option)
       }, [option])
-
 
 
     return(<Row justify={'end'} align='middle' style={{paddingTop:'20px'}}>
@@ -73,9 +72,24 @@ const MyGraphics = () => {
                 <Skeleton active round={true} style={{paddingLeft:'20px', paddingRight:'20px'}} />
                 <Skeleton active round={true} style={{paddingLeft:'20px', paddingRight:'20px'}} />
             </>:<>
-                {option==0 && <Line {...config1} />}
-                {option==1 && <Area {...config2} />}
-                {option==2 && <Line {...config3} />}
+                {option==0 && <>
+                  <Typography.Paragraph style={{marginLeft:'20px'}}>
+                    Volumen acumulado últimas 24 horas(01:00 a 24:00 hrs) en metro cúbicos.
+                  </Typography.Paragraph>
+                  <Line {...config1} />
+                </>}
+                {option==1 && <>
+                  <Typography.Paragraph style={{marginLeft:'20px'}}>
+                    Volumen acumulado desde el 01 al {new Date().getDate()-1} de {monthNames[new Date().getMonth()]} en metro cúbicos.
+                  </Typography.Paragraph>
+                  <Line {...config2} />
+                </>}
+                {option==2 && <>
+                  <Typography.Paragraph style={{marginLeft:'20px'}}>
+                    Promedio nivel desde el 01 al {new Date().getDate()-1} de {monthNames[new Date().getMonth()]} en metros.
+                  </Typography.Paragraph>
+                  <Area {...config3} />
+                </>}
             </>}                                    
         </Col>
     </Row>)

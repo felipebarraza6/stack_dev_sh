@@ -4,7 +4,6 @@ FROM python:3
 RUN mkdir /code
 # Set working dir.
 WORKDIR /code
-
 # Add python requirements file.
 ADD requirements.txt /code/
 

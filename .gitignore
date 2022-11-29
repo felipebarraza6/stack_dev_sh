@@ -2,6 +2,6 @@ ui_crm/node_modules/
 landing_sh/node_modules/
 zivo_ui/node_modules/
 ui_sh_prototype/node_modules/
-ui_prototype/
+ui_prototype/node_modules/
 *.pyc 
 
