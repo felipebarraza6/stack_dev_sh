@@ -48,7 +48,7 @@ const MyGraphics = () => {
       },
       xAxis: {
         title: {
-          text: 'HORAS',
+          text: 'HORA',
           style: {
             fontSize: 13,
           },
@@ -93,7 +93,7 @@ const MyGraphics = () => {
       },
       xAxis: {
         title: {
-          text: 'DIAS DEL MES',
+          text: 'DIA DEL MES',
           style: {
             fontSize: 13,
           },
@@ -138,7 +138,7 @@ const MyGraphics = () => {
       },
       xAxis: {
         title: {
-          text: 'DIAS DEL MES',
+          text: 'DIA DEL MES',
           style: {
             fontSize: 13,
           },
@@ -172,24 +172,23 @@ const MyGraphics = () => {
             <Title level={2}>Gráficos</Title>
         </Col>
         <Col span={18} style={{float:'right'}}>
-            <Button onClick={()=>setOption(0)} style={{margin:'5px', backgroundColor: option == 0 ?'white':'#1F3461', borderRadius:'10px', 
+            <Button disabled={load} onClick={()=>setOption(0)} style={{margin:'5px', backgroundColor: option == 0 ?'white':'#1F3461', borderRadius:'10px', 
                             color:option == 0 ?'#1F3461':'white', borderColor:'#1F3461'}}>
                 Acumulado(m³) - 24 horas
             </Button>
-            <Button onClick={()=>setOption(1)} style={{margin:'5px', backgroundColor: option == 1 ?'white':'#1F3461', borderRadius:'10px', 
+            <Button disabled={load} onClick={()=>setOption(1)} style={{margin:'5px', backgroundColor: option == 1 ?'white':'#1F3461', borderRadius:'10px', 
                             color:option == 1 ?'#1F3461':'white', borderColor:'#1F3461'}}>
                 Acumulado(m³) - mensual
             </Button>
-            <Button onClick={()=>setOption(2)} style={{margin:'5px', backgroundColor: option == 2 ?'white':'#1F3461', borderRadius:'10px', 
+            <Button disabled={load} onClick={()=>setOption(2)} style={{margin:'5px', backgroundColor: option == 2 ?'white':'#1F3461', borderRadius:'10px', 
                             color:option == 2 ?'#1F3461':'white', borderColor:'#1F3461'}}>
                 Nivel freático(m) - mensual
             </Button>
         </Col>
         <Col span={24} style={{paddingTop:'40px'}}>
             {load ? <>
-                <Skeleton active round={true} style={{paddingLeft:'20px', paddingRight:'20px'}} />
-                <Skeleton active round={true} style={{paddingLeft:'20px', paddingRight:'20px'}} />
-                <Skeleton active round={true} style={{paddingLeft:'20px', paddingRight:'20px'}} />
+                <Skeleton active round={true} style={{paddingLeft:'20px', paddingRight:'20px'}} paragraph={{rows:12}} />
+
             </>:<>
                 {option==0 && <>
                   <Typography.Paragraph style={{marginLeft:'20px'}}>

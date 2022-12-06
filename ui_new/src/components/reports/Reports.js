@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { Row, Col, Typography, 
       Table, Button } from 'antd'
 import { AppContext } from '../../App'
 
-import { CloudDownloadOutlined } from '@ant-design/icons'
+import { CloudDownloadOutlined, LoadingOutlined } from '@ant-design/icons'
 import sh from '../../api/sh/endpoints'
 
 const { Title } = Typography
@@ -12,6 +12,7 @@ const { Title } = Typography
 const Reports = () => {
 
     const { state } = useContext(AppContext)
+    const [selectDownload, setSelectDownload] = useState(null)
     
 
     return(<Row style={{padding:'20px'}}>
@@ -19,12 +20,17 @@ const Reports = () => {
                 <Title level={2}>Listado de usuarios autorizados</Title>
             </Col>
             <Col span={24}>
-      {state.profile_client.map((x)=> {
+      {state.profile_client.map((x, index)=> {
                 return(<Button 
                   onClick={async()=> {
-                    const rq = await sh.downloadFile(x.id)
+
+                    setSelectDownload(index)
+                    const rq = await sh.downloadFile(x.id, x.title).then((x)=>{
+                      setSelectDownload(null)
+                    }).catch((x)=> setSelectDownload(null))
                   }}
-                  type='primary' style={{margin:'10px', backgroundColor:'#CBCE07', borderColor:'#CBCE07', color:'black', borderRadius:'10px'}} icon={<CloudDownloadOutlined />} >{x.title}</Button>)
+                  type='primary' style={{margin:'10px', backgroundColor:'#CBCE07', borderColor:'#CBCE07', color:'black', borderRadius:'10px'}} 
+                    icon={selectDownload == index ? <LoadingOutlined/>:<CloudDownloadOutlined />} >{x.title}</Button>)
               })}
             </Col>
             <Col span={24} style={{marginTop:'10px', marginBottom:'0px', }}>

@@ -35,12 +35,20 @@ const SiderLeft = () => {
               <p style={{color:'white', marginBottom:'-1px', border:'1px solid white', textAlign:'center'}}>{x.date.slice(0,2)}:00 - {x['m3/hora']} m³/h</p>
             }
             {state.type_graph === 'm3m' && 
-              <p style={{color:'white', marginBottom:'-1px', border:'1px solid white', textAlign:'center'}}>{x.date}: {x['m3/dia']} m³/d</p>
+              <p style={{color:'white', marginBottom:'-1px', border:'1px solid white', textAlign:'center'}}>Día {x.date}: {x['m3/dia']} m³/d</p>
             }
              {state.type_graph === 'niv' && 
               <p style={{color:'white', marginBottom:'-1px', border:'1px solid white', textAlign:'center'}}>Día {x.date}: {x['m/dia']} m/d</p>
             }
             </div>)}
+            {state.type_graph === 'm3' && 
+              <p style={{color:'#222221', backgroundColor:'white', marginBottom:'-1px', border:'1px solid white', textAlign:'center'}}>TOTAL - {state.list_default.reduce((acc, x)=> acc+x['m3/hora'],0)} m³/d</p>
+            }
+            {state.type_graph === 'm3m' && 
+              <p style={{color:'#222221', backgroundColor:'white', marginBottom:'-1px', border:'1px solid white', textAlign:'center'}}>TOTAL - {state.list_default.reduce((acc, x)=> acc+x['m3/dia'],0)} m³/m</p>
+            }
+
+
 
         </>:<>
         <Title align='center' style={{color:'white'}} level={3}> {state.selected_profile.title} </Title>

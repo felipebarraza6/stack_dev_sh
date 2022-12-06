@@ -1,12 +1,22 @@
 import axios from 'axios'
 
+import { notification } from 'antd'
+import { CloudDownloadOutlined } from '@ant-design/icons'
 const BASE_URL = 'https://api.smarthydro.cl/api/'
 //const BASE_URL = 'http://localhost:8000/api/'
+
+const token = JSON.parse(localStorage.getItem('token') || null)
 
 export const Axios = axios.create({
     baseURL: BASE_URL,
 })
 
+const download = {
+    responseType: 'blob',
+    headers: {        
+        Authorization: `Token ${token}`
+    }
+}
 
 
 export const POST_LOGIN = async (endpoint, data) =>{
@@ -26,28 +36,26 @@ export const GET = async (endpoint) => {
     const request = await Axios.get(endpoint, options)
     return request
 }
-export const DOWNLOAD_FILE = async(endpoint, name_file) => {
-    const token = JSON.parse(localStorage.getItem('token'))
-    const options = {
-        responseType: 'blob',
-        headers: {
-            Authorization: `Token ${token}`
-        }
-    }
-    axios({
-      url: `https://api.smarthydro.cl/api/${endpoint}`,
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-      method: 'GET',
-      responseType: 'blob', // important
-    }).then((response) => {
-      console.log('response', response)
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'file.pdf');
-      document.body.appendChild(link);
-      link.click();
-    }).catch((x)=>console.log(x))
+
+export const DOWNLOAD = async(endpoint, name_file) => {
+    const request = await Axios.get(endpoint, download).then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]))
+        const link = document.createElement('a')
+        link.href = url
+        link.setAttribute('download', name_file)
+        document.body.appendChild(link)
+        link.click()
+    })
+    
+    notification.open({
+        message: `${name_file}`,
+        description: `Archivo descargado exitosamente!`,
+        placement: 'topRight',
+        icon: <CloudDownloadOutlined style={{color:'#69802A'}} />
+
+    })
+
+    return request
 }
+
+
