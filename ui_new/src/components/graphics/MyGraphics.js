@@ -15,24 +15,107 @@ const MyGraphics = () => {
     const [data2, setData2] = useState([])
     const [data3, setData3] = useState([])
 
-    const {state} = useContext(AppContext)
+    const {state, dispatch} = useContext(AppContext)
 
     const config1 = {
       data:  data1,        
       xField: 'date',
-      yField: 'm3/hora'  
+      yField: 'm3/hora',  
+      point: {
+        size: 5,
+        shape: 'diamond',
+        style: {
+          fill: 'white',
+          stroke: '#5B8FF9',
+          lineWidth: 2,
+        },
+      },
+      label: {},
+      tooltip: {
+        showMarkers: false,
+      },
+      state: {
+        active: {
+          style: {
+            shadowBlur: 4,
+            stroke: '#000',
+            fill: 'red',
+          },
+        },
+      },
+      interactions: [
+        {
+          type: 'marker-active',
+        },
+      ],
     }
 
     const config2 = {
       data: data2,        
       xField: 'date',
       yField: 'm3/dia',
+      point: {
+        size: 5,
+        shape: 'diamond',
+        style: {
+          fill: 'white',
+          stroke: '#5B8FF9',
+          lineWidth: 2,
+        },
+      },
+      label: {},
+      tooltip: {
+        showMarkers: false,
+      },
+      state: {
+        active: {
+          style: {
+            shadowBlur: 4,
+            stroke: '#000',
+            fill: 'red',
+          },
+        },
+      },
+      interactions: [
+        {
+          type: 'marker-active',
+        },
+      ],
+
     }
 
     const config3 = {
       data: data3,        
       xField: 'date',
       yField: 'm/dia',
+      point: {
+        size: 5,
+        shape: 'diamond',
+        style: {
+          fill: 'white',
+          stroke: '#5B8FF9',
+          lineWidth: 2,
+        },
+      },
+      label: {},
+      tooltip: {
+        showMarkers: false,
+      },
+      state: {
+        active: {
+          style: {
+            shadowBlur: 4,
+            stroke: '#000',
+            fill: 'red',
+          },
+        },
+      },
+      interactions: [
+        {
+          type: 'marker-active',
+        },
+      ],
+
     }
 
     const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -46,7 +129,7 @@ const MyGraphics = () => {
           setData2, 
           setData3,
           setLoad, 
-        option)
+        option, dispatch)
       }, [option, state.selected_profile])
 
 

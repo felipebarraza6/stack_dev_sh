@@ -38,6 +38,13 @@ export const appReducer = (state, action) => {
                 }
         
         
+        case 'DEFAULT_LIST':
+          console.log(action)
+          return {
+            ...state,
+            type_graph: action.payload.type_graph,
+            list_default: action.payload.list
+          }
 
         case 'LOGOUT':
             localStorage.clear()

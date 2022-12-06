@@ -1,4 +1,4 @@
-export async function getNovusData1( state, api_novus, setData1, setData2, setData3, setLoad, option){
+export async function getNovusData1( state, api_novus, setData1, setData2, setData3, setLoad, option, dispatch){
     
     setLoad(true)
     if(option===0){    
@@ -11,6 +11,8 @@ export async function getNovusData1( state, api_novus, setData1, setData2, setDa
               }
             }
             setData1(listSustraction)                                    
+            dispatch({type:'DEFAULT_LIST', payload:{list:listSustraction, type_graph: 'm3'}})
+            console.log(state)
             setLoad(false)
         }).catch((e)=>{            
             setLoad(false)
@@ -19,16 +21,16 @@ export async function getNovusData1( state, api_novus, setData1, setData2, setDa
     else if(option===1){
         const rqGetDataMonth = await api_novus.getMontData('3grecdi1va', state.selected_profile.token_service).then((x)=>{
             var listSustraction = []
+          console.log(x)
             for(var i=0; i < x.length; i++){
                 if(i>0){
                   listSustraction.push({date: `${x[i].date}` , 
-                  'm3/dia': x[i-1].m3 < x[i].m3 ? 
-                    x[i].m3 - x[i-1].m3 : 
-                    (x[i-1].m3+x[i].m3) - x[i-1].m3
+                  'm3/dia': parseInt((x[i].m3 - x[i-1].m3)/state.selected_profile.scale)   
                 })
 
             }}
             setData2(listSustraction)
+            dispatch({type:'DEFAULT_LIST', payload:{list:listSustraction, type_graph: 'm3m'}})
             setLoad(false)
         }).catch((e)=>{            
             console.log(e)
@@ -48,6 +50,7 @@ export async function getNovusData1( state, api_novus, setData1, setData2, setDa
             ).then((x)=>{
                 x.pop()
                 setData3(x)               
+                dispatch({type:'DEFAULT_LIST', payload:{list:x, type_graph: 'niv'}})
                 setLoad(false)
         }).catch((e)=>{
             setLoad(false)  

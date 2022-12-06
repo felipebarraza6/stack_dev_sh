@@ -14,7 +14,9 @@ function App() {
     token: null,
     user: null,
     profile_client: null,
-    selected_profile: null
+    selected_profile: null,
+    list_default: [],
+    type_graph: ''
   }
 
   const [state, dispatch] = useReducer(appReducer, initialState)
