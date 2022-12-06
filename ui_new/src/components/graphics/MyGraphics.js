@@ -19,126 +19,137 @@ const MyGraphics = () => {
 
     const config1 = {
       data:  data1,        
+      color: 'rgb(57,104,169, 0.4)',
       meta: {
         'm3/hora': {
           min: Math.min(...data1.map(o => o['m3/hora'])), 
-          max: Math.max(...data1.map(o => o['m3/hora'])) 
+          max: Math.max(...data1.map(o => o['m3/hora'])) + 5 
 ,
         },
       },
       xField: 'date',
       yField: 'm3/hora',  
       point: {
-        size:2,
+        size:3,
         style: {
           opacity: '0.2:',
           fill: 'white',
-          stroke: '#69802A',
-          lineWidth: 1,
+          stroke: '#3968A9',
+          lineWidth: 2,
+        },
+      },
+      yAxis: {
+        title: {
+          text: 'METROS CÚBICOS',
+          style: {
+            fontSize: 13,
+          },
+        },
+      },
+      xAxis: {
+        title: {
+          text: 'HORAS',
+          style: {
+            fontSize: 13,
+          },
         },
       },
       label: {
         style: {
-          fill: 'black',
+          fill: '#1F3461',
           fontSize: 15,
         }
-      },
-      tooltip: {
-        showMarkers: true,
-      },
-      state: {
-        active: {
-          style: {
-            shadowBlur: 4,
-            stroke: '#000',
-          },
-        },
-      },
-      interactions: [
-        {
-          type: 'marker-active',
-        },
-      ],
+      }
     }
 
     const config2 = {
-      data: data2,        
+      data:  data2,        
+      color: 'rgb(57,104,169, 0.4)',
       meta: {
         'm3/dia': {
           min: Math.min(...data2.map(o => o['m3/dia'])), 
-          max: Math.max(...data2.map(o => o['m3/dia'])) 
+          max: Math.max(...data2.map(o => o['m3/dia'])) + 5 
+,
         },
       },
       xField: 'date',
-      yField: 'm3/dia',
+      yField: 'm3/dia',  
       point: {
-        size: 5,
-        shape: 'diamond',
+        size:3,
         style: {
+          opacity: '0.2:',
           fill: 'white',
-          stroke: '#5B8FF9',
+          stroke: '#3968A9',
           lineWidth: 2,
         },
       },
-      label: {},
-      tooltip: {
-        showMarkers: false,
-      },
-      state: {
-        active: {
+      yAxis: {
+        title: {
+          text: 'METROS CÚBICOS',
           style: {
-            shadowBlur: 4,
-            stroke: '#000',
-            fill: 'red',
+            fontSize: 13,
           },
         },
       },
-      interactions: [
-        {
-          type: 'marker-active',
+      xAxis: {
+        title: {
+          text: 'DIAS DEL MES',
+          style: {
+            fontSize: 13,
+          },
         },
-      ],
-
+      },
+      label: {
+        style: {
+          fill: '#1F3461',
+          fontSize: 15,
+        }
+      }
     }
 
     const config3 = {
-      data: data3,        
+      data:  data3,        
+      color: 'rgb(57,104,169, 0.4)',
       meta: {
         'm/dia': {
           min: Math.min(...data3.map(o => o['m/dia'])), 
-          max: Math.max(...data3.map(o => o['m/dia'])) 
+          max: Math.max(...data3.map(o => o['m/dia'])) + 5 
+,
         },
       },
       xField: 'date',
-      yField: 'm/dia',
+      yField: 'm/dia',  
       point: {
-        size: 5,
-        shape: 'diamond',
+        size:3,
         style: {
+          opacity: '0.2:',
           fill: 'white',
-          stroke: '#5B8FF9',
+          stroke: '#3968A9',
           lineWidth: 2,
         },
       },
-      label: {},
-      tooltip: {
-        showMarkers: false,
-      },
-      state: {
-        active: {
+      yAxis: {
+        title: {
+          text: 'METROS',
           style: {
-            shadowBlur: 4,
-            stroke: '#000',
-            fill: 'red',
+            fontSize: 13,
           },
         },
       },
-      interactions: [
-        {
-          type: 'marker-active',
+      xAxis: {
+        title: {
+          text: 'DIAS DEL MES',
+          style: {
+            fontSize: 13,
+          },
         },
-      ],
-
+      },
+      label: {
+        style: {
+          fill: '#1F3461',
+          fontSize: 15,
+        }
+      }
     }
 
     const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
