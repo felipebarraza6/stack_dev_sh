@@ -193,19 +193,19 @@ const MyGraphics = () => {
             </>:<>
                 {option==0 && <>
                   <Typography.Paragraph style={{marginLeft:'20px'}}>
-                    Volumen acumulado últimas 24 horas(01:00 a 24:00 hrs) en metro cúbicos.
+                    Volumen acumulado del día <b>{new Date().getDate() -1} de {monthNames[new Date().getMonth()]} </b> en metros cúbicos.
                   </Typography.Paragraph>
                   <Line {...config1} />
                 </>}
                 {option==1 && <>
                   <Typography.Paragraph style={{marginLeft:'20px'}}>
-                    Volumen acumulado desde el 01 al {new Date().getDate()-1} de {monthNames[new Date().getMonth()]} en metro cúbicos.
+                    Volumen acumulado desde el <b>01 al {new Date().getDate()-1} de {monthNames[new Date().getMonth()]}</b> en metro cúbicos.
                   </Typography.Paragraph>
                   <Line {...config2} />
                 </>}
                 {option==2 && <>
                   <Typography.Paragraph style={{marginLeft:'20px'}}>
-                    Promedio nivel desde el 01 al {new Date().getDate()-1} de {monthNames[new Date().getMonth()]} en metros.
+                    Promedio nivel freático desde el <b>01 al {new Date().getDate()-1} de {monthNames[new Date().getMonth()]}</b> en metros.
                   </Typography.Paragraph>
                   <Area {...config3} />
                 </>}

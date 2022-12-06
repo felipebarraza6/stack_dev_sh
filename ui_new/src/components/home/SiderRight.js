@@ -40,9 +40,7 @@ const SiderLeft = () => {
              {state.type_graph === 'niv' && 
               <p style={{color:'white', marginBottom:'-1px', border:'1px solid white', textAlign:'center'}}>Día {x.date}: {x['m/dia']} m/d</p>
             }
-
             </div>)}
-
 
         </>:<>
         <Title align='center' style={{color:'white'}} level={3}> {state.selected_profile.title} </Title>
