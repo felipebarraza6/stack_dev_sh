@@ -29,15 +29,20 @@ const MyGraphics = () => {
       xField: 'date',
       yField: 'm3/hora',  
       point: {
-        size: 5,
-        shape: 'diamond',
+        size:2,
         style: {
+          opacity: '0.2:',
           fill: 'white',
-          stroke: '#5B8FF9',
-          lineWidth: 2,
+          stroke: '#69802A',
+          lineWidth: 1,
         },
       },
-      label: {},
+      label: {
+        style: {
+          fill: 'black',
+          fontSize: 15,
+        }
+      },
       tooltip: {
         showMarkers: true,
       },
@@ -46,7 +51,6 @@ const MyGraphics = () => {
           style: {
             shadowBlur: 4,
             stroke: '#000',
-            fill: 'red',
           },
         },
       },

@@ -39,9 +39,7 @@ const MyWell = () => {
                             <Col span={12}><Title level={5} style={{color:'#222221'}}>Caudal</Title></Col>
                             <Col span={12} offset={7} style={{marginTop:'-15px'}}>
                               <Typography.Paragraph level={5}>
-                                {state.selected_profile.title == 'Las Pircas' ?  
-                                <b>{parseFloat(((acumulado/60)/nivel)/1000).toFixed(1)} (Litros/seg)</b>:
-                                <b>{parseFloat(caudal).toFixed(1)} (Litros/seg)</b>}
+                                <b>{parseFloat(caudal).toFixed(1)} (Litros/seg)</b>
                               </Typography.Paragraph>
                             </Col>
                         </Row>                                    
@@ -70,9 +68,7 @@ const MyWell = () => {
                                <img src={pozo1} width={'430px'} style={{position:'absolute', marginLeft:'-240px', marginTop:'-80px'}} />                                        
                            </center>
                                <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'150px', marginTop:'30px', marginLeft:'100px', position:'absolute', borderRadius:'10px'}} 
-                                value={state.selected_profile.title == 'Las Pircas' ?  
-                                `${parseFloat(((acumulado/60)/nivel)/1000).toFixed(1)} (Litros/seg)`:
-                                `${parseFloat(caudal).toFixed(1)} (Litros/seg)`} />
+                                value={`${parseFloat(caudal).toFixed(1)} (Litros/seg)`} />
 
                                <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'160px', marginTop:'5px', marginLeft:'320px', position:'absolute', borderRadius:'10px'}} value={`${numberForMiles.format(acumulado)} (m³)`}  />
                                <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'110px', marginTop:'260px', marginLeft:'300px', position:'absolute', borderRadius:'10px'}} value={`${parseFloat(nivel).toFixed(1)} (m)`}  />                               

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../../App'
-import { Typography, Card } from 'antd'
+import { Typography, Card, Tag } from 'antd'
 import { useLocation } from 'react-router-dom'
 
 const { Title } = Typography
@@ -9,16 +9,30 @@ const SiderLeft = () => {
 
     const { state } = useContext(AppContext)
     let location = useLocation()
-    console.log(state)
   console.log(location.pathname)
     
 
-    return(<Card hoverable={true} style={{backgroundColor:'#1F3461', borderRadius:'20px',paddingRight:'5px', paddingLeft:'5px'}}>
+    return(<Card hoverable={true}  style={{backgroundColor:'#1F3461', borderRadius:'20px',paddingRight:'5px', paddingLeft:'5px'}}>
       {location.pathname === '/graficos' ? <>
+          {state.type_graph === 'm3' && 
+              <p style={{color:'#222221', marginBottom:'-1px', backgroundColor:'white',border:'1px solid white', textAlign:'center'}}>
+                Acumulado(m³/h)
+            </p>
+            }
+            {state.type_graph === 'm3m' && 
+            <p style={{color:'#222221', marginBottom:'-1px', backgroundColor:'white',border:'1px solid white', textAlign:'center'}}>
+                Acumulado(m³/d)
+            </p>
+            }
+             {state.type_graph === 'niv' && 
+ <p style={{color:'#222221', marginBottom:'-1px', backgroundColor:'white',border:'1px solid white', textAlign:'center'}}>
+                Nivel freático(m/d)
+            </p>
+            }
           
           {state.list_default.map((x)=><div>
             {state.type_graph === 'm3' && 
-              <p style={{color:'white', marginBottom:'-1px', border:'1px solid white', textAlign:'center'}}>{x.date.slice(0,2)}:00 - {x['m3/hora']} m³/h</p>
+              <p style={{color:'white', marginBottom:'-1px', border:'1px solid white', textAlign:'center'}}>{x.date.slice(0,2)} - {x['m3/hora']} m³/h</p>
             }
             {state.type_graph === 'm3m' && 
               <p style={{color:'white', marginBottom:'-1px', border:'1px solid white', textAlign:'center'}}>{x.date}: {x['m3/dia']} m³/d</p>
