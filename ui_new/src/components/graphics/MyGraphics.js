@@ -19,6 +19,13 @@ const MyGraphics = () => {
 
     const config1 = {
       data:  data1,        
+      meta: {
+        'm3/hora': {
+          min: Math.min(...data1.map(o => o['m3/hora'])), 
+          max: Math.max(...data1.map(o => o['m3/hora'])) 
+,
+        },
+      },
       xField: 'date',
       yField: 'm3/hora',  
       point: {
@@ -32,7 +39,7 @@ const MyGraphics = () => {
       },
       label: {},
       tooltip: {
-        showMarkers: false,
+        showMarkers: true,
       },
       state: {
         active: {
@@ -52,6 +59,12 @@ const MyGraphics = () => {
 
     const config2 = {
       data: data2,        
+      meta: {
+        'm3/dia': {
+          min: Math.min(...data2.map(o => o['m3/dia'])), 
+          max: Math.max(...data2.map(o => o['m3/dia'])) 
+        },
+      },
       xField: 'date',
       yField: 'm3/dia',
       point: {
@@ -86,6 +99,12 @@ const MyGraphics = () => {
 
     const config3 = {
       data: data3,        
+      meta: {
+        'm/dia': {
+          min: Math.min(...data3.map(o => o['m/dia'])), 
+          max: Math.max(...data3.map(o => o['m/dia'])) 
+        },
+      },
       xField: 'date',
       yField: 'm/dia',
       point: {

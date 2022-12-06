@@ -15,21 +15,10 @@ const SiderLeft = () => {
 
     return(<Card hoverable={true} style={{backgroundColor:'#1F3461', borderRadius:'20px',paddingRight:'5px', paddingLeft:'5px'}}>
       {location.pathname === '/graficos' ? <>
-          <Title align='center' style={{color:'white'}} level={3}> Detalle </Title>
-          {state.type_graph === 'm3' && 
-              <p style={{color:'white', marginBottom:'5px', textAlign:'center'}}>Acumulado(m³) - 24 horas</p>
-            }
-            {state.type_graph === 'm3m' && 
-              <p style={{color:'white', marginBottom:'5px', textAlign:'center'}}>Acumulado(m³) - mensual</p>
-            }
-             {state.type_graph === 'niv' && 
-              <p style={{color:'white', marginBottom:'5px', textAlign:'center'}}>Nivel freático(m) - mensual</p>
-            }
-
-          <hr />
+          
           {state.list_default.map((x)=><div>
             {state.type_graph === 'm3' && 
-              <p style={{color:'white', marginBottom:'5px', textAlign:'center'}}>{x.date.slice(0,2)}:00 - {x['m3/hora']} m³/d</p>
+              <p style={{color:'white', marginBottom:'5px', textAlign:'center'}}>{x.date.slice(0,2)}:00 - {x['m3/hora']} m³/h</p>
             }
             {state.type_graph === 'm3m' && 
               <p style={{color:'white', marginBottom:'5px', textAlign:'center'}}>{x.date}: {x['m3/dia']} m³/d</p>
