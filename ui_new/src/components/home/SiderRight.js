@@ -18,13 +18,13 @@ const SiderLeft = () => {
           
           {state.list_default.map((x)=><div>
             {state.type_graph === 'm3' && 
-              <p style={{color:'white', marginBottom:'5px', textAlign:'center'}}>{x.date.slice(0,2)}:00 - {x['m3/hora']} m³/h</p>
+              <p style={{color:'white', marginBottom:'-1px', border:'1px solid white', textAlign:'center'}}>{x.date.slice(0,2)}:00 - {x['m3/hora']} m³/h</p>
             }
             {state.type_graph === 'm3m' && 
-              <p style={{color:'white', marginBottom:'5px', textAlign:'center'}}>{x.date}: {x['m3/dia']} m³/d</p>
+              <p style={{color:'white', marginBottom:'-1px', border:'1px solid white', textAlign:'center'}}>{x.date}: {x['m3/dia']} m³/d</p>
             }
              {state.type_graph === 'niv' && 
-              <p style={{color:'white', marginBottom:'5px', textAlign:'center'}}>{x.date}: {x['m/dia']} m/d</p>
+              <p style={{color:'white', marginBottom:'-1px', border:'1px solid white', textAlign:'center'}}>{x.date}: {x['m/dia']} m/d</p>
             }
 
             </div>)}
