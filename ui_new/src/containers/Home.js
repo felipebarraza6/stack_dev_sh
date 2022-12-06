@@ -23,7 +23,7 @@ const Home = () => {
                 <Col span={3} style={{padding:'5px'}}>                    
                     <SiderRight />                    
                 </Col>
-                <Col span={18}>
+                <Col span={17}>
                     <Row justify='center'>
                         <Col span={24}>
                             <ListWells />
@@ -38,7 +38,7 @@ const Home = () => {
                         </Col>
                     </Row>                    
                 </Col>     
-                <Col span={3} style={{padding:'5px'}}>
+                <Col span={4} style={{padding:'5px'}}>
                     <SiderLeft />
                 </Col>
             </Row>
