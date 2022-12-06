@@ -41,9 +41,7 @@ function App() {
         })
       })    
       return rq  
-    } else {   
-      window.open('/')   
-    }
+    } 
   }
 
   useEffect(()=> {
@@ -52,7 +50,6 @@ function App() {
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>      
-       
         {state.isAuth ? <Home />:
           <Login />}      
     </AppContext.Provider>

@@ -28,7 +28,11 @@ const HeaderNav = () => {
         <Col style={{paddingTop:'30px'}} span={3} offset={9}>
             <UserOutlined style={{backgroundColor:'grey', color:'white', fontSize:'15px', borderRadius:'100%', padding:'10px', marginRight:'10px'}} />
             
-                <Popconfirm cancelText='Volver' okButtonProps okText='SALIR' title='¿Estas seguro de querer cerrar la sesión?' onConfirm={()=>dispatch({type:'LOGOUT'})} >                
+                <Popconfirm cancelText='Volver' okButtonProps okText='SALIR' title='¿Estas seguro de querer cerrar la sesión?' 
+                  onConfirm={()=>{
+                    dispatch({type:'LOGOUT'})
+                    window.location.assign('/') 
+                  }} >                
                     <ArrowLeftOutlined style={{backgroundColor:'grey', color:'white', fontSize:'15px', borderRadius:'100%', padding:'10px', marginRight:'10px'}} />             
                 </Popconfirm>
             

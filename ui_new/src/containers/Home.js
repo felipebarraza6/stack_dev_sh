@@ -31,8 +31,6 @@ const Home = () => {
                         <Col span={24}>
                             <Routes>
                                 <Route exact path="/" element={<MyWell />} />
-                                <Route exact path="/graficos" element={<MyGraphics />} />
-                                <Route exact path="/indicadores" element={<Indicators />} />
                                 <Route exact path="/reportes" element={<Reports />} />
                             </Routes>
                         </Col>
