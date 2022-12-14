@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import HeaderMenu from '../components/HeaderMenu'
-import { Layout, Col, Row, Typography,
-        Affix, Button } from 'antd'
+import { Layout, Col, Row, 
+          Typography, Button } from 'antd'
 import logo_src from '../assets/images/logo.png'
 import logo_src2 from '../assets/images/logo2.png'
 import icono_logo from '../assets/images/icono_logo.png'
@@ -44,19 +44,6 @@ const Home = () => {
 
     return(<Layout style={styles.layout}>
         <BrowserRouter>                            
-              <Route exact path='/fingerprint/:id'>
-                <Header style={styles.header1} />                
-              </Route>
-              <Route path='/quotations/'>
-                <Row style={{padding:'10px', backgroundColor:'#1890ff'}} justify="start">
-                  <Col span={width > 800 ? 18:24}>
-                  <img src={logo_src2} alt='logo' style={styles.logo2} />                 
-                  </Col>
-                  <Col span={width > 800 ? 6:24}>
-                    <Typography.Title level={4} style={{color:'white', paddingTop:'8%'}}> {event.toLocaleDateString('es-ES', options)} </Typography.Title>
-                  </Col>
-                </Row>
-              </Route>
               <Route exact path='/'>                
                 <Header style={styles.header} >            
                   <Row align='middle'>                
@@ -71,7 +58,6 @@ const Home = () => {
                       </Col>                
                     </>:<>
                       <Col style={styles.colLogoMobil} span={12}>
-                        
                         <a href='https://smarthydro.cl'>
                         <img src={icono_logo} alt='logo' style={styles.logo} />
                         </a>
@@ -87,27 +73,19 @@ const Home = () => {
               </Route>
               <Route exact path='/fingerprint/:id'>
               <Header style={styles.header}>            
-                <Row >                
-                  {width > 800 ? <>
-                    <Col span={4}>
-                      <a href='https://smarthydro.cl'>
-                      <img src={logo_src} alt='logo' style={styles.logo} />
-                      </a>
+                <Row>                
+                    <Col  span={2} offset={22}>
+                      <center>
+                        <a href='https://smarthydro.cl'>
+                          <img src={icono_logo} alt='logo' style={styles.logoh} />
+                        </a>
+                      </center>
                     </Col>
-                    <Col span={5}>
-                    </Col>                
-                    <Col span={15}>                       
-                    </Col>                
-                  </>: 
-                    <Col style={styles.colLogoMobil} span={24}>
-                      <a href='https://smarthydro.cl'>
-                      <img src={logo_src} alt='logo' style={styles.logo} />
-                      </a>
-                    </Col>}
                 </Row>
               </Header>
               </Route>
-        <Content>
+              <Content>
+              <Route exact path='/fingerprint/:id' component={Fingerprint} />
               <Route exact path='/'> 
                 <>
                   <Col span={24} >
@@ -135,8 +113,6 @@ const Home = () => {
               </Route>
               <Route exact path='/dgaform/external_client/:id' component={ContainerFormDga} >
               </Route>
-              <Route exact path='/fingerprint/:id' component={Fingerprint} />
-              <Route exact path='/fingerprint/root/:id' component={Fingerprint} />
               <Route exact path='/contacto'>
                 <ContactForm />
               </Route>
@@ -186,6 +162,9 @@ const styles = {
     logo: {
         width: window.innerWidth<800?'35px':'50px',                
     },
+    logoh: {
+      width: '55px'
+    },
     logo2: {
       width: '200px',
       padding:'10px'
@@ -207,8 +186,6 @@ const styles = {
         backgroundColor: '#1890ff',
         paddingBottom:  window.innerWidth > 800 ? '0px':'100px'
     }
-
-    
 }
 
 

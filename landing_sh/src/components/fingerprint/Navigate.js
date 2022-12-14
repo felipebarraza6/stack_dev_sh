@@ -26,11 +26,7 @@ const Navigate = ({ elements, state, setState }) => {
 
 
   return(<>
-    <DrawerSupport is_open={stateNavigate.drawerSupportOpen} 
-      is_create={stateNavigate.drawerIsCreate}
-      setStateNavigate={setStateNavigate}
-      tickets={stateNavigate.tickets} />
-    <Menu mode='inline'>{elements && <>
+        <Menu mode='inline' style={{border:'2px solid #002766', borderRadius:'10px 10px 0px 0px'}}>{elements && <>
         <Menu.Item onClick={()=> window.open(glosary)} icon={<BookOutlined />}>
           GLOSARIO
         </Menu.Item>
@@ -40,8 +36,7 @@ const Navigate = ({ elements, state, setState }) => {
           <CheckCircleOutlined style={{color:'green'}} />
           </>:<>
             {section.in_validate ? <Spin />:
-            <CloseCircleOutlined style={{color:'red'}} />
-            }
+              <CloseCircleOutlined style={{color:'red'}} />}
           </>
         } {module.id}.{section.id}) {section.name}
       </Menu.Item>)}

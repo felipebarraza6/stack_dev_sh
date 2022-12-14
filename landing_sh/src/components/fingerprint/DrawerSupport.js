@@ -64,7 +64,7 @@ const DrawerSupport = ({ is_create, is_open, setStateNavigate, tickets }) => {
       const [form] = Form.useForm()
 
       return(<Drawer width={450} title={`Comentarios ticket: #${drawerChild.ticket.id}`} 
-                visible={drawerChild.visible}
+                open={drawerChild.visible}
                 onClose={onCloseChildren}>
             {drawerChild.answers.length > 0 ? 
             <List>
@@ -99,20 +99,19 @@ const DrawerSupport = ({ is_create, is_open, setStateNavigate, tickets }) => {
 
   return(<Drawer title={is_create ? 'Crear Ticket': 'Tickets'} 
           onClose={onClose} 
-          visible={is_open} 
           open={DrawerComments}
           width={500} >
-      {is_create ? 
-        <Form layout={'vertical'} form={form}>
-          <Form.Item label='MENSAJE' name='affair'>
-            <Input.TextArea rows={10} placeholder={'DESCRIBE TU PROBLEMA EN RELACIÓN AL MODULO ACTUAL...'}>
-            </Input.TextArea>
-          </Form.Item>
-          <Form.Item>
-            <Button type='primary' style={styles.button}>ENVÍAR</Button>
-            <Button style={styles.button} onClick={resetForm}>LIMPIAR</Button>
-          </Form.Item>
-        </Form>:<>{tickets && <List grid={{ gutter: 16, column: 4 }}>
+          {is_create ? 
+            <Form layout={'vertical'} form={form}>
+              <Form.Item label='MENSAJE' name='affair'>
+                <Input.TextArea rows={10} placeholder={'DESCRIBE TU PROBLEMA EN RELACIÓN AL MODULO ACTUAL...'}>
+                </Input.TextArea>
+              </Form.Item>
+              <Form.Item>
+                <Button type='primary' style={styles.button}>ENVÍAR</Button>
+                <Button style={styles.button} onClick={resetForm}>LIMPIAR</Button>
+              </Form.Item>
+            </Form>:<>{tickets && <List grid={{ gutter: 16, column: 4 }}>
             {tickets.map((ticket)=> <Ticket {...ticket} />)}
           </List>}
         </>

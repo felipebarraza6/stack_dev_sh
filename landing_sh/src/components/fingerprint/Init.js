@@ -29,10 +29,10 @@ import img2 from '../../assets/images/agencia_sus.png'
     }, [])
 
 
-    return(<>
+    return(<Row>
       <Col span={6} style={styles.container}>        
         {state.data_fingerprint && <>
-          <Typography.Title level={4}>{state.data_fingerprint.title} (#{state.data_fingerprint.id})</Typography.Title>
+          <Typography.Title level={5}>{state.data_fingerprint.title} </Typography.Title>
           <Navigate elements={state.data_fingerprint.modules} setState={setState} state={state} />          
         </>}
         <Navigate />
@@ -71,16 +71,21 @@ import img2 from '../../assets/images/agencia_sus.png'
           <FormFields fields={state.fields} section={state.section_selected} />          
         </Row>
       </Col>
-    </>)
+    </Row>)
 }
 
 const styles = {
   container: {
+    marginTop:'-50px',
     padding: '20px'
   },
   nav:{
     backgroundColor: 'white',
+    border: '2px solid #003a8c',
+    marginTop:'10px',
+    borderRadius:'15px',
     padding: '20px'
+
   },
   rowContainer: {
     marginTop: '20px'
