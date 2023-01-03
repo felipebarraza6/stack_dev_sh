@@ -3,7 +3,7 @@ import  api from '../../api/endpoints'
 import { Table, Button, Modal, 
           Tooltip, Card, Descriptions,
           Row, Col, Tag } from 'antd'
-import { SendOutlined, CloudDownloadOutlined, EyeFilled } from '@ant-design/icons'
+import { SendOutlined, CloudDownloadOutlined, EyeFilled, FileImageFilled } from '@ant-design/icons'
 
 const Home = () => {
 
@@ -46,6 +46,9 @@ const Home = () => {
         content: <Row>
           {wells.map((x)=> {
             return(<Col span={12}><Card title={x.name}>
+                {x.img1 && <Button icon={<FileImageFilled/>} type='primary' style={{margin:'5px'}} onClick={()=>window.open(`https://api.smarthydro.cl${x.img1}`)}>General</Button>}
+                {x.img2 && <Button icon={<FileImageFilled/>}  type='primary' style={{margin:'5px'}} onClick={()=>window.open(`https://api.smarthydro.cl${x.img2}`)} >Detalle salida pozo</Button>}
+
                 <Descriptions bordered title={x.exact_address}>
                   <Descriptions.Item span={3} label={<>Caudal otorgado <Tag color='geekblue'>(Lt/SEG)</Tag></>}>
                     {parseFloat(x.granted_flow).toFixed(2)}

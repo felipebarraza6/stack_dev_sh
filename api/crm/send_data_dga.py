@@ -3,6 +3,7 @@ import requests
 from datetime import datetime
 
 
+
 def send(profile_data, response):
     url = "https://snia.mop.gob.cl/controlextraccion/datosExtraccion/SendDataExtraccionService"
 
@@ -26,9 +27,10 @@ def send(profile_data, response):
     headers = {
       'Content-Type': 'application/xml'
     }
-
+    
     response = requests.request("POST", url, headers=headers, data=payload)
-
+    print(profile_data)
     print(response.text)
+
 
 
