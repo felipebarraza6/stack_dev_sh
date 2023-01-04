@@ -30,12 +30,8 @@ const getLastDataHour = async(variable,token) => {
     for(var i =0 ; i < 25; i++){
         console.log(nowDate.getMonth())
         
-        var date = `${nowDate.getFullYear()}-${nowDate.getMonth()+1}-${nowDate.getDate()-1>9?nowDate.getDate()-1:`0${nowDate.getDate()-1}`}T${i>=10?i:`0${i}`}:00:00`        
-        
-        console.log(i,date)
+        var date = `${nowDate.getFullYear()}-${nowDate.getMonth()+1>9?nowDate.getMonth()+1: `0${nowDate.getMonth()+1}`}-${nowDate.getDate()-1>9?nowDate.getDate()-1:`0${nowDate.getDate()-1}`}T${i>=10?i:`0${i}`}:00:00`        
         const request = await GET(`?variable=${variable}&query=last_item&end_date=${date}`, token)
-        console.log(request.data.result[0].value)
-        
         listData.push({
             date: i === 24 ? '24 hrs':`${date.slice(11,13)} hrs`,
             m3:request.data.result[0] ? parseInt(request.data.result[0].value) : parseInt(0)
@@ -61,9 +57,9 @@ const getMonth = async(variable,token) => {
         
 
     for(var i =0 ; i < nowDate.getDate(); i++){
-        var date = `${nowDate.getFullYear()}-${nowDate.getMonth()+1}-${i}`        
+        var date = `${nowDate.getFullYear()}-${nowDate.getMonth()+1>9? nowDate.getMonth()+1:`0${nowDate.getMonth()+1}`}-${i}`        
         if(i==0){
-          date = `${nowDate.getFullYear()}-${nowDate.getMonth()}-${lastDay.getDate()}`        
+          date = `${nowDate.getFullYear()}-${nowDate.getMonth()+1>9? nowDate.getMonth()+1:`0${nowDate.getMonth()+1}`}-${lastDay.getDate()}`        
         }
         const request = await GET(`?variable=${variable}&query=last_item&end_date=${date}`, token)
         listData.push({
@@ -84,7 +80,7 @@ const getMonthLevel = async(variable,token) => {
     var nowDate = new Date()
     var listData = []
     for(var i =0 ; i < nowDate.getDate(); i++){        
-        var date = `${nowDate.getFullYear()}-${nowDate.getMonth() > 10 ? nowDate.getMonth():`0${nowDate.getMonth()}` }-${nowDate.getDate() > 10 ? i+1:`0${i+1}`}`                
+        var date = `${nowDate.getFullYear()}-${nowDate.getMonth() > 9 ? nowDate.getMonth()+1:`0${nowDate.getMonth()+1}` }-${nowDate.getDate() > 9 ? i+1:`0${i+1}`}`                
         const request = await GET(`?variable=${variable}&query=last_item&end_date=${date}`, token)
 
         listData.push({
