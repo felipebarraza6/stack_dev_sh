@@ -59,7 +59,11 @@ const getMonth = async(variable,token) => {
     for(var i =0 ; i < nowDate.getDate(); i++){
         var date = `${nowDate.getFullYear()}-${nowDate.getMonth()+1>9? nowDate.getMonth()+1:`0${nowDate.getMonth()+1}`}-${i}`        
         if(i==0){
-          date = `${nowDate.getFullYear()}-${nowDate.getMonth()+1>9? nowDate.getMonth()+1:`0${nowDate.getMonth()+1}`}-${lastDay.getDate()}`        
+            if(nowDate.getMonth()+1==1){
+                date = `${nowDate.getFullYear()-1}-12-${lastDay.getDate()}`        
+            } else{
+                date = `${nowDate.getFullYear()}-${nowDate.getMonth()+1 > 9 ? nowDate.getMonth():`${nowDate.getMonth()+1}`}-${lastDay.getDate()}`        
+            }          
         }
         const request = await GET(`?variable=${variable}&query=last_item&end_date=${date}`, token)
         listData.push({
