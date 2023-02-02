@@ -56,7 +56,7 @@ const MyWell = () => {
                                     <Col span={7}><img src={acumulado_img} width='60px'  /></Col>
                                     <Col span={17}><Title level={5} style={{color:'#222221'}}>Acumulado</Title></Col>                                            
                                     <Col span={12} offset={7} style={{marginTop:'-22px'}}>
-                                    <Typography.Paragraph level={5}><b>{numberForMiles.format(acumulado)}</b><br/></Typography.Paragraph>
+                                    <Typography.Paragraph level={5}><b>{state.user.username === 'fermin'  ? numberForMiles.format(acumulado*100) :numberForMiles.format(acumulado)}</b><br/></Typography.Paragraph>
                                     <Typography.Paragraph level={5} style={{marginTop:'-20px'}}><b>(Metros cúbicos)</b></Typography.Paragraph>
                                     </Col>
                                     
@@ -71,7 +71,7 @@ const MyWell = () => {
                                 value={`${parseFloat(caudal).toFixed(1)} (Litros/seg)`} />
 
                                <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'160px', marginTop:'5px', marginLeft:'320px', position:'absolute', borderRadius:'10px'}}  value={`${parseFloat(nivel).toFixed(1)} (m)`} />
-                               <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'110px', marginTop:'260px', marginLeft:'300px', position:'absolute', borderRadius:'10px'}} value={`${numberForMiles.format(acumulado)} (m³)`}  />                               
+                               <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'110px', marginTop:'260px', marginLeft:'300px', position:'absolute', borderRadius:'10px'}} value={`${state.user.username === 'fermin'  ? numberForMiles.format(acumulado*100) :numberForMiles.format(acumulado)} (m³)`}  />                               
                        </Col>
                        <Col>
                        </Col>
