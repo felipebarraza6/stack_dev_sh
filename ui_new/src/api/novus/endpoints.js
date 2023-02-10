@@ -28,7 +28,6 @@ const getLastDataHour = async(variable,token) => {
     var listData = []
 
     for(var i =0 ; i < 25; i++){
-        console.log(nowDate.getMonth())
         
         var date = `${nowDate.getFullYear()}-${nowDate.getMonth()+1>9?nowDate.getMonth()+1: `0${nowDate.getMonth()+1}`}-${nowDate.getDate()-1>9?nowDate.getDate()-1:`0${nowDate.getDate()-1}`}T${i>=10?i:`0${i}`}:00:00`        
         const request = await GET(`?variable=${variable}&query=last_item&end_date=${date}`, token)
@@ -62,7 +61,11 @@ const getMonth = async(variable,token) => {
             if(nowDate.getMonth()+1 === 1){
                 date = `${nowDate.getFullYear()-1}-12-${lastDay.getDate()}`        
             } else{
-                date = `${nowDate.getFullYear()}-${nowDate.getMonth()+1 > 9 ? nowDate.getMonth():`${nowDate.getMonth()+1}`}-${lastDay.getDate()}`        
+                
+                date = `${nowDate.getFullYear()}-${nowDate.getMonth()+1 > 9 ? 
+                    nowDate.getMonth():`0${nowDate.getMonth()}`
+                }-${lastDay.getDate()}`        
+console.log(lastDay.getDate())
             }          
         }
         const request = await GET(`?variable=${variable}&query=last_item&end_date=${date}`, token)
@@ -73,6 +76,7 @@ const getMonth = async(variable,token) => {
         })                
         
     }
+  console.log(listData)
 
     return(listData)
 
