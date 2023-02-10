@@ -39,7 +39,11 @@ const MyWell = () => {
                             <Col span={12}><Title level={5} style={{color:'#222221'}}>Caudal</Title></Col>
                             <Col span={12} offset={7} style={{marginTop:'-15px'}}>
                               <Typography.Paragraph level={5}>
+                                { parseFloat(caudal).toFixed(1)==='3276.7' ? 
+                                <div style={{color:'red'}}>{parseFloat(caudal).toFixed(1)}</div>
+                                  :
                                 <b>{parseFloat(caudal).toFixed(1)} (Litros/seg)</b>
+                                }
                               </Typography.Paragraph>
                             </Col>
                         </Row>                                    
@@ -67,8 +71,8 @@ const MyWell = () => {
                            <center>
                                <img src={pozo1} width={'430px'} style={{position:'absolute', marginLeft:'-240px', marginTop:'-80px'}} />                                        
                            </center>
-                               <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'150px', marginTop:'30px', marginLeft:'100px', position:'absolute', borderRadius:'10px'}} 
-                               value={`${parseFloat(caudal).toFixed(1)} (Litros/seg)`} />
+                               <Input disabled style={{color:'white',backgroundColor: parseFloat(caudal).toFixed(1) ==='3276.7'?'#cf1322':'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width: parseFloat(caudal).toFixed(1) === '3276.7'? '80px':'150px', marginTop:'30px', marginLeft:'100px', position:'absolute', borderRadius:'10px'}} 
+                               value={parseFloat(caudal).toFixed(1) ==='3276.7' ? `${parseFloat(caudal).toFixed(1)}`:`${parseFloat(caudal).toFixed(1)} (Litros/seg)`} />
 
                                <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'160px', marginTop:'5px', marginLeft:'320px', position:'absolute', borderRadius:'10px'}} value={`${state.user.username === 'fermin'  ? numberForMiles.format(acumulado*1) :numberForMiles.format(acumulado)} (m³)`} />
                                <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'110px', marginTop:'260px', marginLeft:'300px', position:'absolute', borderRadius:'10px'}} value={`${parseFloat(nivel).toFixed(1)} (m)`}  />                               
