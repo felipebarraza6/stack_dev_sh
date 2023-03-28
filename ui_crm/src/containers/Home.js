@@ -7,11 +7,14 @@ import { Layout, Menu  } from 'antd'
 // Antd Icons
 import { DashboardOutlined,          
          UsergroupAddOutlined, 
+          FolderOutlined,
          BuildOutlined, 
          OrderedListOutlined,
          UserOutlined,
          UnorderedListOutlined,
-         FolderOpenOutlined} from '@ant-design/icons'
+         FolderOpenOutlined, 
+         BuildFilled,
+         FileOutlined } from '@ant-design/icons'
 
 //Build
 import logo from '../build/images/logo-white.png'
@@ -24,6 +27,8 @@ import Clients from '../components/clients/Clients'
 import Tasks from '../components/tasks/Tasks'
 import NotFound from '../components/errors/NotFound'
 import HomeQuotation  from '../components/quotations/Home'
+import Projects from '../components/projects/Projects'
+import Files from '../components/files/Files'
 
 // React Router
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
@@ -35,7 +40,7 @@ const Home = () =>{
         return(
           <BrowserRouter>
             <Layout style={{ minHeight: '100vh' }}>            
-            <Sider style={{padding:'10px'}} width={'260px'}>
+            <Sider style={{padding:'10px'}} width={'300px'}>
               <div>
                   <img alt='logo' style={{width:'80%', marginRight:'50px', marginTop:'40px', marginBottom:'40px'}} src={logo} />
               </div>
@@ -47,51 +52,40 @@ const Home = () =>{
                      Dashboard
                      </Link>
                 </Menu.Item>
-                  <Menu.Item key="2">
-                    <Link to="/enterprises">
-                        <BuildOutlined/>
-                        Empresas
-                      </Link>
-                    </Menu.Item>
-                    <Menu.Item key="3">
-                    <Link to="/clients">
-                        <UsergroupAddOutlined />
-                        Clientes
-                      </Link>
-                    </Menu.Item>
-                    <Menu.Item key="4">
-                    <Link to="/actions">
-                        <UnorderedListOutlined />
-                        Tareas
-                      </Link>
-                  </Menu.Item>                
-                  <Menu.SubMenu title={<><FolderOpenOutlined /> Cotizaciones</>} >
-                    <Menu.SubMenu title="Externas">
-                      <Menu.Item key="5">
-                        <Link to="/quotations">
-                          <OrderedListOutlined />
-                            Cotizaciones
+                <Menu.SubMenu title={<><FolderOpenOutlined /> Clientes</>} >
+                      <Menu.Item key="2">
+                        <Link to="/enterprises">
+                          <BuildOutlined />
+                           Empresas 
                         </Link>                        
                       </Menu.Item>
-                      <Menu.Item key="6">
-                        <Link to="/external-clients">
+                      <Menu.Item key="4">
+                        <Link to="/clients">
                           <UserOutlined />
-                          Prospectos Externos
+                          Personas
                         </Link>
                       </Menu.Item>
-                      </Menu.SubMenu>                    
-                  </Menu.SubMenu>
-                  <Menu.SubMenu title={<><FolderOpenOutlined /> Huella Hidrica</>} >
-                    <Menu.SubMenu title="Procesos activos">
-                      <Menu.Item key="5">
-                          <a href='http://localhost:3000/fingerprint/root/1' target='__blank'>
-                          <OrderedListOutlined />
-                            CLIENTE #1 
-                            </a>
+                                      </Menu.SubMenu>
+<Menu.SubMenu title={<><FolderOutlined />Proyectos</>} >
+                      <Menu.Item key="8">
+                        <Link to="/projects">
+                          <FolderOpenOutlined/>
+                          Gestionar proyectos
+                        </Link>                        
                       </Menu.Item>
-                      </Menu.SubMenu>                    
-                  </Menu.SubMenu>
-
+                                            <Menu.Item key="6">
+                        <Link to="/files">
+                          <FileOutlined />
+                          Archivos
+                        </Link>                        
+                      </Menu.Item>
+                    </Menu.SubMenu>
+                  <Menu.Item key="7">
+                    <Link to="/actions">
+                        <UnorderedListOutlined />
+                        Gestión de Tareas
+                      </Link>
+                  </Menu.Item>                
               </Menu>
               
             </Sider>
@@ -109,6 +103,8 @@ const Home = () =>{
                     <Route exact path='/clients' component={Clients} />
                     <Route exact path='/actions' component={Tasks} />
                     <Route exact path='/quotations' component={HomeQuotation} />
+                    <Route exact path='/projects' component={Projects} />
+                    <Route exact path='/files' component={Files} />
                     <Route path="*" component={NotFound} />
                  </Switch>
                 </div>

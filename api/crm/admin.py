@@ -5,7 +5,8 @@ from django.contrib import admin
 
 # Models
 from api.crm.models import (InteractionDetail, User, 
-                        ExternalClient ,Client, Action, ProfileClient,
+                        ExternalClient ,Client, Action, Project, ProfileClient,
+                        EconomicActivity, Employee,
                         RegisterPersons, DataHistoryFact,
                         TechnicalInfo, Quotation, Well, Note,
                         FormLandingContact, ProfileFootprints, 
@@ -17,6 +18,9 @@ from api.crm.models import (InteractionDetail, User,
 from import_export.admin import ExportActionMixin
 
 admin.site.register(SupportSection)
+admin.site.register(Project)
+admin.site.register(Employee)
+admin.site.register(EconomicActivity)
 admin.site.register(TicketSupport)
 admin.site.register(AnswerTicket)
 admin.site.register(OptionsSelectionFieldFootprints)

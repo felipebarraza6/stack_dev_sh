@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { Steps, Button, Form, Input, Select,
-        DatePicker, Spin, InputNumber } from 'antd'
+        DatePicker, Spin, InputNumber, notification } from 'antd'
 
 import { BuildOutlined, PhoneOutlined, MailOutlined, AimOutlined,
     ArrowRightOutlined, ArrowLeftOutlined, RocketOutlined, BuildTwoTone, 
@@ -13,6 +13,7 @@ import { BuildOutlined, PhoneOutlined, MailOutlined, AimOutlined,
 import { updateEnterprise } from '../../actions/enterprises'
 import moment from 'moment'
 import locale from 'antd/es/date-picker/locale/es_ES'
+import api from '../../api/endpoints'
 
 //Resources
 import geography from '../../resources/geography' 
@@ -24,11 +25,14 @@ const FormSteps = (attr) =>{
     
     const loading = attr.loading
 
+    const [isOther, setIsOther] = useState(false)
+    const [economicActivities, setEconomicActivities] = useState(null)
+
     const layout = {
-        labelCol: {span:6}
+        labelCol: { span:6 }
     }
   
-    const submitForm = (values) =>{                        
+    const submitForm = async(values) =>{                        
         
         setGeo({
             ...geo,
@@ -43,6 +47,13 @@ const FormSteps = (attr) =>{
                 'date_jurisdiction':moment(values.date_jurisdiction).format('YYYY-MM-DD')
             }
         }
+      
+      if(isOther){
+        const rq = await api.enterprises.create_economic({'name':values.category}).then((r)=> {
+          getData()
+          setIsOther(false)
+        })
+      }
 
        updateEnterprise(attr.dispatch, attr.enterprise.id, values)
     }
@@ -109,6 +120,23 @@ const FormSteps = (attr) =>{
             'date_jurisdiction':moment(attr.date_jurisdiction)         
         }
     }
+
+    const getData = async() => {
+      const rq = await api.enterprises.list_economic().then((res)=> {
+        setEconomicActivities(res.data.results)
+      }) 
+    }
+
+    const delteEconomic = async(id)=>{
+      const rq = await api.enterprises.delete_economic(id).then((r)=> {
+        notification.success({message:'Actividad eliminada correctamente'})
+      })
+    }
+
+    useEffect(()=> {
+      getData()
+    }, [])
+
 
     return(   
         <>         
@@ -246,9 +274,9 @@ const FormSteps = (attr) =>{
                                     <Option value="Cooperativa">Cooperativa</Option>
                                 </Select>                            
                             </Form.Item>
-                            <Form.Item name="number_starts" rules={[{ required: false, message: 'Ingresa el numero de arranques'}]}>
-                                <InputNumber style={{width: '100%'}} placeholder="Cantidad de arranques"/>
-                            </Form.Item> 
+                            <Form.Item name="amount_regularized" label="Cantidad de pozos">
+                                <InputNumber style={{width:'100%'}} placeholder="Numero de pozos"/>
+                            </Form.Item>
                             <Form.Item name="date_jurisdiction">
                                 <DatePicker locale={locale} size={'large'} style={{width:'100%'}} placeholder="Fecha de Constitución"/>
                             </Form.Item>
@@ -256,19 +284,18 @@ const FormSteps = (attr) =>{
                         }
                         {attr.enterprise.type_client === 'Empresa' &&
                             <>
-                            <Form.Item name="amount_regularized" label="Derechos regularizados">
-                                <InputNumber style={{width:'100%'}} placeholder="Cantidad de derechos"/>
+                            <Form.Item name="amount_regularized" label="Cantidad de pozos">
+                                <InputNumber style={{width:'100%'}} placeholder="Numero de pozos"/>
                             </Form.Item>
-                            <Form.Item name="flow_rates" label="Caudales(litros-seg)">
-                                <Input style={{width:'100%'}} placeholder="Cantidad de caudales"/>
+                            <Form.Item name="flow_rates" label="Cantidad de pozos regularizados">
+                                <Input style={{width:'100%'}} placeholder="Numero de pozos regularizados"/>
                             </Form.Item>
-                            <Form.Item label="Categoria" name="category" rules={[{ required: false, message: 'Selecciona una opcion'}]}>                                
-                                <Select placeholder="Administrado por" >
-                                    <Option value="Estándar Mayor" >Estándar Mayor</Option>
-                                    <Option value="Estándar medio">Estándar medio</Option>
-                                    <Option value="Estándar menor" >Estándar menor</Option>
-                                    <Option value="Estándar caudales muy pequeños">Estándar caudales muy pequeños</Option>
-                                </Select>                            
+                            <Form.Item label="Actividad economica" name="category" rules={[{ required: false, message: 'Selecciona una opcion'}]}>                                
+                              {isOther ? <Input />:
+                                <Select onChange={(value)=>value === 'Otro' ? setIsOther(true):setIsOther(false)} placeholder="Selecciona una opción" >
+                                {economicActivities.map((x)=><><Option value={x.name}>{x.name} </Option></>)}                                      
+                                  <Option value="Otro">Otro</Option>
+                                </Select>}                  
                             </Form.Item>
                             </>
                             

@@ -16,6 +16,13 @@ class ExternalClient(ModelApi):
 	def __str__(self):
 		return str(self.name_enterprise)
 
+class EconomicActivity(ModelApi):
+    name = models.CharField(max_length=1200)
+    
+    def __str__(self):
+        return self.name
+
+
 
 class Client(ModelApi):
 	
@@ -102,3 +109,12 @@ class Employee(ModelApi):
 
 	def __str__(self):
 		return self.name + self.enterprise
+
+class Project(ModelApi):
+    name = models.CharField(max_length=2000)
+    code = models.CharField(max_length=120)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.code
+

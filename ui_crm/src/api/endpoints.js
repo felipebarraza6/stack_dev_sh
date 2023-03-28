@@ -234,6 +234,22 @@ const get_list_quotation = async()=>{
   return rq
 }
 
+const list_economic = async() => {
+  const rq = await GET('economic_activities/')
+  return rq
+}
+
+const create_economic = async(data) => {
+  const rq = await POST('economic_activities/', data)
+  return rq
+}
+
+const delete_economic = async(id) => {
+  const rq = await DELETE(`economic_activities/${id}/`)
+  return rq
+}
+
+
 const api = {
     user:{
         login,
@@ -254,7 +270,10 @@ const api = {
         create_enterprise,
         delete_enterprise,
         update_enterprise,
-        search_enterprise
+        search_enterprise,
+        list_economic,    
+        create_economic,
+        delete_economic
     },
     employess:{
         get_totals_employees,

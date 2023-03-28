@@ -46,22 +46,17 @@ def get_novus_and_save_in_api():
                 if data.get("result"):
                     response["total"] = data.get("result")[0].get("value")
                 else:
-                    response["total"] = "0"
+                    response["total"] = "0"        
         
+        serializer = InteractionDetailModelSerializer(data=response)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()   
+
         if client.is_dga:
             try:
                 send(client, response)
-                serializer = InteractionDetailModelSerializer(data=response)
-                serializer.is_valid(raise_exception=True)
-                serializer.save()
-            except:
-                serializer = InteractionDetailModelSerializer(data=response)
-                serializer.is_valid(raise_exception=True)
-                serializer.save()
-        else:
-            serializer = InteractionDetailModelSerializer(data=response)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
+            except Exception as e:
+                print("Error al enviar: ", client, response)
 
         
 

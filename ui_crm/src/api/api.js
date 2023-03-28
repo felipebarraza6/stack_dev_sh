@@ -1,8 +1,8 @@
 
 import axios from 'axios'
 
-const BASE_URL = 'https://api.smarthydro.cl/api/'
-//const BASE_URL = 'http://localhost:8000/api/'
+//const BASE_URL = 'https://api.smarthydro.cl/api/'
+const BASE_URL = 'http://localhost:8000/api/'
 
 
 export const INSTANCE = axios.create({

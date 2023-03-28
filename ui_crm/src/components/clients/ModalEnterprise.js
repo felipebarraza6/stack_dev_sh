@@ -38,9 +38,9 @@ const ModalEnterprise = (data) =>{
 
                 {data.type_client === 'Empresa' &&
                     <>
-                        {data.amount_regularized ? <Tag color="green">Derechos regularizados</Tag>: <Tag color="red">Derechos regularizados</Tag>}
-                        {data.flow_rates ? <Tag color="green">Caudales</Tag>: <Tag color="red">Caudales</Tag>}
-                        {data.category ? <Tag color="green">Categoría</Tag>: <Tag color="red">Categoría</Tag>}
+                        {data.amount_regularized ? <Tag color="green">Cantidad de pozos</Tag>: <Tag color="red">Cantidad de pozos</Tag>}
+                        {data.flow_rates ? <Tag color="green">Cantidad de pozos regularizados</Tag>: <Tag color="red">Cantidad de pozos regularizados</Tag>}
+                        {data.category ? <Tag color="green">Actividad economica</Tag>: <Tag color="red">Actividad economica</Tag>}
                     </>  
                 }
 
@@ -70,17 +70,17 @@ const ModalEnterprise = (data) =>{
             {data.type_client === 'Empresa' &&
             
             <Descriptions style={{marginTop:'30px'}} title="Datos de Empresa" bordered>
-                <Descriptions.Item label="Derechos Regularizados">{data.amount_regularized ? data.amount_regularized : 'S/D'}</Descriptions.Item>
-                <Descriptions.Item label="Caudales">{data.flow_rates ? data.flow_rates : 'S/D'}</Descriptions.Item>
-                <Descriptions.Item label="Categoría">{data.category ? data.category : 'S/D'}</Descriptions.Item>                
+                <Descriptions.Item label="Cantidad de pozos">{data.amount_regularized ? data.amount_regularized : 'S/D'}</Descriptions.Item>
+                <Descriptions.Item label="Cantidad de pozos regularizados">{data.flow_rates ? data.flow_rates : 'S/D'}</Descriptions.Item>
+                <Descriptions.Item label="Actividad economica">{data.category ? data.category : 'S/D'}</Descriptions.Item>                
             </Descriptions>
             
             }
 
             {data.type_client === 'Planta APR' &&
             <Descriptions style={{marginTop:'30px'}} title="Datos de Planta APR" bordered>
-                <Descriptions.Item label="Derechos Regularizados">{data.administered ? data.administered : 'S/D'}</Descriptions.Item>
-                <Descriptions.Item label="Cantidad de arranques">{data.number_starts ? data.number_starts : 'S/D'}</Descriptions.Item>
+                <Descriptions.Item label="Cantidad de pozos">{data.administered ? data.administered : 'S/D'}</Descriptions.Item>
+                <Descriptions.Item label="Cantidad de pozos regularizados">{data.number_starts ? data.number_starts : 'S/D'}</Descriptions.Item>
                 <Descriptions.Item label="Fecha de Constitución">{data.date_jurisdiction ? data.date_jurisdiction : 'S/D'}</Descriptions.Item>
                 <Descriptions.Item label="Fecha de renovación de directorio">{data.date_jurisdiction ? difference : 'S/D'}</Descriptions.Item>                
             </Descriptions>

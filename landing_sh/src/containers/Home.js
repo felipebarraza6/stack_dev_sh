@@ -20,6 +20,7 @@ import { UserOutlined } from '@ant-design/icons'
 import ThankYou from '../components/pages/ThankYou'
 import WebinarRetrieve from '../components/webinars/webinarRetrieve'
 import QuotationExternalClients from './Quotation'
+import QuotationDefine from './QuotationDefine'
 const { Header, Content, Footer } = Layout
 
 const Home = () => {
@@ -111,6 +112,9 @@ const Home = () => {
               <Route exact path='/quotations/new' >
                 <QuotationExternalClients />
               </Route>
+              <Route exact path='/quotations/client/:id' component={QuotationExternalClients} >
+              </Route>
+
               <Route exact path='/dgaform/external_client/:id' component={ContainerFormDga} >
               </Route>
               <Route exact path='/contacto'>

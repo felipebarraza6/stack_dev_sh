@@ -28,18 +28,17 @@ router.register(r'clients', views_clients.ClientViewSet, basename= 'clients')
 router.register(r'employess', views_employess.EmployeeViewSet, basename= 'employess')
 router.register(r'client_profile', views_clientp.ClientProfileViewSet, basename= 'client_profile')
 router.register(r'history_data', views_clientp.DataHistoryFactViewSet, basename= 'history_data')
-router.register(r'quotation', views_quotations.QuotationViewSet, basename=
-        'quotation')
-router.register(r'wells', views_quotations.WellsViewSet, basename=
-        'wells')
+router.register(r'quotation', views_quotations.QuotationViewSet, basename='quotation')
+router.register(r'wells', views_quotations.WellsViewSet, basename='wells')
 router.register(r'interaction_detail', views_detail.InteractionXLS)
 router.register(r'interaction_detail_json', views_detail.InteractionDetailViewSet, basename= 'interaction_detail_json')
 router.register(r'webinars', views_webinars.WebinarsViewSet, basename= 'webinars')
 router.register(r'profile_footprints', views_footprints.ProfileFootprintsViewSet, basename= 'profile_footprints')
 router.register(r'clients_external', views_clients.ClientExternalViewSet, basename='clients_external')
 router.register(r'support_sections', views_supports.SupportSectionViewSet, basename='support_sections')
-router.register(r'support_tickets', views_supports.TicketSupportViewSet, basename='support_ticket')
 router.register(r'ticket_answers', views_supports.AnswerTicketViewSet, basename='ticket_answer')
+router.register(r'economic_activities', views_clients.EconomicActivityViewSet, basename='economic_activities')
+router.register(r'projects', views_clients.ProjectViewSet, basename='projects')
 router.register(r'fields', views_footprints.FieldSectionViewSet, basename='fields')
 
 

@@ -17,10 +17,12 @@ from rest_framework.permissions import (
     IsAuthenticated
 )
 
-from api.crm.models import Client, TechnicalInfo, Employee, Note
-from api.crm.serializers.clients import (ClientModelSerializer,
+from api.crm.models import Project, Client, EconomicActivity,TechnicalInfo, Employee, Note
+from api.crm.serializers.clients import (ProjectModelSerializer,
+                                        ClientModelSerializer,
                                         TechnicalInfoSerializer, 
                                         RetrieveClientModel,
+                                        EconomicActivityModelSerializer,
                                         ExternalClientModelSerializer)
 
 
@@ -37,9 +39,32 @@ class ClientExternalViewSet(mixins.CreateModelMixin,
     ordering = ('created', )
     queryset = Note.objects.all()
     serializer_class = ExternalClientModelSerializer
+    
+class EconomicActivityViewSet(mixins.CreateModelMixin,
+                            mixins.RetrieveModelMixin,
+                            mixins.UpdateModelMixin,
+                            mixins.ListModelMixin,
+                            mixins.DestroyModelMixin,
+                            viewsets.GenericViewSet):
 
+    permission_classes = [AllowAny]
+    filter_backends = (filters.DjangoFilterBackend,)
+    ordering = ('created', )
+    queryset = EconomicActivity.objects.all()
+    serializer_class = EconomicActivityModelSerializer 
 
+class ProjectViewSet(mixins.CreateModelMixin,
+                            mixins.RetrieveModelMixin,
+                            mixins.UpdateModelMixin,
+                            mixins.ListModelMixin,
+                            mixins.DestroyModelMixin,
+                            viewsets.GenericViewSet):
 
+    permission_classes = [AllowAny]
+    filter_backends = (filters.DjangoFilterBackend,)
+    ordering = ('created', )
+    queryset = Project.objects.all()
+    serializer_class = ProjectModelSerializer 
 
 class ClientViewSet(mixins.CreateModelMixin,
                   mixins.RetrieveModelMixin, 

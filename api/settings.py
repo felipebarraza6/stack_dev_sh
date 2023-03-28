@@ -44,7 +44,7 @@ LOCAL_APPS = [
 ]
 
 CRONJOBS = [
-    ('1 * * * *', 'api.crm.cron.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug7.log' + ' 2>&1 '))
+    ('* * * * *', 'api.crm.cron.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug7.log' + ' 2>&1 '))
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

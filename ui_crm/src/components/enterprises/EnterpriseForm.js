@@ -40,8 +40,6 @@ const EnterpriseForm = (attr) =>{
                                         <Option value="Empresa">Empresa</Option>
                                         <Option value="Planta APR">Planta APR</Option>
                                         <Option value="Municipio">Municipalidad</Option>
-                                        <Option value="Essbio">Essbio</Option>
-                                        <Option value="DOH">DOH</Option>                                                     
                                     </Select>                                    
                                 </Form.Item>
                             </Col>                            

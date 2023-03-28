@@ -86,7 +86,7 @@ const Home = () => {
     return(<Table bordered
         columns = {[          
           {
-            title: 'Datos de contacto',
+            title: 'Cliente',
             render: (x)=> <>
               {x.external_client.name_enterprise.length < 8 ? 
                <Button 

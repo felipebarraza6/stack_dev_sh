@@ -2,7 +2,7 @@
 from django.db import models
 import uuid
 from .utils import ModelApi
-from .clients import Client, ExternalClient 
+from .clients import Client, Employee, ExternalClient 
 
 
 class Quotation(ModelApi):
@@ -12,6 +12,7 @@ class Quotation(ModelApi):
          default = uuid.uuid4,
          editable = False)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, blank=True, null=True)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, blank=True, null=True)
     external_client = models.ForeignKey(ExternalClient, on_delete=models.CASCADE, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_external_client = models.BooleanField(default=False)

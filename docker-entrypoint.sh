@@ -6,7 +6,4 @@ if [ "$1" = cron ]; then
   ./manage.py crontab add
   ./manage.py crontab show
 fi
-
-# Launch the main container command passed as arguments.
-echo "$@"
 exec "$@"

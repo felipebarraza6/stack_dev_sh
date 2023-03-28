@@ -1,5 +1,5 @@
 from .utils import ModelApi
-from .clients import ExternalClient, TechnicalInfo, Client, Employee
+from .clients import Project, EconomicActivity, ExternalClient, TechnicalInfo, Client, Employee
 from .actions import Action, TypeAction
 from .users import User
 from .interaction_detail import InteractionDetail

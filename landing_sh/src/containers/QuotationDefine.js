@@ -3,20 +3,13 @@ import React, {
   useReducer } from 'react'
 
 import { quotation_reducers } from '../reducers/quotations'
-import Header from '../components/quotations/Header'
+import HeaderDefine from '../components/quotations/HeaderDefine'
 import ContainerQuotation from '../components/quotations/ContainerQuotation'
 
 export const QuotationContext = createContext()
 
-const Quotation = ({ match }) => {
+const QuotationDefine = () => {
   
-  var id_person = null
-  
-  if(match){
-    id_person = match.params.id
-  }
-
-  console.log(id_person)
   const initalState = {
     client: null,
     wells: { 
@@ -45,7 +38,7 @@ const Quotation = ({ match }) => {
     counter_wells: 0,
     date_now: new Date(),
     steps: { 
-      current: match ? 1: 0,
+      current: 0,
       lastCurrent: 0,
       step01: { title: 'Ingresa tus datos de contacto', finish: false, active: true, hide: false },
       step02: { title:'Agregar Pozo', finish: false, active: true, hide: false },
@@ -67,11 +60,10 @@ const Quotation = ({ match }) => {
 
 
   return(<QuotationContext.Provider value={{state, dispatch}}>
-    <Header />
-    <ContainerQuotation />
+    <HeaderDefine />
   </QuotationContext.Provider>)
 
 }
 
 
-export default Quotation
+export default QuotationDefine
