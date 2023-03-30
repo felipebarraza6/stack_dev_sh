@@ -16,7 +16,6 @@ const Quotation = ({ match }) => {
     id_person = match.params.id
   }
 
-  console.log(id_person)
   const initalState = {
     client: null,
     wells: { 

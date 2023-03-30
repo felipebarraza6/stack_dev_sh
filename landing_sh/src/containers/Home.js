@@ -11,6 +11,7 @@ import Services from '../components/Services'
 import Contact from '../components/Contact'
 import Collaborators from '../components/Collaborators'
 import FooterInfo from '../components/FooterInfo'
+import InternalLifting from '../components/pages/InternalLifting'
 import FooterFingerprint from '../components/FooterFingerprint'
 import { BrowserRouter, Redirect, Route } from 'react-router-dom'
 import ContainerFormDga from '../components/dgaform/ContainerFormDga'
@@ -110,7 +111,11 @@ const Home = () => {
                 <Redirect to='/quotations/new' />
               </Route>
               <Route exact path='/quotations/new' >
+                
                 <QuotationExternalClients />
+              </Route>
+              <Route exact path='/internal_lifting' >
+                <InternalLifting />
               </Route>
               <Route exact path='/quotations/client/:id' component={QuotationExternalClients} >
               </Route>

@@ -19,12 +19,12 @@ const ContainerQuotation = () => {
     },
   }
 
-  return(<Row style={{paddingBottom:'22px'}} >
+  return(<Row>
         {window.innerWidth  > 800 && <Col span={4}>
           <TimeLineProcess />
         </Col>}        
         <Col span={window.innerWidth > 800 ? 20:24}>
-        <Row justify={'center'} style={styles.container}>
+        <Row  style={styles.container}>
           {state.steps.current === 0 && <Col>
             <Title level={3}>Primero debes ingresar tus datos de contacto...</Title>
             <FormClientExternal />

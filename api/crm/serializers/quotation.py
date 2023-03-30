@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from api.crm.models.quotation import Note, Quotation, Well
 from api.crm.models.clients import ExternalClient
+from api.crm.serializers.clients import ClientModelSerializer
+
 from .clients import ExternalClientModelSerializer
 
 class NoteModelSerializer(serializers.ModelSerializer):
@@ -21,6 +23,7 @@ class WellsModelSerializer(serializers.ModelSerializer):
 class QuotationRetrieveModelSerializer(serializers.ModelSerializer):
     external_client = ExternalClientModelSerializer()
     wells = serializers.SerializerMethodField('get_wells')
+    client = ClientModelSerializer()
 
     def get_wells(self, quotation):
         qs = Well.objects.filter(quotation_id=quotation.uuid)

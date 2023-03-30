@@ -12,12 +12,14 @@ import { DashboardOutlined,
          OrderedListOutlined,
          UserOutlined,
          UnorderedListOutlined,
+         ProfileFilled,
          FolderOpenOutlined, 
          BuildFilled,
          FileOutlined } from '@ant-design/icons'
 
 //Build
 import logo from '../build/images/logo-white.png'
+import InternalLifting from '../components/internal_lifting/Home'
 
 //Components
 import MenuHeader from '../components/home/MenuHeader'
@@ -64,9 +66,23 @@ const Home = () =>{
                           <UserOutlined />
                           Personas
                         </Link>
+                        
                       </Menu.Item>
+                      <Menu.Item key="13">
+                      <Link to="/quotations">
+                          <ProfileFilled />
+                           Levantamiento clientes
+                        </Link>                 
+                      </Menu.Item>
+                      <Menu.Item key="12">
+                      <Link to="/internal_lifting">
+                          <ProfileFilled />
+                           Levantamiento terreno
+                        </Link>                 
+                      </Menu.Item>
+                      
                                       </Menu.SubMenu>
-<Menu.SubMenu title={<><FolderOutlined />Proyectos</>} >
+<Menu.SubMenu title={<><FolderOutlined />Proyectos (en desarrollo...)</>} >
                       <Menu.Item key="8">
                         <Link to="/projects">
                           <FolderOpenOutlined/>
@@ -103,6 +119,7 @@ const Home = () =>{
                     <Route exact path='/clients' component={Clients} />
                     <Route exact path='/actions' component={Tasks} />
                     <Route exact path='/quotations' component={HomeQuotation} />
+                    <Route exact path='/internal_lifting' component={InternalLifting} />
                     <Route exact path='/projects' component={Projects} />
                     <Route exact path='/files' component={Files} />
                     <Route path="*" component={NotFound} />

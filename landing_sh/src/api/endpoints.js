@@ -95,10 +95,18 @@ const update_field = async(id, data)=>{
   return rq
 }
 
+const listClients = async()=> {
+  const rq = await GET('clients/')
+  return rq.data
+}
+
 
 
 
 export const callbacks = {
+  clients: {
+    list: listClients
+  },
   fingerprint: {
     retrieve: get_fingerprint,
     update_field: update_field,

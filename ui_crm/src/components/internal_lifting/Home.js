@@ -5,12 +5,12 @@ import { Table, Button, Modal,
           Row, Col, Tag } from 'antd'
 import { SendOutlined, CloudDownloadOutlined, EyeFilled, FileImageFilled } from '@ant-design/icons'
 
-const Home = () => {
+const InternalLifting = () => {
 
     const [listQuotations, setListQuotations] = useState([])
     
     async function getData(){
-      const rq = await api.quotation.list().then((x)=> {
+      const rq = await api.quotation.listf().then((x)=> {
         console.log(x)
         setListQuotations(x.data.results)
       })
@@ -31,13 +31,47 @@ const Home = () => {
                   </Descriptions.Item>
                   <Descriptions.Item label='Email' span={3}>
                     <b>{client.mail_contact}</b>
-                  </Descriptions.Item>
-                  <Descriptions.Item label='Nombre empresa' span={3}>
-                    <b>{client.name_enterprise}</b>
-                  </Descriptions.Item>
+                  </Descriptions.Item>                  
           </Descriptions>
       })
     }
+
+    function modalRetrieveEnterprise(client) {
+        Modal.info({ 
+          width: 750,
+          okText: 'Volver',
+          title: client.name,
+          content: <Descriptions bordered layout='horizontal' style={{marginTop:'50px'}} size='middle'>
+                    <Descriptions.Item label='Nombre' span={3}>
+                      <b>{client.name}</b>
+                    </Descriptions.Item>            
+                    <Descriptions.Item label='Teléfono' span={3}>
+                      <b>{client.phone_number}</b>
+                    </Descriptions.Item>
+                    <Descriptions.Item label='Email' span={3}>
+                      <b>{client.email}</b>
+                    </Descriptions.Item>                  
+                    <Descriptions.Item label='Region' span={3}>
+                      <b>{client.region}</b>
+                    </Descriptions.Item> 
+                    <Descriptions.Item label='Comuna' span={3}>
+                      <b>{client.commune}</b>
+                    </Descriptions.Item> 
+                    <Descriptions.Item label='Provincia' span={3}>
+                      <b>{client.province}</b>
+                    </Descriptions.Item> 
+                    <Descriptions.Item label='Direccion' span={3}>
+                      <b>{client.address_exact}</b>
+                    </Descriptions.Item> 
+                    <Descriptions.Item label='Cantidad de pozos' span={3}>
+                      <b>{client.amount_regularized}</b>
+                    </Descriptions.Item> 
+                    <Descriptions.Item label='Cantidad de pozos regularizados' span={3}>
+                      <b>{client.flow_rates}</b>
+                    </Descriptions.Item>
+            </Descriptions>
+        })
+      }
     
     function modalDataWells(wells) {
       Modal.info({
@@ -50,7 +84,7 @@ const Home = () => {
                 {x.img1 && <Button icon={<FileImageFilled/>} type='primary' style={{margin:'5px'}} onClick={()=>window.open(`https://api.smarthydro.cl${x.img1}`)}>General</Button>}
                 {x.img2 && <Button icon={<FileImageFilled/>}  type='primary' style={{margin:'5px'}} onClick={()=>window.open(`https://api.smarthydro.cl${x.img2}`)} >Detalle salida pozo</Button>}
 
-                <Descriptions bordered title={x.exact_address}>
+                <Descriptions bordered size='small' title={x.exact_address}>
                   <Descriptions.Item span={3} label={<>Caudal otorgado <Tag color='geekblue'>(Lt/SEG)</Tag></>}>
                     {parseFloat(x.granted_flow).toFixed(2)}
                   </Descriptions.Item>
@@ -72,6 +106,9 @@ const Home = () => {
                   <Descriptions.Item span={3} label={<>Diámetro exterior ducto salida bomba <Tag color='geekblue'>(MM/PULG)</Tag></>}>
                     {parseFloat(x.duct_outside_diameter).toFixed(2)}
                   </Descriptions.Item>
+                  <Descriptions.Item span={3} label={<>Cuenta con flujometro? <Tag color='geekblue'>(MM/PULG)</Tag></>}>
+                    {x.has_flow_sensor}
+                  </Descriptions.Item>                  
                 </Descriptions>
               </Card></Col>)
           })}
@@ -86,10 +123,34 @@ const Home = () => {
 
     return(<Table bordered
         columns = {[          
+            {
+                title: 'Cliente',
+                render: (x)=> <>
+                  {x.client < 8  ? 
+                   <Button 
+                   type='primary'
+                   ghost
+                   style={{textAlign:'left'}}
+                   block
+                   icon={<EyeFilled style={{marginRight:'5px'}} />}
+                   onClick={()=>modalRetrieveEnterprise(x.client)}>
+                      {x.client.name}                                 
+                 </Button>:<Tooltip color={'#f50'} title={x.client.name}><Button 
+                   type='primary'
+                   ghost
+                   style={{textAlign:'left'}}
+                   block
+                   icon={<EyeFilled style={{marginRight:'5px'}} />}
+                   onClick={()=>modalRetrieveEnterprise(x.client)}>
+                      {x.client.name.slice(0,20)}...                                 
+                 </Button></Tooltip>
+                  }               
+                </>
+              },
           {
-            title: 'Cliente',
+            title: 'Receptor de visita',
             render: (x)=> <>
-              {x.external_client.name_enterprise.length < 8 ? 
+              {x.external_client.name_contact.length < 8 ? 
                <Button 
                type='primary'
                ghost
@@ -97,15 +158,15 @@ const Home = () => {
                block
                icon={<EyeFilled style={{marginRight:'5px'}} />}
                onClick={()=>modalRetrieveClient(x.external_client)}>
-                  {x.external_client.name_enterprise}                                 
-             </Button>:<Tooltip color={'#f50'} title={x.external_client.name_enterprise}><Button 
+                  {x.external_client.name_contact}                                 
+             </Button>:<Tooltip color={'#f50'} title={x.external_client.name_contact}><Button 
                type='primary'
                ghost
                style={{textAlign:'left'}}
                block
                icon={<EyeFilled style={{marginRight:'5px'}} />}
                onClick={()=>modalRetrieveClient(x.external_client)}>
-                  {x.external_client.name_enterprise.slice(0,20)}...                                 
+                  {x.external_client.name_contact.slice(0,20)}...                                 
              </Button></Tooltip>
               }               
             </>
@@ -136,4 +197,4 @@ const Home = () => {
 }
 
 
-export default Home
+export default InternalLifting

@@ -69,7 +69,8 @@ class QuotationViewSet(mixins.CreateModelMixin,
         class Meta:
             model = Quotation
             fields = {
-                    'client': ['exact']
+                'client': ['exact'],
+                'is_external_client': ['exact']
             }
 
     filterset_class = QuotationFilter

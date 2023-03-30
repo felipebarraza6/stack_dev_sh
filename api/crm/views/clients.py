@@ -17,7 +17,7 @@ from rest_framework.permissions import (
     IsAuthenticated
 )
 
-from api.crm.models import Project, Client, EconomicActivity,TechnicalInfo, Employee, Note
+from api.crm.models import ExternalClient, Project, Client, EconomicActivity,TechnicalInfo, Employee, Note
 from api.crm.serializers.clients import (ProjectModelSerializer,
                                         ClientModelSerializer,
                                         TechnicalInfoSerializer, 
@@ -37,7 +37,7 @@ class ClientExternalViewSet(mixins.CreateModelMixin,
     permission_classes = [AllowAny]
     filter_backends = (filters.DjangoFilterBackend,)
     ordering = ('created', )
-    queryset = Note.objects.all()
+    queryset = ExternalClient.objects.all()
     serializer_class = ExternalClientModelSerializer
     
 class EconomicActivityViewSet(mixins.CreateModelMixin,
@@ -74,9 +74,10 @@ class ClientViewSet(mixins.CreateModelMixin,
                   viewsets.GenericViewSet,):
 
     def get_permissions(self):
-           
-        permissions = [IsAuthenticated]
-           
+        if self.action in ["list",]:
+            permissions = [AllowAny]
+        else:
+            permissions = [IsAuthenticated]
         return [p() for p in permissions]
     
     filter_backends = (filters.DjangoFilterBackend,)

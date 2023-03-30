@@ -230,9 +230,14 @@ const search_type_task = async(name_type_task)=>{
 }
 
 const get_list_quotation = async()=>{
-  const rq = await GET('quotation/')
+  const rq = await GET('quotation/?is_external_client=true')
   return rq
 }
+
+const get_list_quotationf = async()=>{
+    const rq = await GET('quotation/?is_external_client=false')
+    return rq
+  }
 
 const list_economic = async() => {
   const rq = await GET('economic_activities/')
@@ -291,7 +296,8 @@ const api = {
         search_type_task
     },
     quotation: {
-      list: get_list_quotation
+      list: get_list_quotation,
+      listf: get_list_quotationf,
     } 
 }
 

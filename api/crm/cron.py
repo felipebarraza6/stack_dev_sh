@@ -1,5 +1,5 @@
-from .models import (InteractionDetail, User, 
-                    Client, ProfileClient)
+from django.db.models import Count
+from .models import (InteractionDetail, User, Client, ProfileClient)
 from .serializers import InteractionDetailModelSerializer
 import requests
 from datetime import datetime
@@ -7,10 +7,9 @@ from zeep import Client
 import pytz
 from .send_data_dga import send
 
-
 def get_novus_and_save_in_api():
     clients = ProfileClient.objects.all()
-    chile = pytz.timezone("America/Santiago") 
+    chile = pytz.timezone("America/Santiago")
 
     for client in clients:
         list_variables = {
@@ -24,12 +23,12 @@ def get_novus_and_save_in_api():
             parsed_url = (
                 f"https://api.tago.io/data/?variable={list_variables[variable]}&query=last_item"
             )
-            
+
             request = requests.get(parsed_url, headers={"authorization": client.token_service})
-            
+
             data = request.json()
 
-            response["date_time_medition"] = datetime.now(chile).strftime("%Y-%m-%dT%H:00:00")                       
+            response["date_time_medition"] = datetime.now(chile).strftime("%Y-%m-%dT%H:00:00")
             response["profile_client"] = client.id
 
             if variable == "nivel":
@@ -46,21 +45,23 @@ def get_novus_and_save_in_api():
                 if data.get("result"):
                     response["total"] = data.get("result")[0].get("value")
                 else:
-                    response["total"] = "0"        
-        
+                    response["total"] = "0"
+
         serializer = InteractionDetailModelSerializer(data=response)
         serializer.is_valid(raise_exception=True)
-        serializer.save()   
+        serializer.save()
 
-        if client.is_dga:
-            try:
-                send(client, response)
-            except Exception as e:
-                print("Error al enviar: ", client, response)
+        # Eliminar los registros duplicados basados en el campo 'total'
+        # Obtener una consulta con los registros duplicados
+        duplicates = InteractionDetail.objects.values('date_time_medition').annotate(count=Count('date_time_medition')).filter(count__gt=1)
 
-        
+        # Eliminar los registros duplicados excepto uno
+        for duplicate in duplicates:
+            InteractionDetail.objects.filter(total=duplicate['date_time_medition']).exclude(
+                id=InteractionDetail.objects.filter(total=duplicate['date_time_medition']).earliest('date_time_medition').id).delete()
+
+
 
 
 def main():
     get_novus_and_save_in_api()
-
