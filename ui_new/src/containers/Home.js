@@ -20,12 +20,13 @@ const Home = () => {
         </Col>
         <Col span={24}>
             <Row >
+                {window.innerWidth>900 && 
                 <Col span={3} style={{padding:'5px'}}>                    
                     <SiderRight />                    
-                </Col>
-                <Col span={17}>
+                </Col>}
+                <Col span={window.innerWidth > 900? 17:24}>
                     <Row justify='center'>
-                        <Col span={24}>
+                        <Col span={24} >
                             <ListWells />
                         </Col>
                         <Col span={24}>
@@ -38,9 +39,10 @@ const Home = () => {
                         </Col>
                     </Row>                    
                 </Col>     
-                <Col span={4} style={{padding:'5px'}}>
+                {window.innerWidth>900 && 
+                <Col span={window.innerWidth > 900?4:24} style={{padding:'5px'}}>
                     <SiderLeft />
-                </Col>
+                </Col>}
             </Row>
         </Col>
         </BrowserRouter>     

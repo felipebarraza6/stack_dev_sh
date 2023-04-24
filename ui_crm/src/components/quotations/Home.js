@@ -3,7 +3,7 @@ import  api from '../../api/endpoints'
 import { Table, Button, Modal, 
           Tooltip, Card, Descriptions,
           Row, Col, Tag } from 'antd'
-import { SendOutlined, CloudDownloadOutlined, EyeFilled, FileImageFilled } from '@ant-design/icons'
+import { UserOutlined, CloudDownloadOutlined, EyeFilled, FileImageFilled } from '@ant-design/icons'
 
 const Home = () => {
 
@@ -20,6 +20,7 @@ const Home = () => {
     function modalRetrieveClient(client) {
       Modal.info({ 
         width: 750,
+        icon:<UserOutlined />,
         okText: 'Volver',
         title: client.name_enterprise,
         content: <Descriptions bordered layout='horizontal' style={{marginTop:'50px'}} size='middle'>
@@ -41,16 +42,18 @@ const Home = () => {
     
     function modalDataWells(wells) {
       Modal.info({
-        width: 1000,  
+        width: '100%',  
         icon:<></>,    
+        style: {top:0},
         okText:'Volver',  
-        content: <Row>
+        content: <Row justify='center' align='middle'>
           {wells.map((x)=> {
-            return(<Col span={12}><Card title={x.name}>
+            return(<>
+            <Col span={8}><Card bordered title={x.name} style={{border:'1px solid black', borderRadius:'10px', marginRight:'10px'}}>
                 {x.img1 && <Button icon={<FileImageFilled/>} type='primary' style={{margin:'5px'}} onClick={()=>window.open(`https://api.smarthydro.cl${x.img1}`)}>General</Button>}
                 {x.img2 && <Button icon={<FileImageFilled/>}  type='primary' style={{margin:'5px'}} onClick={()=>window.open(`https://api.smarthydro.cl${x.img2}`)} >Detalle salida pozo</Button>}
 
-                <Descriptions bordered title={x.exact_address}>
+                <Descriptions size='small' bordered title={x.exact_address}>
                   <Descriptions.Item span={3} label={<>Caudal otorgado <Tag color='geekblue'>(Lt/SEG)</Tag></>}>
                     {parseFloat(x.granted_flow).toFixed(2)}
                   </Descriptions.Item>
@@ -71,9 +74,12 @@ const Home = () => {
                   </Descriptions.Item>
                   <Descriptions.Item span={3} label={<>Diámetro exterior ducto salida bomba <Tag color='geekblue'>(MM/PULG)</Tag></>}>
                     {parseFloat(x.duct_outside_diameter).toFixed(2)}
+                  </Descriptions.Item>                  
+                  <Descriptions.Item span={3} label={<>Cuenta con flujometro? </>}>
+                    {x.has_flow_sensor}
                   </Descriptions.Item>
                 </Descriptions>
-              </Card></Col>)
+              </Card></Col></>)
           })}
         </Row>
       })
