@@ -26,7 +26,7 @@ const MyWell = () => {
 
     let month = dateToday.toLocaleString("es", {month: "long"})
     let day = dateToday.getDate()
-    let fechaConMes = `Ingresaras el periodo de correspondiente al ${dateToday.getFullYear()}` 
+    let fechaConMes = `Ingresaras el periodo de correspondiente al "${dateToday.getFullYear()}"` 
         
 
     useEffect(()=> {
