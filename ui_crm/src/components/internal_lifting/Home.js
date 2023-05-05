@@ -3,7 +3,7 @@ import  api from '../../api/endpoints'
 import { Table, Button, Modal, 
           Tooltip, Card, Descriptions,
           Row, Col, Tag } from 'antd'
-import { SendOutlined, CloudDownloadOutlined, EyeFilled, FileImageFilled } from '@ant-design/icons'
+import { UserOutlined, BuildOutlined, CloudDownloadOutlined, EyeFilled, FileImageFilled } from '@ant-design/icons'
 
 const InternalLifting = () => {
 
@@ -22,6 +22,7 @@ const InternalLifting = () => {
         width: 750,
         okText: 'Volver',
         title: client.name_enterprise,
+        icon: <UserOutlined />,
         content: <Descriptions bordered layout='horizontal' style={{marginTop:'50px'}} size='middle'>
                   <Descriptions.Item label='Nombre contacto' span={3}>
                     <b>{client.name_contact}</b>
@@ -39,6 +40,8 @@ const InternalLifting = () => {
     function modalRetrieveEnterprise(client) {
         Modal.info({ 
           width: 750,
+          style: {top:0},
+          icon: <BuildOutlined />,
           okText: 'Volver',
           title: client.name,
           content: <Descriptions bordered layout='horizontal' style={{marginTop:'50px'}} size='middle'>
@@ -75,12 +78,13 @@ const InternalLifting = () => {
     
     function modalDataWells(wells) {
       Modal.info({
-        width: 1000,  
+        width: '100%',  
         icon:<></>,    
+        style:{top:0},
         okText:'Volver',  
-        content: <Row>
+        content: <Row justify='center' align='middle'>
           {wells.map((x)=> {
-            return(<Col span={12}><Card title={x.name}>
+            return(<Col span={8}><Card title={x.name} style={{border:'1px solid black', borderRadius:'10px', marginRight:'10px'}}>
                 {x.img1 && <Button icon={<FileImageFilled/>} type='primary' style={{margin:'5px'}} onClick={()=>window.open(`https://api.smarthydro.cl${x.img1}`)}>General</Button>}
                 {x.img2 && <Button icon={<FileImageFilled/>}  type='primary' style={{margin:'5px'}} onClick={()=>window.open(`https://api.smarthydro.cl${x.img2}`)} >Detalle salida pozo</Button>}
 
@@ -106,7 +110,7 @@ const InternalLifting = () => {
                   <Descriptions.Item span={3} label={<>Diámetro exterior ducto salida bomba <Tag color='geekblue'>(MM/PULG)</Tag></>}>
                     {parseFloat(x.duct_outside_diameter).toFixed(2)}
                   </Descriptions.Item>
-                  <Descriptions.Item span={3} label={<>Cuenta con flujometro? <Tag color='geekblue'>(MM/PULG)</Tag></>}>
+                  <Descriptions.Item span={3} label={<>Cuenta con flujometro? </>}>
                     {x.has_flow_sensor}
                   </Descriptions.Item>                  
                 </Descriptions>

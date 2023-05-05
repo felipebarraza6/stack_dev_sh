@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Row, Col, Typography,
-        Input, Card } from 'antd'
+import { Row, Col, Typography, Modal,
+        Input, Card, Form, Button } from 'antd'
 
 import caudal_img  from '../../assets/images/caudal.png'
 import nivel_img  from '../../assets/images/nivel.png'
@@ -10,7 +10,7 @@ import { AppContext } from '../../App'
 import api_novus from '../../api/novus/endpoints'
 import { getNovusData } from './controller'
 
-const { Title } = Typography
+const { Title, Paragraph } = Typography
 
 const numberForMiles = new Intl.NumberFormat('de-DE')
 
@@ -21,7 +21,13 @@ const MyWell = () => {
     const [nivel, setNivel] = useState(0.0)
     const [acumulado, setAcumulado] = useState(0)
 
-    
+    let dateToday = new Date()
+    let fechaFormateada = dateToday.toLocaleDateString("es-CL")
+
+    let month = dateToday.toLocaleString("es", {month: "long"})
+    let day = dateToday.getDate()
+    let fechaConMes = `Ingresaras el periodo de correspondiente al ${dateToday.getFullYear()}` 
+        
 
     useEffect(()=> {
         getNovusData(setCaudal, setNivel, state, api_novus, setAcumulado, acumulado, nivel)
@@ -29,9 +35,28 @@ const MyWell = () => {
     }, [state.selected_profile])
 
     return(<Row justify={'center'} style={{padding:'20px'}}>
+                {state.selected_profile.title=='Coquimbo'? <Col span={20} style={{marginTop:'100px'}}>
+                  <Title level={3}>Ingreso de estandar menor</Title>
+                  <Paragraph><u><strong>{fechaConMes}</strong></u></Paragraph>
+                  <Form layout='inline' onFinish={()=>{
+                    Modal.success({title:'Datos ingresados correctament'})
+                  }}>
+                    <Form.Item>
+                      <Input placeholder='Caudal(Ltrs)' />
+                    </Form.Item>
+                    <Form.Item >
+                      <Input placeholder='Nivel(Mt)'/>
+                    </Form.Item>
+                    <Form.Item  >
+                      <Input placeholder='Acumulado(m³)'/>
+                    </Form.Item>
+                    <Button htmlType='submit' type='primary' style={{marginRight:'10px'}}>Ingresar</Button>
+                    <Button type='primary' danger>Limpiar</Button>
+                  </Form>
+                  </Col>:<>
                 <Col span={24}>
                     <Title level={2}>Mi Pozo</Title>
-                </Col>       
+                </Col> 
                 <Col span={window.innerWidth > 900 ? 6:24}>                                    
                     <Card hoverable style={{marginBottom:'10px', marginTop:'20px', border:'solid 1px grey', borderRadius:'15px', width:'350px'}}>
                         <Row align='middle'>
@@ -81,6 +106,7 @@ const MyWell = () => {
                        </Col>}
                        <Col>
                        </Col>
+</>}
                    </Row>)
 }
 
