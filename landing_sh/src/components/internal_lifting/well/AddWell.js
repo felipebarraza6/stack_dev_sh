@@ -22,7 +22,9 @@ const AddWell = () => {
     values = {
       name_well: values.name_well.toUpperCase(),
       type_captation: values.type_captation.toUpperCase(),
-      address_exact: values.address_exact.toUpperCase()
+      address_exact: values.address_exact.toUpperCase(),
+      latitude: coordinates.latitude,
+      longitude: coordinates.longitude
     }
 
     if(state.wells.list.length>0 && !state.wells.temporary_well.is_edit){
@@ -44,9 +46,6 @@ const AddWell = () => {
         data: values
       })
     }
-    
-
-    
   }
 
   useEffect(()=>{

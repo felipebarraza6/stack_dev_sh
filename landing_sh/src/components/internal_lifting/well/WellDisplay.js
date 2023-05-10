@@ -191,25 +191,23 @@ const WellDisplay = () => {
             <Col style={{ paddingLeft:state.wells.temporary_well.is_edit ? 
                     state.wells.temporary_well.is_load_image ? 
                         '24%':'25%' :'69%', 
-                    paddingTop:'110%', zIndex:10}}>
-                                
-                {state.wells.temporary_well.is_edit ? <>                     
-                    {state.wells.temporary_well.images  ? 
-                    <Button type='primary' style={{marginRight:'10px'}} icon={<FileImageFilled />} onClick={()=> activeImg('a') } >                        
-                        Imágenes
-                    </Button>:
-                    <Button type='primary' style={{marginRight:'10px'}} icon={<FileImageFilled />} onClick={()=> activeImg('a') } >                        
-                        Imágenes
-                    </Button>}
-                    <Button type='primary' icon={<ArrowRightOutlined />} onClick={()=> activeImg() } >
-                        Actualizar! y ver pozos                   
-                    </Button>
-                </>:<Popconfirm onCancel={()=>activeImg()} onConfirm={()=>activeImg('a')} style={{zIndex:2}} title="¿Quieres agregar imágenes?" okText='SI, agregar imágenes' cancelText="NO, continuar sin imágenes">                
-                    <Button type='primary' icon={<ArrowRightOutlined />} >
-                        Siguiente!                    
-                    </Button>
-                </Popconfirm>}
-                
+                    paddingTop:'110%', zIndex:10}}>                                
+                    {state.wells.temporary_well.is_edit ? <>                     
+                        {state.wells.temporary_well.images  ? 
+                        <Button type='primary' style={{marginRight:'10px'}} icon={<FileImageFilled />} onClick={()=> activeImg('a') } >                        
+                            Imágenes
+                        </Button>:
+                        <Button type='primary' style={{marginRight:'10px'}} icon={<FileImageFilled />} onClick={()=> activeImg('a') } >                        
+                            Imágenes
+                        </Button>}
+                        <Button type='primary' icon={<ArrowRightOutlined />} onClick={()=> activeImg() } >
+                            Actualizar! y ver pozos                   
+                        </Button>
+                    </>:<Popconfirm onCancel={()=>activeImg()} onConfirm={()=>activeImg('a')} style={{zIndex:2}} title="¿Quieres agregar imágenes?" okText='SI, agregar imágenes' cancelText="NO, continuar sin imágenes">                
+                        <Button type='primary' icon={<ArrowRightOutlined />} >
+                            Siguiente!                    
+                        </Button>
+                    </Popconfirm>}
             </Col>
         </Row>
     </>)

@@ -1,10 +1,10 @@
 import axios from 'axios'
 
 
-//export const BASE_URL = 'https://api.smarthydro.cl/api/'
-//export const BASE_URL_MEDIA = 'https://api.smarthydro.cl/'
-export const BASE_URL = 'http://localhost:8000/api/'
-export const BASE_URL_MEDIA = 'http://localhost:8000/'
+export const BASE_URL = 'https://api.smarthydro.cl/api/'
+export const BASE_URL_MEDIA = 'https://api.smarthydro.cl/'
+//export const BASE_URL = 'http://localhost:8000/api/'
+//export const BASE_URL_MEDIA = 'http://localhost:8000/'
 
 export const INSTANCE = axios.create({
     baseURL: BASE_URL,

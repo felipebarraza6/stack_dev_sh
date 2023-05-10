@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
-import { Tag, Card, InputNumber as Input, 
-        Col, Row, Badge, 
+import React, { useContext, useState } from 'react'
+import { Tag, Card, InputNumber as Input, Input as InputNormal,
+        Col, Row, Badge,
         Select, Button, notification, Popconfirm } from 'antd'
 import { QuotationContext } from '../../../containers/Quotation'
 import { InternalLiftingContext } from '../../pages/InternalLifting'
@@ -8,9 +8,13 @@ import { ArrowRightOutlined, FileImageFilled } from '@ant-design/icons'
 
 const { Option } = Select
 
+const { TextArea } = InputNormal
+
 const ListFormDataWell = () => {
 
     const { state, dispatch } = useContext(InternalLiftingContext)
+    const  [isFlow, setIsFlow] = useState(false)
+
 
     const activeImg = (a) => {
         const granted_flow = state.wells.temporary_well.well_data.granted_flow.value
@@ -137,6 +141,13 @@ const ListFormDataWell = () => {
             name:'has_flow_sensor',
             suffix: 'SI/NO',
             value: state.wells.temporary_well.well_data.has_flow_sensor.value
+        },
+        {
+            title: '¿Factibilidad de instalación electrica?',
+            color: 'geekblue',
+            name:'electric_found',
+            suffix: 'SI/NO',
+            value: state.wells.temporary_well.well_data.has_flow_sensor.value
         }
     ]
 
@@ -164,15 +175,29 @@ const ListFormDataWell = () => {
         
         {data.map((item, index)=> {
             return(<Row>
-                    <Col span={item.color==='blue' ?  window.innerWidth > 800 ? 2:24:24} style={{marginTop:'15px', marginBottom:'15px'}}>                        
-                        <Tag style={{marginTop:item.color==='geekblue'&& '20px'}} color={item.color}>{index+1}) {item.title}</Tag>                                                
+                    <Col span={item.color==='blue' ?  window.innerWidth > 800 ? 2:2:2} style={{marginTop:'15px', marginBottom:'15px'}}>                        
+                        <Tag style={{marginTop:item.color==='geekblue'&& '0px'}} color={item.color}>{index+1}) {item.title}</Tag>                                                
                     </Col>
-                    <Col span={item.color==='blue' ? window.innerWidth > 800 ? 5:12:18} offset={item.color==="blue" ? window.innerWidth>800?17:12:12} style={{marginTop: item.color==='blue' ?'5px':'0px', marginBottom:'15px'}}>
-                        {item.color==='geekblue' ? 
-                        <Select defaultValue={item.value} onChange={(x)=>addValue(item.name, x)} style={{width:'70%'}} placeholder='Selecciona una opción'>
+                    <Col span={item.color==='blue' ? window.innerWidth > 800 ? 5:12:12} offset={item.color==="blue" ? window.innerWidth>800?17:17:17} style={{marginTop: item.color==='blue' ?'10px':'-10px', marginBottom:'0px'}}>
+                        {item.color==='geekblue' ? <> 
+                        <Select size='small' onSelect={(value)=> {                            
+                            if(item.name==="has_flow_sensor"){ 
+                                console.log(value)
+                                if(value=='SI'){
+                                    setIsFlow(true)
+                                    console.log('asd')
+                                } else {
+                                    setIsFlow(false)
+
+                                }
+                                
+                            }
+                        }} defaultValue={item.value} onChange={(x)=>addValue(item.name, x)} style={{width:'100%', textAlign:'center', marginLeft:window.innerWidth>800?'-60px':'0px'}} placeholder='Selecciona una opción'>
                             <Option value='SI'>SI</Option>
                             <Option value='NO'>NO</Option>
-                        </Select>:<>
+                        </Select>
+                        {item.name==="has_flow_sensor" & isFlow ? <TextArea rows={3} placeholder='Funciona el sensor?' style={{marginLeft:'-60px'}} />:<></>}
+                        </>:<>
                         <Badge.Ribbon text={<>{item.suffix}</>} style={{zIndex:2, marginTop:'-26px', marginRight:window.innerWidth>800?'-2px':'10px', fontSize:'12px'}} />   
                         <Input    
                             onChange={(x)=>addValue(item.name, x)}                         

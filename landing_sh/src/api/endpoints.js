@@ -42,6 +42,8 @@ const create_wells = async(wells) => {
     data.append('well_depth', wells[i].well_data.well_depth.value)
     data.append('static_level', wells[i].well_data.static_level.value)
     data.append('dynamic_level', wells[i].well_data.dynamic_level.value)
+    data.append('latitude', wells[i].well_data.latitude)
+    data.append('longitude', wells[i].well_data.longitude)
     data.append('pump_installation_depth', wells[i].well_data.pump_installation_depth.value)
     data.append('inside_diameter_well', wells[i].well_data.inside_diameter_well.value)
     data.append('duct_outside_diameter', wells[i].well_data.duct_outside_diameter.value)

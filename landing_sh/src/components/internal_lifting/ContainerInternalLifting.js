@@ -22,6 +22,8 @@ const ContainerInternalLifting = () => {
     },
   }
 
+  console.log(state)
+
   return(<Row justify={'center'} >
       <Col span={24} style={{backgroundColor:'#002c8c', paddingLeft:'10px', paddingTop:'5px'}}>
         <Title style={{color:'white'}} level={window.innerWidth>900?2:4}>App levantamiento de información</Title>

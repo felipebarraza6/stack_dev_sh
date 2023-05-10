@@ -33,7 +33,7 @@ import React, {
             pump_installation_depth:{ value:0.0, select:false },
             inside_diameter_well:{ value:0.0, select:false },
             duct_outside_diameter:{ value:0.0, select:false },
-            has_flow_sensor: { value:null, select:false }
+            has_flow_sensor: { value:null, select:false },            
           },
           images: { 
             r1: null,

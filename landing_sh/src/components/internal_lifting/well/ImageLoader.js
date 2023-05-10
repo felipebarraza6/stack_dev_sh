@@ -13,6 +13,7 @@ const { Title, Paragraph, Text } = Typography
 const ImageLoader = () => {
 
     const { state, dispatch } = useContext(InternalLiftingContext)
+    console.log(state)
 
     const [img1, setImg1] = useState(null)
     const [img2, setImg2] = useState(null)
@@ -86,42 +87,66 @@ const ImageLoader = () => {
             </Row>}>
             <Row>
                 <Col span={24} style={{marginBottom:'20px'}}>            
-                        <Title style={styles.title} level={4}>Agrega tus imágenes de refencia (opcional)</Title>
+                        <Title style={styles.title} level={4}>Agregar imágenes del pozo según la siguiente referencia:</Title>
                 </Col>
-                <Col span={window.innerWidth>800?12:24}>
+                <Col span={window.innerWidth>800?6:24}>
                     <Col span={window.innerWidth > 800 ? 12:24}>                    
                         <img src={r1} width={'100%'} style={{borderRadius:'10px'}} />
                     </Col>
                     <Col span={window.innerWidth > 800 ? 12:24} style={{padding:'10px'}}>
                         <Title level={5}>GENERAL</Title>
-                        <Paragraph style={{marginTop:'20px'}}>HAZ CLICK EN EL SÍMBOLO (+) PARA SUBIR LA IMÁGEN GENERAL</Paragraph>
+                        
                         {img1 && <Tooltip title='ELIMINAR ARCHIVO'>
                             <Button onClick={()=>setImg1(null)} type='primary' icon={<CloseOutlined />}>{img1.name.slice(0,15)}...</Button>
                         </Tooltip>}
                     </Col>
-                    <Col span={12} style={{marginBottom:'20px'}}>
-                        <Upload name="r1" listType="picture-card" showUploadList={false} maxCount={1} 
-                            onChange={(e)=> setImg1(e.file.originFileObj)} ><PlusOutlined />
-                        </Upload>
-                    </Col>
+                    
                 </Col>
-                <Col span={window.innerWidth>800?12:24}>
+                <Col span={window.innerWidth>800?6:24}>
                     <Col span={window.innerWidth > 800 ? 12:24}>                    
                         <img src={r2}  width={'100%'} style={{borderRadius:'10px'}} />                                         
                     </Col>
                     <Col span={window.innerWidth > 800 ? 12:24} style={{padding:'10px'}}>
                         <Title level={5}>DETALLE DE SALIDA DE POZO</Title>
-                        <Paragraph style={{marginTop:'20px'}}>HAz CLICK EN EL SÍMBOLO (+) PARA SUBIR LA IMÁGEN DE DETALLE DE SALIDA DE POZO</Paragraph>
+                        
                         {img2 && <Tooltip title='ELIMINAR ARCHIVO'>
                             <Button onClick={()=>setImg2(null)} type='primary' icon={<CloseOutlined />}>{img2.name.slice(0,15)}...</Button>
                         </Tooltip>}
-                        <Col span={12}>
-                        <Upload name="r2" listType="picture-card" showUploadList={false} maxCount={1} 
-                            onChange={(e)=> setImg2(e.file.originFileObj)} ><PlusOutlined />
-                        </Upload>
-                        </Col>
+                        
                     </Col>
                 </Col>
+                <Col span={window.innerWidth>800?6:24}>
+                    <Col span={window.innerWidth > 800 ? 12:24}>                    
+                        <img src={r2}  width={'100%'} style={{borderRadius:'10px'}} />                                         
+                    </Col>
+                    <Col span={window.innerWidth > 800 ? 12:24} style={{padding:'10px'}}>
+                        <Title level={5}>EMPLAZAMIENTO DEL POZO</Title>
+                        
+                        {img2 && <Tooltip title='ELIMINAR ARCHIVO'>
+                            <Button onClick={()=>setImg2(null)} type='primary' icon={<CloseOutlined />}>{img2.name.slice(0,15)}...</Button>
+                        </Tooltip>}
+                       
+                    </Col>
+                </Col>
+                <Col span={window.innerWidth>800?6:24}>
+                    <Col span={window.innerWidth > 800 ? 12:24}>                    
+                        <img src={r2}  width={'100%'} style={{borderRadius:'10px'}} />                                         
+                    </Col>
+                    <Col span={window.innerWidth > 800 ? 12:24} style={{padding:'10px'}}>
+                        <Paragraph level={3}><b>EQUIPOS INSTALADOS</b></Paragraph>
+                        
+                        
+                        {img2 && <Tooltip title='ELIMINAR ARCHIVO'>
+                            <Button onClick={()=>setImg2(null)} type='primary' icon={<CloseOutlined />}>{img2.name.slice(0,15)}...</Button>
+                        </Tooltip>}
+                       
+                    </Col>
+                </Col>
+                <Col span={12} style={{marginBottom:'20px'}}>
+                        <Upload name="r1" listType="picture-card" showUploadList={true} maxCount={20} 
+                            onChange={(e)=> setImg1(e.file.originFileObj)} ><PlusOutlined />
+                        </Upload>
+                    </Col>
             </Row>                  
         </Card>
         </Col>
