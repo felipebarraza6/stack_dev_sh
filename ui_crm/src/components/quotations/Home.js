@@ -11,7 +11,6 @@ const Home = () => {
     
     async function getData(){
       const rq = await api.quotation.list().then((x)=> {
-        console.log(x)
         setListQuotations(x.data.results)
       })
       return rq
@@ -52,7 +51,6 @@ const Home = () => {
             <Col span={8}><Card bordered title={x.name} style={{border:'1px solid black', borderRadius:'10px', marginRight:'10px'}}>
                 {x.img1 && <Button icon={<FileImageFilled/>} type='primary' style={{margin:'5px'}} onClick={()=>window.open(`https://api.smarthydro.cl${x.img1}`)}>General</Button>}
                 {x.img2 && <Button icon={<FileImageFilled/>}  type='primary' style={{margin:'5px'}} onClick={()=>window.open(`https://api.smarthydro.cl${x.img2}`)} >Detalle salida pozo</Button>}
-
                 <Descriptions size='small' bordered title={x.exact_address}>
                   <Descriptions.Item span={3} label={<>Caudal otorgado <Tag color='geekblue'>(Lt/SEG)</Tag></>}>
                     {parseFloat(x.granted_flow).toFixed(2)}
@@ -95,6 +93,8 @@ const Home = () => {
           {
             title: 'Cliente',
             render: (x)=> <>
+              {console.log(x)}
+              {x.external_client.name_enterprise && <>
               {x.external_client.name_enterprise.length < 8 ? 
                <Button 
                type='primary'
@@ -113,12 +113,13 @@ const Home = () => {
                onClick={()=>modalRetrieveClient(x.external_client)}>
                   {x.external_client.name_enterprise.slice(0,20)}...                                 
              </Button></Tooltip>
-              }               
+              }       </>}        
             </>
           },
           {
             title: 'Pozos',
             render: (x) => <>
+            {x.external_client.name_enterprise && <>
               <Button 
                 type='primary'
                 ghost
@@ -126,7 +127,7 @@ const Home = () => {
                 icon={<EyeFilled />}
                 onClick={()=> modalDataWells(x.wells)}>
                  {x.wells.length} {x.wells.length === 1 ? 'Pozo':'Pozos'}
-              </Button>
+              </Button></>}
             </>
           },
           {
@@ -134,7 +135,11 @@ const Home = () => {
             render: (x) => {
               var date = new Date(x.created)
               var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour:'numeric', minute:'numeric' }
-             return (<>{date.toLocaleDateString('es-ES', options).toUpperCase()}</>)
+             return (<>
+             {x.external_client.name_enterprise && <>
+              {date.toLocaleDateString('es-ES', options).toUpperCase()}
+              </>}
+              </>)
             }
           },                    
         ]}

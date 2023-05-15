@@ -130,7 +130,8 @@ const InternalLifting = () => {
             {
                 title: 'Cliente',
                 render: (x)=> <>
-                  {x.client < 8  ? 
+                {x.client && <>
+                  {x.client  ? 
                    <Button 
                    type='primary'
                    ghost
@@ -138,7 +139,7 @@ const InternalLifting = () => {
                    block
                    icon={<EyeFilled style={{marginRight:'5px'}} />}
                    onClick={()=>modalRetrieveEnterprise(x.client)}>
-                      {x.client.name}                                 
+                      {x.client.id}                                 
                  </Button>:<Tooltip color={'#f50'} title={x.client.name}><Button 
                    type='primary'
                    ghost
@@ -148,7 +149,7 @@ const InternalLifting = () => {
                    onClick={()=>modalRetrieveEnterprise(x.client)}>
                       {x.client.name.slice(0,20)}...                                 
                  </Button></Tooltip>
-                  }               
+                  }</>}               
                 </>
               },
           {
