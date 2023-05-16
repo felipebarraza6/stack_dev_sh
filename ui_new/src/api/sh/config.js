@@ -10,14 +10,10 @@ export const Axios = axios.create({
     baseURL: BASE_URL,
 })
 
-
-
-
 export const POST_LOGIN = async (endpoint, data) =>{
     const request = await Axios.post(endpoint, data)
     return request
 }
-
 
 export const GET = async (endpoint) => {
     const token = JSON.parse(localStorage.getItem('token'))
@@ -49,8 +45,6 @@ export const DOWNLOAD = async(endpoint, name_file) => {
         document.body.appendChild(link)
         link.click()
     })
-    
-
     
     notification.open({
         message: `${name_file}`,

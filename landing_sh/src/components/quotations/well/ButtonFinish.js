@@ -24,9 +24,8 @@ const ButtonFinish = () => {
     
 
     const senData = async() => {
-        //setVisible(true)
+        setVisible(true)
         console.log(state.wells.list)
-        /*
         const rq1_create_client = await callbacks.external_clients.create({...state.client}).then((response)=>{            
             notification.success({message: 'DATOS DE CONTACTO'})           
             const rq2_create_quotation =  callbacks.quotation.create({
@@ -51,7 +50,7 @@ const ButtonFinish = () => {
                     }, 5000);
                 })
             })
-        })*/
+        })
     }
 
 

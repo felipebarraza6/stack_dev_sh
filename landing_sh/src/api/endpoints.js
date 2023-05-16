@@ -6,6 +6,7 @@ const get_fingerprint = async(id) => {
   return request
 }
 
+
 const get_webinar = async(id) => {
   const request = await GET(`webinars/${id}/`)
   return request

@@ -5,8 +5,6 @@ from django.db import models
 from .utils import ModelApi
 
 
-# Clients
-
 class Action(ModelApi):
     type_action = models.ForeignKey('TypeAction', related_name='type_action', on_delete=models.CASCADE)
     client = models.ForeignKey('Client', related_name='client_action', on_delete=models.CASCADE, blank=True, null=True)

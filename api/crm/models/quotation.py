@@ -29,6 +29,8 @@ class Well(ModelApi):
     quotation = models.ForeignKey(Quotation, blank=True, null=True,
             on_delete=models.CASCADE)
     name = models.CharField(max_length=320, blank=True, null=True)       
+    latitude = models.CharField(max_length=400, blank=True, null=True)
+    longitude = models.CharField(max_length=400, blank=True, null=True)
     type_captation = models.CharField(max_length=320, blank=True, null=True)
     granted_flow = models.FloatField(max_length=1000, blank=True, null=True)
     well_depth = models.FloatField(max_length=1000, blank=True, null=True)

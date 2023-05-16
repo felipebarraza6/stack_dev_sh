@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Row, Col, Typography, Modal,
-        Input, Card, Form, Button } from 'antd'
+        Input, Card, Form, Button, Table } from 'antd'
 
 import caudal_img  from '../../assets/images/caudal.png'
 import nivel_img  from '../../assets/images/nivel.png'
@@ -35,11 +35,14 @@ const MyWell = () => {
     }, [state.selected_profile])
 
     return(<Row justify={'center'} style={{padding:'20px'}}>
-                {state.selected_profile.title=='Coquimbo'? <Col span={20} style={{marginTop:'100px'}}>
-                  <Title level={3}>Ingreso de estandar menor</Title>
+                {state.selected_profile.title=='Coquimbo'? <Col span={20} style={{marginTop:'20px'}}>
+                  <Title level={3}>Ingreso manual de datos</Title>
+                  <Title level={5} style={{marginTop:'-10px'}}>Estandar menor</Title>
+                  <Title level={5} style={{marginTop:'-10px', marginBottom:'30px'}}>SHAC: Provincia del Elqui y Limarí</Title>
                   <Paragraph><u><strong>{fechaConMes}</strong></u></Paragraph>
+                  <Title level={5}>SEMESTRE</Title>
                   <Form layout='inline' onFinish={()=>{
-                    Modal.success({title:'Datos ingresados correctament'})
+                    Modal.success({title:'Semestre ingresado correctamente'})
                   }}>
                     <Form.Item>
                       <Input placeholder='Caudal(Ltrs)' />
@@ -51,8 +54,17 @@ const MyWell = () => {
                       <Input placeholder='Acumulado(m³)'/>
                     </Form.Item>
                     <Button htmlType='submit' type='primary' style={{marginRight:'10px'}}>Ingresar</Button>
-                    <Button type='primary' danger>Limpiar</Button>
-                  </Form>
+                    <Button type='primary' danger>Limpiar</Button>                  
+                  </Form>                  
+                  
+                  
+                  <Table bordered style={{marginTop:'20px'}} header={()=><h1>Datos ingresados</h1>} columns={[
+                    {title:'Caulda(Ltrs)'},
+                    {title:'Nivel(Mt)'},
+                    {title:'Acumulado(m³)'},                  
+                    {title:'Fecha'},
+                    {title:'Usuario'},
+                  ]}></Table>
                   </Col>:<>
                 <Col span={24}>
                     <Title level={2}>Mi Pozo</Title>
