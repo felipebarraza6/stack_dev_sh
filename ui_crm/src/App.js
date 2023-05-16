@@ -44,23 +44,13 @@ function App(){
   }, [])
 
 
-  return(
-    
-    <AuthContext.Provider
-    
+  return(<AuthContext.Provider    
       value = {{
         state,
         dispatch
-      }}
-    >          
-      <div className="App">{!state.isAuthenticated ? <Login/> : <Home/> }</div>
-
-      
-    
-    </AuthContext.Provider>
-    
-    
-  )
+      }} >          
+      <div className="App">{!state.isAuthenticated ? <Login/> : <Home/> }</div>    
+    </AuthContext.Provider>)
     
  
 }
