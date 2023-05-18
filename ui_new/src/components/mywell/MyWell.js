@@ -57,7 +57,6 @@ const MyWell = () => {
                     <Button type='primary' danger>Limpiar</Button>                  
                   </Form>                  
                   
-                  
                   <Table bordered style={{marginTop:'20px'}} header={()=><h1>Datos ingresados</h1>} columns={[
                     {title:'Caulda(Ltrs)'},
                     {title:'Nivel(Mt)'},

@@ -13,7 +13,14 @@ def send(profile_data, response):
     caudal=float(response['flow'])
     nivel_freatico_del_pozo=float(profile_data.d3)-float(response['nivel'])
 
-    print(response)
+    if(caudal<0):
+        caudal = 0.0
+
+    if(nivel_freatico_del_pozo<0):
+        nivel_freatico_del_pozo = 0.0
+
+    if(totalizador<0):
+        totalizador = 0
 
     payload = str("<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:aut=\"http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionRequest\">\n<soapenv:Header>\n<aut:authSendDataExtraccionTraza>\n<aut:codigoDeLaObra>{codigo_obra}</aut:codigoDeLaObra>\n<aut:timeStampOrigen>{time_stamp_origen}</aut:timeStampOrigen>\n</aut:authSendDataExtraccionTraza>\n</soapenv:Header>\n<soapenv:Body>\n<aut:authSendDataExtraccionRequest>\n<aut:authDataUsuario>\n<aut:idUsuario>\n<aut:rut>17352192-8</aut:rut>\n</aut:idUsuario>\n<aut:password>ZSQgCiDg7y</aut:password>\n</aut:authDataUsuario>\n<!--Optional:-->\n<aut:authDataExtraccionSubterranea>\n<aut:fechaMedicion>{fecha_medicion}</aut:fechaMedicion>\n<aut:horaMedicion>{hora_medicion}</aut:horaMedicion>\n<aut:totalizador>{totalizador}</aut:totalizador>\n<aut:caudal>{caudal}</aut:caudal>\n<aut:nivelFreaticoDelPozo>{nivel_freatico_del_pozo}</aut:nivelFreaticoDelPozo>\n</aut:authDataExtraccionSubterranea>\n</aut:authSendDataExtraccionRequest>\n</soapenv:Body>\n</soapenv:Envelope>").format(totalizador=totalizador,
             caudal=caudal,
@@ -22,11 +29,12 @@ def send(profile_data, response):
             time_stamp_origen=time_stamp_origen,
             fecha_medicion=fecha_medicion,
             hora_medicion=hora_medicion)
-    print(payload)
+    
     headers = {
       'Content-Type': 'application/xml'
     }
+    
 
     response = requests.request("POST", url, headers=headers, data=payload)
-    print(response)
+    
     print(response.text)
