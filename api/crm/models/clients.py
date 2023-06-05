@@ -110,11 +110,5 @@ class Employee(ModelApi):
 	def __str__(self):
 		return self.name + self.enterprise
 
-class Project(ModelApi):
-    name = models.CharField(max_length=2000)
-    code = models.CharField(max_length=120)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.code
 

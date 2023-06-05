@@ -25,7 +25,8 @@ class ProfileClient(ModelApi):
     in6 = models.BooleanField(blank=True, default=True)
     others_ind = models.BooleanField(blank=True, default=False)
     qr_dga = models.ImageField(blank=True, null=True)
-    is_apr = models.BooleanField(blank=True, null=True, default=False)
+    is_dga_medium = models.ImageField(blank=True, null=True)
+    is_apr = models.BooleanField(blank=True, null=True, default=False)    
     is_dga = models.BooleanField(blank=True, null=True)
 
 

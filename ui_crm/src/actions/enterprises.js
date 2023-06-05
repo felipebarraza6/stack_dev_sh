@@ -2,8 +2,10 @@
 import React from 'react'
 import api from '../api/endpoints'
 
-import { notification, Modal } from 'antd'
-import { DeleteOutlined, LikeOutlined } from '@ant-design/icons';
+import { Button, notification, Modal, Form, Input, Select } from 'antd'
+import { DeleteOutlined, LikeOutlined, UserAddOutlined } from '@ant-design/icons';
+
+const { Option } = Select
 
 export const getTotals = async(dispatch) =>{
     try{
@@ -22,6 +24,55 @@ export const getTotals = async(dispatch) =>{
             error:error
         })
     }
+}
+
+export const createPerson = async(enterprise)=> {
+  //notification.success({message:'Persona creada'})
+  
+  const onFnish = async(values)=> {
+    values = {
+      ...values,
+      enterprise: enterprise.id
+    }
+    const rq1 = await api.employess.create_employee(values).then((r)=> {
+      Modal.destroyAll()
+      notification.success('Persona creada!')
+    }).catch((e)=> {
+      console.log(e)
+    })
+    
+  }
+
+  Modal.info({okText:'Volver', title:'Crear persona', icon:<UserAddOutlined />, content:<><Form onFinish={onFnish} style={{paddingTop:'30px'}} layout='vertical'>
+      <Form.Item label='Nombre' name='name' rules={[{ required: true, message: 'Ingresa el nombre'}]}>
+        <Input />
+      </Form.Item>
+      <Form.Item label='Cargo' name='charge' rules={[{ required: true, message: 'Ingresa el cargo'}]}>
+        <Select placeholder='Selecciona un cargo'>
+          <Option value="Gerente General">Gerente General</Option>
+          <Option value="Gerente de Operaciones">Gerente de Operaciones</Option>
+          <Option value="Jefe de Operaciones">Jefe de Operaciones</Option>
+          <Option value="Jefe de Planta">Jefe de Planta</Option>
+          <Option value="Jefe de Mantención">Jefe de Mantención</Option>
+          <Option value="Secretaria General">Secretaria General</Option>
+          <Option value="Secretaria administrativa">Secretaria administrativa</Option>
+          <Option value="Secretaria Gerencia">Secretaria Gerencia</Option>
+          <Option value="Otro Cargo">Otro</Option>
+        </Select>
+      </Form.Item>
+      <Form.Item label='Telefono' name="phone_number" >
+        <Input />
+      </Form.Item>
+      <Form.Item label='Email' name='email' rules={[{ type:"email", required: true, message: 'Ingresa el correo electrónico'}]} >
+        <Input />
+      </Form.Item>
+      <Form.Item>
+        <Button style={{float:'right', marginBottom:'-200px'}} htmlType='submit' type='primary'>Crear persona</Button>
+      </Form.Item>
+    </Form>  
+
+    </>
+  })
 }
 
 export const updateTotals = async(dispatch) =>{

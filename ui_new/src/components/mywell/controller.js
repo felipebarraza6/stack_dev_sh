@@ -17,7 +17,6 @@ export async function getNovusData(setCaudal, setNivel, state, api_novus, setAcu
         state.selected_profile.title=='POZO 3' || state.selected_profile.title=='POZO 2'  ? '3grecuc1v': 
         state.selected_profile.title=='Las Pircas' ? '3grecuc1v': state.selected_profile.title=='PAINE' ? 'wifia2va':
         state.user.id==32 ? '3grecuc1v':state.user.id==34?'3grecuc1v':'3grecuc2v', 
-
         state.selected_profile.title=='POZO 3'? 
             '321bbb98-4579-4c63-b93f-ecad987b2abf':
             state.selected_profile.title=='POZO 2'? 

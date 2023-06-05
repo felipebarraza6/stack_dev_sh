@@ -4,7 +4,7 @@ from .actions import (ActionModelSerializer,
                       FinishActionSerializer,
                       TypeActionModelSerializer)
 
-from .clients import ProjectModelSerializer, EconomicActivityModelSerializer, ClientModelSerializer, ClientShortSerializer, RetrieveClientModel
+from .clients import EconomicActivityModelSerializer, ClientModelSerializer, ClientShortSerializer, RetrieveClientModel
 from .employees import EmployeeModelSerializer, EmployeeListSerializer
 from .users import UserProfile ,UserModelSerializer, UserLoginSerializer, UserSignUpSerializer
 from .client_profile import  (ProfileClient, RegisterPersons,
@@ -18,3 +18,5 @@ from .supports import (SupportSectionModelSerializer,
                         AnswerTicketModelSerializer,
                         AnswerTicketModelSerializerRetrieve,
                         TicketSupportModelSerializerRetrieve)
+
+from .projects import SectionElementModelSerializer, ProjectModelSerializer, ProjectRetrieveModelSerializer,TypeElement, ValueElement

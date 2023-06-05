@@ -8,3 +8,4 @@ from .interaction_detail import InteractionDetailViewSet, InteractionXLS
 from .webinars import WebinarsViewSet
 from .profile_footprints import ProfileFootprintsViewSet
 from .supports import SupportSectionViewSet, TicketSupportViewSet, AnswerTicketViewSet
+from .projects import SectionElementViewSet, ProjectViewSet, TypeEelementViewSet, ValueElementViewSet

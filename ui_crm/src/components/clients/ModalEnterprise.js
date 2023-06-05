@@ -27,7 +27,6 @@ const ModalEnterprise = (data) =>{
             
                 {data.name ? <Tag style={{margin:'3px'}} color="green">Nombre</Tag>: <Tag color="red">Nombre</Tag>}
                 {data.rut ? <Tag style={{margin:'3px'}} color="green">Rut</Tag>: <Tag color="red">Rut</Tag>}
-                {data.type_client ? <Tag color="green">Tipo de Cliente</Tag>: <Tag color="red">Tipo de Cliente</Tag>}
                 {data.phone_number ? <Tag color="green">Número de telefono</Tag>: <Tag color="red">Número de telefono</Tag>}
                 {data.email ? <Tag color="green">Email</Tag>: <Tag color="red">Email</Tag>}
 
@@ -36,26 +35,14 @@ const ModalEnterprise = (data) =>{
                 {data.commune ? <Tag color="green">Comuna</Tag>: <Tag color="red">Comuna</Tag>}
                 {data.address_exact ? <Tag color="green">Ubicación exacta</Tag>: <Tag color="red">Ubicación exacta</Tag>}
 
-                {data.type_client === 'Empresa' &&
-                    <>
                         {data.amount_regularized ? <Tag color="green">Cantidad de pozos</Tag>: <Tag color="red">Cantidad de pozos</Tag>}
                         {data.flow_rates ? <Tag color="green">Cantidad de pozos regularizados</Tag>: <Tag color="red">Cantidad de pozos regularizados</Tag>}
                         {data.category ? <Tag color="green">Actividad economica</Tag>: <Tag color="red">Actividad economica</Tag>}
-                    </>  
-                }
 
-                {data.type_client === 'Planta APR' &&
-                    <>
-                        {data.administered ? <Tag color="green">Tipo organización</Tag>: <Tag color="red">Derechos regularizados</Tag>}
-                        {data.number_starts ? <Tag color="green">Cantidad de Arranques</Tag>: <Tag color="red">Cantidad de Arranques</Tag>}
-                        {data.date_jurisdiction ? <Tag color="green">Fecha de Constitución</Tag>: <Tag color="red">Fecha de Constitución</Tag>}
-                    </>  
-                }
-            
+                            
             <Descriptions style={{marginTop:'60px'}} title="General" bordered>
                 <Descriptions.Item label="Nombre">{data.name ? data.name : 'S/D'}</Descriptions.Item>
                 <Descriptions.Item label="RUT">{data.rut ? data.rut : 'S/D'}</Descriptions.Item>
-                <Descriptions.Item label="Tipo Cliente">{data.type_client ? data.type_client : 'S/D'}</Descriptions.Item>
                 <Descriptions.Item label="Telefono">{data.phone_number ? data.phone_number : 'S/D'}</Descriptions.Item>
                 <Descriptions.Item label="Email">{data.email ? data.email : 'S/D'}</Descriptions.Item>
             </Descriptions>
@@ -67,25 +54,14 @@ const ModalEnterprise = (data) =>{
                 <Descriptions.Item label="Ubicación exacta">{data.address_exact ? data.address_exact : 'S/D'}</Descriptions.Item>                
             </Descriptions>
             
-            {data.type_client === 'Empresa' &&
             
             <Descriptions style={{marginTop:'30px'}} title="Datos de Empresa" bordered>
                 <Descriptions.Item label="Cantidad de pozos">{data.amount_regularized ? data.amount_regularized : 'S/D'}</Descriptions.Item>
                 <Descriptions.Item label="Cantidad de pozos regularizados">{data.flow_rates ? data.flow_rates : 'S/D'}</Descriptions.Item>
                 <Descriptions.Item label="Actividad economica">{data.category ? data.category : 'S/D'}</Descriptions.Item>                
             </Descriptions>
-            
-            }
 
-            {data.type_client === 'Planta APR' &&
-            <Descriptions style={{marginTop:'30px'}} title="Datos de Planta APR" bordered>
-                <Descriptions.Item label="Cantidad de pozos">{data.administered ? data.administered : 'S/D'}</Descriptions.Item>
-                <Descriptions.Item label="Cantidad de pozos regularizados">{data.number_starts ? data.number_starts : 'S/D'}</Descriptions.Item>
-                <Descriptions.Item label="Fecha de Constitución">{data.date_jurisdiction ? data.date_jurisdiction : 'S/D'}</Descriptions.Item>
-                <Descriptions.Item label="Fecha de renovación de directorio">{data.date_jurisdiction ? difference : 'S/D'}</Descriptions.Item>                
-            </Descriptions>
-            }
-            </React.Fragment>,
+                        </React.Fragment>,
 
         okText: 'Cerrar',                        
         width: '1300px'      

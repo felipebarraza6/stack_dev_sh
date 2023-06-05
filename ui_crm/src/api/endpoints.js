@@ -1,4 +1,4 @@
-import { GET, POST_LOGIN, POST, UPDATE, DELETE } from './api'
+import { GET, POST_LOGIN, POST, UPDATE, DELETE, POST_FILE } from './api'
 
 const login = async (data) => {
 
@@ -254,6 +254,74 @@ const delete_economic = async(id) => {
   return rq
 }
 
+const create_project = async(data) => {
+    const rq = await POST('projects/', data)
+    return rq
+}
+
+const retrieve_project = async(id) => {
+    const rq = await GET(`projects/${id}/`)
+    return rq
+}
+
+const list_project = async() => {
+    const rq = await GET('projects/')
+    return rq
+}
+
+const update_project = async(id, data) => {
+    const rq = await UPDATE(`projects/${id}/`, data)
+    return rq
+}
+
+const delete_project = async(id) => {
+    const rq = await DELETE(`projects/${id}/`)
+    return rq
+}
+
+const create_telement = async(data) => {
+    const rq = await POST('type_element/', data)
+    return rq
+}
+
+const list_telements = async() => {
+    const rq = await GET('type_element/')
+    return rq
+}
+
+const update_telement = async(id, data) => {
+    const rq = await UPDATE(`type_element/${id}/`, data)
+    return rq
+}
+
+const delete_telement = async(id) => {
+    const rq = await DELETE(`type_element/${id}/`)
+    return rq
+}
+
+const create_velement = async(data) => {
+    const rq = await POST_FILE('value_element/', data)
+    return rq
+}
+
+const list_velements = async(project,type_element) => {
+    const rq = await GET(`value_element/?${project&&`project=${project}`}${type_element&&`&type_element=${type_element}`}`) 
+    return rq
+}
+
+const update_velement = async(id, data) => {
+    console.log(id)
+    const rq = await UPDATE(`value_element/${id.id}/`, data)
+    return rq
+}
+
+const delete_velement = async(id) => {
+    const rq = await DELETE(`value_element/${id}/`)
+    return rq
+}
+
+
+
 
 const api = {
     user:{
@@ -294,6 +362,27 @@ const api = {
         delete_type_task,
         update_type_task,
         search_type_task
+    },
+    projects: {
+        project:{
+            create: create_project,
+            list: list_project,
+            update: update_project,
+            retrieve: retrieve_project,
+            delete: delete_project
+        },
+        types_elements: {
+            create: create_telement,
+            list: list_telements,
+            update: update_telement,
+            delete: delete_telement
+        },
+        values_elements: {
+            create: create_velement,
+            list: list_velements,
+            update: update_velement,
+            delete: delete_velement
+        }
     },
     quotation: {
       list: get_list_quotation,

@@ -17,9 +17,8 @@ from rest_framework.permissions import (
     IsAuthenticated
 )
 
-from api.crm.models import ExternalClient, Project, Client, EconomicActivity,TechnicalInfo, Employee, Note
-from api.crm.serializers.clients import (ProjectModelSerializer,
-                                        ClientModelSerializer,
+from api.crm.models import ExternalClient, Client, EconomicActivity,TechnicalInfo, Employee, Note
+from api.crm.serializers.clients import (ClientModelSerializer,
                                         TechnicalInfoSerializer, 
                                         RetrieveClientModel,
                                         EconomicActivityModelSerializer,
@@ -53,18 +52,7 @@ class EconomicActivityViewSet(mixins.CreateModelMixin,
     queryset = EconomicActivity.objects.all()
     serializer_class = EconomicActivityModelSerializer 
 
-class ProjectViewSet(mixins.CreateModelMixin,
-                            mixins.RetrieveModelMixin,
-                            mixins.UpdateModelMixin,
-                            mixins.ListModelMixin,
-                            mixins.DestroyModelMixin,
-                            viewsets.GenericViewSet):
 
-    permission_classes = [AllowAny]
-    filter_backends = (filters.DjangoFilterBackend,)
-    ordering = ('created', )
-    queryset = Project.objects.all()
-    serializer_class = ProjectModelSerializer 
 
 class ClientViewSet(mixins.CreateModelMixin,
                   mixins.RetrieveModelMixin, 

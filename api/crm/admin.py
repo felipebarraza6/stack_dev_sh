@@ -6,19 +6,21 @@ from django.contrib import admin
 # Models
 from api.crm.models import (InteractionDetail, User, 
                         ExternalClient ,Client, Action, Project, ProfileClient,
-                        EconomicActivity, Employee,
+                        EconomicActivity, Employee, TypeElement, ValueElement,
                         RegisterPersons, DataHistoryFact,
                         TechnicalInfo, Quotation, Well, Note,
                         FormLandingContact, ProfileFootprints, 
                         Webinars, ElementsProgramation, ModuleFootprints, 
                         SectionModuleFootprints, FieldSectionFootprints, QuestionSection, 
                         OptionsSelectionFieldFootprints, SupportSection,
-                        TicketSupport, AnswerTicket)
+                        TicketSupport, AnswerTicket, SectionElement)
                         
 from import_export.admin import ExportActionMixin
 
 admin.site.register(SupportSection)
 admin.site.register(Project)
+admin.site.register(TypeElement)
+admin.site.register(ValueElement)
 admin.site.register(Employee)
 admin.site.register(EconomicActivity)
 admin.site.register(TicketSupport)
@@ -29,6 +31,7 @@ admin.site.register(SectionModuleFootprints)
 admin.site.register(FieldSectionFootprints)
 admin.site.register(QuestionSection)
 admin.site.register(ExternalClient)
+admin.site.register(SectionElement)
 admin.site.register(Note)
 admin.site.register(ProfileClient)
 admin.site.register(RegisterPersons)

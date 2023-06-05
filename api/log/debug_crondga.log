@@ -1,5 +1,7 @@
-{'date_time_medition': '2023-05-18T19:00:00', 'total': '1317878', 'flow': '0.2', 'nivel': '21.2'}
-{'date_time_medition': '2023-05-18T19:00:00', 'total': '1317878', 'flow': '0.2', 'nivel': '21.2'}
-{'date_time_medition': datetime.datetime(2023, 5, 18, 19, 0, tzinfo=datetime.timezone.utc), 'total': '1317878', 'flow': '0.2', 'nivel': '21.2'}
-{'date_time_medition': '2023-05-18T15:00:00', 'total': '1317878', 'flow': '0.2', 'nivel': '21.2'}
-<?xml version="1.0" encoding="utf-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><authSendDataExtraccionResponse xmlns="http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionResponse"><numeroComprobante>d2c918b5b0153f732333686853163514</numeroComprobante><status><Code>0</Code><Description>La medicion se ingreso correctamente en la cola</Description></status></authSendDataExtraccionResponse></soapenv:Body></soapenv:Envelope>
+
+Codigo DGA/nombre: OB-0804-270/D NIVEL: 9.8 CAUDAL: 0.2 ACUMULADO: 1327010
+<?xml version="1.0" encoding="utf-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><authSendDataExtraccionResponse xmlns="http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionResponse"><status><Code>20</Code><Description>Error Tipo de Datos</Description></status></authSendDataExtraccionResponse></soapenv:Body></soapenv:Envelope>
+Codigo DGA/nombre: OB-0804-270/D NIVEL: 9.8 CAUDAL: 0.2 ACUMULADO: 1327010
+<?xml version="1.0" encoding="utf-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><authSendDataExtraccionResponse xmlns="http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionResponse"><numeroComprobante>eec192f563516858a175b31c08e4db12</numeroComprobante><status><Code>0</Code><Description>La medicion se ingreso correctamente en la cola</Description></status></authSendDataExtraccionResponse></soapenv:Body></soapenv:Envelope>
+Codigo DGA/nombre: OB-0804-270/D NIVEL: 0.0 CAUDAL: 0.0 ACUMULADO: 22426
+<?xml version="1.0" encoding="utf-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><authSendDataExtraccionResponse xmlns="http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionResponse"><numeroComprobante>eec192f563516858a175b31c08e4db12</numeroComprobante><status><Code>0</Code><Description>La medicion se ingreso correctamente en la cola</Description></status></authSendDataExtraccionResponse></soapenv:Body></soapenv:Envelope>

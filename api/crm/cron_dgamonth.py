@@ -15,7 +15,7 @@ def get_novus_and_send_api():
 
         for client in clients:
 
-            if client.is_dga:
+            if client.is_dga_medium:
                 try:
                     get_data = InteractionDetail.objects.filter(profile_client=client.id).first()
                     response = {}
@@ -29,7 +29,7 @@ def get_novus_and_send_api():
                     print(e)
 
     else:
-        print('NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR')
+        print('NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MEDIO')
 
 
 def main():

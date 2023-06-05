@@ -6,7 +6,7 @@ import { Steps, Button, Form, Input, Select,
 import { BuildOutlined, PhoneOutlined, MailOutlined, AimOutlined,
     ArrowRightOutlined, ArrowLeftOutlined, RocketOutlined, BuildTwoTone, 
     PushpinOutlined, ReconciliationOutlined, EditOutlined, IdcardOutlined, 
-    BulbOutlined }
+    DeleteFilled }
     from '@ant-design/icons'
 
 //Actions    
@@ -24,6 +24,7 @@ const { Option } = Select
 const FormSteps = (attr) =>{   
     
     const loading = attr.loading
+    const [count, setCount] = useState(0)
 
     const [isOther, setIsOther] = useState(false)
     const [economicActivities, setEconomicActivities] = useState(null)
@@ -32,8 +33,7 @@ const FormSteps = (attr) =>{
         labelCol: { span:6 }
     }
   
-    const submitForm = async(values) =>{                        
-        
+    const submitForm = async(values) =>{       
         setGeo({
             ...geo,
             region: null,
@@ -54,7 +54,6 @@ const FormSteps = (attr) =>{
           setIsOther(false)
         })
       }
-
        updateEnterprise(attr.dispatch, attr.enterprise.id, values)
     }
 
@@ -130,12 +129,13 @@ const FormSteps = (attr) =>{
     const delteEconomic = async(id)=>{
       const rq = await api.enterprises.delete_economic(id).then((r)=> {
         notification.success({message:'Actividad eliminada correctamente'})
+        setCount(count+1)
       })
     }
 
     useEffect(()=> {
       getData()
-    }, [])
+    }, [count])
 
 
     return(   
@@ -155,18 +155,9 @@ const FormSteps = (attr) =>{
             
             
             <Step title="Ubicación" icon={<PushpinOutlined />}>                
+            </Step>            
+            <Step title="Datos" icon={<ReconciliationOutlined />}>                
             </Step>
-            {attr.enterprise && 
-                attr.enterprise.type_client === 'Planta APR' &&
-                <Step title="Datos APR" icon={<ReconciliationOutlined/>}>                
-                </Step>                
-            }
-
-            {attr.enterprise && 
-                attr.enterprise.type_client === 'Empresa' &&
-                <Step title="Datos Empresa" icon={<ReconciliationOutlined />}>                
-                </Step>
-            }
                              
         </Steps>    
 
@@ -190,19 +181,16 @@ const FormSteps = (attr) =>{
                             <Input name="name" maxLength={20}  prefix={<BuildOutlined/>} type="text" placeholder={'Nombre'}  />
                         </Form.Item>
                         
-                        <Form.Item name="rut" rules={[{ required: true, message: 'Ingresa el rut de la empresa'}]}>
+                        <Form.Item name="rut" >
                             <Input name="rut" maxLength={10}  prefix={<IdcardOutlined/>} type="text" placeholder={'Rut'}  />
                         </Form.Item>
+                                            
                         
-                        <Form.Item disabled name="type_client" rules={[{ required: true, message: 'Selecciona una tipo de empresa'}]} >
-                            <Input name="type_client" disabled  prefix={<BulbOutlined/>} type="text" placeholder={'Rut'}  />
-                        </Form.Item>
-                        
-                        <Form.Item name="phone_number" rules={[{ required: false, message: 'Ingresa el telefono de la empresa'}]}>
+                        <Form.Item name="phone_number" >
                             <Input name="phone_number" prefix={<><PhoneOutlined/></>} type="text" placeholder="Telefono" />
                         </Form.Item>
                         
-                        <Form.Item name="email" rules={[{ type:"email", required: true, message: 'Ingresa el correo electrónico'}]}>
+                        <Form.Item name="email" >
                             <Input name="email" prefix={<MailOutlined />} type="email" placeholder="Email"/>
                         </Form.Item>
                     
@@ -282,7 +270,7 @@ const FormSteps = (attr) =>{
                             </Form.Item>
                             </> 
                         }
-                        {attr.enterprise.type_client === 'Empresa' &&
+                        
                             <>
                             <Form.Item name="amount_regularized" label="Cantidad de pozos">
                                 <InputNumber style={{width:'100%'}} placeholder="Numero de pozos"/>
@@ -292,14 +280,13 @@ const FormSteps = (attr) =>{
                             </Form.Item>
                             <Form.Item label="Actividad economica" name="category" rules={[{ required: false, message: 'Selecciona una opcion'}]}>                                
                               {isOther ? <Input />:
-                                <Select onChange={(value)=>value === 'Otro' ? setIsOther(true):setIsOther(false)} placeholder="Selecciona una opción" >
-                                {economicActivities.map((x)=><><Option value={x.name}>{x.name} </Option></>)}                                      
+                                <Select onSelect={(value)=>value === 'Otro' ? setIsOther(true):setIsOther(false)} placeholder="Selecciona una opción" >
+                                {economicActivities.map((x)=><><Option value={x.name}>{x.name} <Button style={{zIndex:'4'}} shape='circle' size='small' danger onClick={()=>delteEconomic(x.id)}><DeleteFilled /></Button></Option></>)}                                      
                                   <Option value="Otro">Otro</Option>
                                 </Select>}                  
                             </Form.Item>
                             </>
                             
-                        }
                     </>
                }
                 
@@ -316,9 +303,10 @@ const FormSteps = (attr) =>{
         {attr.enterprise ? <>
             {stepsEnterprise.current > 0 && <Button  type="primary" shape="circle" icon={<ArrowLeftOutlined/>} className="margin-btn-steps" onClick={() => prev() }></Button>}
 
-            {stepsEnterprise.current < 1  && <Button type="primary" shape="circle" icon={<ArrowRightOutlined/>} className="margin-btn-steps" onClick={() => next() }></Button>}  
+            {stepsEnterprise.current === 0  && <Button type="primary" shape="circle" icon={<ArrowRightOutlined/>} className="margin-btn-steps" onClick={() => next() }></Button>}  
+
+            {stepsEnterprise.current === 1  && <Button type="primary" shape="circle" icon={<ArrowRightOutlined/>} className="margin-btn-steps" onClick={() => next() }></Button>}  
             
-            {stepsEnterprise.current & attr.enterprise.type_client ==='Empresa' ? <Button type="primary" shape="circle" icon={<ArrowRightOutlined/>} className="margin-btn-steps" onClick={() => next() }></Button>: ''}
 
             {stepsEnterprise.current & attr.enterprise.type_client ==='Planta APR' ? <Button type="primary" shape="circle" icon={<ArrowRightOutlined/>} className="margin-btn-steps" onClick={() => next() }></Button>: ''}
 

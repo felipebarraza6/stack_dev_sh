@@ -1,8 +1,8 @@
 
 import axios from 'axios'
 
-const BASE_URL = 'https://api.smarthydro.cl/api/'
-//const BASE_URL = 'http://localhost:8000/api/'
+//const BASE_URL = 'https://api.smarthydro.cl/api/'
+const BASE_URL = 'http://localhost:8000/api/'
 
 
 export const INSTANCE = axios.create({
@@ -73,6 +73,21 @@ export const DELETE = async (endpoint) =>{
 
     return response
 
+}
+
+export const POST_FILE = async(endpoint, fields) => {
+    console.log(fields)
+    const token = JSON.parse(localStorage.getItem('access_token') || null)
+    let data = new FormData()
+    fields.map((e)=> data.append(e.key, e.value))
+    const options = {
+        headers: {
+            Authorization: `Token ${token}`,
+            'content-type': 'multipart/form-data'
+        }
+    }
+    const request = await INSTANCE.post(endpoint, data,options)
+    return request
 }
 
 

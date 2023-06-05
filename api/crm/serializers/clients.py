@@ -2,15 +2,12 @@
 from rest_framework import serializers
 
 # Models
-from api.crm.models import  Project, EconomicActivity, ExternalClient, TechnicalInfo, Client, Employee
+from api.crm.models import EconomicActivity, ExternalClient, TechnicalInfo, Client, Employee
 
 # Serializers
 from api.crm.serializers.employees import EmployeeModelSerializer
 
-class ProjectModelSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Project
-        fields = '__all__'
+
 
 class ExternalClientModelSerializer(serializers.ModelSerializer):
     class Meta:
@@ -77,9 +74,7 @@ class RetrieveClientModel(serializers.ModelSerializer):
 
 class ClientModelSerializer(serializers.ModelSerializer):
     
-    type_client = serializers.ChoiceField(
-        choices = ['Planta APR','Empresa','Municipio', 'Essbio','DOH']
-    )
+    
 
     class Meta: 
         model = Client

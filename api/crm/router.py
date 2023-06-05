@@ -17,6 +17,7 @@ from api.crm.views import quotation as views_quotations
 from api.crm.views import interaction_detail as views_detail
 from api.crm.views import webinars as views_webinars
 from api.crm.views import profile_footprints as views_footprints
+from api.crm.views import projects as views_projects
 
 router = DefaultRouter()
 
@@ -38,8 +39,11 @@ router.register(r'clients_external', views_clients.ClientExternalViewSet, basena
 router.register(r'support_sections', views_supports.SupportSectionViewSet, basename='support_sections')
 router.register(r'ticket_answers', views_supports.AnswerTicketViewSet, basename='ticket_answer')
 router.register(r'economic_activities', views_clients.EconomicActivityViewSet, basename='economic_activities')
-router.register(r'projects', views_clients.ProjectViewSet, basename='projects')
 router.register(r'fields', views_footprints.FieldSectionViewSet, basename='fields')
+router.register(r'projects', views_projects.ProjectViewSet, basename='projects')
+router.register(r'type_element', views_projects.TypeEelementViewSet, basename='type_element')
+router.register(r'value_element', views_projects.ValueElementViewSet, basename='value_element')
+router.register(r'section_element', views_projects.SectionElementViewSet, basename='section_element')
 
 
 urlpatterns = [
