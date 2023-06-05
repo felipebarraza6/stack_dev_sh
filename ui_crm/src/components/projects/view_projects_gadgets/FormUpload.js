@@ -11,7 +11,7 @@ import { useLocation } from "react-router-dom"
 const { Title } = Typography
 const { TextArea } = Input
 
-const FormUpload = ({ properties, element, count, setCount }) => {
+const FormUpload = ({ properties, element, count, setCount, countA, setCountA }) => {
     const location = useLocation()
     const [loading, setLoading] = useState(false)
     const [form] = Form.useForm()
@@ -37,6 +37,7 @@ const FormUpload = ({ properties, element, count, setCount }) => {
         setLoading(false)
         form.resetFields()
         notification.success({message:'Archivo subido correctamente!'})
+        setCountA(count+1)
         setCount(count+1)
       }).catch((e)=>{
         console.log(e)

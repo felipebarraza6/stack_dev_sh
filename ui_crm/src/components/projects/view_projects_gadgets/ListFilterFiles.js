@@ -7,8 +7,7 @@ import UploadFile from "./UpdateFile";
 
 const { Paragraph } = Typography;
 
-const ListFilterFiles = ({ properties, element, count, setCount }) => {
-  console.log(element)
+const ListFilterFiles = ({ properties, element, count, setCount, countA, setCountA }) => {
   const location = useLocation()
   const [files, setFiles] = useState([])
   console.log(files)
@@ -68,6 +67,7 @@ const ListFilterFiles = ({ properties, element, count, setCount }) => {
                       const rq = await api.projects.values_elements.delete(file.id).then((r)=>{
                         notification.error({message:'Archivo eliminado correctamente'})
                         setCount(count+1)
+                        setCountA(countA+1)
                       })
                     }}  >
                       <Button

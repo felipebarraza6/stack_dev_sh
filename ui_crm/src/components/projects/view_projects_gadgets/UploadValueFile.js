@@ -14,7 +14,7 @@ import FormUpload from "./FormUpload";
 const { Title, Paragraph } = Typography;
 const { TextArea } = Input;
 
-const UploadValueFile = ({ element }) => {
+const UploadValueFile = ({ element, countA, setCountA }) => {
   const [properties, setProperties] = useState(null)
   const [selectFile, setSelectFile] = useState(null)
   const [count, setCount] = useState(0)
@@ -108,10 +108,10 @@ const UploadValueFile = ({ element }) => {
             Formato de archivos designados para este tipo de documento:{" "}
           {validateTypeFileAndColor(element.type_file, false, true)}
         </Paragraph>
-        <ListFilterFiles properties={properties} element={element} count={count} setCount={setCount} />
+        <ListFilterFiles properties={properties} element={element} count={count} setCount={setCount} countA={countA} setCountA={setCountA} />
       </Col>
       <Col span={6}>
-        <FormUpload properties={properties} element={element} count={count} setCount={setCount} />
+        <FormUpload countA={countA} setCountA={setCountA} properties={properties} element={element} count={count} setCount={setCount} />
       </Col>
     </Row>
   );
