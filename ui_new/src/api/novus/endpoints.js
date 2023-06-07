@@ -1,12 +1,12 @@
 import { GET } from './config'
 
-const getData = async(variable, start_date, end_date) =>{
+const getData = async(variable, start_date, end_date, token) =>{
 
     if(!end_date){
         end_date=''
     }
    try {
-        const request = await GET(`?variable=${variable}&start_date=${start_date}&end_date=${end_date}&query=last_item`)        
+        const request = await GET(`?variable=${variable}&start_date=${start_date}&end_date=${end_date}&query=last_item`, token)        
         return request.data        
    } catch(err) {
        console.log(err)

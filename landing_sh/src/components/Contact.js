@@ -15,12 +15,15 @@ const Contact = () => {
     
 
     return(
-        <Row style={styles.container} align='middle'>            
-            <Col xl={12} xs={24} md={12} >
+        <Row style={styles.container} align={'middle'}>            
+            <Col xl={10} xs={24} md={12} >
                 <Itinerary />
             </Col>
-            <Col xl={12} xs={24} md={12}>
+            <Col xl={14} xs={24} md={12}>
                 <Row align={'middle'} justify='center' style={{paddingLeft: window.innerWidth < 800 && '70px'}}>
+                    <Col span={24}>
+                        <Title level={1} style={{color:'white', marginBottom:'30px'}}>Alcance en nuestro país</Title>
+                    </Col>
                     <Col span={4} style={{marginBottom:'20px'}}>
                     <CircularProgressbar
                     value={70}
@@ -50,7 +53,7 @@ const Contact = () => {
                     />
                     </Col>
                     <Col span={18}>
-                        <Title level={2} style={{color:'white', marginTop:'37px', marginLeft:'20px'}}>Empresas y Organizaciones</Title>
+                        <Title level={3} style={{color:'white', marginTop:'0px', marginLeft:'20px'}}>Empresas y Organizaciones</Title>
                     </Col>
                     <Col span={4} style={{marginBottom:'20px'}}>
                     <CircularProgressbar
@@ -82,7 +85,7 @@ const Contact = () => {
                     />
                     </Col>
                     <Col span={18}>
-                        <Title level={2} style={{color:'white', marginTop:'37px', marginLeft:'20px'}}>Sistemas de monitoreo instalados</Title>
+                        <Title level={3} style={{color:'white', marginTop:'0px', marginLeft:'20px'}}>Sistemas de monitoreo instalados</Title>
                     </Col>
                     <Col span={4} style={{marginBottom:'20px'}}>
                     <CircularProgressbar
@@ -114,7 +117,7 @@ const Contact = () => {
                     />
                     </Col>
                     <Col span={18}>
-                        <Title level={2} style={{color:'white', marginTop:'37px', marginLeft:'20px'}}>Agua consumida en tiempo real</Title>
+                        <Title level={3} style={{color:'white', marginTop:'0px', marginLeft:'20px'}}>Agua monitoreada en tiempo real</Title>
                         <Title level={5} style={{color:'white', marginLeft:'20px',marginTop:'-15px', color:'rgba(255, 255, 255, 0.6)'}}>(litros por segundo)</Title>
                     </Col>                    
                 </Row>
@@ -140,8 +143,8 @@ const styles = {
     },
     container: {
         backgroundImage: `url(${cover})`,        
-        paddingTop: '70px',
-        paddingBottom:'60px'
+        paddingTop: '5px',
+        paddingBottom:'5px'
     },
     title: {
         color:'white',

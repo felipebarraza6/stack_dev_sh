@@ -27,11 +27,10 @@ const Services = () => {
     return(<>
         <Row style={styles.row}>
             <Col span={24} style={styles.titleCol}>
-                <Title>Qué puede hacer el <br/> Software(IOT) de Smart Hydro</Title>                
+                <Title>¿Qué puede hacer el Software de Smart Hydro?</Title>                
             </Col>
             </Row>  
-        <Row justify={'center'} style={{
-            
+        <Row justify={'center'} style={{            
             backgroundImage:`url(${R1})`, 
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'top left',
@@ -74,35 +73,29 @@ const Services = () => {
             <Col xl={8} xs={24} style={{position:'absolute', marginTop: window.innerWidth>1000? '400px':'350px', marginRight:'420px'}}>
                 <img src={R2} width={'250px'} />
             </Col>
-            <Col xl={8} xs={24} md={1} style={{padding:'0px', position:'absolute', marginTop:window.innerWidth>1000? '400px':'350px', marginRight:window.innerWidth>1000? '1020px':'800px'}}>
-                <img src={R3} width={'200px'} />
-                <Title level={3} style={{position:'absolute', marginTop:'-20px', marginLeft:'55px'}}>PATNERS</Title>
-            </Col>
-            <Col xl={{span:16, offset:3}} xs={{span:18}} md={{span:16, offset:8}} style={{marginTop:window.innerWidth>800&window.innerWidth<1000? '40px':window.innerWidth<800?'10px':'40px'}}>
-                {window.innerWidth < 800 && <h2>PATNERS</h2>}
-                {window.innerWidth > 800 ? <Col>
-                <img src={P1} width='60px' style={{marginRight:'30px'}} />
-                <img src={P2} width='100px' style={{marginRight:'30px'}} />
-                <img src={P3} width='100px' style={{marginRight:'30px'}} />
-                <img src={P4} width='100px' style={{marginRight:'30px'}} />
-                <img src={P5} width='100px' style={{marginRight:'30px'}} />
-                </Col>:<>
-                <Col span={24} style={{marginBottom:'40px', marginBottom:'20px'}} >
-                    <img src={P1} width='60px' style={{marginRight:'60px'}} />
-                    <img src={P2} width='100px' />
-                </Col>
-
-                <Col span={24} style={{marginBottom:'40px'}}>
-                    <img src={P3} width='100px' style={{marginRight:'60px'}} />
-                    <img src={P4} width='100px' />
-                </Col>
-                <img src={P5} width='100px' style={{marginRight:'60px'}} />
-                </>}
-            </Col>
-            
-
+            <Col span={24}>
+                
+            </Col>                                               
             
         </Row>        
+        <Row justify={'center'} align={'middle'} style={{marginTop:'50px', marginBottom:'50px'}}>
+                    <Col span={24}><Title level={2} style={{textAlign:'center'}}>PATNERS</Title></Col>
+                    <Col span={4}>
+                        <center>
+                            <img src={P2} width='100px' />
+                        </center>
+                    </Col>
+                    <Col span={4}>
+                        <center>
+                            <img src={P3} width='140px'  />                
+                        </center>
+                    </Col>
+                    <Col span={4}>
+                        <center>
+                            <img src={P5} style={{paddingTop:'10px'}} width='160px'  /> 
+                        </center>
+                    </Col>
+                </Row>
         </>
     )
 }
@@ -146,8 +139,8 @@ const styles = {
     titleCol: {
         backgroundColor:'#CBCE07',
         paddingLeft: window.innerWidth > 800 ? '100px':'20px',
-        paddingTop:'10px',
-        paddingBottom:'0px'
+        paddingTop:'30px',
+        paddingBottom:'20px'
         
     }
 }

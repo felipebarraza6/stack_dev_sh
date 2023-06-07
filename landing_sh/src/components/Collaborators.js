@@ -3,10 +3,6 @@ import { Row, Col, Typography, Carousel } from 'antd'
 import logo_corfo from '../assets/images/corfo.png'
 import logo_cidere from '../assets/images/cidere.png'
 
-import diteco from '../assets/images/clientes/diteco.png'
-import polykarpo from '../assets/images/clientes/polykarpo.png'
-import placilla from '../assets/images/placilla.jpeg'
-import cannes from '../assets/images/canner.png'
 
 import im1 from '../assets/images/team/1.jpg'
 import im2 from '../assets/images/team/2.jpg'
@@ -16,6 +12,14 @@ import c2 from '../assets/images/clientes/2.png'
 import c3 from '../assets/images/clientes/3.png'
 import c4 from '../assets/images/clientes/4.png'
 import c5 from '../assets/images/clientes/5.png'
+import c6 from '../assets/images/clientes/6.png'
+import c7 from '../assets/images/clientes/7.png'
+import c8 from '../assets/images/clientes/8.png'
+import c9 from '../assets/images/clientes/9.png'
+import c10 from '../assets/images/clientes/10.png'
+import c11 from '../assets/images/clientes/11.png'
+import c12 from '../assets/images/clientes/12.png'
+import c13 from '../assets/images/clientes/13.png'
 
 
 const { Title } = Typography
@@ -49,16 +53,62 @@ const Collaborators = () => {
         <Title level={1} style={styles.title}>Clientes</Title>
         </Col>
       </Row>
-      <Row justify='center'>
-            <Col span={24} style={{paddingTop:'30px'}}><center>
-              <img src={c1} style={{marginRight:'50px'}} width='15%' alt='logo_cowork' />
-              <img src={c2} style={{marginRight:'50px'}} width='15%' alt='logo_cowork' />
-              <img src={c3} style={{marginRight:'50px'}} width='15%' alt='logo_cowork' />
-              <img src={c4} style={{marginRight:'50px'}} width='15%' alt='logo_cowork' />
-              <img src={c5} style={{marginRight:'50px'}} width='15%' alt='logo_cowork' />
-              </center>
+      <Row>
+        <Col span={24} style={{marginBottom:'-30px'}} >
+      <Carousel autoplay >
+        <div>
+          <Row justify={'space-around'} align={'middle'} style={{paddingTop:'20px'}}>
+            <Col span={4}>
+            <img src={c1}  width='100%' alt='logo_cowork' />
+            </Col>
+            <Col span={4}>
+            <img src={c2} width='100%' alt='logo_cowork' />
+            </Col>
+            <Col span={4}>
+            <img src={c3} width='100%' alt='logo_cowork' />
+            </Col>
+            <Col span={4}>
+            <img src={c4} width='100%' alt='logo_cowork' />
+            </Col>
+            <Col span={4}>
+            <img src={c5} width='100%' alt='logo_cowork' />
+            </Col>
+          </Row>
+        </div>
+        <div>
+          <Row justify={'space-around'} align={'middle'}>
+            <Col span={4}>
+            <img src={c6}  width='100%' alt='logo_cowork' />
+            </Col>
+            <Col span={4}>
+            <img src={c7} width='100%' alt='logo_cowork' />
+            </Col>
+            <Col span={4}>
+            <img src={c8} width='100%' alt='logo_cowork' />
+            </Col>
+            <Col span={4}>
+            <img src={c9} width='100%' alt='logo_cowork' />
+            </Col>
+            <Col span={4}>
+            <img src={c10} width='100%' alt='logo_cowork' />
+            </Col>
+          </Row>
+        </div>
+        <div>
+          <Row justify={'space-around'} align={'middle'}>
+            <Col span={4}>
+            <img src={c11}  width='70%' alt='logo_cowork' />
+            </Col>
+            <Col span={4}>
+            <img src={c12} width='70%' alt='logo_cowork' />
+            </Col>
+            <Col span={4}>
+            <img src={c13} width='70%' alt='logo_cowork' />
             </Col>            
-            
+          </Row>
+        </div>
+      </Carousel>
+      </Col>
       </Row>
     </>)
 

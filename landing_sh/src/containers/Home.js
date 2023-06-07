@@ -48,13 +48,9 @@ const Home = () => {
         <BrowserRouter>                            
               <Route exact path='/'>                
                 <Header style={styles.header} >            
-                  <Row align='middle'>                
+                  <Row align='middle' justify={'center'}>
                     {width > 800 ? <>
-                      <Col span={2} >
-                        <a href='https://smarthydro.cl'>
-                        <img src={icono_logo} alt='logo' style={styles.logo} />
-                        </a>
-                      </Col>          
+                       
                       <Col span={22}> 
                         <HeaderMenu is_mobile={is_mobile} />
                       </Col>                

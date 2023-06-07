@@ -13,8 +13,7 @@ const Itinerary = () => {
 
 
     return (<Row justify={'center'}>
-        <center><Typography.Title level={2} style={styles.title}>Alcance en el País</Typography.Title></center>
-        <center><img src={mapa2} style={{marginTop: window.innerWidth > 800 ? '130px':'80px'}} width={'55%'} /></center>
+        <center><img src={mapa2} style={{marginTop: window.innerWidth > 800 ? '130px':'0'}} width={'90%'} /></center>
     </Row>)
 }
 
