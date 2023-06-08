@@ -78,19 +78,19 @@ const Services = () => {
             </Col>                                               
             
         </Row>        
-        <Row justify={'center'} align={'middle'} style={{marginTop:'50px', marginBottom:'50px'}}>
-                    <Col span={24}><Title level={2} style={{textAlign:'center'}}>PATNERS</Title></Col>
-                    <Col span={4}>
+        <Row justify={'center'} align={'middle'} style={{marginTop:'50px', backgroundColor:'black', padding:'50px', marginBottom:'-20px'}}>
+                    <Col span={24}><Title level={2} style={{textAlign:'center', color:'white'}}>PARTNERS</Title></Col>
+                    <Col xl={4} xs={24} style={{margin:window.innerWidth>800?'':'20px'}}>
                         <center>
-                            <img src={P2} width='100px' />
+                            <img src={P2} width='110px' />
                         </center>
                     </Col>
-                    <Col span={4}>
+                    <Col xl={4} xs={24} style={{margin:window.innerWidth>800?'':'20px'}}>
                         <center>
                             <img src={P3} width='140px'  />                
                         </center>
                     </Col>
-                    <Col span={4}>
+                    <Col xl={4} xs={24} style={{margin:window.innerWidth>800?'':'20px'}}>
                         <center>
                             <img src={P5} style={{paddingTop:'10px'}} width='160px'  /> 
                         </center>
@@ -133,7 +133,7 @@ const styles = {
     },
     row: {
         paddingTop:'90px',
-        marginBottom: '0px',
+        
         marginTop:'-90px'
     },
     titleCol: {

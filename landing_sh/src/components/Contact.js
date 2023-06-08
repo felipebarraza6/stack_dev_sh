@@ -16,13 +16,13 @@ const Contact = () => {
 
     return(
         <Row style={styles.container} align={'middle'}>            
-            <Col xl={10} xs={24} md={12} >
-                <Itinerary />
+            <Col xl={10} xs={24} md={12} style={{marginTop:'50px', backgroundPositionY:'center', backgroundPositionX:'center', backgroundImage: `url(${mapa2})`, backgroundSize:window.innerWidth>800?'400px ':'300px', height:'100vh', backgroundRepeat:'no-repeat'}} >
+                
             </Col>
-            <Col xl={14} xs={24} md={12}>
-                <Row align={'middle'} justify='center' style={{paddingLeft: window.innerWidth < 800 && '70px'}}>
+            <Col xl={14} xs={24} md={12} style={{paddingBottom:window.innerWidth<800&&'30px'}}>
+                <Row align={'middle'} justify='center' >
                     <Col span={24}>
-                        <Title level={1} style={{color:'white', marginBottom:'30px'}}>Alcance en nuestro país</Title>
+                        <Title level={1} style={{textAlign:window.innerWidth<800&&'center', color:'white', marginBottom:'30px', paddingLeft:window.innerWidth>800&&'40px'}}>Alcance en nuestro país</Title>
                     </Col>
                     <Col span={4} style={{marginBottom:'20px'}}>
                     <CircularProgressbar
@@ -57,9 +57,9 @@ const Contact = () => {
                     </Col>
                     <Col span={4} style={{marginBottom:'20px'}}>
                     <CircularProgressbar
-                    value={80}
-                    maxValue={120}
-                    text={`80+`}
+                    value={120}
+                    maxValue={300}
+                    text={`120+`}
                     styles={buildStyles({
                         // Rotation of path and trail, in number of turns (0-1)
                         rotation: 0.25,
@@ -90,8 +90,8 @@ const Contact = () => {
                     <Col span={4} style={{marginBottom:'20px'}}>
                     <CircularProgressbar
                     value={6000}
-                    text={`6.000+`}
-                    maxValue={8700}
+                    text={`7.200+`}
+                    maxValue={12000}
                     styles={buildStyles({
                         // Rotation of path and trail, in number of turns (0-1)
                         rotation: 0.35,

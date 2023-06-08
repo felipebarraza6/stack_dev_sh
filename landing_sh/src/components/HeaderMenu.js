@@ -1,7 +1,7 @@
 import React from 'react'
 import {Col, Row, Button } from 'antd'
 import { HashLink as Link } from 'react-router-hash-link'
-import { UserOutlined, FundOutlined } from '@ant-design/icons'
+import { FundOutlined } from '@ant-design/icons'
 import icono_logo from '../assets/images/icono_logo.png'
 
 
@@ -67,12 +67,15 @@ const styles = {
         backgroundColor:'#222221',
         borderRadius:'10px',
         borderColor:'#222221',
-        color:'white',
+        color:'black',
+        backgroundColor: 'rgb(203, 206, 7)',
+        borderColor: 'rgb(203, 206, 7)'
         
     },
     usericon: {
         marginRight:'8px',        
         fontSize:'20px',
+            
     }
 }
 

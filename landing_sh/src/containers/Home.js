@@ -17,7 +17,7 @@ import { BrowserRouter, Redirect, Route } from 'react-router-dom'
 import ContainerFormDga from '../components/dgaform/ContainerFormDga'
 import ContactForm from '../components/forms/ContactForm'
 import Fingerprint from '../components/fingerprint/Init'
-import { UserOutlined } from '@ant-design/icons'
+import { FundOutlined } from '@ant-design/icons'
 import ThankYou from '../components/pages/ThankYou'
 import WebinarRetrieve from '../components/webinars/webinarRetrieve'
 import QuotationExternalClients from './Quotation'
@@ -61,8 +61,8 @@ const Home = () => {
                         </a>
                       </Col>
                       <Col span={12}>
-                      <Button style={styles.btnAction} icon={<UserOutlined style={styles.usericon} />} onClick={goDataIot}>
-                    <b>ACCESO DATAIOT</b>
+                      <Button size='large' style={styles.btnAction} icon={<FundOutlined style={styles.usericon} />} onClick={goDataIot}>
+                    <b>IKOLU APP</b>
                 </Button>
                       </Col>
                       </>}
@@ -145,12 +145,12 @@ const Home = () => {
 
 
 const styles = {
-  btnAction: {
-    backgroundColor:'#222221',
-    borderRadius:'10px',
-    borderColor:'#222221',
-    color:'white',
-    marginTop:'25px'        
+  btnAction: {    
+    borderRadius:'10px',    
+    color:'black',
+    backgroundColor: 'rgb(203, 206, 7)',
+    borderColor: 'rgb(203, 206, 7)',
+    marginTop:'20px'
 },
     layout: {
       backgroundColor: 'white'

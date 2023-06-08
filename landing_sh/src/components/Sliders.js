@@ -28,19 +28,19 @@ const Sliders = ({is_mobile}) => {
       </Col>
       <Col xl={{span:1, offset:23}} xs={{span:16, offset:3}} md={{span:1,offset:22}}  style={{marginTop:window.innerWidth>1000?'-550px':window.innerWidth<800?'0px':'-750px', borderRadius:'10px'}}>
         <a href='https://www.facebook.com/smarthydrorrss/' target={'__blank'}>
-          <FacebookOutlined style={{fontSize:'30px', margin:'5px', color:'white', backgroundColor:'#222221', padding:'5px',borderRadius:'10px'}} />
+          <FacebookOutlined style={{fontSize:'30px', margin:'5px', color:'black', backgroundColor:'rgb(203, 206, 7)', padding:'5px',borderRadius:'10px'}} />
         </a>
         <a href='https://www.instagram.com/smarthydrorrss/' target={'__blank'}>
-          <InstagramOutlined style={{fontSize:'30px', margin:'5px', color:'white', backgroundColor:'#222221', padding:'5px',borderRadius:'10px'}} />
+          <InstagramOutlined style={{fontSize:'30px', margin:'5px', color:'black', backgroundColor:'rgb(203, 206, 7)', padding:'5px',borderRadius:'10px'}} />
         </a>
         <a href='https://twitter.com/smarthydrorrss' target={'__blank'}>
-          <TwitterOutlined style={{fontSize:'30px', margin:'5px', color:'white', backgroundColor:'#222221', padding:'5px',borderRadius:'10px'}} />
+          <TwitterOutlined style={{fontSize:'30px', margin:'5px', color:'black', backgroundColor:'rgb(203, 206, 7)', padding:'5px',borderRadius:'10px'}} />
         </a>
         <a href='#' target={'__blank'}>
-          <LinkedinOutlined style={{fontSize:'30px', margin:'5px', color:'white', backgroundColor:'#222221', padding:'5px',borderRadius:'10px'}} />
+          <LinkedinOutlined style={{fontSize:'30px', margin:'5px', color:'black', backgroundColor:'rgb(203, 206, 7)', padding:'5px',borderRadius:'10px'}} />
           </a>
         <a href='https://web.whatsapp.com/send?phone=56939581688&text=%C2%A1Hola!' target={'__blank'}>
-          <WhatsAppOutlined style={{fontSize:'30px', margin:'5px', color:'white', backgroundColor:'#222221', padding:'5px',borderRadius:'10px'}} />
+          <WhatsAppOutlined style={{fontSize:'30px', margin:'5px', color:'black', backgroundColor:'rgb(203, 206, 7)', padding:'5px',borderRadius:'10px'}} />
         </a>
       </Col>                                  
       

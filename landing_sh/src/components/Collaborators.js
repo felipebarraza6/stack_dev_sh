@@ -1,7 +1,5 @@
 import React from 'react'
 import { Row, Col, Typography, Carousel } from 'antd'
-import logo_corfo from '../assets/images/corfo.png'
-import logo_cidere from '../assets/images/cidere.png'
 
 
 import im1 from '../assets/images/team/1.jpg'
@@ -147,7 +145,7 @@ const styles = {
     },
     colImg: {
         textAlign: 'center',
-        marginTop:'20px', marginBottom:'20px'   
+        
     }
 }
 
