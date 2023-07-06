@@ -23,11 +23,14 @@ export async function getNovusData(
       state.selected_profile.token_service
     )
     .then((x) => {
-      if (x.data.result[0].value > 0) {
-        setCaudal(x.data.result[0].value);
-      } else {
-        setCaudal(0.0);
+      if(state.client_profile!=='NUEVA ENERGIA'){
+        if (x.data.result[0].value > 0) {
+          setCaudal(x.data.result[0].value);
+        } else {
+          setCaudal(0.0);
+        }
       }
+      
     })
     .catch((e) => {
       setCaudal(0.0);
@@ -81,7 +84,7 @@ export async function getNovusData(
         nowDate.getDate() - 1 > 9
           ? nowDate.getDate() - 1
           : `0${nowDate.getDate() - 1}`
-      }T${nowDate.getHours() - 1}:00:00`;
+      }T00:00:00`;
 
       const rq2 = await api_novus
         .data("3grecdi1va", "", date, state.selected_profile.token_service)
@@ -92,22 +95,6 @@ export async function getNovusData(
         );
       var diff = parseInt(x.data.result[0].value / state.selected_profile.scale) - antHour;
 
-      console.log('v1', antHour)
-      console.log('v2', parseInt(x.data.result[0].value / state.selected_profile.scale))
-
-      
-      if (diff > 0) {
-        var cal = diff * state.selected_profile.scale;
-        
-        console.log('escala:',state.selected_profile.scale )
-        var cal2 = cal / 3600;
-        setCaudal(parseFloat(cal2).toFixed(1));
-        console.log('diferencia', diff)
-        console.log(diff)
-        console.log(cal2)
-      } else {
-        setCaudal(0.0);
-      }
     })
     .catch((e) => {
       setAcumulado(0);

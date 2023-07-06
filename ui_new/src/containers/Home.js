@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext} from 'react'
 import { Row, Col } from 'antd'
 
 import HeaderNav from '../components/home/HeaderNav'
@@ -10,9 +10,11 @@ import MyWell from '../components/mywell/MyWell'
 import MyGraphics from '../components/graphics/MyGraphics'
 import Reports from '../components/reports/Reports'
 import Indicators from '../components/Indicators/Indicators'
+import Dga from '../components/dga/Dga'
+import { AppContext } from '../App'
 
 const Home = () => {
-
+    const {state}=useContext(AppContext)
     return(<Row>
         <BrowserRouter>
         <Col span={24}>
@@ -32,9 +34,11 @@ const Home = () => {
                         <Col span={24}>
                             <Routes>
                                 <Route exact path="/" element={<MyWell />} />
+                                
                                 <Route exact path="/graficos" element={<MyGraphics />} />
                                 <Route exact path="/indicadores" element={<Indicators />} />
                                 <Route exact path="/reportes" element={<Reports />} />
+                                <Route exact path="/dga" element={<Dga />} />
                             </Routes>
                         </Col>
                     </Row>                    

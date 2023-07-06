@@ -5,8 +5,23 @@ const getData = async(variable, start_date, end_date, token) =>{
     if(!end_date){
         end_date=''
     }
+    console.log(variable)
    try {
         const request = await GET(`?variable=${variable}&start_date=${start_date}&end_date=${end_date}&query=last_item`, token)        
+        return request.data        
+   } catch(err) {
+       console.log(err)
+   }
+}
+
+const getDataForCaudal = async(variable, start_date, end_date, token) =>{
+
+    if(!end_date){
+        end_date=''
+    }
+    console.log(variable)
+   try {
+        const request = await GET(`?variable=${variable}&qty=2`, token)        
         return request.data        
    } catch(err) {
        console.log(err)
@@ -19,7 +34,7 @@ const getLastData = async(variable,token) => {
         return request
     } catch(err) {
         console.log(err)
-    }
+    } 
 }
 
 const getLastDataHour = async(variable,token) => {
@@ -142,7 +157,7 @@ const getMonthInd2 = async(variable,token) => {
         
         
         const request = await GET(`?variable=${variable}&query=last_item&end_date=${date}`, token)
-        
+   
         listData.push({
             date: date,
             mt: request.data.result[0] ? 
@@ -159,8 +174,10 @@ const getMonthInd2 = async(variable,token) => {
 }
 
 
+
 const api_novus = {
     data: getData,
+    dataCaudal: getDataForCaudal,
     lastData: getLastData,
     lastDataForHour: getLastDataHour,
     getMontData: getMonth,

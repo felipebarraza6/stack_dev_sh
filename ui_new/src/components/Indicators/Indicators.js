@@ -51,7 +51,7 @@ const Indicators = () => {
                     suffix="(m)"
                 />
  
-                  <div style={{float:'right'}}>{ind1[0] ? ind1[0].date:0}</div>
+                  <div style={{float:'right'}}>{ind2[0] ? ind2[0].date:0}</div>
                 </>} 
             </Card>
         </Col>

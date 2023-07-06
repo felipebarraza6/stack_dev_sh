@@ -33,12 +33,19 @@ const downloadFile = async(id_profile, title)=> {
   return rq.data
 }
 
+const getDataApiSh = async(id_profile) => {
+    const rq = await GET(`interaction_detail_json/?profile_client=${id_profile}&hour=0`)
+    return rq.data
+}
+
+
 const sh = {
     authenticated: login,
     billing_data: get_history_data,
     billing_data_admin: get_history_data_admin,
     get_profile: get_profile,
-    downloadFile: downloadFile 
+    downloadFile: downloadFile,
+    get_data_sh: getDataApiSh
 }
 
 export default sh

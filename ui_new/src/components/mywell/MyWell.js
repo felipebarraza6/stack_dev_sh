@@ -27,10 +27,31 @@ const MyWell = () => {
     let month = dateToday.toLocaleString("es", {month: "long"})
     let day = dateToday.getDate()
     let fechaConMes = `Ingresaras el periodo de correspondiente al "${dateToday.getFullYear()}"` 
+
+    const getAccCaudal = async() => {
+      var nowDate = new Date()
+      var antHour = 0;
+      var date = `${nowDate.getFullYear()}-${
+        nowDate.getMonth() + 1 > 9
+          ? nowDate.getMonth() + 1
+          : `0${nowDate.getMonth() + 1}`
+      }-${
+        nowDate.getDate() - 1 > 9
+          ? nowDate.getDate() - 1
+          : `0${nowDate.getDate() - 1}`
+      }T00:00:00`
+      const rq = await api_novus.dataCaudal('3grecdi1va', '', date, state.selected_profile.token_service).then((r) => {
+        var val1 = r.result[0].value
+        var val2 = r.result[1].value
+        var calc = ((val1/state.selected_profile.scale)-(val2/state.selected_profile.scale))/3600
+        setCaudal(calc)
+      })
+    }
         
 
     useEffect(()=> {
         getNovusData(setCaudal, setNivel, state, api_novus, setAcumulado, acumulado, nivel)
+        getAccCaudal()
 
     }, [state.selected_profile])
 
@@ -90,14 +111,14 @@ const MyWell = () => {
                                    <Col span={7}><img src={nivel_img} width='60px' /></Col>
                                    <Col span={12}><Title level={5} style={{color:'#222221'}}>Nivel Freático</Title></Col>                                            
                                    <Col span={12} offset={7} style={{marginTop:'-25px'}}><Typography.Paragraph level={5}><b>{parseFloat(nivel).toFixed(1)} (Metros)</b></Typography.Paragraph></Col>
-                               </Row>                                    
+                               </Row>                  
                            </Card>
                            <Card hoverable style={{marginBottom:'50px', marginTop:'20px', border:'solid 1px grey', borderRadius:'15px', width:'350px'}}>
                                <Row align='middle'>
                                     <Col span={7}><img src={acumulado_img} width='60px'  /></Col>
                                     <Col span={17}><Title level={5} style={{color:'#222221'}}>Acumulado</Title></Col>                                            
                                     <Col span={12} offset={7} style={{marginTop:'-22px'}}>
-                                    <Typography.Paragraph level={5}><b>{state.user.username === 'fermin'  ? numberForMiles.format(acumulado*1) :state.selected_profile.title=='PAINE' ? '6094':numberForMiles.format(acumulado)}</b><br/></Typography.Paragraph>
+                                    <Typography.Paragraph level={5}><b>{state.user.username === 'fermin'  ? numberForMiles.format(acumulado*1) :numberForMiles.format(acumulado)}</b><br/></Typography.Paragraph>
                                     <Typography.Paragraph level={5} style={{marginTop:'-20px'}}><b>(Metros cúbicos)</b></Typography.Paragraph>
                                     </Col>
                                     
