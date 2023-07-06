@@ -33,7 +33,7 @@ const Dga = () => {
         </Col>
         <Col span={12}>
                 <center><FileImageOutlined style={{fontWeight:'100',fontSize:'150px', textAlign:'center', color: '#1f3461'}} /><br/><br/>
-                <Title level={4}>CODIGO DE OBRA</Title>
+                <Title level={4}>CÓDIGO DE OBRA</Title>
                 <Button style={{borderRadius:'10px', backgroundColor:'#1f3461', color:'white'}} disabled>Ir a mi Dga</Button></center>
         </Col>
         </Row>
