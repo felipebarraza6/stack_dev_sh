@@ -23,7 +23,7 @@ export async function getNovusData(
       state.selected_profile.token_service
     )
     .then((x) => {
-      if(state.client_profile!=='NUEVA ENERGIA'){
+      if(state.client_profile!=='NUEVA ENERGIA'||state.user.username!=='cocacolatemuco'){
         if (x.data.result[0].value > 0) {
           setCaudal(x.data.result[0].value);
         } else {
@@ -37,8 +37,7 @@ export async function getNovusData(
     });
   const rqNivel = await api_novus
     .lastData(
-      state.selected_profile.title == "POZO 3" ||
-        state.selected_profile.title == "POZO 2"
+      state.selected_profile.title == "POZO 3" || state.selected_profile.title == "POZO 2"
         ? "3grecuc1v"
         : state.selected_profile.title == "Las Pircas"
         ? "3grecuc1v"
@@ -48,7 +47,7 @@ export async function getNovusData(
         ? "3grecuc1v"
         : state.user.id == 34
         ? "3grecuc1v"
-        : "3grecuc2v",
+        :  state.user.username === 'cocacolatemuco' ? '3grecuc1v':"3grecuc2v",
       state.selected_profile.title == "POZO 3"
         ? "321bbb98-4579-4c63-b93f-ecad987b2abf"
         : state.selected_profile.title == "POZO 2"
@@ -67,7 +66,7 @@ export async function getNovusData(
     });
   const rqAcumulado = await api_novus
     .lastData(
-      state.selected_profile.title == "Paine" ? "wifiaccva" : "3grecdi1va",
+      state.selected_profile.title == "Paine" ? "wifiaccva" : state.user.username === 'cocacolatemuco'?'3grecdi1va':"3grecdi1va",
       state.selected_profile.token_service
     )
     .then(async (x) => {

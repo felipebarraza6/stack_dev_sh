@@ -19,7 +19,7 @@ const SiderRight = () => {
     <div style={{textAlign:'center', backgroundColor:'white', marginLeft:'-24px', marginRight:'-24px',  marginBottom:'15px',backgroundColor: location.pathname=='/'?'#1F3461':'white',}}>
         <Link to='/'><Button  type='link' style={{color:location.pathname!=='/'?'#1F3461':'white'}}>Mi Pozo</Button></Link>
     </div>
-    {state.user.username!=='nuevaenergia' ? <>
+    {state.user.username === 'pozos_iansa' || state.user.username ==='pozos_iansaquepe' ? <>
     <div style={{textAlign:'center', backgroundColor:'white', marginLeft:'-24px', marginRight:'-24px',  marginBottom:'15px',backgroundColor: location.pathname=='/graficos'?'#1F3461':'white',}}>
         <Link to='/graficos'><Button disabled={state.user.username == 'gcastro' ? true:false} type='link' style={{color:location.pathname!=='/graficos'?'#1F3461':'white'}}>Gráficos</Button></Link>
     </div>
@@ -29,7 +29,7 @@ const SiderRight = () => {
     <div style={{textAlign:'center', backgroundColor:'white', marginLeft:'-24px', marginRight:'-24px',  marginBottom:'250px',backgroundColor: location.pathname=='/reportes'?'#1F3461':'white',}}>
         <Link to='/reportes'><Button disabled={state.user.username == 'gcastro' ? true:false}  type='link' style={{color:location.pathname!=='/reportes'?'#1F3461':'white'}}>Reportes</Button></Link>
 
-    </div></>:<div style={{textAlign:'center', backgroundColor:'white', marginLeft:'-24px', marginRight:'-24px',  marginBottom:state.user.username!=='nuevaenergia'?'15px':'335px',backgroundColor: location.pathname=='/dga'?'#1F3461':'white',}}>
+    </div></>:<div style={{textAlign:'center', backgroundColor:'white', marginLeft:'-24px', marginRight:'-24px',  marginBottom:state.user.username === 'pozos_iansa' || state.user.username ==='pozos_iansaquepe'?'15px':'335px',backgroundColor: location.pathname=='/dga'?'#1F3461':'white',}}>
         <Link to='/dga'><Button disabled={state.user.username == 'gcastro' ? true:false}  type='link' style={{color:location.pathname!=='/dga'?'#1F3461':'white'}}>DGA</Button></Link>                                
     </div>}
     
