@@ -32,8 +32,12 @@ const Dga = () => {
                 ]} />
         </Col>
         <Col span={12}>
-                <center><FileImageOutlined style={{fontWeight:'100',fontSize:'150px', textAlign:'center', color: '#1f3461'}} /><br/><br/>
-                <Title level={4}>CÓDIGO DE OBRA</Title>
+                <center>
+                {state.selected_profile.qr_dga ? <><img width={'50%'} src={`https://api.smarthydro.cl/${state.selected_profile.qr_dga}`} /><br/><br/></>: <>
+                    <FileImageOutlined style={{fontWeight:'100',fontSize:'150px', textAlign:'center', color: '#1f3461'}} /><br/><br/>
+                    </>
+                }
+                <Title level={4}>{state.selected_profile.code_dga_site ? state.selected_profile.code_dga_site:'CÓDIGO DE OBRA'}</Title>
                 <Button style={{borderRadius:'10px', backgroundColor:'#1f3461', color:'white'}} disabled>Ir a mi Dga</Button></center>
         </Col>
         </Row>

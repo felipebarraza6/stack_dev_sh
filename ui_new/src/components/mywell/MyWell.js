@@ -56,10 +56,15 @@ const MyWell = () => {
     }, [state.selected_profile])
 
     return(<Row justify={'center'} style={{padding:'20px'}}>
-                {state.selected_profile.title=='Coquimbo'? <Col span={20} style={{marginTop:'20px'}}>
+                {state.selected_profile.title=='Coquimbo' || state.selected_profile.title =='Las Liras' ? <Col span={20} style={{marginTop:'20px'}}>
                   <Title level={3}>Ingreso manual de datos</Title>
                   <Title level={5} style={{marginTop:'-10px'}}>Estandar menor</Title>
-                  <Title level={5} style={{marginTop:'-10px', marginBottom:'30px'}}>SHAC: Provincia del Elqui y Limarí</Title>
+                  <Title level={5} style={{marginTop:'-10px', marginBottom:'30px'}}> 
+                  {state.selected_profile.title=='Coquimbo' && 
+                    <>SHAC: Provincia del Elqui y Limarí</>}
+                    {state.selected_profile.title=='Las Liras' && 
+                    <>SHAC: Teno - Lontué</>}
+                  </Title>
                   <Paragraph><u><strong>{fechaConMes}</strong></u></Paragraph>
                   <Title level={5}>SEMESTRE</Title>
                   <Form layout='inline' onFinish={()=>{
