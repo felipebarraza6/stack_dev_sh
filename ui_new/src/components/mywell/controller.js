@@ -96,7 +96,6 @@ export async function getNovusData(
 
     })
     .catch((e) => {
-      setAcumulado(0);
     });
   return {
     rqCaudal,
