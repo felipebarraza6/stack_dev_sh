@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Row, Col, Typography, Modal,
-        Input, Card, Form, Button, Table } from 'antd'
+        Input, Card, Form, Button, Table, Select } from 'antd'
 
 import caudal_img  from '../../assets/images/caudal.png'
 import nivel_img  from '../../assets/images/nivel.png'
@@ -9,6 +9,7 @@ import pozo1  from '../../assets/images/pozo1.png'
 import { AppContext } from '../../App'
 import api_novus from '../../api/novus/endpoints'
 import { getNovusData } from './controller'
+import { ZhihuCircleFilled } from '@ant-design/icons'
 
 const { Title, Paragraph } = Typography
 
@@ -20,13 +21,16 @@ const MyWell = () => {
     const [caudal, setCaudal] = useState(0.0)
     const [nivel, setNivel] = useState(0.0)
     const [acumulado, setAcumulado] = useState(0)
+    const [dataSource, setDataSource] = useState([])
+
+    const [form] = Form.useForm()
 
     let dateToday = new Date()
     let fechaFormateada = dateToday.toLocaleDateString("es-CL")
 
     let month = dateToday.toLocaleString("es", {month: "long"})
     let day = dateToday.getDate()
-    let fechaConMes = `Ingresaras el periodo de correspondiente al "${dateToday.getFullYear()}"` 
+    let fechaConMes = `Ingresaras el periodo de correspondiente al mes "0${state.selected_profile.title =='Las Liras' ? dateToday.getMonth() :dateToday.getFullYear()}"` 
 
     const getAccCaudal = async() => {
       var nowDate = new Date()
@@ -52,43 +56,92 @@ const MyWell = () => {
     useEffect(()=> {
         getNovusData(setCaudal, setNivel, state, api_novus, setAcumulado, acumulado, nivel)
         getAccCaudal()
+        const estandar_menor = JSON.parse(localStorage.getItem('estandar_menor'))
+
+        if(estandar_menor){
+          setDataSource([estandar_menor])
+        }
 
     }, [state.selected_profile])
 
     return(<Row justify={'center'} style={{padding:'20px'}}>
                 {state.selected_profile.title=='Coquimbo' || state.selected_profile.title =='Las Liras' ? <Col span={20} style={{marginTop:'20px'}}>
                   <Title level={3}>Ingreso manual de datos</Title>
-                  <Title level={5} style={{marginTop:'-10px'}}>Estandar menor</Title>
+                  <Title level={5} style={{marginTop:'-10px'}}>Estándar menor</Title>
                   <Title level={5} style={{marginTop:'-10px', marginBottom:'30px'}}> 
                   {state.selected_profile.title=='Coquimbo' && 
                     <>SHAC: Provincia del Elqui y Limarí</>}
                     {state.selected_profile.title=='Las Liras' && 
                     <>SHAC: Teno - Lontué</>}
-                  </Title>
-                  <Paragraph><u><strong>{fechaConMes}</strong></u></Paragraph>
-                  <Title level={5}>SEMESTRE</Title>
-                  <Form layout='inline' onFinish={()=>{
-                    Modal.success({title:'Semestre ingresado correctamente'})
+                  </Title>                  
+                  <Title level={5}>{state.selected_profile.title=='Las Liras' ? 'REGISTRO MENSUAL':'SEMESTRE'}</Title>
+                  <Form form={form} layout='inline' onFinish={(values)=>{
+                    Modal.success({title:'Información ingresada correctamente!'})
+                    values={...values, fecha: new Date().toISOString()}
+                    console.log(values)
+                    localStorage.setItem("estandar_menor", [JSON.stringify(values)])
+                    form.resetFields()
+                    setDataSource([values])
                   }}>
-                    <Form.Item>
+                    <Form.Item name='caudal'>
                       <Input placeholder='Caudal(Ltrs)' />
                     </Form.Item>
-                    <Form.Item >
+                    <Form.Item name='nivel' >
                       <Input placeholder='Nivel(Mt)'/>
                     </Form.Item>
-                    <Form.Item  >
+                    <Form.Item name='acumulado'  >
                       <Input placeholder='Acumulado(m³)'/>
+                    </Form.Item><br/>
+                    <Form.Item  name='mes' style={{width:'180px'}}>
+                      <Select style={{marginTop:'10px'}} placeholder='Selecciona un mes...'>
+                        <Select.Option value='enero' disabled>
+                          Enero
+                        </Select.Option>
+                        <Select.Option value='febrero' disabled>
+                          Febrero
+                        </Select.Option>
+                        <Select.Option value='marzo' disabled>
+                          Marzo
+                        </Select.Option>
+                        <Select.Option value='abril' disabled>
+                          Abril
+                        </Select.Option>
+                        <Select.Option value='mayo' disabled>
+                          Mayo
+                        </Select.Option>
+                        <Select.Option value='junio' disabled>
+                          Junio
+                        </Select.Option>
+                        <Select.Option value='julio'>
+                          Julio
+                        </Select.Option>
+                        <Select.Option value='agosto' disabled>
+                          Agosto
+                        </Select.Option>
+                        <Select.Option value='septiembre' disabled>
+                          Septiembre
+                        </Select.Option>
+                        <Select.Option value='octubre' disabled>
+                          Octubre
+                        </Select.Option>
+                        <Select.Option value='noviembre' disabled>
+                          Noviembre
+                        </Select.Option>
+                        <Select.Option value='diciembre' disabled>
+                          Diciembre
+                        </Select.Option>
+                      </Select>
                     </Form.Item>
-                    <Button htmlType='submit' type='primary' style={{marginRight:'10px'}}>Ingresar</Button>
-                    <Button type='primary' danger>Limpiar</Button>                  
+                    <Button htmlType='submit' type='primary' style={{marginRight:'10px', marginTop:'10px'}}>Ingresar</Button>
+                    <Button style={{marginTop:'10px'}} type='primary' onClick={()=>form.resetFields()} danger>Limpiar</Button>                  
                   </Form>                  
                   
-                  <Table bordered style={{marginTop:'20px'}} header={()=><h1>Datos ingresados</h1>} columns={[
-                    {title:'Caulda(Ltrs)'},
-                    {title:'Nivel(Mt)'},
-                    {title:'Acumulado(m³)'},                  
-                    {title:'Fecha'},
-                    {title:'Usuario'},
+                  <Table dataSource={dataSource} bordered style={{marginTop:'20px'}} header={()=><h1>Datos ingresados</h1>} columns={[
+                    {title:'Caulda(Ltrs)', dataIndex:'caudal'},
+                    {title:'Nivel(Mt)', dataIndex:'nivel'},
+                    {title:'Acumulado(m³)', dataIndex:'acumulado'},                  
+                    {title:'Mes', dataIndex:'mes', render:(x)=>x.toUpperCase()},                    
+                    {title:'Fecha ingreso', dataIndex:'fecha', render: (x)=><>{x.slice(0,10)}</>}
                   ]}></Table>
                   </Col>:<>
                 <Col span={24}>
