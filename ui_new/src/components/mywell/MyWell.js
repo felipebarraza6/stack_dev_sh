@@ -55,7 +55,6 @@ const MyWell = () => {
 
     useEffect(()=> {
         getNovusData(setCaudal, setNivel, state, api_novus, setAcumulado, acumulado, nivel)
-        getAccCaudal()
         const estandar_menor = JSON.parse(localStorage.getItem('estandar_menor'))
 
         if(estandar_menor){
