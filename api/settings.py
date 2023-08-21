@@ -44,8 +44,16 @@ LOCAL_APPS = [
 ]
 
 CRONJOBS = [
+    # monitoreo smart hydro
     ('0 * * * *', 'api.crm.cron.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug7.log' + ' 2>&1 ')),
-    ('* * * * *', 'api.crm.cron_dga.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug_crondga.log' + ' 2>&1 '))
+    # estandar mayor
+    ('10 * * * *', 'api.crm.cronjobs_dga.cron_dga.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug_crondga.log' + ' 2>&1 ')),
+    # estandar medio
+    ('10 12 * * *', 'api.crm.cronjobs_dga.cron_dga_medio.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug_crondgamedio.log' + ' 2>&1 ')),
+    # estandar menor
+    ('10 13 1 * *', 'api.crm.cronjobs_dga.cron_dgamenor.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug_crondgamedio.log' + ' 2>&1 ')),
+    # estandar caudales muy pequenos
+    ('10 14 * 12 *', 'api.crm.cronjobs_dga.cron_dgamuypequenos.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug_crondgamedio.log' + ' 2>&1 ')),
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -68,7 +76,6 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'http://localhost:8000',
     'http://localhost:3001',
-    'http://10.56.137.219' #IP ESSBIO
 ]
 
 REST_FRAMEWORK = {
@@ -150,6 +157,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 LANGUAGE_CODE = 'es'
 TIME_ZONE = 'America/Santiago'
+
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True

@@ -20,7 +20,7 @@ from api.crm.models import (
 )
 
 from api.crm.serializers.client_profile import (
-    ProfileClient,
+    ProfileClientSerializer,
     RegisterPersons,
     DataHistoryFact,
     InteractionDetailSerializer,
@@ -38,7 +38,7 @@ class ClientProfileViewSet(
         return [p() for p in permissions]
 
     queryset = ProfileClientM.objects.all()
-    serializer_class = ProfileClient
+    serializer_class = ProfileClientSerializer
     lookup_field = "id"
     # Filters
     filter_backends = (filters.DjangoFilterBackend,)

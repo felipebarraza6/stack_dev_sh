@@ -6,6 +6,7 @@ from rest_framework import serializers
 from api.crm.models import (
     ProfileClient,
     RegisterPersons,
+    VariableClient,
     DataHistoryFact,
     InteractionDetail,
 )
@@ -16,8 +17,20 @@ class RegisterPersons(serializers.ModelSerializer):
         model = RegisterPersons
         fields = "__all__"
 
+class VariableClientModelSerializer(serializers.ModelSerializer):
+     class Meta:
+          model = VariableClient
+          fields = "__all__"
 
-class ProfileClient(serializers.ModelSerializer):
+class ProfileClientSerializer(serializers.ModelSerializer):
+    
+    variables = serializers.SerializerMethodField('get_variables')
+    
+    def get_variables(self, profile):
+        qs = VariableClient.objects.filter(profile = profile)
+        serializer = VariableClientModelSerializer(instance=qs, many=True)
+        return serializer.data
+
     class Meta:
         model = ProfileClient
         fields = "__all__"

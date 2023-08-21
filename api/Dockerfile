@@ -21,6 +21,8 @@ RUN rm /etc/nginx/sites-enabled/default
 RUN ln -s /code/conf/nginx-app.conf /etc/nginx/sites-enabled/
 ADD . /code/
 
+RUN ln -snf /usr/share/zoneinfo/America/Santiago /etc/localtime && echo America/Santiago > /etc/timezone1
+
 # Add source code.
 ENTRYPOINT ["./docker-entrypoint.sh"]
 

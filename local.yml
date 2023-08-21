@@ -27,26 +27,17 @@ services:
         ports:
             - "8000:8000"
 
-    #cron:
-    #    build: ./api     # same as main application
-    #    restart: unless-stopped
-    #    image: cron_smarthydro
-    #    volumes:
-    #        - .:/code
-    #    depends_on:
-    #        - postgres
-    #        - django
-    #    command: cron -f  # as a long-running foreground process
+    cron:
+        build: ./api     # same as main application
+        restart: unless-stopped
+        image: cron_smarthydro
+        volumes:
+            - .:/code
+        depends_on:
+            - postgres
+            - django
+        command: cron -f  # as a long-running foreground process
     
-    #react_crm:
-    #    build: ./ui_crm
-    #    image: crm
-    #    ports:
-    #        - "4200:80"
-    #    depends_on:
-    #        - django
-    #        - postgres
-
     #react_prototype:
     #    build: ./ui_sh_prototype
     #    image: ui_prorotype

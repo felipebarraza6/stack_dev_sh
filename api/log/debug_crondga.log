@@ -1,7 +1,17 @@
-
-Codigo DGA/nombre: OB-0804-270/D NIVEL: 9.8 CAUDAL: 0.2 ACUMULADO: 1327010
-<?xml version="1.0" encoding="utf-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><authSendDataExtraccionResponse xmlns="http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionResponse"><status><Code>20</Code><Description>Error Tipo de Datos</Description></status></authSendDataExtraccionResponse></soapenv:Body></soapenv:Envelope>
-Codigo DGA/nombre: OB-0804-270/D NIVEL: 9.8 CAUDAL: 0.2 ACUMULADO: 1327010
-<?xml version="1.0" encoding="utf-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><authSendDataExtraccionResponse xmlns="http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionResponse"><numeroComprobante>eec192f563516858a175b31c08e4db12</numeroComprobante><status><Code>0</Code><Description>La medicion se ingreso correctamente en la cola</Description></status></authSendDataExtraccionResponse></soapenv:Body></soapenv:Envelope>
-Codigo DGA/nombre: OB-0804-270/D NIVEL: 0.0 CAUDAL: 0.0 ACUMULADO: 22426
-<?xml version="1.0" encoding="utf-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><authSendDataExtraccionResponse xmlns="http://www.mop.cl/controlextraccion/xsd/datosExtraccion/AuthSendDataExtraccionResponse"><numeroComprobante>eec192f563516858a175b31c08e4db12</numeroComprobante><status><Code>0</Code><Description>La medicion se ingreso correctamente en la cola</Description></status></authSendDataExtraccionResponse></soapenv:Body></soapenv:Envelope>
+0
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
+NO HAY CLIENTES CON SERVICIO DGA ESTANDAR MAYOR
