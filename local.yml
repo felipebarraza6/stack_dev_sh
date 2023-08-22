@@ -24,6 +24,9 @@ services:
             - postgres
         volumes:
             - .:/code
+        environment:
+            - TZ=America/Santiago
+
         ports:
             - "8000:8000"
 
