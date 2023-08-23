@@ -33,6 +33,8 @@ const downloadFile = async(id_profile, title)=> {
   return rq.data
 }
 
+
+
 const getDataApiSh = async(id_profile) => {
     const rq = await GET(`interaction_detail_json/?profile_client=${id_profile}&hour=0`)
     return rq.data

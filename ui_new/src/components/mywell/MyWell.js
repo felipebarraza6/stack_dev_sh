@@ -9,13 +9,14 @@ import pozo1  from '../../assets/images/pozo1.png'
 import { AppContext } from '../../App'
 import api_novus from '../../api/novus/endpoints'
 import { getNovusData } from './controller'
-import { ZhihuCircleFilled } from '@ant-design/icons'
-
+import sh from '../../api/sh/endpoints'
 const { Title, Paragraph } = Typography
 
 const numberForMiles = new Intl.NumberFormat('de-DE')
 
 const MyWell = () => {
+  
+
 
     const { state } = useContext(AppContext)
     const [caudal, setCaudal] = useState(0.0)
@@ -52,14 +53,19 @@ const MyWell = () => {
       })
     }
         
+    const getData = async() =>{
+      const rq = await sh.get_data_sh(state.selected_profile.id).then((r)=>{
+        console.log(r)
+        setNivel(r.results[0] ? parseFloat(r.results[0].nivel)>0.0 || isNaN(r.results[0].nivel)  ? r.results[0].nivel:0.0:0.0)
+        setCaudal(r.results[0] ? parseFloat(r.results[0].flow)>0.0 || isNaN(r.results[0].flow)  ? r.results[0].flow:0.0:0.0)
+        setAcumulado(r.results[0] ? r.results[0].total:0)
+      })
+    }
 
     useEffect(()=> {
-        getNovusData(setCaudal, setNivel, state, api_novus, setAcumulado, acumulado, nivel)
-        const estandar_menor = JSON.parse(localStorage.getItem('estandar_menor'))
-
-        if(estandar_menor){
-          setDataSource([estandar_menor])
-        }
+        //getNovusData(setCaudal, setNivel, state, api_novus, setAcumulado, acumulado, nivel)
+        
+        getData()
 
     }, [state.selected_profile])
 
@@ -156,7 +162,8 @@ const MyWell = () => {
                                 {parseFloat(caudal).toFixed(1)==='3276.7' ? 
                                 <div style={{color:'red'}}>{parseFloat(caudal).toFixed(1)}</div>
                                   :
-                                <b>{parseFloat(caudal).toFixed(1)} (Litros/seg)</b>
+                                  <b>{ parseFloat(caudal).toLocaleString('es-ES', { minimumFractionDigits: 1 })} (Litros/seg)</b>
+                               
                                 }
                               </Typography.Paragraph>
                             </Col>
@@ -167,7 +174,12 @@ const MyWell = () => {
                                <Row align='middle'>
                                    <Col span={7}><img src={nivel_img} width='60px' /></Col>
                                    <Col span={12}><Title level={5} style={{color:'#222221'}}>Nivel Freático</Title></Col>                                            
-                                   <Col span={12} offset={7} style={{marginTop:'-25px'}}><Typography.Paragraph level={5}><b>{parseFloat(nivel).toFixed(1)} (Metros)</b></Typography.Paragraph></Col>
+                                   <Col span={12} offset={7} style={{marginTop:'-25px'}}>
+                                    <Typography.Paragraph level={5}>
+                                      <b>{ parseFloat(nivel).toLocaleString('es-ES', { minimumFractionDigits: 1 })} (Metros)</b>
+                                      
+                                      </Typography.Paragraph>
+                                      </Col>
                                </Row>                  
                            </Card>
                            <Card hoverable style={{marginBottom:'50px', marginTop:'20px', border:'solid 1px grey', borderRadius:'15px', width:'350px'}}>
@@ -188,10 +200,12 @@ const MyWell = () => {
                                <img src={pozo1} width={'430px'} style={{position:'absolute', marginLeft:'-240px', marginTop:'-80px'}} />                                        
                            </center>
                                <Input disabled style={{color:'white',backgroundColor: parseFloat(caudal).toFixed(1) ==='3276.7'?'#cf1322':'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width: parseFloat(caudal).toFixed(1) === '3276.7'? '80px':'150px', marginTop:'30px', marginLeft:'100px', position:'absolute', borderRadius:'10px'}} 
-                               value={parseFloat(caudal).toFixed(1) ==='3276.7' ? `${parseFloat(caudal).toFixed(1)}`:`${parseFloat(caudal).toFixed(1)} (Litros/seg)`} />
+                               value={`${parseFloat(caudal).toLocaleString('es-ES', { minimumFractionDigits: 1 })} (Litros/seg)`}
+                               />
+
 
                                <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'160px', marginTop:'5px', marginLeft:'320px', position:'absolute', borderRadius:'10px'}} value={`${state.user.username === 'fermin'  ? numberForMiles.format(acumulado*1) :state.selected_profile.title=='PAINE' ? '6094':numberForMiles.format(acumulado)} (m³)`} />
-                               <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'110px', marginTop:'260px', marginLeft:'300px', position:'absolute', borderRadius:'10px'}} value={`${parseFloat(nivel).toFixed(1)} (m)`}  />                               
+                               <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'130px', marginTop:'260px', marginLeft:'300px', position:'absolute', borderRadius:'10px'}} value={`${parseFloat(nivel).toLocaleString('es-ES', { minimumFractionDigits: 1 })} (Metros)`}  />                               
                        </Col>}
                        <Col>
                        </Col>
