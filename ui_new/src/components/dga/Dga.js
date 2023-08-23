@@ -23,9 +23,9 @@ const Dga = () => {
             let formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
             console.log(formattedDate);
           setData([{
-            nivel: r.results[0].nivel ? r.results[0].nivel:0,
+            nivel: r.results[0].nivel ? r.results[0].nivel-2.0:0,
             caudal: r.results[0].flow ? r.results[0].flow:0,
-            acumulado: r.results[0].total ? r.results[0].total:0,
+            acumulado: r.results[0].total ? r.results[0].total-850:0,
             fecha: formattedDate
           }])
           
