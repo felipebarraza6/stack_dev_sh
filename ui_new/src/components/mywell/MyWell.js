@@ -176,7 +176,7 @@ const MyWell = () => {
                                    <Col span={12}><Title level={5} style={{color:'#222221'}}>Nivel Freático</Title></Col>                                            
                                    <Col span={12} offset={7} style={{marginTop:'-25px'}}>
                                     <Typography.Paragraph level={5}>
-                                      <b>{ parseFloat(nivel).toLocaleString('es-ES', { minimumFractionDigits: 1 })} (Metros)</b>
+                                      <b>{ parseFloat(state.selected_profile.d3-nivel).toLocaleString('es-ES', { minimumFractionDigits: 1 })} (Metros)</b>
                                       
                                       </Typography.Paragraph>
                                       </Col>
@@ -205,7 +205,7 @@ const MyWell = () => {
 
 
                                <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'160px', marginTop:'5px', marginLeft:'320px', position:'absolute', borderRadius:'10px'}} value={`${state.user.username === 'fermin'  ? numberForMiles.format(acumulado*1) :state.selected_profile.title=='PAINE' ? '6094':numberForMiles.format(acumulado)} (m³)`} />
-                               <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'130px', marginTop:'260px', marginLeft:'300px', position:'absolute', borderRadius:'10px'}} value={`${parseFloat(nivel).toLocaleString('es-ES', { minimumFractionDigits: 1 })} (Metros)`}  />                               
+                               <Input disabled style={{color:'white',backgroundColor:'#1F3461',border:'0px solid #1F3461', fontSize:'17px',width:'130px', marginTop:'260px', marginLeft:'300px', position:'absolute', borderRadius:'10px'}} value={`${parseFloat(state.selected_profile.d3-nivel).toLocaleString('es-ES', { minimumFractionDigits: 1 })} (Metros)`}  />
                        </Col>}
                        <Col>
                        </Col>

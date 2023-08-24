@@ -12,7 +12,7 @@ def get_novus_and_save_in_api():
     
     for client in clients:
         response = {}
-        client_serializer =ProfileClientSerializer(client).data
+        client_serializer = ProfileClientSerializer(client).data
         response["date_time_medition"] = datetime.now(chile).strftime("%Y-%m-%dT%H:00:00")
         response["profile_client"] = client_serializer['id']
 
@@ -55,7 +55,9 @@ def get_novus_and_save_in_api():
                 
             sustraction = int(response['total'])-int(last_total)
             prom_flow = float(sustraction / 3600)
+            factor = float(sustraction*1000)
             response['flow'] = round(prom_flow, 1)
+
 
         serializer = InteractionDetailModelSerializer(data=response)
         serializer.is_valid(raise_exception=True)

@@ -40,6 +40,10 @@ const getDataApiSh = async(id_profile) => {
     return rq.data
 }
 
+const getDataApiShDgaSend = async(id_profile) => {
+    const rq = await GET(`interaction_detail_json/?profile_client=${id_profile}&is_send_dga=true`)
+    return rq.data
+}
 
 const sh = {
     authenticated: login,
@@ -47,7 +51,8 @@ const sh = {
     billing_data_admin: get_history_data_admin,
     get_profile: get_profile,
     downloadFile: downloadFile,
-    get_data_sh: getDataApiSh
+    get_data_sh: getDataApiSh,
+    get_data_send_dga: getDataApiShDgaSend
 }
 
 export default sh

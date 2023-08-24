@@ -36,7 +36,8 @@ class InteractionDetailViewSet(mixins.CreateModelMixin,
         class Meta:
             model = InteractionDetail
             fields = {
-                'profile_client': ['exact'],            
+                'profile_client': ['exact'],
+                'is_send_dga': ['exact'],
                 'created': ['contains', 'gte', 'lte', 'year', 'month', 'day', 'year__range', 'month__range', 'day__range', 'date__range'],                
             }
 

@@ -47,15 +47,15 @@ CRONJOBS = [
     # monitoreo smart hydro
     ('0 * * * *', 'api.crm.cron.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug7.log' + ' 2>&1 ')),
     # dga antiguo
-    ('10 * * * *', 'api.crm.cronjobs_dga.cron_dga_old.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug_crondgaold.log' + ' 2>&1 ')),
+    #('10 * * * *', 'api.crm.cronjobs_dga.cron_dga_old.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug_crondgaold.log' + ' 2>&1 ')),
     # estandar mayor
-    ('10 * * * *', 'api.crm.cronjobs_dga.cron_dga.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug_crondga.log' + ' 2>&1 ')),
+    #('10 * * * *', 'api.crm.cronjobs_dga.cron_dga.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug_crondga.log' + ' 2>&1 ')),
     # estandar medio
-    ('20 12 * * *', 'api.crm.cronjobs_dga.cron_dga_medio.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug_crondgamedio.log' + ' 2>&1 ')),
+    #('20 12 * * *', 'api.crm.cronjobs_dga.cron_dga_medio.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug_crondgamedio.log' + ' 2>&1 ')),
     # estandar menor
-    ('30 13 1 * *', 'api.crm.cronjobs_dga.cron_dgamenor.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug_crondgamedio.log' + ' 2>&1 ')),
+    #('30 13 1 * *', 'api.crm.cronjobs_dga.cron_dgamenor.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug_crondgamedio.log' + ' 2>&1 ')),
     # estandar caudales muy pequenos
-    ('40 14 * 12 *', 'api.crm.cronjobs_dga.cron_dgamuypequenos.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug_crondgamedio.log' + ' 2>&1 ')),
+    #('40 14 * 12 *', 'api.crm.cronjobs_dga.cron_dgamuypequenos.main',  '>> ' + os.path.join(BASE_DIR,'api/log/debug_crondgamedio.log' + ' 2>&1 ')),
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
