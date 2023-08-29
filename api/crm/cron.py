@@ -9,7 +9,14 @@ import pytz
 def get_novus_and_save_in_api():
     clients = ProfileClient.objects.filter(is_monitoring=True)
     chile = pytz.timezone("America/Santiago")
-    
+
+    def parser_total(total, scale):
+        """fx = (Delta Acumulado * P/LT) / 1000"""
+        factor_total_scale = int(total) * int(scale)
+        divide = int(factor_total_scale/1000)
+        return divide
+
+
     for client in clients:
         response = {}
         client_serializer = ProfileClientSerializer(client).data
@@ -31,7 +38,7 @@ def get_novus_and_save_in_api():
 
             if variable['type_variable'] == "ACUMULADO":
                 if data.get("result"):
-                    response["total"] = int(data.get("result")[0].get("value") / client_serializer['scale'])
+                    response["total"] = parser_total(data.get("result")[0].get("value"), client_serializer['scale'])
                 else:
                     response["total"] = "0"
                 
@@ -49,15 +56,15 @@ def get_novus_and_save_in_api():
 
         if client_serializer['is_prom_flow']:
             get_last_data = InteractionDetail.objects.filter(profile_client=client_serializer['id']).first()
+
             last_total = 0
             if get_last_data is not None:
                 last_total = get_last_data.total
                 
             sustraction = int(response['total'])-int(last_total)
             prom_flow = float(sustraction / 3600)
-            factor = float(sustraction*1000)
-            response['flow'] = round(prom_flow, 1)
-
+            factor_to_mt = float(prom_flow*1000)
+            response['flow'] = round(factor_to_mt, 1)
 
         serializer = InteractionDetailModelSerializer(data=response)
         serializer.is_valid(raise_exception=True)
