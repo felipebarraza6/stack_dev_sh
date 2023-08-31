@@ -35,6 +35,7 @@ class ProfileClient(ModelApi):
     date_monitoring = models.DateField(blank=True, null=True)
     date_reporting_dga = models.DateField(blank=True, null=True)
     date_delivery_act = models.DateField(blank=True, null=True)
+    is_thethings = models.BooleanField(default=False)
 
     rut_report_dga = models.CharField(max_length=1400, default='17352192-8')
     password_dga_software = models.CharField(max_length=1400, default='ZSQgCiDg7y') 

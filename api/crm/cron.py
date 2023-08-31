@@ -29,30 +29,48 @@ def get_novus_and_save_in_api():
             if variable['is_other_token']:
                 token = variable['token_service']
 
-            parsed_url = (
-                f"https://api.tago.io/data/?variable={variable['str_variable']}&query=last_item"
-            )
+            parsed_url = ''
 
-            request = requests.get(parsed_url, headers={"authorization": token})
+            if client_serializer['is_thethings']:
+                parsed_url = (
+                    f"https://api.thethings.io/v2/things/{token}/resources/{variable['str_variable']}/?limit=1"
+                )
+                request = requests.get(parsed_url)
+                print(request.json())
+            else:
+                parsed_url = (
+                    f"https://api.tago.io/data/?variable={variable['str_variable']}&query=last_item"
+                )
+                request = requests.get(parsed_url, headers={"authorization": token})
+
+
             data = request.json()
 
             if variable['type_variable'] == "ACUMULADO":
-                if data.get("result"):
-                    response["total"] = parser_total(data.get("result")[0].get("value"), client_serializer['scale'])
+                if client_serializer['is_thethings']:
+                    response["total"] = parser_total(data[0].get("value"), client_serializer['scale'])
                 else:
-                    response["total"] = "0"
-                
+                    if data.get("result"):
+                        response["total"] = parser_total(data.get("result")[0].get("value"), client_serializer['scale'])
+                    else:
+                        response["total"] = "0"
             if variable['type_variable'] == "NIVEL":
-                if data.get("result"):
-                    response["nivel"] = data.get("result")[0].get("value")
+                if client_serializer['is_thethings']:
+                    response["nivel"] = round(data[0].get("value"), 1)
                 else:
-                    response["nivel"] = "0.0"
+                    if data.get("result"):
+                        response["nivel"] = data.get("result")[0].get("value")
+                    else:
+                        response["nivel"] = "0.0"
                 
             if variable['type_variable'] == "CAUDAL":
-                if data.get("result"):
-                    response["flow"] = data.get("result")[0].get("value")
+                if client_serializer['is_thethings']:
+                    response["flow"] = round(data[0].get("value"), 1)
                 else:
-                    response["flow"] = "0.0"
+                    if data.get("result"):
+                        response["flow"] = data.get("result")[0].get("value")
+                    else:
+                        response["flow"] = "0.0"
 
         if client_serializer['is_prom_flow']:
             get_last_data = InteractionDetail.objects.filter(profile_client=client_serializer['id']).first()
