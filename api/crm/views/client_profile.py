@@ -24,6 +24,7 @@ from api.crm.serializers.client_profile import (
     RegisterPersons,
     DataHistoryFact,
     InteractionDetailSerializer,
+    RetrieveProfileClientSerializer
 )
 
 
@@ -37,19 +38,28 @@ class ClientProfileViewSet(
             permissions = [AllowAny]
         return [p() for p in permissions]
 
-    queryset = ProfileClientM.objects.all()
+    queryset = ProfileClientM.objects.all().order_by('-created')
     serializer_class = ProfileClientSerializer
     lookup_field = "id"
     # Filters
     filter_backends = (filters.DjangoFilterBackend,)
 
-    @action(detail=False, methods=["get"])
-    def create_interaction(self, request):
-        data = run_interactions()            
-        # serializer.is_valid(raise_exception=True)
-        # user, token = serializer.save()
-        # data = {"user": "Hola", "access_token": "qwerty"}
-        return Response(data)
+    class ProfileFilter(filters.FilterSet):
+        class Meta:
+            model = ProfileClientM
+            fields = {
+                "is_monitoring": ["exact"]
+            }
+
+    filterset_class = ProfileFilter
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return RetrieveProfileClientSerializer
+        elif self.action == 'list':
+            return RetrieveProfileClientSerializer
+        else:
+            return ProfileClientSerializer
 
 
 class DataHistoryFactViewSet(

@@ -1,6 +1,7 @@
 """Profile Serializers."""
 # Django REST Framework
 from rest_framework import serializers
+from .users import UserInfoModelSerializer
 
 # Models
 from api.crm.models import (
@@ -22,15 +23,26 @@ class VariableClientModelSerializer(serializers.ModelSerializer):
           model = VariableClient
           fields = "__all__"
 
-class ProfileClientSerializer(serializers.ModelSerializer):
-    
+class RetrieveProfileClientSerializer(serializers.ModelSerializer):
     variables = serializers.SerializerMethodField('get_variables')
-    
+    user = UserInfoModelSerializer()
+    last_data = serializers.SerializerMethodField('get_last_data')
+
     def get_variables(self, profile):
-        qs = VariableClient.objects.filter(profile = profile)
+        qs = VariableClient.objects.filter(profile=profile)
         serializer = VariableClientModelSerializer(instance=qs, many=True)
         return serializer.data
 
+    def get_last_data(self, profile):
+        qs = InteractionDetail.objects.filter(profile_client=profile).first()
+        serializer = InteractionDetailSerializer(instance=qs, many=False)
+        return serializer.data
+
+    class Meta:
+        model = ProfileClient
+        fields = "__all__"
+
+class ProfileClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProfileClient
         fields = "__all__"

@@ -18,6 +18,11 @@ class RegisterPersonSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class UserInfoModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('__all__')
+
 class Profile(serializers.ModelSerializer):
     persons = serializers.SerializerMethodField('get_persons')
     

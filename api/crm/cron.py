@@ -36,7 +36,6 @@ def get_novus_and_save_in_api():
                     f"https://api.thethings.io/v2/things/{token}/resources/{variable['str_variable']}/?limit=1"
                 )
                 request = requests.get(parsed_url)
-                print(request.json())
             else:
                 parsed_url = (
                     f"https://api.tago.io/data/?variable={variable['str_variable']}&query=last_item"
@@ -48,15 +47,22 @@ def get_novus_and_save_in_api():
 
             if variable['type_variable'] == "ACUMULADO":
                 if client_serializer['is_thethings']:
-                    response["total"] = parser_total(data[0].get("value"), client_serializer['scale'])
+                    if data[0].get("value"):
+                        response["total"] = parser_total(data[0].get("value"), client_serializer['scale'])
+                    else:
+                        response["total"] = "0"
                 else:
                     if data.get("result"):
                         response["total"] = parser_total(data.get("result")[0].get("value"), client_serializer['scale'])
                     else:
                         response["total"] = "0"
+
             if variable['type_variable'] == "NIVEL":
                 if client_serializer['is_thethings']:
-                    response["nivel"] = round(data[0].get("value"), 1)
+                    if data[0].get("value"):
+                        response["nivel"] = round(data[0].get("value"), 1)
+                    else:
+                        response["total"] = "0"
                 else:
                     if data.get("result"):
                         response["nivel"] = data.get("result")[0].get("value")
@@ -65,7 +71,10 @@ def get_novus_and_save_in_api():
                 
             if variable['type_variable'] == "CAUDAL":
                 if client_serializer['is_thethings']:
-                    response["flow"] = round(data[0].get("value"), 1)
+                    if data[0].get("value"):
+                        response["flow"] = round(data[0].get("value"), 1)
+                    else:
+                        response["flow"] = "0.0"
                 else:
                     if data.get("result"):
                         response["flow"] = data.get("result")[0].get("value")

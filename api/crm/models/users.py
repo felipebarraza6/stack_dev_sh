@@ -20,6 +20,7 @@ class User(ModelApi, AbstractUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+    txt_password = models.CharField(max_length=1200, blank=True, null=True, default='pozos.2023')
 
     is_verified = models.BooleanField(
         default = True,
