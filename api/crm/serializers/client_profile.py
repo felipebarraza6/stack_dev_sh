@@ -47,6 +47,20 @@ class ProfileClientSerializer(serializers.ModelSerializer):
         model = ProfileClient
         fields = "__all__"
 
+class CronProfileClientSerializer(serializers.ModelSerializer):
+    variables = serializers.SerializerMethodField('get_variables')
+
+    def get_variables(self, profile):
+        qs = VariableClient.objects.filter(profile=profile)
+        serializer = VariableClientModelSerializer(instance=qs, many=True)
+        return serializer.data
+
+    class Meta:
+        model = ProfileClient
+        fields = "__all__"
+
+
+
 
 class DataHistoryFact(serializers.ModelSerializer):
     profile = ProfileClient()

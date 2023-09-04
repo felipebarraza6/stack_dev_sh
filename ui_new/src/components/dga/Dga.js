@@ -47,7 +47,7 @@ const Dga = () => {
         <Col span={14} style={{padding:'20px'}}>
             <Table style={{borderRadius:'20px'}} bordered size='small' dataSource={data} columns={[
                 {title:'Fecha', dataIndex:'fecha'},
-                {title:'Caulda(lt)', dataIndex:'caudal', render: (flow)=>flow<0?'0.0':flow},
+                {title:'Caudal(lt)', dataIndex:'caudal', render: (flow)=>flow<0?'0.0':flow},
                 {title:'Acumulado(m³)', dataIndex:'acumulado'},
                 {title:'Nivel Freático(m)', dataIndex:'nivel'}
                 ]} />

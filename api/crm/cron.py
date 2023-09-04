@@ -1,6 +1,6 @@
 from django.db.models import Count
 from .models import (InteractionDetail, ProfileClient)
-from .serializers import InteractionDetailModelSerializer, ProfileClientSerializer
+from .serializers import InteractionDetailModelSerializer, CronProfileClientSerializer 
 import requests
 from datetime import datetime
 import pytz
@@ -19,7 +19,7 @@ def get_novus_and_save_in_api():
 
     for client in clients:
         response = {}
-        client_serializer = ProfileClientSerializer(client).data
+        client_serializer = CronProfileClientSerializer(client).data
         response["date_time_medition"] = datetime.now(chile).strftime("%Y-%m-%dT%H:00:00")
         response["profile_client"] = client_serializer['id']
 

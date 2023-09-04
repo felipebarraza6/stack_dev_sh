@@ -2,8 +2,8 @@ import axios from 'axios'
 
 import { notification } from 'antd'
 import { CloudDownloadOutlined } from '@ant-design/icons'
-//const BASE_URL = 'https://api.smarthydro.cl/api/'
-const BASE_URL = 'http://localhost:8000/api/'
+const BASE_URL = 'https://api.smarthydro.cl/api/'
+//const BASE_URL = 'http://localhost:8000/api/'
 
 
 export const Axios = axios.create({
