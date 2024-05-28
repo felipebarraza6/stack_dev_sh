@@ -20,11 +20,10 @@ from rest_framework.permissions import (
 from api.crm.permissions import IsAccountOwner
 
 # Models
-from api.crm.models import User, Action
+from api.crm.models import User,  ProfileClient
 
 # Serializers
 from api.crm.serializers.users import UserProfile, UserLoginSerializer, UserModelSerializer, UserSignUpSerializer
-from api.crm.serializers.actions import ActionModelSerializer
 
 
 class UserViewSet(mixins.RetrieveModelMixin, 
@@ -74,14 +73,9 @@ class UserViewSet(mixins.RetrieveModelMixin,
     def retrieve(self, request, *args, **kwargs):
         """Add extra data to the response."""
         response = super(UserViewSet, self).retrieve(request, *args, **kwargs)
-        actions = Action.objects.filter(
-            user=request.user,
-            is_active=True
-        )
-
+        
         data = {
             'user': response.data,
-            'actions': ActionModelSerializer(actions, many=True).data
         }
         response.data = data
         return response

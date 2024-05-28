@@ -8,7 +8,7 @@ from django.contrib.auth import password_validation, authenticate
 from django.core.validators import RegexValidator
 
 # Models
-from api.crm.models import User, ProfileClient, AdminView,RegisterPersons
+from api.crm.models import User, ProfileClient, RegisterPersons
 
 
 class RegisterPersonSerializers(serializers.ModelSerializer):
@@ -16,6 +16,11 @@ class RegisterPersonSerializers(serializers.ModelSerializer):
         model = RegisterPersons
         fields = '__all__'
 
+
+class UserInfoModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('__all__')
 
 class Profile(serializers.ModelSerializer):
     persons = serializers.SerializerMethodField('get_persons')
@@ -35,7 +40,7 @@ class UserProfile(serializers.ModelSerializer):
     profile_data = serializers.SerializerMethodField('get_profile')
     
     def get_profile(self, user):
-        qs = ProfileClient.objects.filter(user=user.id)
+        qs = ProfileClient.objects.filter(user=user.id).order_by('is_monitoring')
         serializer = Profile(instance=qs, many=True)
         data = serializer.data
         return data
@@ -45,6 +50,14 @@ class UserProfile(serializers.ModelSerializer):
         fields = '__all__'
 
 class UserModelSerializer(serializers.ModelSerializer):
+    profile_data = serializers.SerializerMethodField('get_profile')
+    
+    def get_profile(self, user):
+        qs = ProfileClient.objects.filter(user=user.id).order_by('is_monitoring')
+        serializer = Profile(instance=qs, many=True)
+        data = serializer.data
+        return data
+
     class Meta:
         model = User
         fields = '__all__'

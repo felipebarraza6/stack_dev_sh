@@ -16,16 +16,15 @@ from api.crm.models import (
     ProfileClient as ProfileClientM,
     RegisterPersons as RegisterPersonsM,
     DataHistoryFact as DataHistoryFactM,
-    AdminView as AdminViewM,
     InteractionDetail as Interaction,
 )
 
 from api.crm.serializers.client_profile import (
-    ProfileClient,
+    ProfileClientSerializer,
     RegisterPersons,
     DataHistoryFact,
-    AdminView,
     InteractionDetailSerializer,
+    RetrieveProfileClientSerializer
 )
 
 
@@ -34,24 +33,34 @@ class ClientProfileViewSet(
 ):
     def get_permissions(self):
         if self.action in ["list", "retrieve"]:
-            permissions = [AllowAny]
+            permissions = [IsAuthenticated]
         else:
-            permissions = [AllowAny]
+            permissions = [IsAuthenticated]
         return [p() for p in permissions]
 
-    queryset = ProfileClientM.objects.all()
-    serializer_class = ProfileClient
+    queryset = ProfileClientM.objects.all().order_by('name_client', )
+    serializer_class = ProfileClientSerializer
     lookup_field = "id"
     # Filters
     filter_backends = (filters.DjangoFilterBackend,)
 
-    @action(detail=False, methods=["get"])
-    def create_interaction(self, request):
-        data = run_interactions()            
-        # serializer.is_valid(raise_exception=True)
-        # user, token = serializer.save()
-        # data = {"user": "Hola", "access_token": "qwerty"}
-        return Response(data)
+    class ProfileFilter(filters.FilterSet):
+        class Meta:
+            model = ProfileClientM
+            fields = {
+                "is_monitoring": ["exact"],
+                "name_client": ["icontains"]
+            }
+
+    filterset_class = ProfileFilter
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return RetrieveProfileClientSerializer
+        elif self.action == 'list':
+            return RetrieveProfileClientSerializer
+        else:
+            return ProfileClientSerializer
 
 
 class DataHistoryFactViewSet(
@@ -61,7 +70,7 @@ class DataHistoryFactViewSet(
         if self.action in ["list", "retrieve"]:
             permissions = [IsAuthenticated]
         else:
-            permissions = [AllowAny]
+            permissions = [IsAuthenticated]
         return [p() for p in permissions]
 
     queryset = DataHistoryFactM.objects.all()

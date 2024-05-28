@@ -2,6 +2,7 @@ version: '3'
 
 volumes:
     local_postgres_data: {}
+    local_postgres_data_new: {}
     local_postgres_data_backups: {}
     certs: {}
     vhostd: {}
@@ -9,8 +10,9 @@ volumes:
 
 services:
     postgres:
-        image: postgres:11
+        image: postgres:15
         volumes:
+            - ./postgresql.conf:/etc/postgresql/postgresql.conf
             - local_postgres_data:/var/lib/postgresql/data
             - local_postgres_data_backups:/backups
         ports:
@@ -19,9 +21,10 @@ services:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: postgres
             POSTGRES_DB: api
+            PGDATA: /data/postgres
 
     nginx_proxy:
-        image: jwilder/nginx-proxy
+        image: jwilder/nginx-proxy       
         restart: always
         ports:
           - "80:80"
@@ -56,9 +59,9 @@ services:
         expose:
             - "80"
         environment:
-            - VIRTUAL_HOST=api.smarthydro.cl, www.api.smarthydro.cl
-            - LETSENCRYPT_HOST=api.smarthydro.cl, www.smarthydro.cl
-            - LETSENCRYPT_EMAIL=api@smarthydro.cl
+            - VIRTUAL_HOST=api.smarthydro.app, www.api.smarthydro.app
+            - LETSENCRYPT_HOST=api.smarthydro.app, www.api.smarthydro.app
+            - LETSENCRYPT_EMAIL=api@smarthydro.app
 
         depends_on:
             - nginx_proxy
@@ -76,51 +79,16 @@ services:
           - django
         command: cron -f  # as a long-running foreground process
 
-    react_landing:
-        build: ./landing_sh
-        image: landing
-        expose:
-            - "80"
-        environment:
-            - VIRTUAL_HOST=smarthydro.cl, www.smarthydro.cl
-            - LETSENCRYPT_HOST=smarthydro.cl, www.smarthydro.cl
-            - LETSENCRYPT_EMAIL=app@amamaule.cl
-        depends_on:
-            - django
-            - nginx_proxy
-            - letsencrypt
-
-    react_crm:
-        build: ./ui_crm
-        image: crm
-        expose:
-            - "80"
-        environment:
-            - VIRTUAL_HOST=crm.smarthydro.cl, www.crm.smarthydro.cl
-            - LETSENCRYPT_HOST=crm.smarthydro.cl, www.crm.smarthydro.cl
-            - LETSENCRYPT_EMAIL=app@amamaule.cl
-        depends_on:
-            - django
-            - nginx_proxy
-            - letsencrypt
-    
     react_prototype:
-        build: ./ui_sh_prototype
-        image: ui_prorotype
+        build: ./ui_ikolu
+        image: ui_new
         expose:
             - "80"
         environment:
-            - VIRTUAL_HOST=dataiot.smarthydro.cl, www.dataiot.smarthydro.cl
-            - LETSENCRYPT_HOST=dataiot.smarthydro.cl, www.dataiot.smarthydro.cl
-            - LETSENCRYPT_EMAIL=app@amamaule.cl
+            - VIRTUAL_HOST=ikolu.smarthydro.app, www.ikolu.smarthydro.app
+            - LETSENCRYPT_HOST=ikolu.smarthydro.app, www.ikolu.smarthydro.app
+            - LETSENCRYPT_EMAIL=app@smarthydro.app
         depends_on:
             - django
             - nginx_proxy
             - letsencrypt
-
-
-
-
-
-
-

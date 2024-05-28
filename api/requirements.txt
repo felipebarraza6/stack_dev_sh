@@ -4,9 +4,11 @@ psycopg2-binary
 gunicorn
 Pillow
 openpyxl
-uwsgi
 django-cors-headers
 django-filter
 django-crontab
 requests
 django-import-export
+zeep
+drf-excel
+whitenoise
