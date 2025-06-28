@@ -22,6 +22,10 @@ urlpatterns = [
             {'document_root': settings.MEDIA_ROOT}),
     path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
     path('health/', health_check, name='health_check'),
+    path('users/', include('api.apps.users.urls', namespace='users')),
+    path('erp/', include('api.apps.erp.urls', namespace='erp')),
+    path('telemetry/', include('api.apps.telemetry.urls', namespace='telemetry')),
+    path('support/', include('api.apps.support.urls', namespace='support')),
 ]
 
 if settings.DEBUG:

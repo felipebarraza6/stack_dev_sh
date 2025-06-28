@@ -1,51 +1,51 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  # Base de datos para datos de negocio
-  postgres:
-    image: postgres:15-alpine
-    container_name: smarthydro-postgres
-    environment:
-      POSTGRES_DB: smarthydro_business
-      POSTGRES_USER: smarthydro
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-smarthydro123}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./init-scripts:/docker-entrypoint-initdb.d
-    ports:
-      - "5432:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U smarthydro -d smarthydro_business"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    networks:
-      - smarthydro-network
-    restart: unless-stopped
+  # Base de datos para datos de negocio - Comentado porque se usa un clúster externo
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: smarthydro-postgres
+  #   environment:
+  #     POSTGRES_DB: smarthydro_business
+  #     POSTGRES_USER: smarthydro
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-smarthydro123}
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #     - ./init-scripts:/docker-entrypoint-initdb.d
+  #   ports:
+  #     - "5432:5432"
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U smarthydro -d smarthydro_business"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #     start_period: 40s
+  #   networks:
+  #     - smarthydro-network
+  #   restart: unless-stopped
 
-  # Base de datos para mediciones
-  mongodb:
-    image: mongo:6.0
-    container_name: smarthydro-mongodb
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: smarthydro
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-smarthydro123}
-      MONGO_INITDB_DATABASE: smarthydro_measurements
-    volumes:
-      - mongodb_data:/data/db
-      - ./init-scripts/mongo:/docker-entrypoint-initdb.d
-    ports:
-      - "27017:27017"
-    healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    networks:
-      - smarthydro-network
-    restart: unless-stopped
+  # Base de datos para mediciones - Comentado porque se usa un clúster externo
+  # mongodb:
+  #   image: mongo:6.0
+  #   container_name: smarthydro-mongodb
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: smarthydro
+  #     MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-smarthydro123}
+  #     MONGO_INITDB_DATABASE: smarthydro_measurements
+  #   volumes:
+  #     - mongodb_data:/data/db
+  #     - ./init-scripts/mongo:/docker-entrypoint-initdb.d
+  #   ports:
+  #     - "27017:27017"
+  #   healthcheck:
+  #     test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #     start_period: 40s
+  #   networks:
+  #     - smarthydro-network
+  #   restart: unless-stopped
 
   # Cache y Message Broker
   redis:
@@ -57,7 +57,8 @@ services:
     ports:
       - "6379:6379"
     healthcheck:
-      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-smarthydro123}", "ping"]
+      test:
+        ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-smarthydro123}", "ping"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -96,12 +97,13 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
-      KAFKA_DELETE_TOPIC_ENABLE: 'true'
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_DELETE_TOPIC_ENABLE: "true"
     ports:
       - "9092:9092"
     healthcheck:
-      test: ["CMD-SHELL", "kafka-topics --bootstrap-server localhost:9092 --list"]
+      test:
+        ["CMD-SHELL", "kafka-topics --bootstrap-server localhost:9092 --list"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -130,8 +132,8 @@ services:
     ports:
       - "8001:8001"
     depends_on:
-      postgres:
-        condition: service_healthy
+      # postgres:
+      #   condition: service_healthy
       redis:
         condition: service_healthy
       kafka:
@@ -143,10 +145,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2'
+          cpus: "2"
           memory: 4G
         reservations:
-          cpus: '1'
+          cpus: "1"
           memory: 2G
     restart: unless-stopped
     healthcheck:
@@ -173,8 +175,8 @@ services:
     ports:
       - "8002:8002"
     depends_on:
-      postgres:
-        condition: service_healthy
+      # postgres:
+      #   condition: service_healthy
       kafka:
         condition: service_healthy
     networks:
@@ -182,10 +184,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'
+          cpus: "1"
           memory: 2G
         reservations:
-          cpus: '0.5'
+          cpus: "0.5"
           memory: 1G
     restart: unless-stopped
     healthcheck:
@@ -211,8 +213,8 @@ services:
     ports:
       - "8003:8003"
     depends_on:
-      mongodb:
-        condition: service_healthy
+      # mongodb:
+      #   condition: service_healthy
       redis:
         condition: service_healthy
       kafka:
@@ -222,10 +224,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2'
+          cpus: "2"
           memory: 4G
         reservations:
-          cpus: '1'
+          cpus: "1"
           memory: 2G
     restart: unless-stopped
     healthcheck:
@@ -254,8 +256,8 @@ services:
     ports:
       - "8004:8004"
     depends_on:
-      postgres:
-        condition: service_healthy
+      # postgres:
+      #   condition: service_healthy
       redis:
         condition: service_healthy
     volumes:
@@ -265,10 +267,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'
+          cpus: "1"
           memory: 2G
         reservations:
-          cpus: '0.5'
+          cpus: "0.5"
           memory: 1G
     restart: unless-stopped
     healthcheck:
@@ -293,8 +295,8 @@ services:
     ports:
       - "8005:8005"
     depends_on:
-      mongodb:
-        condition: service_healthy
+      # mongodb:
+      #   condition: service_healthy
       redis:
         condition: service_healthy
     networks:
@@ -302,10 +304,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'
+          cpus: "1"
           memory: 2G
         reservations:
-          cpus: '0.5'
+          cpus: "0.5"
           memory: 1G
     restart: unless-stopped
     healthcheck:
@@ -320,13 +322,13 @@ services:
     image: prom/prometheus:latest
     container_name: smarthydro-prometheus
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/etc/prometheus/console_libraries'
-      - '--web.console.templates=/etc/prometheus/consoles'
-      - '--storage.tsdb.retention.time=200h'
-      - '--web.enable-lifecycle'
-      - '--web.enable-admin-api'
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/etc/prometheus/console_libraries"
+      - "--web.console.templates=/etc/prometheus/consoles"
+      - "--storage.tsdb.retention.time=200h"
+      - "--web.enable-lifecycle"
+      - "--web.enable-admin-api"
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prometheus_data:/prometheus
@@ -336,7 +338,15 @@ services:
       - smarthydro-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/-/healthy"]
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:9090/-/healthy",
+        ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -388,11 +398,47 @@ services:
       - smarthydro-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost/health",
+        ]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 10s
+
+  ingestion-engine:
+    build:
+      context: ./services/ingestion-engine
+      dockerfile: Dockerfile
+    container_name: smarthydro-ingestion-engine
+    environment:
+      - DATABASE_URL=postgresql://smarthydro:${POSTGRES_PASSWORD:-smarthydro123}@postgres:5432/smarthydro_business
+      - LOG_LEVEL=INFO
+      - ENVIRONMENT=development
+    ports:
+      - "8004:8001"
+    depends_on:
+      # postgres:
+      #   condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - smarthydro-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
 volumes:
   postgres_data:
@@ -411,4 +457,4 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.20.0.0/16 
+        - subnet: 172.20.0.0/16

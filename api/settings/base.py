@@ -30,7 +30,17 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    'api.core.apps.CoreAppConfig',
+    # App base con modelos y utilidades compartidas
+    'api.apps.common.apps.CommonConfig',
+
+    # Aplicaciones principales del proyecto
+    'api.apps.telemetry.apps.TelemetryConfig',
+    'api.apps.users.apps.UsersConfig',
+    'api.apps.erp.apps.ErpConfig',
+    'api.apps.support.apps.SupportConfig',
+    'api.apps.datastore.apps.DatastoreConfig',
+    
+    # Herramientas de terceros para apps locales
     'import_export'
 ]
 
@@ -102,7 +112,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Custom user model
-AUTH_USER_MODEL = 'core.User'
+AUTH_USER_MODEL = 'users.User'
 
 # REST Framework configuration
 REST_FRAMEWORK = {

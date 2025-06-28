@@ -1,0 +1,10 @@
+# FastAPI
+fastapi
+uvicorn[standard]
+
+# Database
+psycopg2-binary
+SQLAlchemy
+
+# Configuration
+python-decouple 
