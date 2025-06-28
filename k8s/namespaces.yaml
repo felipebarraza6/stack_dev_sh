@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: smarthydro
+  labels:
+    name: smarthydro
+    environment: production
+    app: smarthydro
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: smarthydro-monitoring
+  labels:
+    name: smarthydro-monitoring
+    environment: production
+    app: smarthydro
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: smarthydro-ingress
+  labels:
+    name: smarthydro-ingress
+    environment: production
+    app: smarthydro

@@ -1,73 +1,119 @@
-version: '3'
+version: "3.8"
 
 volumes:
-    local_postgres_data: {}
-    local_postgres_data_backups: {}
+  local_postgres_data: {}
+  local_postgres_data_backups: {}
+
+networks:
+  smarthydro_network:
+    driver: bridge
 
 services:
-    postgres:
-        image: postgres:11
-        volumes:
-            - local_postgres_data:/var/lib/postgresql/data
-            - local_postgres_data_backups:/backups
-        ports:
-            - "5430:5432"
-        environment:
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: postgres
-            POSTGRES_DB: api
+  postgres:
+    image: postgres:15-alpine
+    container_name: smarthydro_postgres_dev
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
+      - local_postgres_data_backups:/backups
+    ports:
+      - "5430:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: api
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+    networks:
+      - smarthydro_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
 
-    django: &django
-        build: ./api 
-        image: shydro_django
-        depends_on:
-            - postgres
-        volumes:
-            - .:/code
-        ports:
-            - "8000:8000"
+  django: &django
+    build: 
+      context: ./api
+      dockerfile: Dockerfile
+      target: builder
+    image: shydro_django_dev
+    container_name: smarthydro_django_dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - .:/app
+      - django_static:/app/static
+      - django_media:/app/media
+      - django_logs:/app/logs
+    ports:
+      - "8000:8000"
+    env_file:
+      - env.development
+    environment:
+      - DJANGO_ENV=development
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - CREATE_SUPERUSER=true
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+    networks:
+      - smarthydro_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
 
+  cron:
+    build: 
+      context: ./api
+      dockerfile: Dockerfile
+      target: builder
+    image: cron_smarthydro_dev
+    container_name: smarthydro_cron_dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+      django:
+        condition: service_healthy
+    volumes:
+      - .:/app
+      - django_logs:/app/logs
+    env_file:
+      - env.development
+    environment:
+      - DJANGO_ENV=development
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - PYTHONUNBUFFERED=1
+    networks:
+      - smarthydro_network
+    command: cron -f
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
 
-    cron:
-      build: ./api     # same as main application
-      restart: unless-stopped
-      image: cron_smarthydro
-      volumes:
-        - .:/code
-      depends_on:
-        - postgres
-        - django
-      command: cron -f  # as a long-running foreground process
+volumes:
+  django_static:
+  django_media:
+  django_logs:
 
-    #react_crm:
-    #    build: ./ui_crm
-    #    image: crm
-    #    ports:
-    #        - "4200:80"
-    #    depends_on:
-    #        - django
-    #        - postgres
-
-    #react_prototype:
-    #    build: ./ui_sh_prototype
-    #    image: ui_prorotype
-    #    ports:
-    #        - "4201:80"
-    #    depends_on:
-    #        - django
-    #        - postgres
-    
-    #react_web:
-    #    build: ./landing_sh
-    #    image: web
-    #    ports:
-    #        - "80:80"
-    #    depends_on:
-    #        - django
-    #        - postgres
-
-
-
-
-
-    

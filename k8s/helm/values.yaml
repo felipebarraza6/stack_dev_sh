@@ -1,0 +1,299 @@
+# SmartHydro Helm Chart Values
+# Configuración por defecto para SmartHydro Microservices
+
+# Configuración global
+global:
+  environment: production
+  imageRegistry: ""
+  imagePullSecrets: []
+  storageClass: ""
+
+# Configuración de imágenes
+images:
+  telemetryCollector:
+    repository: smarthydro/telemetry-collector
+    tag: "2.0.0"
+    pullPolicy: IfNotPresent
+  businessApi:
+    repository: smarthydro/business-api
+    tag: "2.0.0"
+    pullPolicy: IfNotPresent
+  dataProcessor:
+    repository: smarthydro/data-processor
+    tag: "2.0.0"
+    pullPolicy: IfNotPresent
+  analyticsEngine:
+    repository: smarthydro/analytics-engine
+    tag: "2.0.0"
+    pullPolicy: IfNotPresent
+  dgaCompliance:
+    repository: smarthydro/dga-compliance
+    tag: "2.0.0"
+    pullPolicy: IfNotPresent
+
+# Configuración de microservicios
+telemetryCollector:
+  enabled: true
+  replicas: 3
+  resources:
+    requests:
+      memory: "2Gi"
+      cpu: "1"
+    limits:
+      memory: "4Gi"
+      cpu: "2"
+  autoscaling:
+    enabled: true
+    minReplicas: 3
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 70
+    targetMemoryUtilizationPercentage: 80
+
+businessApi:
+  enabled: true
+  replicas: 2
+  resources:
+    requests:
+      memory: "1Gi"
+      cpu: "0.5"
+    limits:
+      memory: "2Gi"
+      cpu: "1"
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 70
+    targetMemoryUtilizationPercentage: 80
+
+dataProcessor:
+  enabled: true
+  replicas: 3
+  resources:
+    requests:
+      memory: "2Gi"
+      cpu: "1"
+    limits:
+      memory: "4Gi"
+      cpu: "2"
+  autoscaling:
+    enabled: true
+    minReplicas: 3
+    maxReplicas: 8
+    targetCPUUtilizationPercentage: 70
+    targetMemoryUtilizationPercentage: 80
+
+analyticsEngine:
+  enabled: true
+  replicas: 2
+  resources:
+    requests:
+      memory: "1Gi"
+      cpu: "0.5"
+    limits:
+      memory: "2Gi"
+      cpu: "1"
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 70
+    targetMemoryUtilizationPercentage: 80
+
+dgaCompliance:
+  enabled: true
+  replicas: 2
+  resources:
+    requests:
+      memory: "1Gi"
+      cpu: "0.5"
+    limits:
+      memory: "2Gi"
+      cpu: "1"
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 70
+    targetMemoryUtilizationPercentage: 80
+
+# Configuración de bases de datos
+postgresql:
+  enabled: true
+  auth:
+    postgresPassword: ""
+    database: "smarthydro_business"
+    username: "smarthydro"
+  primary:
+    persistence:
+      enabled: true
+      size: 100Gi
+    resources:
+      requests:
+        memory: "2Gi"
+        cpu: "1"
+      limits:
+        memory: "4Gi"
+        cpu: "2"
+
+mongodb:
+  enabled: true
+  auth:
+    rootPassword: ""
+    database: "smarthydro_measurements"
+    username: "smarthydro"
+  persistence:
+    enabled: true
+    size: 200Gi
+  resources:
+    requests:
+      memory: "2Gi"
+      cpu: "1"
+    limits:
+      memory: "4Gi"
+      cpu: "2"
+
+redis:
+  enabled: true
+  auth:
+    password: ""
+  master:
+    persistence:
+      enabled: true
+      size: 20Gi
+    resources:
+      requests:
+        memory: "1Gi"
+        cpu: "0.5"
+      limits:
+        memory: "2Gi"
+        cpu: "1"
+
+kafka:
+  enabled: true
+  persistence:
+    enabled: true
+    size: 50Gi
+  resources:
+    requests:
+      memory: "2Gi"
+      cpu: "1"
+    limits:
+      memory: "4Gi"
+      cpu: "2"
+
+# Configuración de monitoring
+prometheus:
+  enabled: true
+  server:
+    persistentVolume:
+      enabled: true
+      size: 50Gi
+    resources:
+      requests:
+        memory: "1Gi"
+        cpu: "0.5"
+      limits:
+        memory: "2Gi"
+        cpu: "1"
+
+grafana:
+  enabled: true
+  adminPassword: ""
+  persistence:
+    enabled: true
+    size: 10Gi
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "0.25"
+    limits:
+      memory: "1Gi"
+      cpu: "0.5"
+
+# Configuración de ingress
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "30"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+    nginx.ingress.kubernetes.io/rate-limit-window: "1m"
+  tls:
+    - secretName: smarthydro-tls
+      hosts:
+        - api.smarthydro.com
+        - telemetry.smarthydro.com
+        - analytics.smarthydro.com
+        - dga.smarthydro.com
+  hosts:
+    - host: api.smarthydro.com
+      paths:
+        - path: /
+          pathType: Prefix
+          service:
+            name: business-api-service
+            port: 8004
+    - host: telemetry.smarthydro.com
+      paths:
+        - path: /
+          pathType: Prefix
+          service:
+            name: telemetry-collector-service
+            port: 8001
+    - host: analytics.smarthydro.com
+      paths:
+        - path: /
+          pathType: Prefix
+          service:
+            name: analytics-engine-service
+            port: 8005
+    - host: dga.smarthydro.com
+      paths:
+        - path: /
+          pathType: Prefix
+          service:
+            name: dga-compliance-service
+            port: 8002
+
+# Configuración de secrets
+secrets:
+  postgresPassword: ""
+  mongoPassword: ""
+  redisPassword: ""
+  jwtSecretKey: ""
+  twinApiKey: ""
+  nettraApiKey: ""
+  novusApiKey: ""
+  dgaApiKey: ""
+  grafanaPassword: ""
+
+# Configuración de backup
+backup:
+  enabled: true
+  schedule: "0 2 * * *"
+  retention: 30
+  storage:
+    type: "s3"
+    bucket: "smarthydro-backups"
+    region: "us-east-1"
+
+# Configuración de alertas
+alerts:
+  enabled: true
+  slack:
+    webhookUrl: ""
+  email:
+    smtpHost: ""
+    smtpPort: 587
+    username: ""
+    password: ""
+    from: "alerts@smarthydro.com"
+    to: "admin@smarthydro.com"

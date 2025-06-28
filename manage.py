@@ -5,7 +5,14 @@ import sys
 
 
 def main():
+    """Run administrative tasks."""
+    # Configurar el entorno por defecto si no está definido
+    if 'DJANGO_ENV' not in os.environ:
+        os.environ.setdefault('DJANGO_ENV', 'development')
+    
+    # Configurar el módulo de settings
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'api.settings')
+    
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

@@ -1,0 +1,42 @@
+apiVersion: v2
+name: smarthydro
+description: SmartHydro Microservices Platform for Water Resource Management
+type: application
+version: 2.0.0
+appVersion: "2.0.0"
+keywords:
+  - telemetry
+  - water-management
+  - microservices
+  - iot
+home: https://smarthydro.com
+sources:
+  - https://github.com/your-org/smarthydro-microservices
+maintainers:
+  - name: SmartHydro Team
+    email: team@smarthydro.com
+dependencies:
+  - name: postgresql
+    version: 12.x.x
+    repository: https://charts.bitnami.com/bitnami
+    condition: postgresql.enabled
+  - name: mongodb
+    version: 13.x.x
+    repository: https://charts.bitnami.com/bitnami
+    condition: mongodb.enabled
+  - name: redis
+    version: 17.x.x
+    repository: https://charts.bitnami.com/bitnami
+    condition: redis.enabled
+  - name: kafka
+    version: 19.x.x
+    repository: https://charts.bitnami.com/bitnami
+    condition: kafka.enabled
+  - name: prometheus
+    version: 25.x.x
+    repository: https://prometheus-community.github.io/helm-charts
+    condition: prometheus.enabled
+  - name: grafana
+    version: 7.x.x
+    repository: https://grafana.github.io/helm-charts
+    condition: grafana.enabled

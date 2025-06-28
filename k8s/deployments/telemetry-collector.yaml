@@ -1,0 +1,119 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telemetry-collector
+  namespace: smarthydro
+  labels:
+    app: telemetry-collector
+    version: v1.0.0
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: telemetry-collector
+  template:
+    metadata:
+      labels:
+        app: telemetry-collector
+        version: v1.0.0
+    spec:
+      containers:
+        - name: telemetry-collector
+          image: smarthydro/telemetry-collector:latest
+          ports:
+            - containerPort: 8001
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: smarthydro-config
+                  key: DATABASE_URL
+            - name: REDIS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: smarthydro-config
+                  key: REDIS_URL
+            - name: KAFKA_BROKERS
+              valueFrom:
+                configMapKeyRef:
+                  name: smarthydro-config
+                  key: KAFKA_BROKERS
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: smarthydro-secrets
+                  key: POSTGRES_PASSWORD
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: smarthydro-secrets
+                  key: REDIS_PASSWORD
+            - name: TWIN_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: smarthydro-secrets
+                  key: TWIN_API_KEY
+            - name: NETTRA_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: smarthydro-secrets
+                  key: NETTRA_API_KEY
+            - name: NOVUS_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: smarthydro-secrets
+                  key: NOVUS_API_KEY
+            - name: LOG_LEVEL
+              valueFrom:
+                configMapKeyRef:
+                  name: smarthydro-config
+                  key: LOG_LEVEL
+            - name: ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: smarthydro-config
+                  key: ENVIRONMENT
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "1"
+            limits:
+              memory: "4Gi"
+              cpu: "2"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8001
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8001
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: smarthydro-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: telemetry-collector-service
+  namespace: smarthydro
+spec:
+  selector:
+    app: telemetry-collector
+  ports:
+    - protocol: TCP
+      port: 8001
+      targetPort: 8001
+  type: ClusterIP

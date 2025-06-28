@@ -1,0 +1,414 @@
+version: '3.8'
+
+services:
+  # Base de datos para datos de negocio
+  postgres:
+    image: postgres:15-alpine
+    container_name: smarthydro-postgres
+    environment:
+      POSTGRES_DB: smarthydro_business
+      POSTGRES_USER: smarthydro
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-smarthydro123}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U smarthydro -d smarthydro_business"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - smarthydro-network
+    restart: unless-stopped
+
+  # Base de datos para mediciones
+  mongodb:
+    image: mongo:6.0
+    container_name: smarthydro-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: smarthydro
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-smarthydro123}
+      MONGO_INITDB_DATABASE: smarthydro_measurements
+    volumes:
+      - mongodb_data:/data/db
+      - ./init-scripts/mongo:/docker-entrypoint-initdb.d
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - smarthydro-network
+    restart: unless-stopped
+
+  # Cache y Message Broker
+  redis:
+    image: redis:7-alpine
+    container_name: smarthydro-redis
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-smarthydro123}
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-smarthydro123}", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - smarthydro-network
+    restart: unless-stopped
+
+  # Message Queue
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.0
+    container_name: smarthydro-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    healthcheck:
+      test: ["CMD-SHELL", "echo ruok | nc localhost 2181"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - smarthydro-network
+    restart: unless-stopped
+
+  kafka:
+    image: confluentinc/cp-kafka:7.4.0
+    container_name: smarthydro-kafka
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_HOST://kafka:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_DELETE_TOPIC_ENABLE: 'true'
+    ports:
+      - "9092:9092"
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-topics --bootstrap-server localhost:9092 --list"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - smarthydro-network
+    restart: unless-stopped
+
+  # Microservicios
+  telemetry-collector:
+    build:
+      context: ./services/telemetry-collector
+      dockerfile: Dockerfile
+      args:
+        - BUILDKIT_INLINE_CACHE=1
+    container_name: smarthydro-telemetry-collector
+    environment:
+      - DATABASE_URL=postgresql://smarthydro:${POSTGRES_PASSWORD:-smarthydro123}@postgres:5432/smarthydro_business
+      - REDIS_URL=redis://:${REDIS_PASSWORD:-smarthydro123}@redis:6379
+      - KAFKA_BROKERS=kafka:29092
+      - TWIN_API_KEY=${TWIN_API_KEY}
+      - NETTRA_API_KEY=${NETTRA_API_KEY}
+      - NOVUS_API_KEY=${NOVUS_API_KEY}
+      - LOG_LEVEL=INFO
+      - ENVIRONMENT=development
+    ports:
+      - "8001:8001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    volumes:
+      - ./config/providers.yaml:/app/config/providers.yaml:ro
+    networks:
+      - smarthydro-network
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  dga-compliance:
+    build:
+      context: ./services/dga-compliance
+      dockerfile: Dockerfile
+      args:
+        - BUILDKIT_INLINE_CACHE=1
+    container_name: smarthydro-dga-compliance
+    environment:
+      - DATABASE_URL=postgresql://smarthydro:${POSTGRES_PASSWORD:-smarthydro123}@postgres:5432/smarthydro_business
+      - KAFKA_BROKERS=kafka:29092
+      - DGA_API_URL=${DGA_API_URL}
+      - DGA_API_KEY=${DGA_API_KEY}
+      - LOG_LEVEL=INFO
+      - ENVIRONMENT=development
+    ports:
+      - "8002:8002"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - smarthydro-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 1G
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  data-processor:
+    build:
+      context: ./services/data-processor
+      dockerfile: Dockerfile
+      args:
+        - BUILDKIT_INLINE_CACHE=1
+    container_name: smarthydro-data-processor
+    environment:
+      - MONGODB_URL=mongodb://smarthydro:${MONGO_PASSWORD:-smarthydro123}@mongodb:27017/smarthydro_measurements
+      - REDIS_URL=redis://:${REDIS_PASSWORD:-smarthydro123}@redis:6379
+      - KAFKA_BROKERS=kafka:29092
+      - LOG_LEVEL=INFO
+      - ENVIRONMENT=development
+    ports:
+      - "8003:8003"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - smarthydro-network
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  business-api:
+    build:
+      context: ./services/business-api
+      dockerfile: Dockerfile
+      args:
+        - BUILDKIT_INLINE_CACHE=1
+    container_name: smarthydro-business-api
+    environment:
+      - DATABASE_URL=postgresql://smarthydro:${POSTGRES_PASSWORD:-smarthydro123}@postgres:5432/smarthydro_business
+      - REDIS_URL=redis://:${REDIS_PASSWORD:-smarthydro123}@redis:6379
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-secret-key-here}
+      - JWT_ALGORITHM=HS256
+      - JWT_ACCESS_TOKEN_EXPIRE_MINUTES=30
+      - LOG_LEVEL=INFO
+      - ENVIRONMENT=development
+      - DEBUG=True
+    ports:
+      - "8004:8004"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./media:/app/media
+    networks:
+      - smarthydro-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 1G
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8004/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  analytics-engine:
+    build:
+      context: ./services/analytics-engine
+      dockerfile: Dockerfile
+      args:
+        - BUILDKIT_INLINE_CACHE=1
+    container_name: smarthydro-analytics-engine
+    environment:
+      - MONGODB_URL=mongodb://smarthydro:${MONGO_PASSWORD:-smarthydro123}@mongodb:27017/smarthydro_measurements
+      - REDIS_URL=redis://:${REDIS_PASSWORD:-smarthydro123}@redis:6379
+      - LOG_LEVEL=INFO
+      - ENVIRONMENT=development
+    ports:
+      - "8005:8005"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - smarthydro-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 1G
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8005/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: smarthydro-prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+      - '--web.enable-admin-api'
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - smarthydro-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/-/healthy"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: smarthydro-grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - smarthydro-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: smarthydro-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - business-api
+      - telemetry-collector
+      - data-processor
+      - dga-compliance
+      - analytics-engine
+    networks:
+      - smarthydro-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  postgres_data:
+    driver: local
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+
+networks:
+  smarthydro-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16 

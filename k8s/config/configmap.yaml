@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: smarthydro-config
+  namespace: smarthydro
+data:
+  DATABASE_URL: "postgresql://smarthydro:$(POSTGRES_PASSWORD)@postgres-service:5432/smarthydro_business"
+  REDIS_URL: "redis://:$(REDIS_PASSWORD)@redis-service:6379"
+  KAFKA_BROKERS: "kafka-service:9092"
+  MONGODB_URL: "mongodb://smarthydro:$(MONGO_PASSWORD)@mongodb-service:27017/smarthydro_measurements"
+  LOG_LEVEL: "INFO"
+  ENVIRONMENT: "production"
+  DEBUG: "False"
+  JWT_ALGORITHM: "HS256"
+  JWT_ACCESS_TOKEN_EXPIRE_MINUTES: "30"
+  JWT_REFRESH_TOKEN_EXPIRE_DAYS: "7"
+  REQUEST_TIMEOUT: "30"
+  DATABASE_TIMEOUT: "10"
+  REDIS_TIMEOUT: "5"
+  KAFKA_TIMEOUT: "10"
+  ALLOWED_HOSTS: "api.smarthydro.com,telemetry.smarthydro.com,localhost,127.0.0.1"
+  RATE_LIMIT_PER_MINUTE: "100"
+  RATE_LIMIT_PER_HOUR: "1000"
+  KAFKA_TOPIC_MEASUREMENTS: "measurements"
+  KAFKA_TOPIC_NOTIFICATIONS: "notifications"
+  KAFKA_TOPIC_DGA_COMPLIANCE: "dga_compliance"
+  KAFKA_TOPIC_ANALYTICS: "analytics"
+  TELEMETRY_WORKERS: "4"
+  DATA_PROCESSOR_WORKERS: "4"
+  BUSINESS_API_WORKERS: "4"
+  ANALYTICS_WORKERS: "2"
+  BACKUP_ENABLED: "true"
+  BACKUP_RETENTION_DAYS: "30"
+  BACKUP_SCHEDULE: "0 2 * * *"
+  PROMETHEUS_RETENTION_TIME: "200h"
+  PROMETHEUS_SCRAPE_INTERVAL: "15s"
+  GRAFANA_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: smarthydro-monitoring
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+      evaluation_interval: 15s
+
+    rule_files:
+      - "alert_rules.yml"
+
+    alerting:
+      alertmanagers:
+        - static_configs:
+            - targets:
+              - alertmanager:9093
+
+    scrape_configs:
+      - job_name: 'prometheus'
+        static_configs:
+          - targets: ['localhost:9090']
+
+      - job_name: 'telemetry-collector'
+        static_configs:
+          - targets: ['telemetry-collector-service:8001']
+        metrics_path: '/metrics'
+
+      - job_name: 'business-api'
+        static_configs:
+          - targets: ['business-api-service:8004']
+        metrics_path: '/metrics'
+
+      - job_name: 'data-processor'
+        static_configs:
+          - targets: ['data-processor-service:8003']
+        metrics_path: '/metrics'
+
+      - job_name: 'analytics-engine'
+        static_configs:
+          - targets: ['analytics-engine-service:8005']
+        metrics_path: '/metrics'
+
+      - job_name: 'dga-compliance'
+        static_configs:
+          - targets: ['dga-compliance-service:8002']
+        metrics_path: '/metrics'
+
+      - job_name: 'postgres'
+        static_configs:
+          - targets: ['postgres-service:5432']
+
+      - job_name: 'redis'
+        static_configs:
+          - targets: ['redis-service:6379']
+
+      - job_name: 'mongodb'
+        static_configs:
+          - targets: ['mongodb-service:27017']
+
+      - job_name: 'kafka'
+        static_configs:
+          - targets: ['kafka-service:9092']

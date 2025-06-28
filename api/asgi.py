@@ -11,6 +11,10 @@ import os
 
 from django.core.asgi import get_asgi_application
 
+# Configurar el entorno por defecto si no está definido
+if 'DJANGO_ENV' not in os.environ:
+    os.environ.setdefault('DJANGO_ENV', 'production')
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'api.settings')
 
 application = get_asgi_application()

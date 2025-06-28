@@ -1,94 +1,200 @@
-version: '3'
+version: "3.8"
 
 volumes:
-    local_postgres_data: {}
-    local_postgres_data_new: {}
-    local_postgres_data_backups: {}
-    certs: {}
-    vhostd: {}
-    html: {}
+  postgres_data: {}
+  postgres_backups: {}
+  certs: {}
+  vhostd: {}
+  html: {}
+  django_static: {}
+  django_media: {}
+  django_logs: {}
+
+networks:
+  smarthydro_network:
+    driver: bridge
+  proxy_network:
+    driver: bridge
 
 services:
-    postgres:
-        image: postgres:15
-        volumes:
-            - ./postgresql.conf:/etc/postgresql/postgresql.conf
-            - local_postgres_data:/var/lib/postgresql/data
-            - local_postgres_data_backups:/backups
-        ports:
-            - "5430:5432"
-        environment:
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: postgres
-            POSTGRES_DB: api
-            PGDATA: /data/postgres
+  postgres:
+    image: postgres:15-alpine
+    container_name: smarthydro_postgres_prod
+    volumes:
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf:ro
+      - postgres_data:/var/lib/postgresql/data
+      - postgres_backups:/backups
+    ports:
+      - "5430:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: api
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+    networks:
+      - smarthydro_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
 
-    nginx_proxy:
-        image: jwilder/nginx-proxy       
-        restart: always
-        ports:
-          - "80:80"
-          - "443:443"
-        volumes:
-          - /var/run/docker.sock:/tmp/docker.sock:ro
-          - certs:/etc/nginx/certs:ro
-          - vhostd:/etc/nginx/vhost.d
-          - html:/usr/share/nginx/html
-        labels:
-          - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+  nginx_proxy:
+    image: nginxproxy/nginx-proxy:alpine
+    container_name: smarthydro_nginx_proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs:ro
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    networks:
+      - proxy_network
+      - smarthydro_network
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    security_opt:
+      - no-new-privileges:true
 
-    letsencrypt:
-        image: jrcs/letsencrypt-nginx-proxy-companion
-        restart: always
-        environment:
-          - NGINX_PROXY_CONTAINER=nginx_proxy
-        volumes:
-            - certs:/etc/nginx/certs:rw
-            - vhostd:/etc/nginx/vhost.d
-            - html:/usr/share/nginx/html
-            - /var/run/docker.sock:/var/run/docker.sock:ro
-        depends_on:
-          - nginx_proxy
+  letsencrypt:
+    image: nginxproxy/acme-companion:latest
+    container_name: smarthydro_letsencrypt
+    restart: always
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx_proxy
+      - DEFAULT_EMAIL=api@smarthydro.app
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - acme:/etc/acme.sh
+    networks:
+      - proxy_network
+      - smarthydro_network
+    depends_on:
+      - nginx_proxy
+    security_opt:
+      - no-new-privileges:true
 
+  django: &django
+    build: 
+      context: ./api
+      dockerfile: Dockerfile
+    image: shydro_django_prod
+    container_name: smarthydro_django_prod
+    volumes:
+      - .:/app
+      - django_static:/app/static
+      - django_media:/app/media
+      - django_logs:/app/logs
+    expose:
+      - "8000"
+    env_file:
+      - env.production
+    environment:
+      - DJANGO_ENV=production
+      - VIRTUAL_HOST=api.smarthydro.app,www.api.smarthydro.app
+      - LETSENCRYPT_HOST=api.smarthydro.app,www.api.smarthydro.app
+      - LETSENCRYPT_EMAIL=api@smarthydro.app
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+    networks:
+      - smarthydro_network
+      - proxy_network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      nginx_proxy:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '2.0'
+        reservations:
+          memory: 1G
+          cpus: '1.0'
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
-    django: &django
-        build: ./api
-        image: shydro_django
-        volumes:
-            - .:/code
-        expose:
-            - "80"
-        environment:
-            - VIRTUAL_HOST=api.smarthydro.app, www.api.smarthydro.app
-            - LETSENCRYPT_HOST=api.smarthydro.app, www.api.smarthydro.app
-            - LETSENCRYPT_EMAIL=api@smarthydro.app
+  cron:
+    build: 
+      context: ./api
+      dockerfile: Dockerfile
+    image: cron_smarthydro_prod
+    container_name: smarthydro_cron_prod
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - .:/app
+      - django_logs:/app/logs
+    env_file:
+      - env.production
+    environment:
+      - DJANGO_ENV=production
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - PYTHONUNBUFFERED=1
+    networks:
+      - smarthydro_network
+    command: cron -f
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
-        depends_on:
-            - nginx_proxy
-            - letsencrypt
-            - postgres 
+volumes:
+  acme:
 
-    cron:
-        build: ./api     # same as main application
-        restart: unless-stopped
-        image: cron_smarthydro
-        volumes:
-          - .:/code
-        depends_on:
-          - postgres
-          - django
-        command: cron -f  # as a long-running foreground process
-
-    react_prototype:
-        build: ./ui_ikolu
-        image: ui_new
-        expose:
-            - "80"
-        environment:
-            - VIRTUAL_HOST=ikolu.smarthydro.app, www.ikolu.smarthydro.app
-            - LETSENCRYPT_HOST=ikolu.smarthydro.app, www.ikolu.smarthydro.app
-            - LETSENCRYPT_EMAIL=app@smarthydro.app
-        depends_on:
-            - django
-            - nginx_proxy
-            - letsencrypt
