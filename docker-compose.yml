@@ -121,19 +121,19 @@ services:
         - BUILDKIT_INLINE_CACHE=1
     container_name: smarthydro-telemetry-collector
     environment:
-      - DATABASE_URL=postgresql://smarthydro:${POSTGRES_PASSWORD:-smarthydro123}@postgres:5432/smarthydro_business
-      - REDIS_URL=redis://:${REDIS_PASSWORD:-smarthydro123}@redis:6379
-      - KAFKA_BROKERS=kafka:29092
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - KAFKA_BROKERS=${KAFKA_BROKERS}
       - TWIN_API_KEY=${TWIN_API_KEY}
       - NETTRA_API_KEY=${NETTRA_API_KEY}
       - NOVUS_API_KEY=${NOVUS_API_KEY}
-      - LOG_LEVEL=INFO
-      - ENVIRONMENT=development
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - ENVIRONMENT=${ENVIRONMENT:-development}
+      - DATABASE_TIMEOUT=${DATABASE_TIMEOUT:-30}
+      - DATABASE_RETRY_ATTEMPTS=${DATABASE_RETRY_ATTEMPTS:-3}
     ports:
       - "8001:8001"
     depends_on:
-      # postgres:
-      #   condition: service_healthy
       redis:
         condition: service_healthy
       kafka:
@@ -166,17 +166,17 @@ services:
         - BUILDKIT_INLINE_CACHE=1
     container_name: smarthydro-dga-compliance
     environment:
-      - DATABASE_URL=postgresql://smarthydro:${POSTGRES_PASSWORD:-smarthydro123}@postgres:5432/smarthydro_business
-      - KAFKA_BROKERS=kafka:29092
+      - DATABASE_URL=${DATABASE_URL}
+      - KAFKA_BROKERS=${KAFKA_BROKERS}
       - DGA_API_URL=${DGA_API_URL}
       - DGA_API_KEY=${DGA_API_KEY}
-      - LOG_LEVEL=INFO
-      - ENVIRONMENT=development
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - ENVIRONMENT=${ENVIRONMENT:-development}
+      - DATABASE_TIMEOUT=${DATABASE_TIMEOUT:-30}
+      - DATABASE_RETRY_ATTEMPTS=${DATABASE_RETRY_ATTEMPTS:-3}
     ports:
       - "8002:8002"
     depends_on:
-      # postgres:
-      #   condition: service_healthy
       kafka:
         condition: service_healthy
     networks:
@@ -205,17 +205,18 @@ services:
         - BUILDKIT_INLINE_CACHE=1
     container_name: smarthydro-data-processor
     environment:
-      - DATABASE_URL=postgresql://smarthydro:${POSTGRES_PASSWORD:-smarthydro123}@postgres:5432/smarthydro_business
-      - REDIS_URL=redis://:${REDIS_PASSWORD:-smarthydro123}@redis:6379
-      - KAFKA_BROKERS=kafka:29092
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - KAFKA_BROKERS=${KAFKA_BROKERS}
       - DJANGO_API_URL=http://business-api:8004
-      - LOG_LEVEL=INFO
-      - ENVIRONMENT=development
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - ENVIRONMENT=${ENVIRONMENT:-development}
+      - DATABASE_TIMEOUT=${DATABASE_TIMEOUT:-30}
+      - DATABASE_RETRY_ATTEMPTS=${DATABASE_RETRY_ATTEMPTS:-3}
+      - DATABASE_POOL_SIZE=${DATABASE_POOL_SIZE:-20}
     ports:
       - "8003:8003"
     depends_on:
-      # postgres:
-      #   condition: service_healthy
       redis:
         condition: service_healthy
       kafka:
@@ -248,19 +249,20 @@ services:
         - BUILDKIT_INLINE_CACHE=1
     container_name: smarthydro-business-api
     environment:
-      - DATABASE_URL=postgresql://smarthydro:${POSTGRES_PASSWORD:-smarthydro123}@postgres:5432/smarthydro_business
-      - REDIS_URL=redis://:${REDIS_PASSWORD:-smarthydro123}@redis:6379
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
       - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-secret-key-here}
-      - JWT_ALGORITHM=HS256
-      - JWT_ACCESS_TOKEN_EXPIRE_MINUTES=30
-      - LOG_LEVEL=INFO
-      - ENVIRONMENT=development
-      - DEBUG=True
+      - JWT_ALGORITHM=${JWT_ALGORITHM:-HS256}
+      - JWT_ACCESS_TOKEN_EXPIRE_MINUTES=${JWT_ACCESS_TOKEN_EXPIRE_MINUTES:-30}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - ENVIRONMENT=${ENVIRONMENT:-development}
+      - DEBUG=${DEBUG:-True}
+      - DATABASE_TIMEOUT=${DATABASE_TIMEOUT:-30}
+      - DATABASE_RETRY_ATTEMPTS=${DATABASE_RETRY_ATTEMPTS:-3}
+      - DATABASE_POOL_SIZE=${DATABASE_POOL_SIZE:-20}
     ports:
       - "8004:8004"
     depends_on:
-      # postgres:
-      #   condition: service_healthy
       redis:
         condition: service_healthy
     volumes:
@@ -291,15 +293,15 @@ services:
         - BUILDKIT_INLINE_CACHE=1
     container_name: smarthydro-analytics-engine
     environment:
-      - MONGODB_URL=mongodb://smarthydro:${MONGO_PASSWORD:-smarthydro123}@mongodb:27017/smarthydro_measurements
-      - REDIS_URL=redis://:${REDIS_PASSWORD:-smarthydro123}@redis:6379
-      - LOG_LEVEL=INFO
-      - ENVIRONMENT=development
+      - MONGODB_URL=${MONGODB_URL}
+      - REDIS_URL=${REDIS_URL}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - ENVIRONMENT=${ENVIRONMENT:-development}
+      - DATABASE_TIMEOUT=${DATABASE_TIMEOUT:-30}
+      - DATABASE_RETRY_ATTEMPTS=${DATABASE_RETRY_ATTEMPTS:-3}
     ports:
       - "8005:8005"
     depends_on:
-      # mongodb:
-      #   condition: service_healthy
       redis:
         condition: service_healthy
     networks:
@@ -328,16 +330,16 @@ services:
         - BUILDKIT_INLINE_CACHE=1
     container_name: smarthydro-notification-service
     environment:
-      - DATABASE_URL=postgresql://smarthydro:${POSTGRES_PASSWORD:-smarthydro123}@postgres:5432/smarthydro_business
-      - REDIS_URL=redis://:${REDIS_PASSWORD:-smarthydro123}@redis:6379
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
       - DJANGO_API_URL=http://business-api:8004
-      - LOG_LEVEL=INFO
-      - ENVIRONMENT=development
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - ENVIRONMENT=${ENVIRONMENT:-development}
+      - DATABASE_TIMEOUT=${DATABASE_TIMEOUT:-30}
+      - DATABASE_RETRY_ATTEMPTS=${DATABASE_RETRY_ATTEMPTS:-3}
     ports:
       - "8006:8006"
     depends_on:
-      # postgres:
-      #   condition: service_healthy
       redis:
         condition: service_healthy
       business-api:
@@ -368,18 +370,18 @@ services:
         - BUILDKIT_INLINE_CACHE=1
     container_name: smarthydro-alert-service
     environment:
-      - DATABASE_URL=postgresql://smarthydro:${POSTGRES_PASSWORD:-smarthydro123}@postgres:5432/smarthydro_business
-      - REDIS_URL=redis://:${REDIS_PASSWORD:-smarthydro123}@redis:6379
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
       - DJANGO_API_URL=http://business-api:8004
       - NOTIFICATION_SERVICE_URL=http://notification-service:8006
       - TELEMETRY_SERVICE_URL=http://telemetry-collector:8001
-      - LOG_LEVEL=INFO
-      - ENVIRONMENT=development
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - ENVIRONMENT=${ENVIRONMENT:-development}
+      - DATABASE_TIMEOUT=${DATABASE_TIMEOUT:-30}
+      - DATABASE_RETRY_ATTEMPTS=${DATABASE_RETRY_ATTEMPTS:-3}
     ports:
       - "8007:8007"
     depends_on:
-      # postgres:
-      #   condition: service_healthy
       redis:
         condition: service_healthy
       business-api:
@@ -511,7 +513,7 @@ services:
       - LOG_LEVEL=INFO
       - ENVIRONMENT=development
     ports:
-      - "8004:8001"
+      - "8008:8001"
     depends_on:
       # postgres:
       #   condition: service_healthy

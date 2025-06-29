@@ -41,7 +41,7 @@ app.add_middleware(
 # Configuración global
 DATABASE_URL = "postgresql://smarthydro:smarthydro123@postgres:5432/smarthydro_business"
 KAFKA_BROKERS = "kafka:29092"
-DJANGO_API_URL = "http://django:8000"
+DJANGO_API_URL = "http://business-api:8004"
 
 # Conexiones globales
 db_pool: Optional[asyncpg.Pool] = None
