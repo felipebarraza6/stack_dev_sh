@@ -26,7 +26,8 @@ THIRD_PARTY_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'django_filters',
-    'django_rest_passwordreset'
+    'django_rest_passwordreset',
+    'channels',  # Django Channels para WebSockets
 ]
 
 LOCAL_APPS = [
@@ -39,6 +40,7 @@ LOCAL_APPS = [
     'api.apps.erp.apps.ErpConfig',
     'api.apps.support.apps.SupportConfig',
     'api.apps.datastore.apps.DatastoreConfig',
+    'api.apps.notifications.apps.NotificationsConfig',
     
     # Herramientas de terceros para apps locales
     'import_export'
@@ -155,4 +157,71 @@ MICROSERVICES = {
     'telemetry_collector': os.environ.get('TELEMETRY_SERVICE_URL', 'http://telemetry-collector:8001'),
     'dga_compliance': os.environ.get('DGA_SERVICE_URL', 'http://dga-compliance:8002'),
     'business_api': os.environ.get('BUSINESS_API_URL', 'http://business-api:8004')
+}
+
+# =============================================================================
+# DJANGO CHANNELS CONFIGURATION
+# =============================================================================
+
+# Configuración de Channels para WebSockets
+ASGI_APPLICATION = 'api.asgi.application'
+
+# Configuración del backend de channels (Redis)
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [
+                {
+                    'host': os.environ.get('REDIS_HOST', 'redis'),
+                    'port': int(os.environ.get('REDIS_PORT', 6379)),
+                    'password': os.environ.get('REDIS_PASSWORD', 'smarthydro123'),
+                }
+            ],
+        },
+    },
+}
+
+# Configuración de Redis para cache y sessions
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': f"redis://:{os.environ.get('REDIS_PASSWORD', 'smarthydro123')}@{os.environ.get('REDIS_HOST', 'redis')}:{os.environ.get('REDIS_PORT', 6379)}/1",
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+# Configuración de sesiones con Redis
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
+
+# =============================================================================
+# NOTIFICATIONS CONFIGURATION
+# =============================================================================
+
+# Configuración de notificaciones
+NOTIFICATION_SETTINGS = {
+    'ENABLE_REALTIME': True,
+    'ENABLE_EMAIL': True,
+    'ENABLE_PUSH': False,  # Para futuras implementaciones
+    'DEFAULT_CHANNEL': 'general',
+    'USER_CHANNEL_PREFIX': 'user_',
+    'PROJECT_CHANNEL_PREFIX': 'project_',
+    'TICKET_CHANNEL_PREFIX': 'ticket_',
+}
+
+# Tipos de notificaciones disponibles
+NOTIFICATION_TYPES = {
+    'TASK_ASSIGNED': 'task_assigned',
+    'TASK_STATUS_CHANGED': 'task_status_changed',
+    'TICKET_CREATED': 'ticket_created',
+    'TICKET_UPDATED': 'ticket_updated',
+    'TICKET_ASSIGNED': 'ticket_assigned',
+    'QUOTATION_APPROVED': 'quotation_approved',
+    'QUOTATION_REJECTED': 'quotation_rejected',
+    'PAYMENT_RECEIVED': 'payment_received',
+    'SYSTEM_ALERT': 'system_alert',
+    'TELEMETRY_ALERT': 'telemetry_alert',
 } 

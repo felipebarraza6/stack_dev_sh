@@ -26,6 +26,7 @@ urlpatterns = [
     path('erp/', include('api.apps.erp.urls', namespace='erp')),
     path('telemetry/', include('api.apps.telemetry.urls', namespace='telemetry')),
     path('support/', include('api.apps.support.urls', namespace='support')),
+    path('notifications/', include('api.apps.notifications.urls', namespace='notifications')),
 ]
 
 if settings.DEBUG:
