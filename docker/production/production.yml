@@ -1,0 +1,136 @@
+version: '3'
+
+volumes:
+    local_postgres_data: {}
+    local_postgres_data_new: {}
+    local_postgres_data_backups: {}
+    certs: {}
+    vhostd: {}
+    html: {}
+    cron_logs: {}
+
+services:
+    postgres:
+        image: postgres:15
+        volumes:
+            - ./postgresql.conf:/etc/postgresql/postgresql.conf
+            - local_postgres_data:/var/lib/postgresql/data
+            - local_postgres_data_backups:/backups
+        ports:
+            - "5430:5432"
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: api
+            PGDATA: /data/postgres
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 40s
+
+    nginx_proxy:
+        image: jwilder/nginx-proxy       
+        restart: always
+        ports:
+          - "80:80"
+          - "443:443"
+        volumes:
+          - /var/run/docker.sock:/tmp/docker.sock:ro
+          - certs:/etc/nginx/certs:ro
+          - vhostd:/etc/nginx/vhost.d
+          - html:/usr/share/nginx/html
+        labels:
+          - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost/health"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+
+    letsencrypt:
+        image: jrcs/letsencrypt-nginx-proxy-companion
+        restart: always
+        environment:
+          - NGINX_PROXY_CONTAINER=nginx_proxy
+        volumes:
+            - certs:/etc/nginx/certs:rw
+            - vhostd:/etc/nginx/vhost.d
+            - html:/usr/share/nginx/html
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        depends_on:
+          - nginx_proxy
+
+    django: &django
+        build: ./api
+        image: shydro_django
+        volumes:
+            - .:/code
+            - cron_logs:/code/api/cronjobs/telemetry/logs
+        expose:
+            - "80"
+        environment:
+            - VIRTUAL_HOST=api.smarthydro.app, www.api.smarthydro.app
+            - LETSENCRYPT_HOST=api.smarthydro.app, www.api.smarthydro.app
+            - LETSENCRYPT_EMAIL=api@smarthydro.app
+            - CRON_ALERT_EMAIL=felipebarraza@smarthydro.cl
+            - DJANGO_SETTINGS_MODULE=api.settings
+            - PYTHONUNBUFFERED=1
+        depends_on:
+            - nginx_proxy
+            - letsencrypt
+            - postgres
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:80/health/"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 40s
+        restart: unless-stopped
+
+    cron:
+        build: ./api
+        restart: unless-stopped
+        image: cron_smarthydro
+        volumes:
+          - .:/code
+          - cron_logs:/code/api/cronjobs/telemetry/logs
+        depends_on:
+          - postgres
+          - django
+        environment:
+            - DJANGO_SETTINGS_MODULE=api.settings
+            - PYTHONUNBUFFERED=1
+            - CRON_ALERT_EMAIL=felipebarraza@smarthydro.cl
+        command: cron -f
+        healthcheck:
+            test: ["CMD", "pgrep", "cron"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 40s
+
+    # Monitoring service for cron jobs
+    cron_monitor:
+        build: ./api
+        restart: unless-stopped
+        image: cron_monitor_smarthydro
+        volumes:
+          - .:/code
+          - cron_logs:/code/api/cronjobs/telemetry/logs
+        depends_on:
+          - postgres
+          - django
+        environment:
+            - DJANGO_SETTINGS_MODULE=api.settings
+            - PYTHONUNBUFFERED=1
+            - CRON_ALERT_EMAIL=felipebarraza@smarthydro.cl
+        command: python manage.py shell -c "from api.cronjobs.monitoring.cron_monitor import CronJobHealthChecker; checker = CronJobHealthChecker(); print(checker.check_all_jobs())"
+        healthcheck:
+            test: ["CMD", "python", "-c", "import sys; sys.exit(0)"]
+            interval: 300s
+            timeout: 10s
+            retries: 2
+
+    

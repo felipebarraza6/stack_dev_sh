@@ -1,0 +1,148 @@
+groups:
+  - name: telemetry_alerts
+    rules:
+      # Alertas de caudal
+      - alert: CaudalCero
+        expr: telemetry_flow_litros_segundo == 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Caudal en 0 - Punto de captación {{ $labels.catchment_point }}"
+          description: "El caudal ha estado en 0 por más de 5 minutos en el punto {{ $labels.catchment_point }}"
+
+      - alert: CaudalAlto
+        expr: telemetry_flow_litros_segundo > 500
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Caudal muy alto - Punto {{ $labels.catchment_point }}"
+          description: "El caudal supera los 500 l/s en el punto {{ $labels.catchment_point }}"
+
+      # Alertas de nivel freático
+      - alert: NivelCritico
+        expr: telemetry_level_metros > 90
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Nivel freático crítico - Punto {{ $labels.catchment_point }}"
+          description: "El nivel freático supera los 90m en el punto {{ $labels.catchment_point }}"
+
+      - alert: NivelMaximo
+        expr: telemetry_level_metros > 95
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Nivel freático máximo - Punto {{ $labels.catchment_point }}"
+          description: "El nivel freático supera los 95m en el punto {{ $labels.catchment_point }}"
+
+      # Alertas de totalizado
+      - alert: TotalInconsistente
+        expr: telemetry_total_inconsistencia > 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Inconsistencia en totalizado - Punto {{ $labels.catchment_point }}"
+          description: "Se detectó inconsistencia entre caudal y total en el punto {{ $labels.catchment_point }}"
+
+      # Alertas de conectividad
+      - alert: PuntoDesconectado
+        expr: time() - telemetry_ultima_medicion > 3600
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Punto de captación desconectado - {{ $labels.catchment_point }}"
+          description: "No se han recibido datos del punto {{ $labels.catchment_point }} en más de 1 hora"
+
+      # Alertas de proveedores
+      - alert: ProveedorFallando
+        expr: telemetry_proveedor_errores > 3
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Proveedor con errores - {{ $labels.proveedor }}"
+          description: "El proveedor {{ $labels.proveedor }} ha tenido más de 3 errores en 10 minutos"
+
+      # Alertas de sistema DGA
+      - alert: ColaDGALlena
+        expr: telemetry_dga_cola_elementos > 100
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Cola DGA con muchos elementos"
+          description: "La cola DGA tiene más de 100 elementos pendientes"
+
+      - alert: DGAFallando
+        expr: telemetry_dga_errores_envio > 5
+        for: 15m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Sistema DGA con errores"
+          description: "El sistema DGA ha tenido más de 5 errores de envío en 15 minutos"
+
+  - name: system_alerts
+    rules:
+      # Alertas de sistema
+      - alert: CPUAlto
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "CPU alto en {{ $labels.instance }}"
+          description: "El uso de CPU supera el 80% en {{ $labels.instance }}"
+
+      - alert: MemoriaAlta
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Memoria alta en {{ $labels.instance }}"
+          description: "El uso de memoria supera el 85% en {{ $labels.instance }}"
+
+      - alert: DiscoLleno
+        expr: (node_filesystem_size_bytes - node_filesystem_free_bytes) / node_filesystem_size_bytes * 100 > 90
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Disco casi lleno en {{ $labels.instance }}"
+          description: "El uso de disco supera el 90% en {{ $labels.instance }}"
+
+      # Alertas de base de datos
+      - alert: ConexionesDBAltas
+        expr: pg_stat_database_numbackends > 50
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Muchas conexiones a la base de datos"
+          description: "Hay más de 50 conexiones activas a la base de datos"
+
+      # Alertas de API
+      - alert: APILenta
+        expr: http_request_duration_seconds{quantile="0.95"} > 2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "API lenta"
+          description: "El 95% de las peticiones tardan más de 2 segundos"
+
+      - alert: ErroresAPI
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Muchos errores 5xx en la API"
+          description: "La tasa de errores 5xx supera el 10%" 

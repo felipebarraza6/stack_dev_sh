@@ -1,0 +1,146 @@
+version: '3.8'
+
+services:
+  # API Django
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: stack_vps_api_dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api:/app
+      - ./media:/app/media
+      - ./static:/app/static
+    environment:
+      - DEBUG=True
+      - DJANGO_SETTINGS_MODULE=settings
+      - DATABASE_URL=sqlite:///db.sqlite3
+      - REDIS_URL=redis://redis:6379/0
+      - MQTT_BROKER=mqtt_broker
+      - MQTT_PORT=1883
+    depends_on:
+      - redis
+      - mqtt_broker
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             python manage.py runserver 0.0.0.0:8000"
+    networks:
+      - stack_vps_network
+
+  # Redis para cache y sesiones
+  redis:
+    image: redis:7-alpine
+    container_name: stack_vps_redis_dev
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - stack_vps_network
+
+  # MQTT Broker para telemetría
+  mqtt_broker:
+    image: eclipse-mosquitto:2.0
+    container_name: stack_vps_mqtt_dev
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./docker/development/conf/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - mqtt_data:/mosquitto/data
+      - mqtt_logs:/mosquitto/log
+    networks:
+      - stack_vps_network
+
+  # Celery Worker para tareas en background
+  celery_worker:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: stack_vps_celery_worker_dev
+    volumes:
+      - ./api:/app
+    environment:
+      - DEBUG=True
+      - DJANGO_SETTINGS_MODULE=settings
+      - DATABASE_URL=sqlite:///db.sqlite3
+      - REDIS_URL=redis://redis:6379/0
+      - MQTT_BROKER=mqtt_broker
+      - MQTT_PORT=1883
+    depends_on:
+      - api
+      - redis
+    command: celery -A api worker -l info
+    networks:
+      - stack_vps_network
+
+  # Celery Beat para tareas programadas
+  celery_beat:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: stack_vps_celery_beat_dev
+    volumes:
+      - ./api:/app
+    environment:
+      - DEBUG=True
+      - DJANGO_SETTINGS_MODULE=settings
+      - DATABASE_URL=sqlite:///db.sqlite3
+      - REDIS_URL=redis://redis:6379/0
+      - MQTT_BROKER=mqtt_broker
+      - MQTT_PORT=1883
+    depends_on:
+      - api
+      - redis
+    command: celery -A api beat -l info
+    networks:
+      - stack_vps_network
+
+  # Flower para monitoreo de Celery
+  flower:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: stack_vps_flower_dev
+    ports:
+      - "5555:5555"
+    volumes:
+      - ./api:/app
+    environment:
+      - DEBUG=True
+      - DJANGO_SETTINGS_MODULE=settings
+      - DATABASE_URL=sqlite:///db.sqlite3
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - celery_worker
+      - redis
+    command: celery -A api flower --port=5555
+    networks:
+      - stack_vps_network
+
+  # Nginx para servir archivos estáticos
+  nginx:
+    image: nginx:alpine
+    container_name: stack_vps_nginx_dev
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/development/conf/nginx-dev.conf:/etc/nginx/nginx.conf
+      - ./static:/var/www/static
+      - ./media:/var/www/media
+    depends_on:
+      - api
+    networks:
+      - stack_vps_network
+
+volumes:
+  redis_data:
+  mqtt_data:
+  mqtt_logs:
+
+networks:
+  stack_vps_network:
+    driver: bridge 

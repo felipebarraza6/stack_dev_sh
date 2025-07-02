@@ -1,0 +1,44 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "telemetry_rules.yml"
+
+scrape_configs:
+  # Monitoreo del servidor Django
+  - job_name: 'django-telemetry'
+    static_configs:
+      - targets: ['django:8000']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # Monitoreo de la base de datos PostgreSQL
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres:5432']
+    scrape_interval: 30s
+
+  # Monitoreo de Redis (para caché y colas)
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+    scrape_interval: 30s
+
+  # Monitoreo del sistema (Node Exporter)
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+    scrape_interval: 30s
+
+  # Monitoreo de Nginx (si usas proxy)
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['nginx:9113']
+    scrape_interval: 30s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093 

@@ -12,3 +12,30 @@ django-import-export
 zeep
 drf-excel
 whitenoise
+django-rest-passwordreset
+
+# Celery para tareas en background
+celery[redis]
+flower
+
+# MQTT para telemetría
+paho-mqtt
+
+# Redis para cache y broker
+redis
+
+# Monitoreo y métricas
+prometheus-client
+
+# Notificaciones
+django-notifications-hq
+
+# Validación de esquemas
+jsonschema
+
+# Procesamiento de datos
+pandas
+numpy
+
+# APIs externas
+requests-oauthlib

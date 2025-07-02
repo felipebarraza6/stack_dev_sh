@@ -1,0 +1,197 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Telemetría - Dashboard Principal",
+    "tags": ["telemetría", "puntos-captación"],
+    "style": "dark",
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Puntos de Captación Activos",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "telemetry_puntos_activos",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "steps": [
+                {"color": "red", "value": null},
+                {"color": "green", "value": 1}
+              ]
+            }
+          }
+        },
+        "gridPos": {"h": 8, "w": 6, "x": 0, "y": 0}
+      },
+      {
+        "id": 2,
+        "title": "Caudal Promedio por Punto",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "telemetry_flow_promedio",
+            "legendFormat": "Punto {{catchment_point}}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "litrePerSec",
+            "color": {"mode": "palette-classic"}
+          }
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 6, "y": 0}
+      },
+      {
+        "id": 3,
+        "title": "Nivel Freático por Punto",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "telemetry_level_promedio",
+            "legendFormat": "Punto {{catchment_point}}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "m",
+            "color": {"mode": "palette-classic"}
+          }
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8}
+      },
+      {
+        "id": 4,
+        "title": "Total Acumulado por Punto",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "telemetry_total_metros_cubicos",
+            "legendFormat": "Punto {{catchment_point}}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "m3",
+            "color": {"mode": "palette-classic"}
+          }
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8}
+      },
+      {
+        "id": 5,
+        "title": "Errores por Tipo",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "sum by (error_type) (telemetry_errores_total)",
+            "legendFormat": "{{error_type}}",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 8, "x": 0, "y": 16}
+      },
+      {
+        "id": 6,
+        "title": "Estado de Proveedores",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "rate(telemetry_proveedor_exitos[5m])",
+            "legendFormat": "{{proveedor}} - Éxitos/min",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "steps": [
+                {"color": "red", "value": null},
+                {"color": "yellow", "value": 0.1},
+                {"color": "green", "value": 1}
+              ]
+            }
+          }
+        },
+        "gridPos": {"h": 8, "w": 8, "x": 8, "y": 16}
+      },
+      {
+        "id": 7,
+        "title": "Cola DGA",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "telemetry_dga_cola_elementos",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "yellow", "value": 50},
+                {"color": "red", "value": 100}
+              ]
+            }
+          }
+        },
+        "gridPos": {"h": 8, "w": 8, "x": 16, "y": 16}
+      },
+      {
+        "id": 8,
+        "title": "Peticiones API por Minuto",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "rate(telemetry_api_requests_total[1m])",
+            "legendFormat": "{{endpoint}} - {{method}}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "palette-classic"}
+          }
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 24}
+      },
+      {
+        "id": 9,
+        "title": "Duración de Peticiones API",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(telemetry_api_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "P95 - {{endpoint}}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "s",
+            "color": {"mode": "palette-classic"}
+          }
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 24}
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "30s"
+  }
+} 
