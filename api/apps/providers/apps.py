@@ -4,8 +4,8 @@ from django.apps import AppConfig
 
 class ProvidersAppConfig(AppConfig):
     """AppConfig para la app de proveedores"""
-    name = 'api.providers'
+    name = 'api.apps.providers'
     verbose_name = 'Proveedores'
 
     def ready(self):
-        import api.providers.signals 
+        import api.apps.providers.signals 

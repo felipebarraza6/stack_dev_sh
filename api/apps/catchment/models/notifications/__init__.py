@@ -1,7 +1,5 @@
 """
-Modelos de Notificaciones
+Modelos de Notificaciones de Catchment
 """
 
-from .notification import NotificationsCatchment
-
-__all__ = ['NotificationsCatchment'] 
+# No importar modelos aquí para evitar ciclos de importación. 

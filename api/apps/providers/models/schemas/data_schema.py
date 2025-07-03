@@ -3,9 +3,10 @@ Modelo de Esquema de Datos
 """
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from api.apps.core.models import BaseModel
 
 
-class DataSchema(models.Model):
+class DataSchema(BaseModel):
     """Esquemas de datos para diferentes tipos de variables"""
     
     name = models.CharField(
@@ -46,15 +47,8 @@ class DataSchema(models.Model):
         help_text=_('Reglas de validación para los datos')
     )
     
-    # Estado
-    is_active = models.BooleanField(
-        default=True,
-        verbose_name=_('Activo')
-    )
-    
-    # Metadata
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    # Estado - is_active heredado de BaseModel
+    # Metadata - created_at, updated_at heredados de BaseModel
     
     class Meta:
         verbose_name = _('Esquema de Datos')

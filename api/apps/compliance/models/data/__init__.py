@@ -1,7 +1,5 @@
 """
-Modelos de Datos de Cumplimiento
+Modelos de Datos de Compliance
 """
 
-from .compliance_data import ComplianceData
-
-__all__ = ['ComplianceData'] 
+# No importar modelos aquí para evitar ciclos de importación. 

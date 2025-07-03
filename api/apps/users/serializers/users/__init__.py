@@ -2,6 +2,8 @@
 Serializadores de Usuarios
 """
 
-from .user import UserSerializer
+# from .user import UserSerializer
 
-__all__ = ['UserSerializer'] 
+__all__ = [
+    # 'UserSerializer'
+] 

@@ -1,9 +1,13 @@
 """
-Serializadores de Proveedores
+Serializadores de Providers
 Serializadores para los modelos de providers
 """
 from rest_framework import serializers
-from .models import Provider, MQTTBroker, DeviceToken, DataSchema, DataIngestionLog
+from api.apps.providers.models.providers.provider import Provider
+from api.apps.providers.models.mqtt.broker import MQTTBroker
+from api.apps.providers.models.tokens.device_token import DeviceToken
+from api.apps.providers.models.schemas.data_schema import DataSchema
+from api.apps.providers.models.logs.ingestion_log import DataIngestionLog
 
 
 class ProviderSerializer(serializers.ModelSerializer):

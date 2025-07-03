@@ -10,8 +10,12 @@ from datetime import datetime
 import paho.mqtt.client as mqtt
 from django.conf import settings
 from django.core.cache import cache
+from django.db import models
 
-from api.providers.models import Provider, MQTTBroker, DeviceToken, DataSchema, ProviderSchemaMapping
+from api.apps.providers.models.providers.provider import Provider, ProviderSchemaMapping
+from api.apps.providers.models.mqtt.broker import MQTTBroker
+from api.apps.providers.models.tokens.device_token import DeviceToken
+from api.apps.providers.models.schemas.data_schema import DataSchema
 
 logger = logging.getLogger(__name__)
 

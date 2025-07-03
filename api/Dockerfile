@@ -4,6 +4,10 @@ FROM python:3
 RUN mkdir /code
 # Set working dir.
 WORKDIR /code
+
+# Crear directorio de logs
+RUN mkdir -p /code/logs
+
 # Add python requirements file.
 ADD requirements.txt /code/
 
@@ -21,7 +25,9 @@ RUN rm /etc/nginx/sites-enabled/default
 RUN ln -s /code/conf/nginx-app.conf /etc/nginx/sites-enabled/
 ADD . /code/
 
-
+# Asegurar permisos de escritura en logs y hacer ejecutable el entrypoint
+RUN chmod 755 /code/logs
+RUN chmod +x /code/docker-entrypoint.sh
 
 # Add source code.
 ENTRYPOINT ["./docker-entrypoint.sh"]

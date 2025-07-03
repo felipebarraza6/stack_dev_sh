@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # API Django - Sistema completo
+  api:
+    build:
+      context: ../../
+      dockerfile: api/Dockerfile.dev
+    container_name: stack_vps_api_simple
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../../api:/code/api
+      - ../../manage.py:/code/manage.py
+      - ../../media:/code/media
+      - ../../static:/code/static
+    environment:
+      - DEBUG=True
+      - DJANGO_SETTINGS_MODULE=api.config.settings.local
+      - DATABASE_URL=sqlite:///db.sqlite3
+      - TELEMETRY_ENABLED=True
+      - COMPLIANCE_ENABLED=True
+      - CATCHMENT_ENABLED=True
+      - PROVIDERS_ENABLED=True
+      - VARIABLES_ENABLED=True
+      - SPECTACULAR_SETTINGS=True
+    command: >
+      sh -c "export DJANGO_SETTINGS_MODULE=api.config.settings.local &&
+             python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py shell -c '
+             from django.contrib.auth.models import User
+             if not User.objects.filter(username=\"admin\").exists():
+                 User.objects.create_superuser(\"admin\", \"admin@example.com\", \"admin123\")
+                 print(\"✅ Superusuario creado: admin/admin123\")
+             else:
+                 print(\"✅ Superusuario ya existe\")
+             ' &&
+             python manage.py runserver 0.0.0.0:8000"
+    networks:
+      - stack_vps_simple_network
+
+  # Redis simple para cache
+  redis:
+    image: redis:7-alpine
+    container_name: stack_vps_redis_simple
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_simple_data:/data
+    networks:
+      - stack_vps_simple_network
+
+volumes:
+  redis_simple_data:
+
+networks:
+  stack_vps_simple_network:
+    driver: bridge 

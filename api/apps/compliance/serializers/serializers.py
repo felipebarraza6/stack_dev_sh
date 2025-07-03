@@ -1,9 +1,12 @@
 """
-Serializadores de Cumplimiento
+Serializadores de Compliance
 Serializadores para los modelos de compliance
 """
 from rest_framework import serializers
-from .models import ComplianceSource, ComplianceConfig, ComplianceData, ComplianceLog
+from api.apps.compliance.models.sources.compliance_source import ComplianceSource
+from api.apps.compliance.models.configs.compliance_config import ComplianceConfig
+from api.apps.compliance.models.data.compliance_data import ComplianceData
+from api.apps.compliance.models.logs.compliance_log import ComplianceLog
 
 
 class ComplianceSourceSerializer(serializers.ModelSerializer):

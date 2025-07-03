@@ -3,16 +3,14 @@ Serializadores de Telemetría
 Serializadores para los modelos de telemetría mejorados
 """
 from rest_framework import serializers
-from .models import (
+from api.apps.telemetry.models.models import (
     TelemetryData,
     RawTelemetryData,
     ProcessedTelemetryData,
-    ResponseSchema,
-    ProcessingConstant,
-    TelemetryNotification,
     TelemetryProcessingLog
 )
-from api.apps.catchment.models import CatchmentPoint
+from api.apps.telemetry.models.schemas.response_schema import ResponseSchema
+from api.apps.catchment.models.points.catchment_point import CatchmentPoint
 
 
 class CatchmentPointSerializer(serializers.ModelSerializer):
@@ -70,32 +68,32 @@ class ResponseSchemaSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'created_at', 'updated_at']
 
 
-class ProcessingConstantSerializer(serializers.ModelSerializer):
-    """Serializador para constantes de procesamiento"""
-    
-    catchment_points = CatchmentPointSerializer(many=True, read_only=True)
-    variables = serializers.SerializerMethodField()
-    
-    class Meta:
-        model = ProcessingConstant
-        fields = [
-            'id', 'name', 'description', 'constant_type', 'value',
-            'start_date', 'end_date', 'config', 'catchment_points',
-            'variables', 'is_active', 'created_at', 'updated_at'
-        ]
-        read_only_fields = ['id', 'created_at', 'updated_at']
-    
-    def get_variables(self, obj):
-        """Obtener información de variables relacionadas"""
-        return [
-            {
-                'id': var.id,
-                'name': var.name,
-                'code': var.code,
-                'variable_type': var.variable_type
-            }
-            for var in obj.variables.all()
-        ]
+# class ProcessingConstantSerializer(serializers.ModelSerializer):
+#     """Serializador para constantes de procesamiento"""
+#     
+#     catchment_points = CatchmentPointSerializer(many=True, read_only=True)
+#     variables = serializers.SerializerMethodField()
+#     
+#     class Meta:
+#         model = ProcessingConstant
+#         fields = [
+#             'id', 'name', 'description', 'constant_type', 'value',
+#             'start_date', 'end_date', 'config', 'catchment_points',
+#             'variables', 'is_active', 'created_at', 'updated_at'
+#         ]
+#         read_only_fields = ['id', 'created_at', 'updated_at']
+#     
+#     def get_variables(self, obj):
+#         """Obtener información de variables relacionadas"""
+#         return [
+#             {
+#                 'id': var.id,
+#                 'name': var.name,
+#                 'code': var.code,
+#                 'variable_type': var.variable_type
+#             }
+#             for var in obj.variables.all()
+#         ]
 
 
 class ProcessedTelemetryDataSerializer(serializers.ModelSerializer):
@@ -115,18 +113,18 @@ class ProcessedTelemetryDataSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'created_at', 'updated_at']
 
 
-class TelemetryNotificationSerializer(serializers.ModelSerializer):
-    """Serializador para notificaciones de telemetría"""
-    
-    catchment_point = CatchmentPointSerializer(read_only=True)
-    
-    class Meta:
-        model = TelemetryNotification
-        fields = [
-            'id', 'catchment_point', 'title', 'message',
-            'notification_type', 'created_at', 'updated_at'
-        ]
-        read_only_fields = ['id', 'created_at', 'updated_at']
+# class TelemetryNotificationSerializer(serializers.ModelSerializer):
+#     """Serializador para notificaciones de telemetría"""
+#     
+#     catchment_point = CatchmentPointSerializer(read_only=True)
+#     
+#     class Meta:
+#         model = TelemetryNotification
+#         fields = [
+#             'id', 'catchment_point', 'title', 'message',
+#             'notification_type', 'created_at', 'updated_at'
+#         ]
+#         read_only_fields = ['id', 'created_at', 'updated_at']
 
 
 class TelemetryProcessingLogSerializer(serializers.ModelSerializer):

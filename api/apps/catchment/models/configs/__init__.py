@@ -1,7 +1,5 @@
 """
-Modelos de Configuraciones
+Modelos de Configuraciones de Catchment
 """
 
-from .processing_config import CatchmentPointProcessingConfig
-
-__all__ = ['CatchmentPointProcessingConfig'] 
+# No importar modelos aquí para evitar ciclos de importación. 

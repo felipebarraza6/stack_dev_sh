@@ -1,9 +1,10 @@
 """
 Signals para la app de variables
 """
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
-from .models import Variable, VariableAlert
+from api.apps.variables.models.variables.variable import Variable
+from api.apps.variables.models.alerts.alert import VariableAlert
 
 
 @receiver(post_save, sender=Variable)

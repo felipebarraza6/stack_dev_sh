@@ -1,0 +1,1 @@
+# Core app para funcionalidades compartidas 

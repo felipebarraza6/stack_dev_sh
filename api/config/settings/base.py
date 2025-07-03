@@ -42,13 +42,14 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-
+    'api.apps.core.apps.CoreConfig',           # Modelos base y funcionalidades compartidas
     'api.apps.users.apps.UsersAppConfig',      # Gestión de usuarios
     'api.apps.providers.apps.ProvidersAppConfig',  # Proveedores de datos
     'api.apps.variables.apps.VariablesAppConfig',  # Procesamiento de variables
     'api.apps.catchment.apps.CatchmentAppConfig',  # Puntos de captación
     'api.apps.compliance.apps.ComplianceConfig',  # Cumplimiento regulatorio
     'api.apps.telemetry.apps.TelemetryConfig',  # Procesamiento de telemetría
+    'api.apps.frontend.apps.FrontendConfig',   # API Frontend (capa externa)
     'django_crontab',
     'import_export'
 ]

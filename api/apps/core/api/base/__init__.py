@@ -1,0 +1,1 @@
+# API Base - Capa interna del sistema 

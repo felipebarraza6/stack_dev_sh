@@ -1,5 +1,5 @@
 """
-Modelo de Proveedor
+Modelo de Provider
 """
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -94,4 +94,63 @@ class Provider(models.Model):
         db_table = 'providers_provider'
     
     def __str__(self):
-        return self.name 
+        return self.name
+
+
+class ProviderSchemaMapping(models.Model):
+    """Mapeo entre proveedores y esquemas de datos"""
+    
+    provider = models.ForeignKey(
+        Provider,
+        on_delete=models.CASCADE,
+        related_name='schema_mappings',
+        verbose_name=_('Proveedor')
+    )
+    
+    schema = models.ForeignKey(
+        'providers.DataSchema',
+        on_delete=models.CASCADE,
+        related_name='provider_mappings',
+        verbose_name=_('Esquema de datos')
+    )
+    
+    # Configuración específica del mapeo
+    mapping_config = models.JSONField(
+        default=dict,
+        verbose_name=_('Configuración de mapeo'),
+        help_text=_('Configuración específica para este proveedor y esquema')
+    )
+    
+    # Transformaciones de datos
+    data_transformations = models.JSONField(
+        default=dict,
+        verbose_name=_('Transformaciones de datos'),
+        help_text=_('Transformaciones específicas para los datos de este proveedor')
+    )
+    
+    # Prioridad del mapeo
+    priority = models.IntegerField(
+        default=1,
+        verbose_name=_('Prioridad'),
+        help_text=_('Prioridad del mapeo (menor número = mayor prioridad)')
+    )
+    
+    # Estado
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name=_('Activo')
+    )
+    
+    # Metadata
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = _('Mapeo Proveedor-Esquema')
+        verbose_name_plural = _('Mapeos Proveedor-Esquema')
+        db_table = 'providers_provider_schema_mapping'
+        unique_together = ['provider', 'schema']
+        ordering = ['priority']
+    
+    def __str__(self):
+        return f"{self.provider.name} - {self.schema.name}" 

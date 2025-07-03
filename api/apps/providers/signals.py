@@ -1,9 +1,10 @@
 """
-Signals para la app de proveedores
+Signals para la app de providers
 """
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
-from .models import Provider, DeviceToken
+from api.apps.providers.models.providers.provider import Provider
+from api.apps.providers.models.tokens.device_token import DeviceToken
 
 
 @receiver(post_save, sender=Provider)

@@ -3,7 +3,7 @@ Serializadores de Usuarios
 Serializadores para los modelos de usuarios
 """
 from rest_framework import serializers
-from .models import User
+from api.apps.users.models.users.user import User
 
 
 class UserSerializer(serializers.ModelSerializer):

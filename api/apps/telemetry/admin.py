@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import (
+from api.apps.telemetry.models.models import (
+    TelemetryData,
     RawTelemetryData,
-    ResponseSchema,
-    ProcessingConstant,
     ProcessedTelemetryData,
+    TelemetryProcessingLog
 )
+from api.apps.telemetry.models.schemas.response_schema import ResponseSchema
 
 @admin.register(RawTelemetryData)
 class RawTelemetryDataAdmin(admin.ModelAdmin):
@@ -21,14 +22,14 @@ class ResponseSchemaAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     readonly_fields = ('created_at', 'updated_at')
 
-@admin.register(ProcessingConstant)
-class ProcessingConstantAdmin(admin.ModelAdmin):
-    list_display = ('name', 'constant_type', 'value', 'start_date', 'end_date', 'is_active')
-    list_filter = ('constant_type', 'is_active')
-    search_fields = ('name',)
-    filter_horizontal = ('catchment_points', 'variables')
-    readonly_fields = ('created_at', 'updated_at')
-    date_hierarchy = 'start_date'
+# @admin.register(ProcessingConstant)  # Comentado porque no existe el modelo
+# class ProcessingConstantAdmin(admin.ModelAdmin):
+#     list_display = ('name', 'constant_type', 'value', 'start_date', 'end_date', 'is_active')
+#     list_filter = ('constant_type', 'is_active')
+#     search_fields = ('name',)
+#     filter_horizontal = ('catchment_points', 'variables')
+#     readonly_fields = ('created_at', 'updated_at')
+#     date_hierarchy = 'start_date'
 
 @admin.register(ProcessedTelemetryData)
 class ProcessedTelemetryDataAdmin(admin.ModelAdmin):

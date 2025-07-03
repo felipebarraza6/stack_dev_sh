@@ -3,10 +3,11 @@ Modelo de Configuración de Cumplimiento
 """
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from api.apps.core.models import BaseModel
 from ..sources.compliance_source import ComplianceSource
 
 
-class ComplianceConfig(models.Model):
+class ComplianceConfig(BaseModel):
     """Configuración de cumplimiento para un punto de captación"""
     
     catchment_point = models.ForeignKey(
@@ -30,11 +31,7 @@ class ComplianceConfig(models.Model):
         help_text=_('Configuración específica para este punto y fuente')
     )
     
-    # Estado
-    is_active = models.BooleanField(
-        default=True,
-        verbose_name=_('Activo')
-    )
+    # Estado - is_active heredado de BaseModel
     
     # Fechas de cumplimiento
     start_date = models.DateField(
@@ -49,9 +46,7 @@ class ComplianceConfig(models.Model):
         verbose_name=_('Fecha de fin')
     )
     
-    # Metadata
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    # Metadata - created_at, updated_at heredados de BaseModel
     
     class Meta:
         verbose_name = _('Configuración de Cumplimiento')

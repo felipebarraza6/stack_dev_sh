@@ -1,14 +1,5 @@
 """
-Serializadores de Puntos de Captación
+Serializers de Catchment
 """
 
-from .points import CatchmentPointSerializer, UserSerializer
-from .configs import CatchmentPointProcessingConfigSerializer
-from .notifications import NotificationsCatchmentSerializer
-
-__all__ = [
-    'CatchmentPointSerializer',
-    'UserSerializer',
-    'CatchmentPointProcessingConfigSerializer',
-    'NotificationsCatchmentSerializer',
-]
+# No importar serializers aquí para evitar ciclos de importación.

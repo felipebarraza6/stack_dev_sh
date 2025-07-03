@@ -3,10 +3,11 @@ Modelo de Alerta para Variables
 """
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from api.apps.core.models import BaseModel
 from ..variables.variable import Variable
 
 
-class VariableAlert(models.Model):
+class VariableAlert(BaseModel):
     """Alertas para variables"""
     
     ALERT_TYPES = [
@@ -71,15 +72,8 @@ class VariableAlert(models.Model):
         help_text=_('Acciones a ejecutar cuando se activa la alerta')
     )
     
-    # Estado
-    is_active = models.BooleanField(
-        default=True,
-        verbose_name=_('Activa')
-    )
-    
-    # Metadata
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    # Estado - heredado de BaseModel
+    # is_active, created_at, updated_at ya están en BaseModel
     
     class Meta:
         verbose_name = _('Alerta de Variable')

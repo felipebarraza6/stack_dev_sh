@@ -2,6 +2,4 @@
 Modelos de Esquemas
 """
 
-from .data_schema import DataSchema
-
-__all__ = ['DataSchema'] 
+# No importar modelos aquí para evitar ciclos de importación. 

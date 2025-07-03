@@ -3,10 +3,11 @@ Modelo de Notificaciones de Puntos de Captación
 """
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from api.apps.core.models import BaseModel
 from ..points.catchment_point import CatchmentPoint
 
 
-class NotificationsCatchment(models.Model):
+class NotificationsCatchment(BaseModel):
     """Notificaciones de puntos de captación"""
     
     NOTIFICATION_TYPES = [
@@ -39,14 +40,8 @@ class NotificationsCatchment(models.Model):
         verbose_name=_('Mensaje')
     )
     
-    is_active = models.BooleanField(
-        default=True,
-        verbose_name=_('Activa')
-    )
-    
-    # Metadata
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    # Estado - heredado de BaseModel
+    # is_active, created_at, updated_at ya están en BaseModel
     
     class Meta:
         verbose_name = _('Notificación de Punto de Captación')

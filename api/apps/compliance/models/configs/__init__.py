@@ -1,7 +1,5 @@
 """
-Modelos de Configuraciones de Cumplimiento
+Modelos de Configuraciones de Compliance
 """
 
-from .compliance_config import ComplianceConfig
-
-__all__ = ['ComplianceConfig'] 
+# No importar modelos aquí para evitar ciclos de importación. 

@@ -1,0 +1,31 @@
+# Dockerfile para desarrollo local
+FROM python:3.11-slim
+
+# Instalar dependencias del sistema
+RUN apt-get update && apt-get install -y \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Crear directorio de trabajo
+WORKDIR /code
+
+# Copiar requirements primero para cache de Docker
+COPY api/requirements.txt /code/requirements.txt
+
+# Instalar dependencias de Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Crear directorios necesarios
+RUN mkdir -p /code/logs /code/api/media /code/api/static
+
+# Asegurar permisos de escritura en logs
+RUN chmod 755 /code/logs
+
+# Copiar solo los archivos necesarios para evitar copiar archivos temporales
+COPY api/ /code/api/
+
+# Exponer puerto
+EXPOSE 8000
+
+# Comando por defecto
+CMD ["python", "api/manage.py", "runserver", "0.0.0.0:8000"] 

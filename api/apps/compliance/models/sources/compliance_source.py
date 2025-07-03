@@ -3,9 +3,10 @@ Modelo de Fuente de Cumplimiento
 """
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from api.apps.core.models import BaseModel
 
 
-class ComplianceSource(models.Model):
+class ComplianceSource(BaseModel):
     """Fuente de cumplimiento (DGA, SMA, etc.)"""
     
     name = models.CharField(
@@ -39,15 +40,8 @@ class ComplianceSource(models.Model):
         help_text=_('Lista de variables que maneja esta fuente')
     )
     
-    # Estado
-    is_active = models.BooleanField(
-        default=True,
-        verbose_name=_('Activa')
-    )
-    
-    # Metadata
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    # Estado - is_active heredado de BaseModel
+    # Metadata - created_at, updated_at heredados de BaseModel
     
     class Meta:
         verbose_name = _('Fuente de Cumplimiento')

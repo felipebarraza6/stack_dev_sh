@@ -3,9 +3,10 @@ Modelo de Datos Brutos de Telemetría
 """
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from api.apps.core.models import TimestampedModel
 
 
-class RawTelemetryData(models.Model):
+class RawTelemetryData(TimestampedModel):
     """Datos brutos de telemetría - almacenamiento sin procesar"""
     
     # Punto de captación
@@ -16,16 +17,9 @@ class RawTelemetryData(models.Model):
         verbose_name=_('Punto de captación')
     )
     
-    # Timestamps
-    measurement_time = models.DateTimeField(
-        verbose_name=_('Fecha/hora medición')
-    )
-    
-    logger_time = models.DateTimeField(
-        null=True,
-        blank=True,
-        verbose_name=_('Fecha/hora logger')
-    )
+    # Timestamps - timestamp y device_timestamp heredados de TimestampedModel
+    # measurement_time -> timestamp
+    # logger_time -> device_timestamp
     
     # Datos brutos - almacenamiento flexible
     raw_data = models.JSONField(
@@ -52,21 +46,19 @@ class RawTelemetryData(models.Model):
         verbose_name=_('Estado de procesamiento')
     )
     
-    # Metadata
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    # Metadata - created_at, updated_at heredados de TimestampedModel
     
     class Meta:
         verbose_name = _('Dato Bruto de Telemetría')
         verbose_name_plural = _('Datos Brutos de Telemetría')
         db_table = 'telemetry_raw_telemetry_data'
         indexes = [
-            models.Index(fields=['catchment_point', 'measurement_time']),
-            models.Index(fields=['measurement_time']),
+            models.Index(fields=['catchment_point', 'timestamp']),
+            models.Index(fields=['timestamp']),
             models.Index(fields=['is_processed']),
             models.Index(fields=['processing_status']),
         ]
-        ordering = ['-measurement_time']
+        ordering = ['-timestamp']
     
     def __str__(self):
-        return f"{self.catchment_point.name} - {self.measurement_time}" 
+        return f"{self.catchment_point.name} - {self.timestamp}" 

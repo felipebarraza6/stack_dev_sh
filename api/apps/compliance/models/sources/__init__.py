@@ -1,7 +1,5 @@
 """
-Modelos de Fuentes de Cumplimiento
+Modelos de Fuentes de Compliance
 """
 
-from .compliance_source import ComplianceSource
-
-__all__ = ['ComplianceSource'] 
+# No importar modelos aquí para evitar ciclos de importación. 

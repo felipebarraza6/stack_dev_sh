@@ -15,11 +15,20 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 from django_filters import rest_framework as filters
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
+from django.utils import timezone
 
 from api.apps.catchment.models import CatchmentPoint
-from .models import TelemetryData
-from .serializers import (
+from api.apps.telemetry.models.models import TelemetryData
+from api.apps.telemetry.serializers.serializers import (
     TelemetryDataSerializer,
+    TelemetryDataCreateSerializer,
+    TelemetryDataUpdateSerializer,
+    TelemetryDataBulkCreateSerializer,
+    TelemetryDataSummarySerializer,
+    TelemetryDataChartSerializer,
+    TelemetryDataExportSerializer,
     TelemetryDashboardSerializer,
     TelemetryMonthlySummarySerializer,
     TelemetryPointDetailsSerializer,
