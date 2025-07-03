@@ -67,6 +67,9 @@ class TelemetryProcessor:
             # Aplicar reglas de procesamiento específicas
             self._apply_processing_rules(catchment_point, processed_data, raw_data)
             
+            # NUEVO: Convertir pulsos a volumen
+            self._convert_pulses_to_volume(catchment_point, processed_data)
+            
             # Validar consistencia entre variables
             self._validate_variable_consistency(catchment_point, processed_data)
             
@@ -106,6 +109,52 @@ class TelemetryProcessor:
             processed_data.level = 0.0
             processed_data.resets.append("Nivel reseteado por inconsistencia con acumulado")
             logger.warning(f"Inconsistencia nivel-acumulado detectada en punto {catchment_point.id}")
+    
+    def _convert_pulses_to_volume(self, catchment_point: CatchmentPoint, processed_data: ProcessedData):
+        """Convertir pulsos a volumen según configuración del punto de captación"""
+        
+        try:
+            # Obtener configuración de pulsos del punto
+            pulse_config = catchment_point.config.get('pulse_constants', {})
+            
+            # Convertir total si existe y es mayor a 0
+            if hasattr(processed_data, 'total') and processed_data.total > 0:
+                total_config = pulse_config.get('total', {})
+                pulses_per_liter = total_config.get('pulses_per_liter', 1000)  # Valor por defecto
+                calibration_factor = total_config.get('calibration_factor', 1.0)
+                
+                # Convertir: pulsos → m³
+                # Fórmula: (pulsos × factor_calibración) / (pulsos_por_litro × 1000)
+                original_total = processed_data.total
+                processed_data.total = (processed_data.total * calibration_factor) / (pulses_per_liter * 1000)
+                
+                processed_data.resets.append(
+                    f"Total convertido: {original_total} pulsos → {processed_data.total:.6f} m³ "
+                    f"(factor: {pulses_per_liter} pulsos/l, calibración: {calibration_factor})"
+                )
+                logger.info(f"Total convertido para punto {catchment_point.id}: {original_total} pulsos → {processed_data.total:.6f} m³")
+            
+            # Convertir flow si es necesario (si flow viene en pulsos)
+            if hasattr(processed_data, 'flow') and processed_data.flow > 0:
+                flow_config = pulse_config.get('flow', {})
+                pulses_per_liter = flow_config.get('pulses_per_liter', 1000)
+                calibration_factor = flow_config.get('calibration_factor', 1.0)
+                
+                # Solo convertir si flow viene en pulsos (detectar por valor alto)
+                if processed_data.flow > 100:  # Probablemente pulsos
+                    original_flow = processed_data.flow
+                    # Convertir: pulsos → l/s
+                    processed_data.flow = (processed_data.flow * calibration_factor) / pulses_per_liter
+                    
+                    processed_data.resets.append(
+                        f"Flow convertido: {original_flow} pulsos → {processed_data.flow:.3f} l/s "
+                        f"(factor: {pulses_per_liter} pulsos/l, calibración: {calibration_factor})"
+                    )
+                    logger.info(f"Flow convertido para punto {catchment_point.id}: {original_flow} pulsos → {processed_data.flow:.3f} l/s")
+        
+        except Exception as e:
+            logger.error(f"Error en conversión de pulsos para punto {catchment_point.id}: {str(e)}")
+            processed_data.alerts.append(f"Error en conversión de pulsos: {str(e)}")
     
     def _should_reset_total(self, processed_data: ProcessedData, raw_data: Dict[str, Any]) -> bool:
         """Determinar si el total debe ser reseteado"""
