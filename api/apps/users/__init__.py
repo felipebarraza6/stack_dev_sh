@@ -1,11 +1,11 @@
 """
-App de Usuarios
+Users App
 """
 
 default_app_config = 'api.apps.users.apps.UsersAppConfig'
 
-# Importar modelos
-# from .models.users import User
+# Los modelos se descubren automáticamente por Django
+# No importar modelos aquí para evitar AppRegistryNotReady
 
 # Importar serializers
 # from .serializers.users import UserSerializer

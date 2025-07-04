@@ -12,11 +12,6 @@ from django.conf import settings
 from django.core.cache import cache
 from django.db import models
 
-from api.apps.providers.models.providers.provider import Provider, ProviderSchemaMapping
-from api.apps.providers.models.mqtt.broker import MQTTBroker
-from api.apps.providers.models.tokens.device_token import DeviceToken
-from api.apps.providers.models.schemas.data_schema import DataSchema
-
 logger = logging.getLogger(__name__)
 
 
@@ -32,6 +27,9 @@ class DynamicMQTTClient:
     async def initialize(self):
         """Inicializar todos los clientes MQTT activos"""
         try:
+            # Importar modelos localmente para evitar AppRegistryNotReady
+            from api.apps.providers.models.providers.provider import Provider
+            
             # Obtener todos los proveedores MQTT activos
             mqtt_providers = Provider.objects.filter(
                 provider_type='MQTT',
@@ -46,7 +44,7 @@ class DynamicMQTTClient:
         except Exception as e:
             logger.error(f"Error inicializando clientes MQTT: {str(e)}")
     
-    async def setup_provider(self, provider: Provider):
+    async def setup_provider(self, provider):
         """Configurar un proveedor MQTT específico"""
         try:
             if not hasattr(provider, 'mqtt_config'):
@@ -128,6 +126,9 @@ class DynamicMQTTClient:
     def subscribe_to_topics(self, provider_id: int, client):
         """Suscribirse a los topics del proveedor"""
         try:
+            # Importar modelos localmente
+            from api.apps.providers.models.providers.provider import Provider
+            
             provider = Provider.objects.get(id=provider_id)
             mqtt_config = provider.mqtt_config
             
@@ -168,6 +169,9 @@ class DynamicMQTTClient:
     def extract_device_id(self, topic: str, provider_id: int) -> Optional[str]:
         """Extraer device_id del topic MQTT"""
         try:
+            # Importar modelos localmente
+            from api.apps.providers.models.providers.provider import Provider
+            
             provider = Provider.objects.get(id=provider_id)
             mqtt_config = provider.mqtt_config
             
@@ -189,6 +193,9 @@ class DynamicMQTTClient:
     def verify_device_token(self, device_id: str, provider_id: int) -> bool:
         """Verificar si el dispositivo tiene un token válido"""
         try:
+            # Importar modelos localmente
+            from api.apps.providers.models.tokens.device_token import DeviceToken
+            
             # Buscar en caché primero
             cache_key = f"device_token_{device_id}_{provider_id}"
             cached_token = cache.get(cache_key)
@@ -243,9 +250,13 @@ class DynamicMQTTClient:
             logger.error(f"Error procesando mensaje de {device_id}: {str(e)}")
             await self.log_ingestion(provider_id, device_id, None, 'ERROR', 0, 1, str(e))
     
-    async def find_appropriate_schema(self, provider_id: int, data: Dict[str, Any]) -> Optional[DataSchema]:
+    async def find_appropriate_schema(self, provider_id: int, data: Dict[str, Any]) -> Optional[Any]:
         """Encontrar el esquema apropiado para los datos"""
         try:
+            # Importar modelos localmente
+            from api.apps.providers.models.providers.provider import ProviderSchemaMapping
+            from api.apps.providers.models.schemas.data_schema import DataSchema
+            
             # Obtener mapeos activos del proveedor
             mappings = ProviderSchemaMapping.objects.filter(
                 provider_id=provider_id,
@@ -265,7 +276,7 @@ class DynamicMQTTClient:
             logger.error(f"Error buscando esquema: {str(e)}")
             return None
     
-    def schema_matches_data(self, schema: DataSchema, data: Dict[str, Any]) -> bool:
+    def schema_matches_data(self, schema: Any, data: Dict[str, Any]) -> bool:
         """Verificar si el esquema coincide con los datos"""
         try:
             # Verificar si los datos contienen las variables soportadas
@@ -281,9 +292,12 @@ class DynamicMQTTClient:
             logger.error(f"Error verificando esquema: {str(e)}")
             return False
     
-    async def transform_data(self, data: Dict[str, Any], schema: DataSchema, provider_id: int) -> Dict[str, Any]:
+    async def transform_data(self, data: Dict[str, Any], schema: Any, provider_id: int) -> Dict[str, Any]:
         """Transformar datos según el esquema y configuración del proveedor"""
         try:
+            # Importar modelos localmente
+            from api.apps.providers.models.providers.provider import ProviderSchemaMapping
+            
             # Obtener configuración de transformación
             mapping = ProviderSchemaMapping.objects.get(
                 provider_id=provider_id,
@@ -314,7 +328,7 @@ class DynamicMQTTClient:
             logger.error(f"Error transformando datos: {str(e)}")
             return data
     
-    async def save_processed_data(self, provider_id: int, device_id: str, schema: DataSchema, data: Dict[str, Any]):
+    async def save_processed_data(self, provider_id: int, device_id: str, schema: Any, data: Dict[str, Any]):
         """Guardar datos procesados en la base de datos"""
         try:
             # Aquí integrarías con tu modelo de datos existente
@@ -324,10 +338,13 @@ class DynamicMQTTClient:
         except Exception as e:
             logger.error(f"Error guardando datos: {str(e)}")
     
-    async def log_ingestion(self, provider_id: int, device_id: str, schema: Optional[DataSchema], 
-                          status: str, processed: int, failed: int, error_message: str = None):
+    async def log_ingestion(self, provider_id: int, device_id: str, schema: Optional[Any], 
+                          status: str, processed: int, failed: int, error_message: Optional[str] = None):
         """Registrar log de ingesta"""
         try:
+            # Importar modelos localmente
+            from api.apps.providers.models.logs.mqtt.broker import DataIngestionLog
+            
             DataIngestionLog.objects.create(
                 provider_id=provider_id,
                 device_id=device_id,
@@ -345,6 +362,9 @@ class DynamicMQTTClient:
     def update_provider_status(self, provider_id: int, status: str):
         """Actualizar estado del proveedor en base de datos"""
         try:
+            # Importar modelos localmente
+            from api.apps.providers.models.providers.provider import Provider
+            
             Provider.objects.filter(id=provider_id).update(
                 connection_status=status,
                 last_connection=datetime.now()
@@ -356,6 +376,9 @@ class DynamicMQTTClient:
     async def add_device_token(self, provider_id: int, device_id: str, token: str, token_type: str = 'API_KEY'):
         """Agregar token de dispositivo dinámicamente"""
         try:
+            # Importar modelos localmente
+            from api.apps.providers.models.tokens.device_token import DeviceToken
+            
             # Crear o actualizar token
             device_token, created = DeviceToken.objects.update_or_create(
                 provider_id=provider_id,
@@ -380,6 +403,9 @@ class DynamicMQTTClient:
     async def remove_device_token(self, provider_id: int, device_id: str):
         """Remover token de dispositivo"""
         try:
+            # Importar modelos localmente
+            from api.apps.providers.models.tokens.device_token import DeviceToken
+            
             DeviceToken.objects.filter(
                 provider_id=provider_id,
                 device_id=device_id

@@ -2,4 +2,8 @@
 Modelos de Variables
 """
 
-# No importar modelos aquí para evitar ciclos de importación.
+from .variables.variable import Variable
+
+__all__ = [
+    'Variable',
+]

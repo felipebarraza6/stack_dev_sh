@@ -1,5 +1,17 @@
 """
-Modelos de Cumplimiento
+Modelos de Compliance
 """
 
-# No importar modelos aquí para evitar ciclos de importación.
+from .models import (
+    ComplianceSource,
+    ComplianceConfig,
+    ComplianceData,
+    ComplianceLog,
+)
+
+__all__ = [
+    'ComplianceSource',
+    'ComplianceConfig',
+    'ComplianceData',
+    'ComplianceLog',
+]

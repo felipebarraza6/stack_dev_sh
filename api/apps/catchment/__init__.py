@@ -1,10 +1,11 @@
 """
-App de Catchment
+Catchment App
 """
 
 default_app_config = 'api.apps.catchment.apps.CatchmentAppConfig'
 
-# from .models.models import CatchmentPoint, CatchmentPointProcessingConfig, NotificationsCatchment
+# Los modelos se descubren automáticamente por Django
+# No importar modelos aquí para evitar AppRegistryNotReady
 
 # Importar serializers
 # from .serializers.serializers import (
@@ -16,7 +17,7 @@ default_app_config = 'api.apps.catchment.apps.CatchmentAppConfig'
 __all__ = [
     # 'CatchmentPoint',
     # 'CatchmentPointProcessingConfig',
-    # 'NotificationsCatchment',
+    # 'CatchmentPointNotification',
     # 'CatchmentPointSerializer',
     # 'CatchmentPointProcessingConfigSerializer',
     # 'NotificationsCatchmentSerializer',

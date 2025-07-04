@@ -1,5 +1,9 @@
 """
-Modelos de Puntos de Captación
+Modelos de Catchment
 """
 
-# No importar modelos aquí para evitar ciclos de importación.
+from .points.catchment_point import CatchmentPoint
+
+__all__ = [
+    'CatchmentPoint',
+]

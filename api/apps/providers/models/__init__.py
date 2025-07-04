@@ -2,4 +2,8 @@
 Modelos de Providers
 """
 
-# No importar modelos aquí para evitar ciclos de importación.
+from .providers.provider import Provider
+
+__all__ = [
+    'Provider',
+]

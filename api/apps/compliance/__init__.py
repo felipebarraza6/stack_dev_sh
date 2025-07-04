@@ -1,25 +1,14 @@
 """
-App de Compliance
+Compliance App
 """
 
 default_app_config = 'api.apps.compliance.apps.ComplianceConfig'
 
-# from .models.models import (
-#     ComplianceSource, ComplianceConfig, ComplianceData, ComplianceLog
-# )
+# Los modelos se descubren automáticamente por Django
+# No importar modelos aquí para evitar AppRegistryNotReady
 
 # Importar serializers
 # from .serializers.serializers import (
 #     ComplianceSourceSerializer, ComplianceConfigSerializer, 
 #     ComplianceDataSerializer
-# )
-
-__all__ = [
-    # 'ComplianceSource',
-    # 'ComplianceConfig',
-    # 'ComplianceData',
-    # 'ComplianceLog',
-    # 'ComplianceSourceSerializer',
-    # 'ComplianceConfigSerializer',
-    # 'ComplianceDataSerializer',
-] 
+# ) 

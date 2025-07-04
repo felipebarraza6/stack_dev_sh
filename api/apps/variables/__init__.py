@@ -1,16 +1,11 @@
 """
-App de Variables
+Variables App
 """
 
 default_app_config = 'api.apps.variables.apps.VariablesConfig'
 
-# Importar modelos
-# from api.apps.variables.models.variables.variable import Variable
-# from api.apps.variables.models.schemas.schema import VariableSchema
-# from api.apps.variables.models.schemas.mapping import VariableSchemaMapping
-# from api.apps.variables.models.data_points.data_point import VariableDataPoint
-# from api.apps.variables.models.alerts.alert import VariableAlert
-# from api.apps.variables.models.alerts.alert_log import VariableAlertLog
+# Los modelos se descubren automáticamente por Django
+# No importar modelos aquí para evitar AppRegistryNotReady
 
 # Importar serializers
 # from api.apps.variables.serializers.variables.variable import VariableSerializer

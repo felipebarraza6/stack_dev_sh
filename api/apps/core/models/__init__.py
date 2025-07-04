@@ -1,4 +1,8 @@
-# Importar modelos base para que Django los reconozca
-from .base import BaseModel, TimestampedModel, SoftDeleteModel
+"""
+Modelos de Core
+"""
+# Los modelos se importan desde el __init__.py principal de la app
+# para evitar ciclos de importación
 
-__all__ = ['BaseModel', 'TimestampedModel', 'SoftDeleteModel'] 
+# Los modelos se importan desde el __init__.py principal de la app
+# para evitar ciclos de importación 

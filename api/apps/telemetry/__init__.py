@@ -1,11 +1,11 @@
 """
-App de Telemetría - Sistema Modular de Captación de Datos
+Telemetry App
 """
 
 default_app_config = 'api.apps.telemetry.apps.TelemetryConfig'
 
-# from .models.models import TelemetryData
-# from .models.models_schemas import TelemetrySchema, TelemetryGroup, TelemetrySchemaMapping, TelemetrySchemaProcessor
+# Los modelos se descubren automáticamente por Django
+# No importar modelos aquí para evitar AppRegistryNotReady
 
 # Importar serializers
 # from .serializers.serializers import TelemetryDataSerializer
@@ -28,6 +28,13 @@ default_app_config = 'api.apps.telemetry.apps.TelemetryConfig'
 
 __all__ = [
     # 'TelemetryData',
+    # 'TelemetryNotification',
+    # 'TelemetryNotificationResponse',
+    # 'TelemetryProcessingLog',
+    # 'RawTelemetryData',
+    # 'ResponseSchema',
+    # 'ProcessingConstant',
+    # 'ProcessedTelemetryData',
     # 'TelemetrySchema',
     # 'TelemetryGroup',
     # 'TelemetrySchemaMapping',
